@@ -2,6 +2,10 @@
     background: rgb(206, 206, 206);
     height: 3rem;
     bottom:0;
-    position: absolute;
     width: 100%;
+}
+
+.slider-padding{
+    display: flex;
+    justify-content: center;
 }

@@ -1,55 +1,99 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4"
-                placeholder="Email">
+<form class="container" action="">
+    <div class="row">
+        <div class="form-group col-12">
+            <label for="routetitle">Walking Route TItle</label>
+            <input type="text" class="form-control" id="routetitle"
+                placeholder="Pendennis point walking loop.">
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4"
-                placeholder="Password">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress"
-            placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2"
-            placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
+        <div class="form-group col-12">
+            <label for="walkCategory">Walk type</label>
+            <select id="walkCategory" class="form-control">
                 <option selected>Choose...</option>
-                <option>...</option>
+                {% for category in categories %}
+                <option>{{category.category_name}}</option>
+                {% endfor %}
             </select>
         </div>
-        <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
+        <div class="form-group col-12">
+            <label for="walkDescription">Description</label>
+            <input type="text" class="form-control" id="walkDescription"
+                placeholder="Brief description of the walk and surrounding area, anything special or of interest.">
         </div>
-    </div>
-    <div class="form-group">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
+        <div class="form-group col-12">
+            <label for="imageUrl">Image Url/address</label>
+            <input type="text" class="form-control" id="imageUrl"
+                placeholder="Please paste a copied web address/url for the walk's main image">
         </div>
+        <!--Walk category selector-->
+        <div class="form-group col-sm-12 col-md-6">
+            <label for="inputAddress2">Difficulty</label>
+            <select class="form-control" id="inputAddress2">
+                <option selected>Choose...</option>
+                <option>Easy</option>
+                <option>Moderate</option>
+                <option>Hard</option>
+            </select>
+        </div>
+        <!--Text input for walking time-->
+        <div class="form-group col-sm-12 col-md-6">
+            <label for="inputWalkTime">Time</label>
+            <input type="text" class="form-control" id="inputWalkTime"
+                placeholder="1 hour 30 minutes">
+        </div>
+        <div class="form-group col-sm-12 col-md-6">
+            <label for="inputDistance">Distance</label>
+            <input type="text" class="form-control" id="inputDistance"
+                placeholder="3.5kms">
+        </div>
+        <div class="form-group col-sm-12 col-md-6">
+            <label for="inputStartLocation">Start Point</label>
+            <input type="text" class="form-control" id="inputStartLocation"
+                placeholder="Pendennis carpark">
+        </div>
+        <!-- Custom toggle switch found at
+             https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            <input type="checkbox" class="custom-control-input" id="dogFriendly"
+                name="dogFriendly">
+            <label class="custom-control-label" for="dogFriendly">Dog
+                Friendly</label>
+        </div>
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            <input type="checkbox" class="custom-control-input" id="freeParking"
+                name="freeParking">
+            <label class="custom-control-label" for="freeParking">Free
+                Parking</label>
+        </div>
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            <input type="checkbox" class="custom-control-input" id="paidParking"
+                name="paidParking">
+            <label class="custom-control-label" for="paidParking">Paid
+                Parking</label>
+        </div>
+        <h6 class="mx-auto">Please use the Enter key to seperate direction steps
+            from
+            each other.</h6>
+        <div class="form-group col-12">
+            <label for="directionsTextArea">Directions</label>
+            <!-- use of unicode for newline found at
+            http://www.amp-what.com/unicode/search/newline -->
+            <textarea class="form-control" id="directionsTextArea" rows="10"
+                placeholder="Please enter your directions here.&#10;Then next instruction on a new line.&#10;And so on and so forth."></textarea>
+        </div>
+        <div class="form-group col-12">
+            <label for="extraTips">Any Extra Info?</label>
+            <textarea class="form-control" id="extraTips" rows="3"
+                placeholder="Anything interesting to share?&#10;Let others know here!"></textarea>
+        </div>
+
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 {% endblock %}

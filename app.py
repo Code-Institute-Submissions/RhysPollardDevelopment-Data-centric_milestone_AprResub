@@ -25,7 +25,8 @@ def home():
 
 @app.route("/add_walk")
 def add_walk():
-    return render_template("addwalk.html")
+    categories = mongo.db.categories.find()
+    return render_template("addwalk.html", categories=categories)
 
 
 
