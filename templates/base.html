@@ -68,6 +68,12 @@
             </div>
         </nav>
 
+        <section class="container">
+            {% for category in categories %}
+            {{category.category_name}}<br>
+            {% endfor %}
+        </section>
+
         <footer class="footer">
             <div class="container">
 
