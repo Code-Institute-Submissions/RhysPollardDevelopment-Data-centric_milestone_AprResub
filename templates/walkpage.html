@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{walk.title}}</h2>
+<p>{{walk.description}}</p>
+{% if walk.dogs_allowed %}
+<i class="fas fa-paw"></i>
+{% endif %}
+
+{% endblock %}
