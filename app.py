@@ -83,6 +83,11 @@ def edit_walk(route_id):
     return render_template("editwalk.html", walk=walk, categories=categories)
 
 
+@app.route("/delete_walk/<route_id>")
+def delete_walk(route_id):
+    mongo.db.routes.remove({'_id': ObjectId(route_id)})
+    return redirect(url_for("home"))
+
 
 @app.route("/show_route/<route_id>")
 def show_walk(route_id):
