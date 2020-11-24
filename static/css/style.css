@@ -13,3 +13,27 @@
     display: flex;
     justify-content: center;
 }
+
+/*------- Walk Page ----------*/
+
+.walk-title-container{
+    max-width: 60%;
+}
+
+.key-details-container{
+    float: right;
+}
+
+.box-colour{
+    background-color: indigo;
+    color: #ffffff;
+    height: 16rem;
+    justify-content: center;
+    display: flex;
+    /*margin: 0 -0.5rem;*/
+}
+
+.click-box{
+    margin: auto;
+    font-size: 3rem;
+}

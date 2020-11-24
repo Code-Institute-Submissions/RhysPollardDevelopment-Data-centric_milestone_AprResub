@@ -1,10 +1,65 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>{{walk.title}}</h2>
-<p>{{walk.description}}</p>
-{% if walk.dogs_allowed %}
-<i class="fas fa-paw"></i>
-{% endif %}
+<article class="container">
+    <section class="row ">
+        <div class="col-8 text-capitalize">
+            <h2>
+                {{walk.title}}
+            </h2>
+        </div>
+        <div class="col-8">
+            <p>{{walk.description}}</p>
+        </div>
+        <div class="col-4 key-details-container">
+            <h4>Key Details</h4>
+
+            <h5><i class="fas fa-hiking"></i>{{ walk.difficulty }}</h5>
+            <h5><i class="far fa-clock"></i>{{ walk.time }}</h5>
+            <h5><i class="fas fa-map-signs"></i>{{ walk.distance }}</h5>
+            <h5><i class="fas fa-map-marked-alt"></i>{{ walk.startpoint }}</h5>
+            {% if walk.dogs_allowed %}
+            <h5><i class="fas fa-paw"></i>Dog Friendly</h5>
+            {% endif %}
+            {% if walk.free_parking %}
+            <h5><i class="fas fa-parking"></i>Free Parking</h5>
+            {% endif %}
+            {% if walk.paid_parking %}
+            <h5><i class="fas fa-pound-sign"></i></i>Paid Parking</h5>
+            {% endif %}
+        </div>
+    </section>
+    <div class="row">
+        <div>
+            <img src="{{ walk.imageUrl }}" alt="Photo of walking route">
+        </div>
+    </div>
+    <section class="row">
+        <div class="col">
+            <ol>
+                {% for direction in walk.directions %}
+                <li>{{ direction }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </section>
+    <section class="row">
+        <article class="col-sm-12 col-md-6">
+            <div class=" box-colour">
+                <h3 class="click-box">Walking Tips <i
+                        class="fas fa-angle-right"></i></h3>
+            </div>
+        </article>
+        <article class="col-sm-12 col-md-6">
+            <div class=" box-colour">
+                <h3 class="click-box">More Walks <i
+                        class="fas fa-angle-right"></i></h3>
+            </div>
+        </article>
+    </section>
+</article>
+
+
+
 
 {% endblock %}

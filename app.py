@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route("/home")
 def home():
     routes = list(mongo.db.routes.find())
-    return render_template("base.html", routes=routes)
+    return render_template("index.html", routes=routes)
 
 
 @app.route("/add_walk",methods={"GET","POST"})
@@ -52,9 +52,13 @@ def add_walk():
     return render_template("addwalk.html", categories=categories)
 
 
+@app.route("/show_route/<route_id>")
+def show_walk(route_id):
+    walk = mongo.db.routes.find_one({'_id':ObjectId(route_id)})
+    return render_template("walkpage.html", walk=walk)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
     port=int(os.environ.get("PORT")),
     debug=True)
-
-
