@@ -35,8 +35,9 @@ def add_walk():
             "title" : request.form.get("title"),
             "description": request.form.get("description"),
             # Splitlines function references from w3 schools at
-            # https://www.w3schools.com/python/ref_string_splitlines.asp
-            "directions" : request.form.get("directions").splitlines(),
+            # https://www.w3schools.com/python/ref_string_split.asp
+            "directions": request.form.get("directions").split("\n"),
+            "imageUrl": request.form.get("imageUrl"),
             "difficulty" : request.form.get("difficulty"),
             "time" : request.form.get("time"),
             "distance" : request.form.get("distance"),
@@ -50,6 +51,37 @@ def add_walk():
 
     categories = mongo.db.categories.find()
     return render_template("addwalk.html", categories=categories)
+
+
+@app.route("/edit_walk/<route_id>", methods={"GET","POST"})
+def edit_walk(route_id):
+    if request.method == "POST":
+        dogs_allowed = True if request.form.get("dogs_allowed") else False
+        free_parking = True if request.form.get("free_parking") else False
+        paid_parking = True if request.form.get("paid_parking") else False
+        updated = {
+            "category_name" : request.form.get("category_name"),
+            "title" : request.form.get("title"),
+            "description": request.form.get("description"),
+            # Splitlines function references from w3 schools at
+            # https://www.w3schools.com/python/ref_string_split.asp
+            "directions": request.form.get("directions").split("\n"),
+            "imageUrl": request.form.get("imageUrl"),
+            "difficulty" : request.form.get("difficulty"),
+            "time" : request.form.get("time"),
+            "distance" : request.form.get("distance"),
+            "startpoint" : request.form.get("startpoint"),
+            "dogs_allowed" : dogs_allowed,
+            "free_parking" : free_parking,
+            "paid_parking" : paid_parking
+        }
+        mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
+        return redirect(url_for("home"))
+
+    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+    categories = mongo.db.categories.find()
+    return render_template("editwalk.html", walk=walk, categories=categories)
+
 
 
 @app.route("/show_route/<route_id>")

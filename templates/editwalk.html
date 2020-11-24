@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Add a New Walk</h2>
-<form class="container" method="POST" action="{{ url_for('add_walk') }}">
+<h2>Edit Walk</h2>
+<form class="container" method="POST"
+    action="{{ url_for('edit_walk', route_id=walk._id) }}">
     <div class="row">
         <!-- Title of walking route-->
         <div class="form-group col-12">
             <label for="title">Walking Route TItle</label>
             <input type="text" class="form-control" id="title"
-                placeholder="Pendennis point walking loop." name="title">
+                placeholder="Pendennis point walking loop." name="title"
+                value="{{ walk.title }}">
         </div>
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
             <label for="category_name">Walk type</label>
-            <select id="category_name" class="form-control"
-                name="category_name">
-                <option selected>Choose...</option>
+            <select id="category_name" class="form-control" name="category_name"
+                value="{{ walk.category_name }}">
                 {% for category in categories %}
+                {% if category.category_name == walk.category_name %}
+                <option selected>{{category.category_name}}</option>
+                {% else %}
                 <option>{{category.category_name}}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -25,14 +30,16 @@
             <label for="description">Description</label>
             <input type="text" class="form-control" id="description"
                 name="description"
-                placeholder="Brief description of the walk and surrounding area, anything special or of interest.">
+                placeholder="Brief description of the walk and surrounding area, anything special or of interest."
+                value="{{ walk.description }}">
         </div>
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
             <label for="imageUrl">Image Url/address</label>
             <input type="text" class="form-control" id="imageUrl"
                 name="imageUrl"
-                placeholder="Please paste a copied web address/url for the walk's main image">
+                placeholder="Please paste a copied web address/url for the walk's main image"
+                value="{{ walk.imageUrl }}">
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
@@ -48,43 +55,61 @@
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputWalkTime">Time</label>
             <input type="text" class="form-control" id="inputWalkTime"
-                name="time" placeholder="1 hour 30 minutes">
+                name="time" placeholder="1 hour 30 minutes"
+                value="{{ walk.time }}">
         </div>
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputDistance">Distance</label>
             <input type="text" class="form-control" id="inputDistance"
-                name="distance" placeholder="3.5kms">
+                name="distance" placeholder="3.5kms"
+                value="{{ walk.distance }}">
         </div>
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputStartLocation">Start Point</label>
             <input type="text" class="form-control" id="inputStartLocation"
-                name="startpoint" placeholder="Pendennis carpark">
+                name="startpoint" placeholder="Pendennis carpark"
+                value="{{ walk.startpoint }}">
         </div>
         <!-- Custom toggle switch found at
              https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
         <!-- Dog Friendly checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {% if walk.dogs_allowed %}
             <input type="checkbox" class="custom-control-input" id="dogFriendly"
-                name="dogs_allowed">
+                name="dogFriendly" checked>
+            {% else %}
+            <input type="checkbox" class="custom-control-input" id="dogFriendly"
+                name="dogFriendly">
+            {% endif %}
             <label class="custom-control-label" for="dogFriendly">Dog
                 Friendly</label>
         </div>
         <!-- Free parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {% if walk.free_parking %}
+            <input type="checkbox" class="custom-control-input" id="freeParking"
+                name="free_parking" checked>
+            {% else %}
             <input type="checkbox" class="custom-control-input" id="freeParking"
                 name="free_parking">
+            {% endif %}
             <label class="custom-control-label" for="freeParking">Free
                 Parking</label>
         </div>
         <!--paid parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {% if walk.paid_parking %}
             <input type="checkbox" class="custom-control-input" id="paidParking"
-                name="paid_parking">
+                name="paidParking" checked>
+            {% else %}
+            <input type="checkbox" class="custom-control-input" id="paidParking"
+                name="paidParking">
+            {% endif %}
             <label class="custom-control-label" for="paidParking">Paid
                 Parking</label>
         </div>
@@ -97,8 +122,8 @@
             <!-- use of unicode for newline found at
             http://www.amp-what.com/unicode/search/newline -->
             <textarea class="form-control" id="directionsTextArea" rows="10"
-                name="directions"
-                placeholder="Please enter your directions here.&#10;Then next instruction on a new line.&#10;And so on and so forth."></textarea>
+                placeholder="Please enter your directions here.&#10;Then next instruction on a new line.&#10;And so on and so forth."
+                name="directions">{%- for direction in walk.directions -%}{{- direction -}}{%- endfor -%}</textarea>
         </div>
         <div class="form-group col-12">
             <label for="extraTips">Any Extra Info?</label>
