@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>USER</h2>
-
-
-
+<section class="container">
+    <div class="row">
+        <h2>{{ username }}'s Profile</h2>
+    </div>
+    {% for route in routes %}
+    {% if username == route.user.lower() %}
+    <div class="card bg-dark text-white">
+        <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">
+        <div class="card-img-overlay">
+            <h5 class="card-title">{{ route.title }}</h5>
+            <p class="card-text">Created by {{route.user}}</p>
+            <p class="card-text">Last updated 3 mins ago</p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</section>
 {% endblock %}

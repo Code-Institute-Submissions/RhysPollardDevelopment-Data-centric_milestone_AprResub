@@ -150,7 +150,8 @@ def logout():
 def user_profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("userprofile.html", username=username)
+    routes = list(mongo.db.routes.find())
+    return render_template("userprofile.html", username=username, routes=routes)
 
 
 if __name__ == "__main__":
