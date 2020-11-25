@@ -43,12 +43,12 @@
                             Walk</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login')}}">Add
-                            Walk</a>
+                        <a class="nav-link"
+                            href="{{ url_for('register')}}">Login/Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('add_walk')}}">Add
-                            Walk</a>
+                        <a class="nav-link"
+                            href="{{ url_for('user_profile', username=session['user'])}}">Userpage</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

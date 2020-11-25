@@ -37,3 +37,12 @@
     margin: auto;
     font-size: 3rem;
 }
+
+/*-------------Register/Login Page------------*/
+
+.register-button{
+    color: #fff;
+    background-color: #12964b;
+    width: 100%;
+    font-size: larger;
+}
