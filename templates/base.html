@@ -38,18 +38,29 @@
                         <a class="nav-link" href="{{ url_for('home') }}">Home
                             <span class="sr-only">(current)</span></a>
                     </li>
+                    {% if session.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('add_walk')}}">Add
                             Walk</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('register')}}">Login/Register</a>
+                            href="{{ url_for('logout')}}">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
                             href="{{ url_for('user_profile', username=session['user'])}}">Userpage</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ url_for('register')}}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login')}}">Log
+                            in</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search"

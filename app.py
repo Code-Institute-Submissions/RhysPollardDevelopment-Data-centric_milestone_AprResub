@@ -138,6 +138,13 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+    #removes user from session cookie.
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 
 @app.route("/user_profile/<username>")
 def user_profile(username):
