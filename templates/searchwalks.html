@@ -1,7 +1,66 @@
 {% extends "base.html" %}
 {% block content %}
 
+<section class="container-fluid">
+    <div class="row">
+        <div class="jumbotron-fluid index-header col-12">
+            <h1 class="display-4">Hello, world!</h1>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn
+                more</a>
+        </div>
+    </div>
+</section>
 <section class="container">
-
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Facilisis leo vel
+                fringilla est. Id
+                leo in vitae turpis massa. Sit amet consectetur adipiscing elit.
+                Dui faucibus in
+                ornare quam viverra. Id diam vel quam elementum pulvinar etiam
+                non quam lacus. A
+                arcu cursus vitae congue mauris rhoncus. Purus in mollis nunc
+                sed. Sed arcu non
+                odio euismod. Justo donec enim diam vulputate ut pharetra sit
+                amet aliquam.
+                Auctor eu augue ut lectus arcu. Quis eleifend quam adipiscing
+                vitae proin
+                sagittis nisl rhoncus. Risus at ultrices mi tempus imperdiet
+                nulla. Ultrices
+                gravida dictum fusce ut placerat orci nulla. Risus feugiat in
+                ante metus dictum.
+                Quisque id diam vel quam elementum pulvinar etiam non quam.</p>
+        </div>
+    </div>
+    <form class="row">
+        <div class=col-12>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="exampleFormControlSelect1">Example
+                        select</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option selected>Choose...</option>
+                        {% for category in categories %}
+                        <option>{{category.category_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="exampleFormControlSelect1">Example
+                        select</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option selected>Choose...</option>
+                        {% for difficulty in difficulties %}
+                        <option>{{difficulty.challenge}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
 </section>
 {% endblock %}

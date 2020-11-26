@@ -45,10 +45,13 @@
         <div class="form-group col-sm-12 col-md-6">
             <label for="difficulty">Difficulty</label>
             <select class="form-control" id="difficulty" name="difficulty">
-                <option selected>Choose...</option>
-                <option>Easy</option>
-                <option>Moderate</option>
-                <option>Hard</option>
+                {% for difficulty in difficulties %}
+                {% if difficulty.challenge == walk.difficulty %}
+                <option selected>{{difficulty.challenge}}</option>
+                {% else %}
+                <option>{{difficulty.challenge}}</option>
+                {% endif %}
+                {% endfor %}
             </select>
         </div>
         <!--Text input for walking time-->

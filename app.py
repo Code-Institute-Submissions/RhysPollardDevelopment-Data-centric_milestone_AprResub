@@ -53,7 +53,8 @@ def add_walk():
         return redirect(url_for("home"))
 
     categories = mongo.db.categories.find()
-    return render_template("addwalk.html", categories=categories)
+    difficulties = mongo.db.difficulty.find()
+    return render_template("addwalk.html", categories=categories, difficulties=difficulties)
 
 
 @app.route("/edit_walk/<route_id>", methods={"GET","POST"})
@@ -83,7 +84,8 @@ def edit_walk(route_id):
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
     categories = mongo.db.categories.find()
-    return render_template("editwalk.html", walk=walk, categories=categories)
+    difficulties = mongo.db.difficulty.find()
+    return render_template("editwalk.html", walk=walk, categories=categories, difficulties=difficulties)
 
 
 @app.route("/delete_walk/<route_id>")
@@ -158,7 +160,10 @@ def user_profile(username):
 
 @app.route("/search_walks")
 def search_walks():
-    return render_template("searchwalks.html")
+    routes = list(mongo.db.routes.find())
+    categories = mongo.db.categories.find()
+    difficulties = mongo.db.difficulty.find()
+    return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties)
 
 
 if __name__ == "__main__":

@@ -20,6 +20,7 @@
     height: 30rem;
     overflow: hidden;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 

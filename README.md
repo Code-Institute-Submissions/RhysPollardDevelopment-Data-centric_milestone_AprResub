@@ -43,6 +43,14 @@ Categories:
     }
 ```
 
+Difficulty:
+```
+    {
+        "_id":<ObjectId>,
+        "challenge":<string>
+    }
+```
+
 Routes:
 ``` 
     {

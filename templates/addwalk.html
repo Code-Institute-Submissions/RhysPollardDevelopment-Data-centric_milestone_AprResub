@@ -39,9 +39,9 @@
             <label for="difficulty">Difficulty</label>
             <select class="form-control" id="difficulty" name="difficulty">
                 <option selected>Choose...</option>
-                <option>Easy</option>
-                <option>Moderate</option>
-                <option>Hard</option>
+                {% for difficulty in difficulties %}
+                <option>{{difficulty.challenge}}</option>
+                {% endfor %}
             </select>
         </div>
         <!--Text input for walking time-->
