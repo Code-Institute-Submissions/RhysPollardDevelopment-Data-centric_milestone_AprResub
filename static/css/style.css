@@ -2,6 +2,10 @@
     min-height:90vh;
 }
 
+.center-flex{
+    flex:auto;
+}
+
 .footer{
     background: rgb(206, 206, 206);
     height: 3rem;
