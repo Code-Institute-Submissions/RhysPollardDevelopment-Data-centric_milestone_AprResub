@@ -6,13 +6,17 @@
         <div class="jumbotron-fluid index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn
-                more</a>
+            <div class="col-6">
+                <input class="form-control mr-sm-2" type="search"
+                    placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit">Search</button>
+            </div>
         </div>
     </div>
 </section>
 <section class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -35,13 +39,12 @@
                 ante metus dictum.
                 Quisque id diam vel quam elementum pulvinar etiam non quam.</p>
         </div>
-    </div>
+    </div> -->
     <form class="row">
         <div class=col-12>
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="exampleFormControlSelect1">Example
-                        select</label>
+                    <label for="exampleFormControlSelect1">Walk Type</label>
                     <select class="form-control" id="exampleFormControlSelect1">
                         <option selected>Choose...</option>
                         {% for category in categories %}
@@ -50,8 +53,7 @@
                     </select>
                 </div>
                 <div class="form-group col-6">
-                    <label for="exampleFormControlSelect1">Example
-                        select</label>
+                    <label for="exampleFormControlSelect1">Difficulty</label>
                     <select class="form-control" id="exampleFormControlSelect1">
                         <option selected>Choose...</option>
                         {% for difficulty in difficulties %}
@@ -59,8 +61,59 @@
                         {% endfor %}
                     </select>
                 </div>
+                <div
+                    class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                    <input type="checkbox" class="custom-control-input"
+                        id="dogFriendly" name="dogs_allowed">
+                    <label class="custom-control-label" for="dogFriendly">Dog
+                        Friendly</label>
+                </div>
+                <div
+                    class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                    <input type="checkbox" class="custom-control-input"
+                        id="freeParking" name="free_parking">
+                    <label class="custom-control-label" for="freeParking">Free
+                        Parking</label>
+                </div>
+                <div
+                    class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                    <input type="checkbox" class="custom-control-input"
+                        id="paidParking" name="paid_parking">
+                    <label class="custom-control-label" for="paidParking">Paid
+                        Parking</label>
+                </div>
             </div>
         </div>
     </form>
+</section>
+<section class="container">
+    <div class="row">
+        {% for route in routes %}
+        <div class="card bg-dark text-white col-6 search-card">
+            <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">
+            <div class="card-img-overlay">
+                <h5 class="card-title">{{ route.title }}</h5>
+                <p class="card-text">Created by {{route.user}}</p>
+                <p class="card-text">Last updated 3 mins ago</p>
+                <a href="{{ url_for('show_walk',route_id=route._id) }}"
+                    class="btn btn-primary">View Walk</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="row">
+    <article class="col-sm-12 col-md-6">
+        <div class=" box-colour">
+            <h3 class="click-box">Walking Tips <i
+                    class="fas fa-angle-right"></i></h3>
+        </div>
+    </article>
+    <article class="col-sm-12 col-md-6">
+        <div class=" box-colour">
+            <h3 class="click-box">More Walks <i class="fas fa-angle-right"></i>
+            </h3>
+        </div>
+    </article>
 </section>
 {% endblock %}
