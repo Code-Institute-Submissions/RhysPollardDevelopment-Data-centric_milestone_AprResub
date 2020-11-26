@@ -156,6 +156,11 @@ def user_profile(username):
     return render_template("userprofile.html", username=username, routes=routes)
 
 
+@app.route("/search_walks")
+def search_walks():
+    return render_template("searchwalks.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
     port=int(os.environ.get("PORT")),

@@ -14,6 +14,16 @@
     justify-content: center;
 }
 
+/*---------Index--------------*/
+.index-header{
+    background-image: url("https://nt.global.ssl.fastly.net/images/1431762236176-1247347-resize.jpg?width=1920&auto=webp&crop=16:7");
+    height: 30rem;
+    overflow: hidden;
+    background-size: cover;
+}
+
+
+
 /*------- Walk Page ----------*/
 
 .walk-title-container{

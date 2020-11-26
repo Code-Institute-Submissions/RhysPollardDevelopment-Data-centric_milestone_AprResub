@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Wlecome to walks</h1>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron-fluid index-header col-12">
+            <h1 class="display-4">Hello, world!</h1>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn
+                more</a>
+        </div>
+    </div>
+</div>
 <section class="container">
     <div class="row">
         {% for route in routes %}
