@@ -45,7 +45,9 @@ def add_walk():
             "startpoint" : request.form.get("startpoint"),
             "dogs_allowed" : dogs_allowed,
             "free_parking" : free_parking,
-            "paid_parking" : paid_parking
+            "paid_parking": paid_parking,
+            "user": mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
         }
         mongo.db.routes.insert_one(walk)
         return redirect(url_for("home"))
