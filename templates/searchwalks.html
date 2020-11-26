@@ -1,20 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="container-fluid">
+<form class="container-fluid" method="POST" action="{{ url_for('search') }}">
     <div class="row">
         <div class="jumbotron-fluid index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
             <hr class="my-4">
             <div class="col-6">
                 <input class="form-control mr-sm-2" type="search"
-                    placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0"
+                    placeholder="Search" aria-label="Search" name="query">
+                <button class="btn btn-success my-2 my-sm-0"
                     type="submit">Search</button>
             </div>
         </div>
     </div>
-</section>
+    <div class=container>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="exampleFormControlSelect1">Walk Type</label>
+                <select class="form-control" id="exampleFormControlSelect1"
+                    name="category_name">
+                    <option selected>Choose...</option>
+                    {% for category in categories %}
+                    <option>{{category.category_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="exampleFormControlSelect1">Difficulty</label>
+                <select class="form-control" id="exampleFormControlSelect1"
+                    name="difficulty">
+                    <option selected>Choose...</option>
+                    {% for difficulty in difficulties %}
+                    <option>{{difficulty.challenge}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div
+                class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                <input type="checkbox" class="custom-control-input"
+                    id="dogFriendly" name="dogs_allowed">
+                <label class="custom-control-label" for="dogFriendly">Dog
+                    Friendly</label>
+            </div>
+            <div
+                class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                <input type="checkbox" class="custom-control-input"
+                    id="freeParking" name="free_parking">
+                <label class="custom-control-label" for="freeParking">Free
+                    Parking</label>
+            </div>
+            <div
+                class="form-group custom-control custom-switch col-12 col-md-2 slider-padding">
+                <input type="checkbox" class="custom-control-input"
+                    id="paidParking" name="paid_parking">
+                <label class="custom-control-label" for="paidParking">Paid
+                    Parking</label>
+            </div>
+</form>
 <section class="container">
     <!-- <div class="row">
         <div class="col-12">
@@ -40,7 +83,7 @@
                 Quisque id diam vel quam elementum pulvinar etiam non quam.</p>
         </div>
     </div> -->
-    <form class="row">
+    <!-- <form class="row">
         <div class=col-12>
             <div class="row">
                 <div class="form-group col-6">
@@ -82,9 +125,11 @@
                     <label class="custom-control-label" for="paidParking">Paid
                         Parking</label>
                 </div>
+                <button class="btn btn-success my-2 my-sm-0"
+                    type="submit">Filter</button>
             </div>
         </div>
-    </form>
+    </form> -->
 </section>
 <section class="container">
     <div class="row">
@@ -111,7 +156,7 @@
     </article>
     <article class="col-sm-12 col-md-6">
         <div class=" box-colour">
-            <h3 class="click-box">More Walks <i class="fas fa-angle-right"></i>
+            <h3 class="click-box">Sign Up<i class="fas fa-angle-right"></i>
             </h3>
         </div>
     </article>
