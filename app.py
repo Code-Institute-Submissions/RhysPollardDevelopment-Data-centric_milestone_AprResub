@@ -170,39 +170,45 @@ def search_page():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    query = request.form.get("query")
     filters = {}
-    dogs_allowed = request.form.get("dogs_allowed") 
-    free_parking = request.form.get("free_parking")
-    paid_parking = request.form.get("paid_parking")
-    difficulty = request.form.get("difficulty")
-    category = request.form.get("category_name")
-    
-
-    if query != "":
-        filters["$text"] = {"$search": query}
-
-    if dogs_allowed:
-        filters["dogs_allowed"] = True
+    if request.method == "POST":
+        query = request.form.get("query")
+        dogs_allowed = request.form.get("dogs_allowed") 
+        free_parking = request.form.get("free_parking")
+        paid_parking = request.form.get("paid_parking")
+        difficulty = request.form.get("difficulty")
+        category = request.form.get("category_name")
         
-    if free_parking:
-        filters["free_parking"] = True
-    
-    if paid_parking:
-        filters["paid_parking"] = True
+
+        if query != "":
+            filters["$text"] = {"$search": query}
+
+        if dogs_allowed:
+            filters["dogs_allowed"] = True
+            
+        if free_parking:
+            filters["free_parking"] = True
         
-    if difficulty != "Choose...":
-        filters["difficulty"] = difficulty
+        if paid_parking:
+            filters["paid_parking"] = True
+            
+        if difficulty != "Choose...":
+            filters["difficulty"] = difficulty
 
-    if category != "Choose...":
-        filters["category_name"] = category
+        if category != "Choose...":
+            filters["category_name"] = category
 
-    print(filters)
-    
-    routes = list(mongo.db.routes.find(filters))
+        print(filters)
+        
+        routes = list(mongo.db.routes.find(filters))
+        categories = mongo.db.categories.find()
+        difficulties = mongo.db.difficulty.find()
+        return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties, filters=filters)
+
+    routes = list(mongo.db.routes.find())
     categories = mongo.db.categories.find()
     difficulties = mongo.db.difficulty.find()
-    return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties)
+    return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties, filters=filters)
 
 
 if __name__ == "__main__":
