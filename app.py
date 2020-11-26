@@ -77,7 +77,9 @@ def edit_walk(route_id):
             "startpoint" : request.form.get("startpoint"),
             "dogs_allowed" : dogs_allowed,
             "free_parking" : free_parking,
-            "paid_parking" : paid_parking
+            "paid_parking": paid_parking,
+            "user": mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
         }
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
         return redirect(url_for("home"))
