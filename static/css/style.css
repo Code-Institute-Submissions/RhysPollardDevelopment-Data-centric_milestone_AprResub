@@ -39,18 +39,51 @@
     float: right;
 }
 
-.box-colour{
-    background-color: indigo;
-    color: #ffffff;
-    height: 16rem;
-    justify-content: center;
-    display: flex;
-    /*margin: 0 -0.5rem;*/
+.box{ 
+    height: 18rem;
+}
+
+.walkpage-img{
+    height: 50vh;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: inherit;
+    object-fit: cover;
+        padding: 2rem;
+    background-color: gainsboro;
+}
+
+.box-space{
+    padding: 0.5rem;
 }
 
 .click-box{
     margin: auto;
-    font-size: 3rem;
+    font-size: 2rem;
+    justify-content: center;
+    display: flex;
+    color: #ffffff;
+    line-height: 1.5rem;
+}
+
+.blue{
+    background-color: #2d2d71;
+}
+
+.green{
+    background-color: #500522;
+}
+
+.image-1{
+    background-image: url(https://www.falriver.co.uk/_media/12799/image?fit=crop&w=1200&h=675);
+    background-size: cover;
+    overflow: hidden;
+}
+
+.image-2{
+    background-image: url(https://www.falriver.co.uk/_media/11487/image?fit=crop&w=1200&h=675);
+    background-size: cover;
+    overflow: hidden;
 }
 
 /*-------------Register/Login Page------------*/

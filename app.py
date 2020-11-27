@@ -1,4 +1,5 @@
 import os
+import random
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_pymongo import PyMongo
@@ -18,10 +19,14 @@ mongo = PyMongo(app)
 
 
 # Index/landing page
+# Loads 3 walks for viewer as todays pic at random.
 @app.route("/")
 @app.route("/home")
 def home():
-    routes = list(mongo.db.routes.find())
+    # random choices found at w3schools.com
+    # https://www.w3schools.com/python/ref_random_choices.asp
+    complete = list(mongo.db.routes.find())
+    routes = random.choices(complete, k=3)
     return render_template("index.html", routes=routes)
 
 
@@ -170,6 +175,8 @@ def search_page():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+# Suggestion of adding to dictionary found on stack overflow
+# https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
     if request.method == "POST":
         query = request.form.get("query")

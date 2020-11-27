@@ -34,11 +34,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav center-flex justify-content-center">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('home') }}">Home
                             <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link"
                             href="{{ url_for('search') }}">Discover</a>
                     </li>
@@ -49,11 +49,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('logout')}}">Logout</a>
+                            href="{{ url_for('user_profile', username=session['user'])}}">Userpage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('user_profile', username=session['user'])}}">Userpage</a>
+                            href="{{ url_for('logout')}}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

@@ -13,7 +13,6 @@
         </div>
         <div class="col-4 key-details-container">
             <h4>Key Details</h4>
-
             <h5><i class="fas fa-hiking"></i>{{ walk.difficulty }}</h5>
             <h5><i class="far fa-clock"></i>{{ walk.time }}</h5>
             <h5><i class="fas fa-map-signs"></i>{{ walk.distance }}</h5>
@@ -30,8 +29,9 @@
         </div>
     </section>
     <div class="row">
-        <div>
-            <img src="{{ walk.imageUrl }}" alt="Photo of walking route">
+        <div class="col-12">
+            <img class="walkpage-img" src="{{ walk.imageUrl }}"
+                alt="Photo of walking route">
         </div>
     </div>
     <section class="row">
@@ -44,18 +44,19 @@
         </div>
     </section>
     <section class="row">
-        <article class="col-sm-12 col-md-6">
-            <div class=" box-colour">
-                <h3 class="click-box">Walking Tips <i
-                        class="fas fa-angle-right"></i></h3>
+        <article class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box image-2">
+                <h3 class="click-box">Walking Tips<i
+                        class="fas fa-angle-right"></i>
+                </h3>
             </div>
         </article>
-        <article class="col-sm-12 col-md-6">
-            <div class=" box-colour">
-                <h3 class="click-box">More Walks <i
-                        class="fas fa-angle-right"></i></h3>
+        <div class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box blue">
+                <h3 class="click-box">Discover<i class="fas fa-angle-right"></i>
+                </h3>
             </div>
-        </article>
+        </div>
     </section>
 </article>
 

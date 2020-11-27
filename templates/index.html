@@ -6,34 +6,74 @@
         <div class="jumbotron-fluid index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn
-                more</a>
         </div>
     </div>
 </div>
 <section class="container">
     <div class="row">
+        <div class="col-12">
+            <h3>Company name!</h3>
+            <p>Welcome to the best local walks and strolls Cornwall has to
+                offer.</p>
+            <p>How can we find the best kept walks and secrets of the county?
+                That's because our walks are created by the locals who enjoy
+                them the most and know them best,
+                next best thing to a local guide showing you around. So come and
+                take the back road, that unsuspecting pathway or even a classic
+                well known walk which is really
+                just that good.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
         {% for route in routes %}
-        <article class="card text-center col-4">
+        <article class="card text-center col-12 col-md-4">
             <div class="card-header">
                 Top voted
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ route.title}}</h5>
                 <p class="card-text">Created by {{route.user}}</p>
-                <a href="{{ url_for('edit_walk',route_id=route._id) }}"
-                    class="btn btn-primary">Edit Walk</a>
                 <a href="{{ url_for('show_walk',route_id=route._id) }}"
                     class="btn btn-primary">View Walk</a>
-                <a href="{{ url_for('delete_walk',route_id=route._id) }}"
-                    class="btn btn-primary">Delete Walk</a>
             </div>
             <div class="card-footer text-muted">
                 2 days ago
             </div>
         </article>
-
         {% endfor %}
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box blue">
+                <h3 class="click-box">Discover<i class="fas fa-angle-right"></i>
+                </h3>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box image-1">
+                <h3 class="click-box">Sign Up<i class="fas fa-angle-right"></i>
+                </h3>
+            </div>
+        </div>
+        <article class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box image-2">
+                <h3 class="click-box">Walking Tips<i
+                        class="fas fa-angle-right"></i>
+                </h3>
+            </div>
+        </article>
+        <div class="col-sm-12 col-md-6 box-space">
+            <div class="click-box box green">
+                <h3 class="click-box">Contact Us<i
+                        class="fas fa-angle-right"></i>
+                </h3>
+            </div>
+        </div>
     </div>
 </section>
 
