@@ -18,132 +18,52 @@
     </div>
 
 </section>
-<section>
+<section class="faq-container">
     <div class="row">
         <div class="accordion col-6" id="accordionExample">
+            {% for faq in faqs %}
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="heading{{ faq._id }}">
                     <h5 class="mb-0">
                         <button class="btn btn-link" type="button"
-                            data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="false" aria-controls="collapseOne">
-                            Collapsible Group Item #1
+                            data-toggle="collapse"
+                            data-target="#collapse{{ faq._id }}"
+                            aria-expanded="false"
+                            aria-controls="collapse{{ faq._id }}">
+                            {{ faq.FAQ }}
                         </button>
                     </h5>
                 </div>
-                <div id="collapseOne" class="collapse"
-                    aria-labelledby="headingOne"
+                <div id="collapse{{ faq._id }}" class="collapse"
+                    aria-labelledby="heading{{ faq._id }}"
                     data-parent="#accordionExample">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high
-                        life
-                        accusamus terry richardson ad squid. 3 wolf moon officia
-                        aute,
-                        non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                        sunt aliqua
-                        put a bird on it squid single-origin coffee nulla
-                        assumenda
-                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer
-                        labore
-                        wes anderson cred nesciunt sapiente ea proident. Ad
-                        vegan
-                        excepteur butcher vice lomo. Leggings occaecat craft
-                        beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably
-                        haven't heard of them accusamus labore sustainable VHS.
+                        {{ faq.Answer }}
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button"
-                            data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="false" aria-controls="collapseTwo">
-                            Collapsible Group Item #2
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse"
-                    aria-labelledby="headingTwo"
-                    data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high
-                        life
-                        accusamus terry richardson ad squid. 3 wolf moon officia
-                        aute,
-                        non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                        sunt aliqua
-                        put a bird on it squid single-origin coffee nulla
-                        assumenda
-                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer
-                        labore
-                        wes anderson cred nesciunt sapiente ea proident. Ad
-                        vegan
-                        excepteur butcher vice lomo. Leggings occaecat craft
-                        beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably
-                        haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button"
-                            data-toggle="collapse" data-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse"
-                    aria-labelledby="headingThree"
-                    data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high
-                        life
-                        accusamus terry richardson ad squid. 3 wolf moon officia
-                        aute,
-                        non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                        sunt aliqua
-                        put a bird on it squid single-origin coffee nulla
-                        assumenda
-                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer
-                        labore
-                        wes anderson cred nesciunt sapiente ea proident. Ad
-                        vegan
-                        excepteur butcher vice lomo. Leggings occaecat craft
-                        beer
-                        farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably
-                        haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <form class="col-6">
+        <form class="col-5">
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                <label for="reportIssue">Report a Problem</label>
+                <select class="form-control" id="reportIssue"
+                    name="reportIssue">
+                    <option selected>Choose...</option>
+                    {% for faq in faqs %}
+                    {% if faq.report_problem %}
+                    <option>{{ faq.report_problem }}</option>
+                    {% endif %}
+                    {% endfor %}
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example
+                <label for="issueText">Example
                     textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1"
-                    rows="3"></textarea>
+                <textarea class="form-control" id="issueText" name="issueText"
+                    rows="6"></textarea>
             </div>
+            <button type="submit" class="btn btn-primary">Report</button>
         </form>
     </div>
 </section>

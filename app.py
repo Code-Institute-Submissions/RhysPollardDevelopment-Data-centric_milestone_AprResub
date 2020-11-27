@@ -109,7 +109,8 @@ def show_walk(route_id):
 
 @app.route("/contact")
 def contact():
-    return render_template("contactus.html")
+    faqs = list(mongo.db.FAQs.find())
+    return render_template("contactus.html", faqs=faqs)
 
 
 @app.route("/register", methods={"GET", "POST"})
