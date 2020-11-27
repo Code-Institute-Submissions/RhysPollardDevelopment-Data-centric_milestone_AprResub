@@ -164,6 +164,7 @@ def logout():
 
 @app.route("/user_profile/<username>")
 def user_profile(username):
+    # If no user is logged in, redirect to login page so check it first.
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     routes = list(mongo.db.routes.find())

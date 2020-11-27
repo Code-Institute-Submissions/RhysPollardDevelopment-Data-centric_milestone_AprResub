@@ -110,6 +110,11 @@
 }
 
 .contact-card{
-    margin:auto;
-    background-color: #fff;
+    background-color: ivory;
+    position: relative;
+    width: 60%;
+    text-align: center;
+    height: 50%;
+    margin: auto;
+    top: 25%;
 }

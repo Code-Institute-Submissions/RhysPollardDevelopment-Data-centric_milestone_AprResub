@@ -81,6 +81,16 @@ Users:
     }
 ```
 
+FAQs:
+```
+    {
+        "_id":<ObjectId>,
+        "FAQ":<string>,
+        "Answer":<string>,
+        *"report_problem":<string> - optional*
+    }
+```
+
 ### Wireframes
 All wireframes were constructed using the Balsamiq Tool. As some webpages served very similar services, such as log in/register and add walk/edit walk, these were made using the same page template but with required information completed using the database.
 
