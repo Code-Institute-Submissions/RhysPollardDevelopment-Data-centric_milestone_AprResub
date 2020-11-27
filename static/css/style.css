@@ -49,10 +49,11 @@
     overflow: hidden;
     width: inherit;
     object-fit: cover;
-        padding: 2rem;
+    padding: 2rem;
     background-color: gainsboro;
 }
 
+/*------------Content Boxes-----------*/
 .box-space{
     padding: 0.5rem;
 }
@@ -98,4 +99,17 @@
 /*---------Search Page---------*/
 .search-card{
     width:75%
+}
+
+/*---------contact us---------*/
+.contact-img{
+    height: 75vh;
+    object-fit: cover;
+    width:fit-content;
+    background-image: url(https://www.falriver.co.uk/_media/12883/image?fit=crop&w=1200&h=675);
+}
+
+.contact-card{
+    margin:auto;
+    background-color: #fff;
 }

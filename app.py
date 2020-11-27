@@ -107,6 +107,11 @@ def show_walk(route_id):
     return render_template("walkpage.html", walk=walk)
 
 
+@app.route("/contact")
+def contact():
+    return render_template("contactus.html")
+
+
 @app.route("/register", methods={"GET", "POST"})
 def register():
     if request.method == "POST":
