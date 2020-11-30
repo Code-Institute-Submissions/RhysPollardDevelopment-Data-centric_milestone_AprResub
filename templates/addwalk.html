@@ -7,14 +7,19 @@
         <div class="form-group col-12">
             <label for="title">Walking Route TItle</label>
             <input type="text" class="form-control" id="title"
-                placeholder="Pendennis point walking loop." name="title">
+                placeholder="Pendennis point walking loop." name="title"
+                required minlength="5" maxlength="40">
         </div>
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
             <label for="category_name">Walk type</label>
-            <select id="category_name" class="form-control"
-                name="category_name">
-                <option selected>Choose...</option>
+            <select id="category_name" class="form-control" name="category_name"
+                required>
+                <!-- Value set to "" so choose can be selected but won't
+                satisfy required requirement as no value. Found at: -->
+                <!-- https://stackoverflow.com/questions/8605516/
+                    default-select-option-as-blank-->
+                <option selected disabled value="">Choose...</option>
                 {% for category in categories %}
                 <option>{{category.category_name}}</option>
                 {% endfor %}
@@ -24,21 +29,22 @@
         <div class="form-group col-12">
             <label for="description">Description</label>
             <input type="text" class="form-control" id="description"
-                name="description"
+                name="description" required minlength="20" maxlength="200"
                 placeholder="Brief description of the walk and surrounding area, anything special or of interest.">
         </div>
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
             <label for="imageUrl">Image Url/address</label>
             <input type="text" class="form-control" id="imageUrl"
-                name="imageUrl"
+                name="imageUrl" required
                 placeholder="Please paste a copied web address/url for the walk's main image">
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="difficulty">Difficulty</label>
-            <select class="form-control" id="difficulty" name="difficulty">
-                <option selected>Choose...</option>
+            <select class="form-control" id="difficulty" name="difficulty"
+                required>
+                <option selected disabled value="">Choose...</option>
                 {% for difficulty in difficulties %}
                 <option>{{difficulty.challenge}}</option>
                 {% endfor %}
@@ -48,19 +54,19 @@
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputWalkTime">Time</label>
             <input type="text" class="form-control" id="inputWalkTime"
-                name="time" placeholder="1 hour 30 minutes">
+                name="time" placeholder="1 hour 30 minutes" required>
         </div>
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputDistance">Distance</label>
             <input type="text" class="form-control" id="inputDistance"
-                name="distance" placeholder="3.5kms">
+                name="distance" placeholder="3.5kms" required>
         </div>
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputStartLocation">Start Point</label>
             <input type="text" class="form-control" id="inputStartLocation"
-                name="startpoint" placeholder="Pendennis carpark">
+                name="startpoint" placeholder="Pendennis carpark" required>
         </div>
         <!-- Custom toggle switch found at
              https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
@@ -91,13 +97,13 @@
         <h6 class="mx-auto">Please use the Enter key to seperate direction steps
             from
             each other.</h6>
-        <!-- Text are for directions -->
+        <!-- Text area for directions -->
         <div class="form-group col-12">
             <label for="directionsTextArea">Directions</label>
             <!-- use of unicode for newline found at
             http://www.amp-what.com/unicode/search/newline -->
             <textarea class="form-control" id="directionsTextArea" rows="10"
-                name="directions"
+                name="directions" required
                 placeholder="Please enter your directions here.&#10;Then next instruction on a new line.&#10;And so on and so forth."></textarea>
         </div>
         <div class="form-group col-12">
