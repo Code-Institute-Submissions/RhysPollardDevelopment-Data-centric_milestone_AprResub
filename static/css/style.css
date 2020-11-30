@@ -104,15 +104,16 @@
 /*---------contact us---------*/
 .contact-img{
     height: 75vh;
-    object-fit: cover;
-    width:fit-content;
+    background-size: cover;
+    width:100%;
     background-image: url(https://www.falriver.co.uk/_media/12883/image?fit=crop&w=1200&h=675);
+    background-repeat: no-repeat;
 }
 
 .contact-card{
     background-color: ivory;
     position: relative;
-    width: 60%;
+    width: 50%;
     text-align: center;
     height: 50%;
     margin: auto;
