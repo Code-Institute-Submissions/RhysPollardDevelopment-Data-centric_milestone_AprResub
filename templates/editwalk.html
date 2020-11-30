@@ -9,13 +9,13 @@
             <label for="title">Walking Route TItle</label>
             <input type="text" class="form-control" id="title"
                 placeholder="Pendennis point walking loop." name="title"
-                value="{{ walk.title }}">
+                value="{{ walk.title }}" required minlength="5" maxlength="40">
         </div>
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
             <label for="category_name">Walk type</label>
             <select id="category_name" class="form-control" name="category_name"
-                value="{{ walk.category_name }}">
+                value="{{ walk.category_name }}" required>
                 {% for category in categories %}
                 {% if category.category_name == walk.category_name %}
                 <option selected>{{category.category_name}}</option>
@@ -29,7 +29,7 @@
         <div class="form-group col-12">
             <label for="description">Description</label>
             <input type="text" class="form-control" id="description"
-                name="description"
+                name="description" required minlength="20" maxlength="200"
                 placeholder="Brief description of the walk and surrounding area, anything special or of interest."
                 value="{{ walk.description }}">
         </div>
@@ -37,14 +37,15 @@
         <div class="form-group col-12">
             <label for="imageUrl">Image Url/address</label>
             <input type="text" class="form-control" id="imageUrl"
-                name="imageUrl"
+                name="imageUrl" required maxlength="250"
                 placeholder="Please paste a copied web address/url for the walk's main image"
                 value="{{ walk.imageUrl }}">
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="difficulty">Difficulty</label>
-            <select class="form-control" id="difficulty" name="difficulty">
+            <select class="form-control" id="difficulty" name="difficulty"
+                required>
                 {% for difficulty in difficulties %}
                 {% if difficulty.challenge == walk.difficulty %}
                 <option selected>{{difficulty.challenge}}</option>
@@ -59,21 +60,22 @@
             <label for="inputWalkTime">Time</label>
             <input type="text" class="form-control" id="inputWalkTime"
                 name="time" placeholder="1 hour 30 minutes"
-                value="{{ walk.time }}">
+                value="{{ walk.time }}" required maxlength="20">
         </div>
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputDistance">Distance</label>
             <input type="text" class="form-control" id="inputDistance"
-                name="distance" placeholder="3.5kms"
-                value="{{ walk.distance }}">
+                name="distance" placeholder="3.5kms" value="{{ walk.distance }}"
+                required maxlength="10">
         </div>
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
             <label for="inputStartLocation">Start Point</label>
             <input type="text" class="form-control" id="inputStartLocation"
                 name="startpoint" placeholder="Pendennis carpark"
-                value="{{ walk.startpoint }}">
+                value="{{ walk.startpoint }}" minlength="10" maxlength="40"
+                required>
         </div>
         <!-- Custom toggle switch found at
              https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
@@ -126,7 +128,8 @@
             http://www.amp-what.com/unicode/search/newline -->
             <textarea class="form-control" id="directionsTextArea" rows="10"
                 placeholder="Please enter your directions here.&#10;Then next instruction on a new line.&#10;And so on and so forth."
-                name="directions">{%- for direction in walk.directions -%}{{- direction -}}{%- endfor -%}</textarea>
+                name="directions" required minlength="100"
+                maxlength="1600">{%- for direction in walk.directions -%}{{- direction -}}{%- endfor -%}</textarea>
         </div>
         <div class="form-group col-12">
             <label for="extraTips">Any Extra Info?</label>
