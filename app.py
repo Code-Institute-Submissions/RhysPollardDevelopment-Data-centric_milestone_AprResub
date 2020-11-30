@@ -2,6 +2,9 @@ import os
 import random
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
+from flask_wtf import Form
+from wtforms import StringField, PasswordField
+from wtforms.validators import InputRequired, Email, Length 
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,6 +19,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
 
 
 @app.route("/")
@@ -137,6 +141,12 @@ def contact():
     return render_template("contactus.html", faqs=faqs)
 
 
+class RegistrationForm(Form):
+    username = StringField(
+        "Username", validators=[InputRequired(), Length(max=20, min=4)], render_kw={'class':'form-control'})
+    password = PasswordField("password", validators=[InputRequired(), Length(min=6)])
+
+
 @app.route("/register", methods={"GET", "POST"})
 def register():
     """
@@ -144,12 +154,13 @@ def register():
     When form posted, if the user already exists in database the user is 
     redirected to the register page and asked to log in instead.
     """
-    if request.method == "POST":
+    regform = RegistrationForm()
+    if regform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            return redirect(url_for("register"))
+            return redirect(url_for("register", regform=regform))
 
         # New user is generated if a matching username is not found.
         new_user = {
@@ -162,7 +173,8 @@ def register():
         session["user"] = request.form.get("username").lower()
         return redirect(url_for("user_profile", username=session["user"]))
 
-    return render_template("register.html")
+
+    return render_template("register.html", regform=regform)
 
 
 

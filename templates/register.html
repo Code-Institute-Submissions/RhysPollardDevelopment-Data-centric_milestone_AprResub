@@ -17,9 +17,8 @@
                 <form method="POST" action="{{ url_for('register')}}">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control"
-                            id="registerusername" aria-describedby="username"
-                            placeholder="Enter username" name="username">
+                        {{ regform.username(aria_describedby="username",
+                         minlength="4", maxlength="20", placeholder="Enter Username") }}
                         <small id="usernameHelp"
                             class="form-text text-muted">You'll need this to
                             login.</small>
