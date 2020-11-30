@@ -114,7 +114,7 @@ def delete_walk(route_id):
     Removes the data for a walk from database collection.
     """
     mongo.db.routes.remove({'_id': ObjectId(route_id)})
-    return redirect(url_for("home"))
+    return redirect(url_for("userprofile"))
 
 
 @app.route("/show_route/<route_id>")
