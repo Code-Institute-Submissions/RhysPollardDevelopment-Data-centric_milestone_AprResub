@@ -14,17 +14,14 @@
                 </li>
             </ul>
             <div>
+                <!-- Registration form -->
                 <form method="POST" action="{{ url_for('register')}}">
+                    <!-- Crsf token checks secret key to ensure is a legitimate webpage -->
                     {{ regform.csrf_token }}
                     <div class="form-group">
+                        <!-- uses WTForms to do backed validity, applies classes,etc in backend-->
                         {{ regform.email.label }}
                         {{ regform.email }}
-                        <!-- {% if regform.email.errors %}
-                        <ul class="errors">
-                            {% for error in regform.email.errors %}<li>
-                                {{ error }}</li>
-                            {% endfor %}</ul>
-                        {% endif %} -->
                     </div>
                     <div class="form-group">
                         {{ regform.username.label }}
@@ -37,13 +34,14 @@
                         {{ regform.password.label }}
                         {{ regform.password }}
                     </div>
+                    <!-- Custom javascript code compares this to the above password-->
                     <div class="form-group">
                         {{ regform.confirm_password.label }}
                         {{ regform.confirm_password }}
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input"
-                            id="exampleCheck1">
+                            id="exampleCheck1" required>
                         <label class="form-check-label" for="exampleCheck1">I
                             agree to the terms and conditions of this
                             site.</label>
