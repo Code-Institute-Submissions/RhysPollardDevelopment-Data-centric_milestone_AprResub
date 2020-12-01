@@ -150,7 +150,7 @@ class RegistrationForm(Form):
         "Username", validators=[InputRequired(), Length(max=20, min=4)],
         render_kw={
             'class': 'form-control',
-            'aria-describedby': 'username',
+            'aria-describedby': 'usernameLabel',
             'minlength': '4',
             'maxlength': '20',
             'placeholder': 'Enter username'
@@ -160,7 +160,7 @@ class RegistrationForm(Form):
         EqualTo('confirm_password', message="Passwords must match")],
         render_kw={
             'class': 'form-control',
-            'aria-describedby': 'password',
+            'aria-describedby': 'passwordLabel',
             'minlength': '10',
             'placeholder': 'Password'
         })
@@ -168,14 +168,14 @@ class RegistrationForm(Form):
         validators=[InputRequired()],
         render_kw={
             'class': 'form-control',
-            'aria-describedby': 'confirm password',
+            'aria-describedby': 'confirmLabel',
             'placeholder': 'Confirm Password'
         })
     email = html5.EmailField("Email", validators=[InputRequired(),
         Email(message='This field requires a valid email')],
         render_kw={
             'class': 'form-control',
-            'aria-describedby': 'email',
+            'aria-describedby': 'emailLabel',
             'placeholder': 'Email Address'
         })
     agree = BooleanField("I agree to the terms and conditions of this site.",
@@ -214,6 +214,22 @@ def register():
     return render_template("register.html", regform=regform)
 
 
+class logInForm(Form):
+    login_username = StringField(
+        "Username", validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'loginUsernameLabel',
+            'placeholder': 'Enter username'
+        })
+    login_password = PasswordField(
+        "Password", validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'loginPasswordLabel',
+            'placeholder': 'Password'
+        })
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -223,21 +239,21 @@ def login():
     If a match is found they are directed to userpage, else returned to
     login with an error message.
     """
-    if request.method == "POST":
-        form = request.form
+    logform = logInForm()
+    if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
-            {"username": form.get("username").lower()})
-        
+            {"username": request.form.get("login_username").lower()})
+            
         if existing_user:
-            if check_password_hash(existing_user["password"], form.get("password")):
-                session["user"] = form.get("username").lower()
+            if check_password_hash(existing_user["password"], request.form.get("login_password")):
+                session["user"] = request.form.get("login_username").lower()
                 return redirect(url_for("user_profile", username=session["user"]))
             else:
-                return redirect(url_for("login"))
+                return redirect(url_for("login", logform=logform))
         else:
-            return redirect(url_for("login"))
+            return redirect(url_for("login", logform=logform))
 
-    return render_template("login.html")
+    return render_template("login.html", logform=logform)
 
 
 @app.route("/logout")
