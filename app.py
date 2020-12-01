@@ -4,7 +4,8 @@ from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_wtf import Form
 from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired, Email, Length 
+from wtforms.fields import html5
+from wtforms.validators import InputRequired, Email, Length, EqualTo
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -143,8 +144,38 @@ def contact():
 
 class RegistrationForm(Form):
     username = StringField(
-        "Username", validators=[InputRequired(), Length(max=20, min=4)], render_kw={'class':'form-control'})
-    password = PasswordField("password", validators=[InputRequired(), Length(min=6)])
+        # Use of render keywords for html data found at
+        # https://pythonpedia.com/en/knowledge-base/20440056/custom-attributes-for
+        # -flask-wtforms
+        "Username", validators=[InputRequired(), Length(max=20, min=4)],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'username',
+            'minlength': '4',
+            'maxlength': '20',
+            'placeholder': 'Enter username'
+        })
+    password = PasswordField(
+        "Password", validators=[InputRequired(), Length(min=10),
+        EqualTo('confirm_password', message="Passwords must match")],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'password',
+            'minlength': '10',
+            'placeholder': 'Password'
+        })
+    confirm_password = PasswordField("Repeat Password", validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'confirm password',
+            'placeholder': 'Confirm Password'
+        })
+    email = html5.EmailField("Email", validators=[InputRequired(), Email(message='This field requires a valid email')],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'email',
+            'placeholder': 'Email Address'
+        })
 
 
 @app.route("/register", methods={"GET", "POST"})
@@ -165,13 +196,14 @@ def register():
         # New user is generated if a matching username is not found.
         new_user = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "email": request.form.get("email").lower()
         }
         mongo.db.users.insert_one(new_user)
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for("user_profile", username=session["user"]))
+        return redirect(url_for("user_profile", username=session["user"], regform=regform))
 
 
     return render_template("register.html", regform=regform)
