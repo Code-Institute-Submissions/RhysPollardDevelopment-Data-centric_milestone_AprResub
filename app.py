@@ -220,7 +220,8 @@ class logInForm(Form):
         render_kw={
             'class': 'form-control',
             'aria-describedby': 'loginUsernameLabel',
-            'placeholder': 'Enter username'
+            'placeholder': 'Enter username',
+            'autocomplete': 'off'
         })
     login_password = PasswordField(
         "Password", validators=[InputRequired()],
@@ -240,6 +241,7 @@ def login():
     login with an error message.
     """
     logform = logInForm()
+    errors = []
     if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("login_username").lower()})
@@ -249,11 +251,13 @@ def login():
                 session["user"] = request.form.get("login_username").lower()
                 return redirect(url_for("user_profile", username=session["user"]))
             else:
-                return redirect(url_for("login", logform=logform))
+                errors.append("Incorrect Username and/or Password.")
+                return render_template("login.html", logform=logform, errors=errors)
         else:
-            return redirect(url_for("login", logform=logform))
+            errors.append("Incorrect Username and/or Password.")
+            return render_template("login.html", logform=logform, errors=errors)
 
-    return render_template("login.html", logform=logform)
+    return render_template("login.html", logform=logform, errors=errors)
 
 
 @app.route("/logout")
