@@ -6,33 +6,21 @@
     <div class="row">
         <!-- Title of walking route-->
         <div class="form-group col-12">
-            <label for="title" class="text-capitalize">Walking Route
-                Title</label>
-            <input type="text" class="form-control" id="title"
-                placeholder="Pendennis point walking loop." name="title"
-                required minlength="5" maxlength="40" required>
+            {{ addform.title.label }}
+            {{ addform.title }}
         </div>
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
-            <label for="category_name">Walk type</label>
-            <select id="category_name" class="form-control" name="category_name"
-                required>
-                <!-- Value set to "" so choose can be selected but won't
-                satisfy required requirement as no value. Found at: -->
-                <!-- https://stackoverflow.com/questions/8605516/
-                    default-select-option-as-blank-->
-                <option selected disabled value="">Choose...</option>
-                {% for category in categories %}
-                <option>{{category.category_name}}</option>
-                {% endfor %}
-            </select>
+            {{ addform.category.label }}
+            {{ addform.category }}
+            <div class="valid-feedback">
+                Is this correct?
+            </div>
         </div>
         <!-- Input for walk route description -->
         <div class="form-group col-12">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description"
-                name="description" required minlength="20" maxlength="200"
-                placeholder="Brief description of the walk and surrounding area, anything special or of interest.">
+            {{ addform.description.label }}
+            {{ addform.description }}
         </div>
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
@@ -43,34 +31,26 @@
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
-            <label for="difficulty">Difficulty</label>
-            <select class="form-control" id="difficulty" name="difficulty"
-                required>
-                <option selected disabled value="">Choose...</option>
-                {% for difficulty in difficulties %}
-                <option>{{difficulty.challenge}}</option>
-                {% endfor %}
-            </select>
+            {{ addform.difficulty.label }}
+            {{ addform.difficulty }}
+            <div class="valid-feedback">
+                Is this correct?
+            </div>
         </div>
         <!--Text input for walking time-->
         <div class="form-group col-sm-12 col-md-6">
-            <label for="inputWalkTime">Time</label>
-            <input type="text" class="form-control" id="inputWalkTime"
-                name="time" placeholder="1 hour 30 minutes" required
-                maxlength="20">
+            {{ addform.time.label }}
+            {{ addform.time }}
         </div>
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
-            <label for="inputDistance">Distance</label>
-            <input type="text" class="form-control" id="inputDistance"
-                name="distance" placeholder="3.5kms" required maxlength="10">
+            {{ addform.distance.label }}
+            {{ addform.distance }}
         </div>
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
-            <label for="inputStartLocation">Start Point</label>
-            <input type="text" class="form-control" id="inputStartLocation"
-                name="startpoint" placeholder="Pendennis carpark" minlength="10"
-                maxlength="40" required>
+            {{ addform.startpoint.label }}
+            {{ addform.startpoint }}
         </div>
         <!-- Custom toggle switch found at
              https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->

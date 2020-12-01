@@ -5,7 +5,7 @@ from flask import (
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField
 from wtforms.fields import html5
-from wtforms.validators import InputRequired, Email, Length, EqualTo
+from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -35,6 +35,61 @@ def home():
     complete = list(mongo.db.routes.find())
     routes = random.choices(complete, k=3)
     return render_template("index.html", routes=routes)
+
+
+class Walkform(Form):
+    title = StringField("Walking Route Title", validators=[InputRequired(),
+        Length(min=5, max=40)],
+        render_kw={"class": "form-control",
+        "placeholder": "Pendennis point walking loop",
+        "minlength":"5", "maxlength":"40"})
+        
+    difficulty = SelectField("Difficulty", validators=[InputRequired(),
+        AnyOf(["Easy", "Moderate", "Hard"])],
+        choices=[], render_kw={"class": "form-control"})
+
+    category = SelectField("Walk type", validators=[InputRequired(),
+        AnyOf(["Historical", "Coastal", "Pub Walk, Town/City, Countryside"])],
+        choices=[], render_kw={"class": "form-control"})
+
+    imageUrl = StringField("Image Url/Address", validators=[InputRequired(),
+        Length(max=250)],
+        render_kw={"class": "form-control",
+        "placeholder": "Please paste a copied web address/url for the walk's main image",
+         "maxlength": "250"})
+
+    description = StringField("Description", validators=[InputRequired(),
+        Length(min=20, max=200)],
+        render_kw={"class": "form-control",
+        "placeholder": "Pendennis point walking loop",
+        "minlength": "20", "maxlength": "200"})
+        
+    time = StringField("Time", validators=[InputRequired(), Length(max=20)],
+        render_kw={"class": "form-control",
+        "placeholder": "1 hour 30 minutes", "maxlength": "20"})
+        
+    startpoint = StringField("Start Point", validators=[InputRequired(),
+        Length(min=5, max=40)],
+        render_kw={"class": "form-control",
+        "placeholder": "Pendennis Carpark",
+        "minlength": "5", "maxlength": "40"})
+        
+    distance = StringField("Distance", validators=[InputRequired(), Length(max=10)],
+        render_kw={"class": "form-control",
+        "placeholder": "3.5 miles",
+        "maxlength": "10"})
+        
+    dogs_allowed = BooleanField("Dog Friendly",
+        validators=[InputRequired()],
+        render_kw={'class': 'custom-control-input'})
+        
+    free_parking = BooleanField("Free Parking",
+        validators=[InputRequired()],
+        render_kw={'class': 'custom-control-input'})
+        
+    paid_parking = BooleanField("Paid Parking",
+        validators=[InputRequired()],
+        render_kw={'class': 'custom-control-input'})
 
 
 @app.route("/add_walk",methods={"GET","POST"})
@@ -71,9 +126,14 @@ def add_walk():
         mongo.db.routes.insert_one(walk)
         return redirect(url_for("home"))
 
-    categories = mongo.db.categories.find()
-    difficulties = mongo.db.difficulty.find()
-    return render_template("addwalk.html", categories=categories, difficulties=difficulties)
+    # distinct used to select only the fields wanted from collection.
+    # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
+    categories = mongo.db.categories.distinct("category_name")
+    difficulties = mongo.db.difficulty.distinct("challenge")
+    addform = Walkform()
+    addform.difficulty.choices = [(difficulty, difficulty) for difficulty in difficulties]
+    addform.category.choices = [(category, category) for category in categories]
+    return render_template("addwalk.html", categories=categories, difficulties=difficulties, addform=addform)
 
 
 @app.route("/edit_walk/<route_id>", methods={"GET","POST"})
