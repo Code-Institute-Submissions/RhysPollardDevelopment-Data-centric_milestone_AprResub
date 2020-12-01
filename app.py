@@ -3,7 +3,7 @@ import random
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_wtf import Form
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField
 from wtforms.fields import html5
 from wtforms.validators import InputRequired, Email, Length, EqualTo
 from flask_pymongo import PyMongo
@@ -164,18 +164,23 @@ class RegistrationForm(Form):
             'minlength': '10',
             'placeholder': 'Password'
         })
-    confirm_password = PasswordField("Repeat Password", validators=[InputRequired()],
+    confirm_password = PasswordField("Repeat Password",
+        validators=[InputRequired()],
         render_kw={
             'class': 'form-control',
             'aria-describedby': 'confirm password',
             'placeholder': 'Confirm Password'
         })
-    email = html5.EmailField("Email", validators=[InputRequired(), Email(message='This field requires a valid email')],
+    email = html5.EmailField("Email", validators=[InputRequired(),
+        Email(message='This field requires a valid email')],
         render_kw={
             'class': 'form-control',
             'aria-describedby': 'email',
             'placeholder': 'Email Address'
         })
+    agree = BooleanField("I agree to the terms and conditions of this site.",
+        validators=[InputRequired()],
+        render_kw={'class':'form-check-input'})
 
 
 @app.route("/register", methods={"GET", "POST"})
