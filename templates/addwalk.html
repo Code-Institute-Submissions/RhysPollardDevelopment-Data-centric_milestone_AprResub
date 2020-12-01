@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Add a New Walk</h2>
-<form class="container" method="POST" action="{{ url_for('add_walk') }}"
-    novalidate>
+<form class="container needs-validation" method="POST"
+    action="{{ url_for('add_walk') }}" novalidate>
     <div class="row">
         <!-- Title of walking route-->
         <div class="form-group col-12">
@@ -10,7 +10,7 @@
                 Title</label>
             <input type="text" class="form-control" id="title"
                 placeholder="Pendennis point walking loop." name="title"
-                required minlength="5" maxlength="40">
+                required minlength="5" maxlength="40" required>
         </div>
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
