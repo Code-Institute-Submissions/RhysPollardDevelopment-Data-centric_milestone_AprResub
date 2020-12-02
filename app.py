@@ -5,7 +5,7 @@ from flask import (
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField
 from wtforms.fields import html5
-from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf
+from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf, URL
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -53,7 +53,7 @@ class Walkform(Form):
         choices=[], render_kw={"class": "form-control"})
 
     imageUrl = StringField("Image Url/Address", validators=[InputRequired(),
-        Length(max=250)],
+        Length(max=250), URL()],
         render_kw={"class": "form-control",
         "placeholder": "Please paste a copied web address/url for the walk's main image",
          "maxlength": "250"})
@@ -129,9 +129,14 @@ def add_walk():
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
-    difficulties = mongo.db.difficulty.distinct("challenge")
+    difficulties = mongo.db.difficulty.find()
+    # cycles through each entry for challenge field and adds to new list
+    challenges = []
+    for d in difficulties:
+        challenges.append(d['challenge'])
+        print(challenges)
     addform = Walkform()
-    addform.difficulty.choices = [(difficulty, difficulty) for difficulty in difficulties]
+    addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     addform.category.choices = [(category, category) for category in categories]
     return render_template("addwalk.html", categories=categories, difficulties=difficulties, addform=addform)
 
