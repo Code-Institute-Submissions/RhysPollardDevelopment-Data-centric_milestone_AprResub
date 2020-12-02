@@ -3,9 +3,10 @@ import random
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField
+from wtforms import (
+    StringField, PasswordField, BooleanField, SelectField, TextAreaField)
 from wtforms.fields import html5
-from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf, URL
+from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -52,11 +53,11 @@ class Walkform(Form):
         AnyOf(["Historical", "Coastal", "Pub Walk, Town/City, Countryside"])],
         choices=[], render_kw={"class": "form-control"})
 
-    imageUrl = StringField("Image Url/Address", validators=[InputRequired(),
-        Length(max=250), URL()],
+    imageUrl = html5.URLField("Image Url/Address", validators=[InputRequired(),
+        Length(min=20, max=250), URL()],
         render_kw={"class": "form-control",
         "placeholder": "Please paste a copied web address/url for the walk's main image",
-         "maxlength": "250"})
+         "minlength": "20", "maxlength": "250"})
 
     description = StringField("Description", validators=[InputRequired(),
         Length(min=20, max=200)],
@@ -80,16 +81,19 @@ class Walkform(Form):
         "maxlength": "10"})
         
     dogs_allowed = BooleanField("Dog Friendly",
-        validators=[InputRequired()],
         render_kw={'class': 'custom-control-input'})
         
     free_parking = BooleanField("Free Parking",
-        validators=[InputRequired()],
         render_kw={'class': 'custom-control-input'})
         
     paid_parking = BooleanField("Paid Parking",
-        validators=[InputRequired()],
         render_kw={'class': 'custom-control-input'})
+
+    directions = TextAreaField("Enter your Directions", validators=[InputRequired(),
+        Length(min=100, max=1600)],
+        render_kw={"class": "form-control",
+        "placeholder": "Please enter your directions here.\rNext instruction on a new line without any spaces.\rAnd so on and so forth.",
+        "minlength": "100", "maxlength": "1600", "rows":"10"})
 
 
 @app.route("/add_walk",methods={"GET","POST"})
@@ -130,11 +134,12 @@ def add_walk():
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
-    # cycles through each entry for challenge field and adds to new list
+    # cycles through each entry for challenge field to maintain ordering.
     challenges = []
     for d in difficulties:
         challenges.append(d['challenge'])
         print(challenges)
+
     addform = Walkform()
     addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     addform.category.choices = [(category, category) for category in categories]

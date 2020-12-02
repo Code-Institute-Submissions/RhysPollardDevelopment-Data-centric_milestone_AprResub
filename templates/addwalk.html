@@ -24,10 +24,11 @@
         </div>
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
-            <label for="imageUrl">Image Url/address</label>
-            <input type="text" class="form-control" id="imageUrl"
-                name="imageUrl" required maxlength="250"
-                placeholder="Please paste a copied web address/url for the walk's main image">
+            {{ addform.imageUrl.label }}
+            {{ addform.imageUrl }}
+            <div class="invalid-feedback">
+                Please paste/enter a valid URL for your image.
+            </div>
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
@@ -57,38 +58,33 @@
         <!-- Dog Friendly checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            <input type="checkbox" class="custom-control-input" id="dogFriendly"
-                name="dogs_allowed">
-            <label class="custom-control-label" for="dogFriendly">Dog
-                Friendly</label>
+            {{ addform.dogs_allowed }}
+            {{ addform.dogs_allowed.label(class="custom-control-label") }}
         </div>
         <!-- Free parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            <input type="checkbox" class="custom-control-input" id="freeParking"
-                name="free_parking">
-            <label class="custom-control-label" for="freeParking">Free
-                Parking</label>
+            {{ addform.free_parking }}
+            {{ addform.free_parking.label(class="custom-control-label") }}
         </div>
         <!--paid parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            <input type="checkbox" class="custom-control-input" id="paidParking"
-                name="paid_parking">
-            <label class="custom-control-label" for="paidParking">Paid
-                Parking</label>
+            {{ addform.paid_parking }}
+            {{ addform.paid_parking.label(class="custom-control-label") }}
         </div>
         <h6 class="mx-auto">Please use the Enter key to seperate direction steps
             from
             each other.</h6>
         <!-- Text area for directions -->
         <div class="form-group col-12">
-            <label for="directionsTextArea">Directions</label>
             <!-- use of unicode for newline found at
             http://www.amp-what.com/unicode/search/newline -->
-            <textarea class="form-control" id="directionsTextArea" rows="10"
-                name="directions" required minlength="100" maxlength="1600"
-                placeholder="Please enter your directions here.&#10;Next instruction on a new line without any spaces.&#10;And so on and so forth."></textarea>
+            {{ addform.directions.label }}
+            {{ addform.directions }}
+            <div class="invalid-feedback">
+                Directions must be between 100-1600 characters.
+            </div>
         </div>
         <div class="form-group col-12">
             <label for="extraTips">Any Extra Info?</label>
