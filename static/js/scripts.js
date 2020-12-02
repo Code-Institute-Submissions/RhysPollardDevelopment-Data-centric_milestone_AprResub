@@ -21,6 +21,7 @@ function validatePassword() {
     }
 }
 
+// Code from bootstrap for their validation styles.
 (function() {
   'use strict';
   window.addEventListener('load', function() {

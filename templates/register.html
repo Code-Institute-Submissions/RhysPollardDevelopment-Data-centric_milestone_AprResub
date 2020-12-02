@@ -53,6 +53,13 @@
                         {{ regform.agree }}
                         {{ regform.agree.label }}
                     </div>
+                    {% if errors != [] %}
+                    <div class="alert alert-warning" role="alert">
+                        {% for error in errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                     <button type="submit"
                         class="btn register-button">Register</button>
                 </form>
