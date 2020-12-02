@@ -55,7 +55,9 @@ class Walkform(Form):
         Length(min=20, max=250), URL()],
         render_kw={"class": "form-control",
         "placeholder": "Please paste a copied web address/url for the walk's main image",
-         "minlength": "20", "maxlength": "250"})
+        "minlength": "20", "maxlength": "250",
+        # regex simulated at https://www.regextester.com/20
+        "pattern" : "^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$"})
 
     description = StringField("Description", validators=[InputRequired(),
         Length(min=20, max=200)],
@@ -159,9 +161,8 @@ def edit_walk(route_id):
         challenges.append(d['challenge'])
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
-    editform = Walkform()#data=walk)
-    #editform.directions.data = "".join(walk["directions"])
-    print(editform.directions.data)
+    editform = Walkform(data=walk)
+    editform.directions.data = "".join(walk["directions"])
 
     editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category.choices = [(category, category) for category in categories]

@@ -5,6 +5,16 @@
     action="{{ url_for('edit_walk', route_id=walk._id) }}" novalidate>
     {{ editform.csrf_token }}
     <div class="row">
+        {% for field, errors in editform.errors.items() %}
+        <div class="alert alert-danger alert-dismissible fade show col-12"
+            role="alert">
+            {{ editform[field].label }}: {{ ', '.join(errors) }}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
         <!-- Title of walking route-->
         <div class="form-group col-12">
             {{ editform.title.label }}
@@ -28,7 +38,8 @@
             {{ editform.imageUrl.label }}
             {{ editform.imageUrl }}
             <div class="invalid-feedback">
-                Please paste/enter a valid URL for your image.
+                Must begin with http or https, please paste/enter a valid URL
+                for your image.
             </div>
         </div>
         <!--Walk difficulty selector-->
@@ -93,11 +104,6 @@
                 name="extra_tips"
                 placeholder="Anything interesting to share?&#10;Let others know here!"></textarea>
         </div>
-        {% for field, errors in editform.errors.items() %}
-        <div class="alert alert-error">
-            {{ editform[field].label }}: {{ ', '.join(errors) }}
-        </div>
-        {% endfor %}
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

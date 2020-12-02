@@ -5,6 +5,16 @@
     action="{{ url_for('add_walk') }}" novalidate>
     {{ addform.csrf_token }}
     <div class="row">
+        {% for field, errors in addform.errors.items() %}
+        <div class="alert alert-danger alert-dismissible fade show col-12"
+            role="alert">
+            {{ addform[field].label }}: {{ ', '.join(errors) }}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
         <!-- Title of walking route-->
         <div class="form-group col-12">
             {{ addform.title.label }}
@@ -28,7 +38,8 @@
             {{ addform.imageUrl.label }}
             {{ addform.imageUrl }}
             <div class="invalid-feedback">
-                Please paste/enter a valid URL for your image.
+                Must begin with http or https, please paste/enter a valid URL
+                for your image.
             </div>
         </div>
         <!--Walk difficulty selector-->
@@ -95,11 +106,6 @@
         </div>
         <!-- Error message fixed from stackoverflow answer-->
         <!--https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors-->
-        {% for field, errors in addform.errors.items() %}
-        <div class="alert alert-error">
-            {{ addform[field].label }}: {{ ', '.join(errors) }}
-        </div>
-        {% endfor %}
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
