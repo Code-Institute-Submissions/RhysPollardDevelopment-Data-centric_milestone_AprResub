@@ -152,16 +152,20 @@ def edit_walk(route_id):
     """
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
-    
+
     # cycles through each entry for challenge field to maintain ordering.
     challenges = []
     for d in difficulties:
         challenges.append(d['challenge'])
-        print(challenges)
 
-    addform = Walkform()
-    addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
-    addform.category.choices = [(category, category) for category in categories]
+    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+    editform = Walkform(data=walk)
+    editform.directions.data = "".join(walk["directions"])
+    print(editform.directions.data)
+
+    editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
+    editform.category.choices = [(category, category) for category in categories]
+
     if request.method == "POST":
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
@@ -187,8 +191,8 @@ def edit_walk(route_id):
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
         return redirect(url_for("home"))
 
-    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
-    return render_template("editwalk.html", walk=walk)
+
+    return render_template("editwalk.html", walk=walk, editform=editform)
 
 
 @app.route("/delete_walk/<route_id>")

@@ -10,37 +10,16 @@
             {{ addform.title.label }}
             {{ addform.title }}
         </div>
-        {% if addform.title.errors %}
-        <ul class="errors">
-            {% for error in addform.title.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <!-- Select input for category of walk-->
         <div class="form-group col-12">
             {{ addform.category.label }}
             {{ addform.category }}
-            {% if addform.category.errors %}
-            <ul class="errors">
-                {% for error in addform.category.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </div>
         <!-- Input for walk route description -->
         <div class="form-group col-12">
             {{ addform.description.label }}
             {{ addform.description }}
         </div>
-        {% if addform.description.errors %}
-        <ul class="errors">
-            {% for error in addform.description.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
             {{ addform.imageUrl.label }}
@@ -48,13 +27,6 @@
             <div class="invalid-feedback">
                 Please paste/enter a valid URL for your image.
             </div>
-            {% if addform.imageUrl.errors %}
-            <ul class="errors">
-                {% for error in addform.imageUrl.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
@@ -63,50 +35,22 @@
             <div class="valid-feedback">
                 Is this correct?
             </div>
-            {% if addform.difficulty.errors %}
-            <ul class="errors">
-                {% for error in addform.difficulty.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </div>
         <!--Text input for walking time-->
         <div class="form-group col-sm-12 col-md-6">
             {{ addform.time.label }}
             {{ addform.time }}
         </div>
-        {% if addform.time.errors %}
-        <ul class="errors">
-            {% for error in addform.time.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
             {{ addform.distance.label }}
             {{ addform.distance }}
         </div>
-        {% if addform.distance.errors %}
-        <ul class="errors">
-            {% for error in addform.distance.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
             {{ addform.startpoint.label }}
             {{ addform.startpoint }}
         </div>
-        {% if addform.startpoint.errors %}
-        <ul class="errors">
-            {% for error in addform.startpoint.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <!-- Custom toggle switch found at
              https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
         <!-- Dog Friendly checkbox-->
@@ -127,13 +71,6 @@
             {{ addform.paid_parking }}
             {{ addform.paid_parking.label(class="custom-control-label") }}
         </div>
-        {% if addform.paid_parking.errors %}
-        <ul class="errors">
-            {% for error in addform.paid_parking.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <h6 class="mx-auto">Please use the Enter key to seperate direction steps
             from
             each other.</h6>
@@ -146,13 +83,6 @@
             <div class="invalid-feedback">
                 Directions must be between 100-1600 characters.
             </div>
-            {% if addform.directions.errors %}
-            <ul class="errors">
-                {% for error in addform.directions.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </div>
         <div class="form-group col-12">
             <label for="extraTips">Any Extra Info?</label>
@@ -160,6 +90,8 @@
                 name="extra_tips"
                 placeholder="Anything interesting to share?&#10;Let others know here!"></textarea>
         </div>
+        <!-- Error message fixed from stackoverflow answer-->
+        <!--https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors-->
         {% for field, errors in addform.errors.items() %}
         <div class="alert alert-error">
             {{ addform[field].label }}: {{ ', '.join(errors) }}
