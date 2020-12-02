@@ -3,7 +3,7 @@
 
 <form class="container-fluid" method="POST" action="{{ url_for('search') }}">
     <div class="row">
-        {{ searchform.csrf_token }}
+        {{ filterform.csrf_token }}
         <!-- Top image and search form-->
         <div class="jumbotron-fluid index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
@@ -19,29 +19,29 @@
     <div class=container>
         <div class="row">
             <div class="form-group col-6">
-                {{ searchform.category.label }}
-                {{ searchform.category }}
+                {{ filterform.category_name.label }}
+                {{ filterform.category_name }}
             </div>
             <div class="form-group col-6">
-                {{ searchform.difficulty.label }}
-                {{ searchform.difficulty }}
+                {{ filterform.difficulty.label }}
+                {{ filterform.difficulty }}
             </div>
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ searchform.dogs_allowed }}
-                {{ searchform.paid_parking.label(class="custom-control-label") }}
+                {{ filterform.dogs_allowed }}
+                {{ filterform.dogs_allowed.label(class="custom-control-label") }}
             </div>
             <!-- Free parking checkbox-->
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ searchform.free_parking }}
-                {{ searchform.paid_parking.label(class="custom-control-label") }}
+                {{ filterform.free_parking }}
+                {{ filterform.free_parking.label(class="custom-control-label") }}
             </div>
             <!--paid parking checkbox-->
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ searchform.paid_parking }}
-                {{ searchform.paid_parking.label(class="custom-control-label") }}
+                {{ filterform.paid_parking }}
+                {{ filterform.paid_parking.label(class="custom-control-label") }}
             </div>
 </form>
 <section class="container">

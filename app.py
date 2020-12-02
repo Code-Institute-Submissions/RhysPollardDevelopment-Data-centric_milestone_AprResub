@@ -155,15 +155,13 @@ def edit_walk(route_id):
     difficulties = mongo.db.difficulty.find()
 
     # cycles through each entry for challenge field to maintain ordering.
-    challenges = []
-    for d in difficulties:
-        challenges.append(d['challenge'])
-
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
     editform = Walkform(data=walk)
     editform.directions.data = "".join(walk["directions"])
+    for d in difficulties:
+        editform.difficulty.choices.append(d['challenge'])
 
-    editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
+    #editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category_name.choices = [(category, category) for category in categories]
 
     if editform.validate_on_submit():
@@ -369,9 +367,9 @@ def user_profile(username):
 
 class SearchForm(Form):
     difficulty = SelectField("Difficulty",
-    choices=[], render_kw={"class": "form-control"})
+    choices=[("Choose...")], render_kw={"class": "form-control"})
 
-    category_name = SelectField("Walk type", choices=[],
+    category_name = SelectField("Walk type", choices=[("Choose...")],
     render_kw={"class": "form-control"})
     
     dogs_allowed = BooleanField("Dog Friendly",
@@ -397,6 +395,20 @@ def search():
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
     filterform = SearchForm()
+
+    categories = mongo.db.categories.distinct("category_name")
+    difficulties = mongo.db.difficulty.find()
+    # cycles through each entry for challenge field to maintain ordering.
+    for d in difficulties:
+        filterform.difficulty.choices.append(d['challenge'])
+
+    for c in categories:
+        filterform.category_name.choices.append(c)
+    
+    # filterform.difficulty.choices=[(challenge, challenge) for challenge in challenges]
+    #filterform.category_name.choices = [(category, category) for category in categories]
+    print(type(filterform.difficulty.choices))
+    
     if request.method == "POST":
         query = request.form.get("query")
         dogs_allowed = request.form.get("dogs_allowed") 
@@ -428,16 +440,15 @@ def search():
 
         if category != "Choose...":
             filters["category_name"] = category
-            filterform.category.data = filters["category"]
+            filterform.category_name.data = filters["category_name"]
+
+        print(filters)
+        print(filterform.category_name.data)
 
         routes = list(mongo.db.routes.find(filters))
-        categories = mongo.db.categories.find()
-        difficulties = mongo.db.difficulty.find()
         return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
     routes = list(mongo.db.routes.find())
-    categories = mongo.db.categories.find()
-    difficulties = mongo.db.difficulty.find()
     return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
 
