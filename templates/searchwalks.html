@@ -3,6 +3,8 @@
 
 <form class="container-fluid" method="POST" action="{{ url_for('search') }}">
     <div class="row">
+        {{ searchform.csrf_token }}
+        <!-- Top image and search form-->
         <div class="jumbotron-fluid index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
             <hr class="my-4">
@@ -17,86 +19,29 @@
     <div class=container>
         <div class="row">
             <div class="form-group col-6">
-                <label for="exampleFormControlSelect1">Walk Type</label>
-                <select class="form-control" id="exampleFormControlSelect1"
-                    name="category_name">
-                    <!-- If no previous filters, option is selected. 
-                    If a previous filter, option is not selected-->
-                    {% if not filters.category_name %}
-                    <option selected>Choose...</option>
-                    {% else %}
-                    <option>Choose...</option>
-                    {% endif %}
-                    <!--For each challenge level, decide whether it is
-                    selected or not-->
-                    {% for category in categories %}
-                    {% if category.category_name == filters.category_name %}
-                    <option selected>{{category.category_name}}</option>
-                    {% else %}
-                    <option>{{category.category_name}}</option>
-                    {% endif %}
-                    {% endfor %}
-                </select>
+                {{ searchform.category.label }}
+                {{ searchform.category }}
             </div>
             <div class="form-group col-6">
-                <label for="exampleFormControlSelect1">Difficulty</label>
-                <select class="form-control" id="exampleFormControlSelect1"
-                    name="difficulty">
-                    <!-- If no previous filters, option is selected. 
-                    If a previous filter, option is not selected-->
-                    {% if not filters.difficulty %}
-                    <option selected>Choose...</option>
-                    {% else %}
-                    <option>Choose...</option>
-                    {% endif %}
-                    <!--For each challenge level, decide whether it is
-                    selected or not-->
-                    {% for difficulty in difficulties %}
-                    {% if difficulty.challenge == filters.difficulty %}
-                    <option selected>{{ difficulty.challenge }}</option>
-                    {% else %}
-                    <option>{{difficulty.challenge}}</option>
-                    {% endif %}
-                    {% endfor %}
-                </select>
+                {{ searchform.difficulty.label }}
+                {{ searchform.difficulty }}
             </div>
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {% if filters.dogs_allowed %}
-                <input type="checkbox" class="custom-control-input"
-                    id="dogFriendly" name="dogs_allowed" checked>
-                {% else %}
-                <input type="checkbox" class="custom-control-input"
-                    id="dogFriendly" name="dogs_allowed">
-                {% endif %}
-                <label class="custom-control-label" for="dogFriendly">Dog
-                    Friendly</label>
+                {{ searchform.dogs_allowed }}
+                {{ searchform.paid_parking.label(class="custom-control-label") }}
             </div>
             <!-- Free parking checkbox-->
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {% if filters.free_parking %}
-                <input type="checkbox" class="custom-control-input"
-                    id="freeParking" name="free_parking" checked>
-                {% else %}
-                <input type="checkbox" class="custom-control-input"
-                    id="freeParking" name="free_parking">
-                {% endif %}
-                <label class="custom-control-label" for="freeParking">Free
-                    Parking</label>
+                {{ searchform.free_parking }}
+                {{ searchform.paid_parking.label(class="custom-control-label") }}
             </div>
             <!--paid parking checkbox-->
             <div
                 class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {% if filters.paid_parking %}
-                <input type="checkbox" class="custom-control-input"
-                    id="paidParking" name="paid_parking" checked>
-                {% else %}
-                <input type="checkbox" class="custom-control-input"
-                    id="paidParking" name="paid_parking">
-                {% endif %}
-                <label class="custom-control-label" for="paidParking">Paid
-                    Parking</label>
+                {{ searchform.paid_parking }}
+                {{ searchform.paid_parking.label(class="custom-control-label") }}
             </div>
 </form>
 <section class="container">

@@ -47,7 +47,7 @@ class Walkform(Form):
     difficulty = SelectField("Difficulty", validators=[InputRequired()],
         choices=[], render_kw={"class": "form-control"})
 
-    category = SelectField("Walk type", coerce=str, validators=[InputRequired()],
+    category_name = SelectField("Walk type", validators=[InputRequired()],
         choices=[], render_kw={"class": "form-control"})
 
     imageUrl = html5.URLField("Image Url/Address", validators=[InputRequired(),
@@ -107,7 +107,7 @@ def add_walk():
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
-    addform.category.choices = [(category, category) for category in categories]
+    addform.category_name.choices = [(category, category) for category in categories]
 
     difficulties = mongo.db.difficulty.find()
     # # cycles through each entry for challenge field to maintain ordering.
@@ -164,7 +164,7 @@ def edit_walk(route_id):
     editform.directions.data = "".join(walk["directions"])
 
     editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
-    editform.category.choices = [(category, category) for category in categories]
+    editform.category_name.choices = [(category, category) for category in categories]
 
     if editform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
@@ -189,7 +189,7 @@ def edit_walk(route_id):
                 {"username": session["user"]})["username"]
         }
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
-        return redirect(url_for("home"))
+        return redirect(url_for("user_profile", username=session["user"]))
 
 
     return render_template("editwalk.html", walk=walk, editform=editform)
@@ -367,6 +367,22 @@ def user_profile(username):
     return render_template("userprofile.html", username=username, routes=routes)
 
 
+class SearchForm(Form):
+    difficulty = SelectField("Difficulty",
+    choices=[], render_kw={"class": "form-control"})
+
+    category_name = SelectField("Walk type", choices=[],
+    render_kw={"class": "form-control"})
+    
+    dogs_allowed = BooleanField("Dog Friendly",
+        render_kw={'class': 'custom-control-input'})
+        
+    free_parking = BooleanField("Free Parking",
+        render_kw={'class': 'custom-control-input'})
+        
+    paid_parking = BooleanField("Paid Parking",
+        render_kw={'class': 'custom-control-input'})
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
@@ -380,6 +396,7 @@ def search():
     # Suggestion of adding to dictionary found on stack overflow
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
+    filterform = SearchForm()
     if request.method == "POST":
         query = request.form.get("query")
         dogs_allowed = request.form.get("dogs_allowed") 
@@ -395,28 +412,33 @@ def search():
         # won't select for walks with unchecked boxes, only those with checked.
         if dogs_allowed:
             filters["dogs_allowed"] = True
+            filterform.dogs_allowed.data = filters["dogs_allowed"]
 
         if free_parking:
             filters["free_parking"] = True
+            filterform.free_parking.data = filters["free_parking"]
         
         if paid_parking:
             filters["paid_parking"] = True
+            filterform.paid_parking.data = filters["paid_parking"]
             
         if difficulty != "Choose...":
             filters["difficulty"] = difficulty
+            filterform.difficulty.data = filters["difficulty"]
 
         if category != "Choose...":
             filters["category_name"] = category
+            filterform.category.data = filters["category"]
 
         routes = list(mongo.db.routes.find(filters))
         categories = mongo.db.categories.find()
         difficulties = mongo.db.difficulty.find()
-        return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties, filters=filters)
+        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
     routes = list(mongo.db.routes.find())
     categories = mongo.db.categories.find()
     difficulties = mongo.db.difficulty.find()
-    return render_template("searchwalks.html", routes=routes, categories=categories, difficulties=difficulties, filters=filters)
+    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
 
 if __name__ == "__main__":
