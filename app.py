@@ -45,12 +45,10 @@ class Walkform(Form):
         "placeholder": "Pendennis point walking loop",
         "minlength":"5", "maxlength":"40"})
         
-    difficulty = SelectField("Difficulty", validators=[InputRequired(),
-        AnyOf(["Easy", "Moderate", "Hard"])],
+    difficulty = SelectField("Difficulty", validators=[InputRequired()],
         choices=[], render_kw={"class": "form-control"})
 
-    category = SelectField("Walk type", validators=[InputRequired(),
-        AnyOf(["Historical", "Coastal", "Pub Walk, Town/City, Countryside"])],
+    category = SelectField("Walk type", coerce=str, validators=[InputRequired()],
         choices=[], render_kw={"class": "form-control"})
 
     imageUrl = html5.URLField("Image Url/Address", validators=[InputRequired(),
@@ -104,7 +102,20 @@ def add_walk():
     checkboxes are assigned as booleans rather than "On"/"Off" as unchecked
     returns null and is less useful for other logic.
     """
-    if request.method == "POST":
+    addform = Walkform()
+    # distinct used to select only the fields wanted from collection.
+    # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
+    categories = mongo.db.categories.distinct("category_name")
+    addform.category.choices = [(category, category) for category in categories]
+
+    difficulties = mongo.db.difficulty.find()
+    # # cycles through each entry for challenge field to maintain ordering.
+    challenges = []
+    for d in difficulties:
+        challenges.append(d['challenge'])
+    addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
+
+    if addform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
         paid_parking = True if request.form.get("paid_parking") else False
@@ -130,10 +141,18 @@ def add_walk():
         mongo.db.routes.insert_one(walk)
         return redirect(url_for("home"))
 
-    # distinct used to select only the fields wanted from collection.
-    # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
+    return render_template("addwalk.html", addform=addform)
+
+
+@app.route("/edit_walk/<route_id>", methods={"GET","POST"})
+def edit_walk(route_id):
+    """ 
+    Reloads the add_walk def and pre-fills information to update database.
+    Same logic as add_walk but loads walk data using the Object Id.
+    """
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
+    
     # cycles through each entry for challenge field to maintain ordering.
     challenges = []
     for d in difficulties:
@@ -143,15 +162,6 @@ def add_walk():
     addform = Walkform()
     addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     addform.category.choices = [(category, category) for category in categories]
-    return render_template("addwalk.html", categories=categories, difficulties=difficulties, addform=addform)
-
-
-@app.route("/edit_walk/<route_id>", methods={"GET","POST"})
-def edit_walk(route_id):
-    """ 
-    Reloads the add_walk def and pre-fills information to update database.
-    Same logic as add_walk but loads walk data using the Object Id.
-    """
     if request.method == "POST":
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
@@ -178,9 +188,7 @@ def edit_walk(route_id):
         return redirect(url_for("home"))
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
-    categories = mongo.db.categories.find()
-    difficulties = mongo.db.difficulty.find()
-    return render_template("editwalk.html", walk=walk, categories=categories, difficulties=difficulties)
+    return render_template("editwalk.html", walk=walk)
 
 
 @app.route("/delete_walk/<route_id>")
