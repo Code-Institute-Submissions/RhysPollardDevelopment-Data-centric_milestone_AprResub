@@ -80,7 +80,7 @@
         <!-- Text area for directions -->
         <div class="form-group col-12">
             <!-- use of unicode for newline found at
-                    http://www.amp-what.com/unicode/search/newline -->
+            http://www.amp-what.com/unicode/search/newline -->
             {{ editform.directions.label }}
             {{ editform.directions }}
             <div class="invalid-feedback">
@@ -93,7 +93,11 @@
                 name="extra_tips"
                 placeholder="Anything interesting to share?&#10;Let others know here!"></textarea>
         </div>
-
+        {% for field, errors in editform.errors.items() %}
+        <div class="alert alert-error">
+            {{ editform[field].label }}: {{ ', '.join(errors) }}
+        </div>
+        {% endfor %}
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -159,14 +159,14 @@ def edit_walk(route_id):
         challenges.append(d['challenge'])
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
-    editform = Walkform(data=walk)
-    editform.directions.data = "".join(walk["directions"])
+    editform = Walkform()#data=walk)
+    #editform.directions.data = "".join(walk["directions"])
     print(editform.directions.data)
 
     editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category.choices = [(category, category) for category in categories]
 
-    if request.method == "POST":
+    if editform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
         paid_parking = True if request.form.get("paid_parking") else False
