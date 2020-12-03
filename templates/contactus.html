@@ -4,6 +4,22 @@
 <section class="container-fluid">
     <div class="row">
         <div class="col-12 contact-img">
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show col-12"
+                role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            {% endwith %}
+
             <div class="contact-card">
                 <h2>Get in Touch</h2>
                 <p>Contact us by email if you have any comments about the site,
@@ -43,26 +59,32 @@
             </div>
             {% endfor %}
         </div>
-        <form class="col-5">
-            {{ contactform.crsf_token }}
+        {{ contactform.csrf_token }}
+        <form class="col-5 needs-validation" method="POST"
+            action="{{ url_for('contact') }}" novalidate>
+            {{ contactform.csrf_token }}
+
             <div class="form-group">
-                <label for="reportIssue">Report a Problem</label>
-                <select class="form-control" id="reportIssue"
-                    name="reportIssue">
-                    <option selected>Choose...</option>
-                    {% for faq in faqs %}
-                    {% if faq.report_problem %}
-                    <option>{{ faq.report_problem }}</option>
-                    {% endif %}
-                    {% endfor %}
-                </select>
+                {{ contactform.problem.label }}
+                {{ contactform.problem }}
             </div>
             <div class="form-group">
-                <label for="issueText">Example
-                    textarea</label>
-                <textarea class="form-control" id="issueText" name="issueText"
-                    rows="6"></textarea>
+                {{ contactform.user_issue.label }}
+                {{ contactform.user_issue }}
+                <div class="invalid-feedback">
+                    Please make your message between 20 and 500 words.
+                </div>
             </div>
+            {% for field, errors in contactform.errors.items() %}
+            <div class="alert alert-danger alert-dismissible fade show col-12"
+                role="alert">
+                {{ contactform[field].label }}: {{ ', '.join(errors) }}
+                <button type="button" class="close" data-dismiss="alert"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
             <button type="submit" class="btn btn-primary">Report</button>
         </form>
     </div>

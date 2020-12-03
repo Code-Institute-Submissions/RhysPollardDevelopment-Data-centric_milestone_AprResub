@@ -211,24 +211,34 @@ def show_walk(route_id):
 
 
 class ContactForm(Form):
-    category_name = SelectField("Walk type", validators=[InputRequired()],
-        choices=[("Choose...")], render_kw={"class": "form-control"})
+    problem = SelectField("Report a Problem", validators=[InputRequired()],
+        choices=[("Other")], render_kw={"class": "form-control"})
         
-    directions = TextAreaField("Enter your Directions", validators=[InputRequired(),
-        Length(min=100, max=1600)],
+    user_issue = TextAreaField("What issue has occurred:", validators=[InputRequired(),
+        Length(min=20, max=500)],
         render_kw={"class": "form-control",
-        "placeholder": "Please enter your directions here.\rNext instruction on a new line without any spaces.\rAnd so on and so forth.",
-        "minlength": "100", "maxlength": "1600", "rows":"10"})
+        "placeholder": "Tell us what problem you're having and we will try to fix it or get back to you.",
+        "minlength": "20", "maxlength": "500", "rows":"7"})
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
     """
     Loads contact us page with FAQs and form.
     Has a collection which holds frequently asked questions and pre-loaded
     problems to report using form.
     """
+    contactform = ContactForm()
     faqs = list(mongo.db.FAQs.find())
-    return render_template("contactus.html", faqs=faqs)
+    for faq in faqs:
+        for f in faq:
+            if f == 'report_problem':
+                contactform.problem.choices.append(faq[f])
+
+    if contactform.validate_on_submit():
+        flash("Your message has been sent, thanks!")
+        return redirect(url_for("contact", faqs=faqs, contactform=contactform))
+        
+    return render_template("contactus.html", faqs=faqs, contactform=contactform)
 
 
 class RegistrationForm(Form):
