@@ -290,15 +290,13 @@ def register():
     redirected to the register page and asked to log in instead.
     """
     regform = RegistrationForm()
-    errors=[]
     if regform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            errors.append("Sorry, that username already exists")
-            print(errors)
-            return render_template("register.html", regform=regform, errors=errors)
+            flash("Sorry, that username already exists")
+            return redirect(url_for("register", regform=regform))
 
         # New user is generated if a matching username is not found.
         new_user = {
@@ -313,7 +311,7 @@ def register():
         return redirect(url_for("user_profile", username=session["user"], regform=regform))
 
 
-    return render_template("register.html", regform=regform, errors=errors)
+    return render_template("register.html", regform=regform)
 
 
 class logInForm(Form):
