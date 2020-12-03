@@ -45,6 +45,13 @@
 </form>
 <section class="container">
     <div class="row">
+        {% if errors != [] %}
+        {% for error in errors %}
+        <div class="col-12 d-flex justify-content-center">
+            <h3>{{ error }}</h3>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% for route in routes %}
         <div class="card bg-dark text-white col-6 search-card">
             <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">

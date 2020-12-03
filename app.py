@@ -399,6 +399,7 @@ def search():
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
     filterform = SearchForm()
+    errors=[]
 
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
@@ -408,11 +409,7 @@ def search():
 
     for c in categories:
         filterform.category_name.choices.append(c)
-    
-    # filterform.difficulty.choices=[(challenge, challenge) for challenge in challenges]
-    #filterform.category_name.choices = [(category, category) for category in categories]
-    print(type(filterform.difficulty.choices))
-    
+   
     if request.method == "POST":
         query = request.form.get("query")
         dogs_allowed = request.form.get("dogs_allowed") 
@@ -446,15 +443,14 @@ def search():
         if category != "Choose...":
             filters["category_name"] = category
             filterform.category_name.data = filters["category_name"]
-
-        print(filters)
-        print(filterform.query.data)
-
+            
         routes = list(mongo.db.routes.find(filters))
-        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
+        if routes == []:
+            errors.append("Nothing matched your search, try changing your search word or filter.")
+        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, errors=errors)
 
     routes = list(mongo.db.routes.find())
-    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
+    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, errors=errors)
 
 
 if __name__ == "__main__":
