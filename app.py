@@ -341,7 +341,6 @@ def login():
     login with an error message.
     """
     logform = logInForm()
-    errors = []
     if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("login_username").lower()})
@@ -351,13 +350,13 @@ def login():
                 session["user"] = request.form.get("login_username").lower()
                 return redirect(url_for("user_profile", username=session["user"]))
             else:
-                errors.append("Incorrect Username and/or Password.")
-                return render_template("login.html", logform=logform, errors=errors)
+                flash("Incorrect Username and/or Password.")
+                return redirect(url_for("login", logform=logform))
         else:
-            errors.append("Incorrect Username and/or Password.")
-            return render_template("login.html", logform=logform, errors=errors)
+            flash("Incorrect Username and/or Password.")
+            return redirect(url_for("login", logform=logform))
 
-    return render_template("login.html", logform=logform, errors=errors)
+    return render_template("login.html", logform=logform)
 
 
 @app.route("/logout")
