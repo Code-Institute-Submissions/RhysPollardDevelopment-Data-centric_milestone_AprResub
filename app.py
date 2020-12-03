@@ -112,10 +112,8 @@ def add_walk():
 
     difficulties = mongo.db.difficulty.find()
     # # cycles through each entry for challenge field to maintain ordering.
-    challenges = []
     for d in difficulties:
-        challenges.append(d['challenge'])
-    addform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
+        addform.difficulty.choices.append(d['challenge'])
 
     if addform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
@@ -211,6 +209,16 @@ def show_walk(route_id):
     walk = mongo.db.routes.find_one({'_id':ObjectId(route_id)})
     return render_template("walkpage.html", walk=walk)
 
+
+class ContactForm(Form):
+    category_name = SelectField("Walk type", validators=[InputRequired()],
+        choices=[("Choose...")], render_kw={"class": "form-control"})
+        
+    directions = TextAreaField("Enter your Directions", validators=[InputRequired(),
+        Length(min=100, max=1600)],
+        render_kw={"class": "form-control",
+        "placeholder": "Please enter your directions here.\rNext instruction on a new line without any spaces.\rAnd so on and so forth.",
+        "minlength": "100", "maxlength": "1600", "rows":"10"})
 
 @app.route("/contact")
 def contact():

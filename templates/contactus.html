@@ -44,6 +44,7 @@
             {% endfor %}
         </div>
         <form class="col-5">
+            {{ contactform.crsf_token }}
             <div class="form-group">
                 <label for="reportIssue">Report a Problem</label>
                 <select class="form-control" id="reportIssue"
