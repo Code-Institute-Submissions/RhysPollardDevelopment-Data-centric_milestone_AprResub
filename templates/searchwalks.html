@@ -46,13 +46,15 @@
 </form>
 <section class="container">
     <div class="row">
-        {% if errors != [] %}
-        {% for error in errors %}
+        {% with messages = get_flashed_messages(category_filter =["error"]) %}
+        {% if messages %}
+        {% for message in messages %}
         <div class="col-12 d-flex justify-content-center">
-            <h3>{{ error }}</h3>
+            <h3>{{ message }}</h3>
         </div>
         {% endfor %}
         {% endif %}
+        {% endwith %}
         {% for route in routes %}
         <div class="card bg-dark text-white col-sm-12 col-md-6 search-card">
             <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">

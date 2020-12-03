@@ -160,6 +160,7 @@ TBA
 ### Unit Testing
 
 ### Bugs
+Older posts done before the WTForm update, could not be edited properly. This might be that they were failing validation before even being loaded so could not be stored. Unsure as most of these were unfit for purpose anyway and were deleted for new data which was not incomplete.
 
 ## Deployment
 The source code for this website was deployed and stored in a GitHub repository while the website application is hosted by Heroku. The two are linked so any new commits or pushes to GitHub's master branch are also updated on the Heroku hosting service.

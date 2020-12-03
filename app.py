@@ -139,7 +139,8 @@ def add_walk():
                 {"username": session["user"]})["username"]
         }
         mongo.db.routes.insert_one(walk)
-        return redirect(url_for("home"))
+        flash("Walk successfully added!")
+        return redirect(url_for("user_profile", username=session["user"]))
 
     return render_template("addwalk.html", addform=addform)
 
@@ -186,8 +187,8 @@ def edit_walk(route_id):
                 {"username": session["user"]})["username"]
         }
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
+        flash("Walk edited successfully!")
         return redirect(url_for("user_profile", username=session["user"]))
-
 
     return render_template("editwalk.html", walk=walk, editform=editform)
 
@@ -414,7 +415,6 @@ def search():
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
     filterform = SearchForm()
-    errors=[]
 
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
@@ -461,11 +461,11 @@ def search():
             
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
-            errors.append("Nothing matched your search, try changing your search word or filter.")
-        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, errors=errors)
+            flash("Nothing matched your search, try changing your search word or filter.", 'error')
+        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
     routes = list(mongo.db.routes.find())
-    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, errors=errors)
+    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
 
 
 if __name__ == "__main__":

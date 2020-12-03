@@ -3,6 +3,22 @@
 
 <section class="container">
     <div class="row">
+        <!-- Warning/Update Messages-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-success alert-dismissible fade show col-12"
+            role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <!-- User's routes diplay-->
         {% for route in routes %}
         {% if username == route.user.lower() %}
         <div class="col-12 card bg-dark text-white">
