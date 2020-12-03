@@ -357,7 +357,7 @@ def register():
 
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """
     Loads login page, allows user to insert username and password for database
