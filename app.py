@@ -163,7 +163,7 @@ def edit_walk(route_id):
 
     #editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category_name.choices = [(category, category) for category in categories]
-
+    print(editform.directions.data)
     if editform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
