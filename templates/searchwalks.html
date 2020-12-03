@@ -1,47 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form class="container-fluid" method="POST" action="{{ url_for('search') }}">
+<section class="container-fluid">
     <div class="row">
         {{ filterform.csrf_token }}
         <!-- Top image and search form-->
-        <div class="jumbotron-fluid index-header col-12">
+        <div class="index-header col-12">
             <h1 class="display-4">Hello, world!</h1>
-            <hr class="my-4">
-            <div class="col-6">
-                {{ filterform.query(class="form-control mr-sm-2") }}
-                <button class="btn btn-success my-2 my-sm-0"
-                    type="submit">Search</button>
-            </div>
         </div>
     </div>
-    <div class=container>
-        <div class="row">
-            <div class="form-group col-6">
-                {{ filterform.category_name.label }}
-                {{ filterform.category_name }}
-            </div>
-            <div class="form-group col-6">
-                {{ filterform.difficulty.label }}
-                {{ filterform.difficulty }}
-            </div>
-            <div
-                class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ filterform.dogs_allowed }}
-                {{ filterform.dogs_allowed.label(class="custom-control-label") }}
-            </div>
-            <!-- Free parking checkbox-->
-            <div
-                class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ filterform.free_parking }}
-                {{ filterform.free_parking.label(class="custom-control-label") }}
-            </div>
-            <!--paid parking checkbox-->
-            <div
-                class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-                {{ filterform.paid_parking }}
-                {{ filterform.paid_parking.label(class="custom-control-label") }}
-            </div>
+</section>
+<form class="container-fluid" method="POST" action="{{ url_for('search') }}">
+    <div class="row search-box">
+        <div class="col-12">
+            {{ filterform.query(class="form-control mr-sm-2") }}
+        </div>
+        <div class="form-group col-sm-12 col-md-6">
+            {{ filterform.category_name.label }}
+            {{ filterform.category_name }}
+        </div>
+        <div class="form-group col-sm-12 col-md-6">
+            {{ filterform.difficulty.label }}
+            {{ filterform.difficulty }}
+        </div>
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {{ filterform.dogs_allowed }}
+            {{ filterform.dogs_allowed.label(class="custom-control-label") }}
+        </div>
+        <!-- Free parking checkbox-->
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {{ filterform.free_parking }}
+            {{ filterform.free_parking.label(class="custom-control-label") }}
+        </div>
+        <!--paid parking checkbox-->
+        <div
+            class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
+            {{ filterform.paid_parking }}
+            {{ filterform.paid_parking.label(class="custom-control-label") }}
+        </div>
+        <button class="btn btn-success my-2 my-sm-0"
+            type="submit">Search</button>
+    </div>
 </form>
 <section class="container">
     <div class="row">
@@ -53,7 +54,7 @@
         {% endfor %}
         {% endif %}
         {% for route in routes %}
-        <div class="card bg-dark text-white col-6 search-card">
+        <div class="card bg-dark text-white col-sm-12 col-md-6 search-card">
             <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">
             <div class="card-img-overlay">
                 <h5 class="card-title">{{ route.title }}</h5>
