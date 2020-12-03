@@ -8,10 +8,10 @@ if (password) {
     confirm_password.addEventListener('keyup', validatePassword);
 }
 
-// Checks that both Passwords are same after each character and sets the
-// warning for validity.
-// Idea for validate password found at https://codepen.io/diegoleme/pen/surIK
-// https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/setCustomValidity
+/*Checks that both Passwords are same after each character and sets the
+warning for validity.
+Idea for validate password found at https://codepen.io/diegoleme/pen/surIK
+*/ https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/setCustomValidity
 function validatePassword() {
     if (password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords do not match!");
@@ -39,3 +39,16 @@ function validatePassword() {
     });
   }, false);
 })();
+
+/*
+Confirm that the user wants to delete a recipe and delete it if so.
+Args:
+  recipe_delete_url: string. The URL endpoint to delete a given recipe.
+*/
+
+function confirm_delete(recipe_delete_url){
+  var delete_confirmed = confirm("Delete this recipe?")
+  if (delete_confirmed){
+      window.location.href = recipe_delete_url;
+  }
+}

@@ -24,18 +24,63 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-@app.route("/")
-@app.route("/home")
-def home():
-    """
-    Routes user to the home/index page.
-    Loads a list of all routes and randomly selects 3 of them to feature.
-    """
-    # random choices found at w3schools.com
-    # https://www.w3schools.com/python/ref_random_choices.asp
-    complete = list(mongo.db.routes.find())
-    routes = random.choices(complete, k=3)
-    return render_template("index.html", routes=routes)
+class RegistrationForm(Form):
+    username = StringField(
+        # Use of render keywords for html data found at
+        # https://pythonpedia.com/en/knowledge-base/20440056/custom-attributes-for
+        # -flask-wtforms
+        "Username", validators=[InputRequired(), Length(max=20, min=4)],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'usernameLabel',
+            'minlength': '4',
+            'maxlength': '20',
+            'placeholder': 'Enter username'
+        })
+    password = PasswordField(
+        "Password", validators=[InputRequired(), Length(min=10),
+        EqualTo('confirm_password', message="Passwords must match")],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'passwordLabel',
+            'minlength': '10',
+            'placeholder': 'Password'
+        })
+    confirm_password = PasswordField("Repeat Password",
+        validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'confirmLabel',
+            'placeholder': 'Confirm Password'
+        })
+    email = html5.EmailField("Email", validators=[InputRequired(),
+        Email(message='This field requires a valid email')],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'emailLabel',
+            'placeholder': 'Email Address'
+        })
+    agree = BooleanField("I agree to the terms and conditions of this site.",
+        validators=[InputRequired()],
+        render_kw={'class':'form-check-input'})
+
+
+class logInForm(Form):
+    login_username = StringField(
+        "Username", validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'loginUsernameLabel',
+            'placeholder': 'Enter username',
+            'autocomplete': 'off'
+        })
+    login_password = PasswordField(
+        "Password", validators=[InputRequired()],
+        render_kw={
+            'class': 'form-control',
+            'aria-describedby': 'loginPasswordLabel',
+            'placeholder': 'Password'
+        })
 
 
 class Walkform(Form):
@@ -94,6 +139,52 @@ class Walkform(Form):
         render_kw={"class": "form-control",
         "placeholder": "Please enter your directions here.\rNext instruction on a new line without any spaces.\rAnd so on and so forth.",
         "minlength": "100", "maxlength": "1600", "rows":"10"})
+
+
+class ContactForm(Form):
+    problem = SelectField("Report a Problem", validators=[InputRequired()],
+        choices=[("Other")], render_kw={"class": "form-control"})
+        
+    user_issue = TextAreaField("What issue has occurred:", validators=[InputRequired(),
+        Length(min=20, max=500)],
+        render_kw={"class": "form-control",
+        "placeholder": "Tell us what problem you're having and we will try to fix it or get back to you.",
+        "minlength": "20", "maxlength": "500", "rows": "7"})
+        
+
+class SearchForm(Form):
+    query = html5.SearchField("", render_kw={"class": "form-control",
+    "placeholder":"Search", "aria-label":"Search"})
+
+    difficulty = SelectField("Difficulty",
+    choices=[("Choose...")], render_kw={"class": "form-control"})
+
+    category_name = SelectField("Walk type", choices=[("Choose...")],
+    render_kw={"class": "form-control"})
+    
+    dogs_allowed = BooleanField("Dog Friendly",
+        render_kw={'class': 'custom-control-input'})
+        
+    free_parking = BooleanField("Free Parking",
+        render_kw={'class': 'custom-control-input'})
+        
+    paid_parking = BooleanField("Paid Parking",
+        render_kw={'class': 'custom-control-input'})
+
+
+@app.route("/")
+@app.route("/home")
+def home():
+    """
+    Routes user to the home/index page.
+    Loads a list of all routes and randomly selects 3 of them to feature.
+    """
+    # random choices found at w3schools.com
+    # https://www.w3schools.com/python/ref_random_choices.asp
+    complete = list(mongo.db.routes.find())
+    routes = random.choices(complete, k=3)
+    return render_template("index.html", routes=routes)
+
 
 
 @app.route("/add_walk",methods={"GET","POST"})
@@ -211,16 +302,6 @@ def show_walk(route_id):
     return render_template("walkpage.html", walk=walk)
 
 
-class ContactForm(Form):
-    problem = SelectField("Report a Problem", validators=[InputRequired()],
-        choices=[("Other")], render_kw={"class": "form-control"})
-        
-    user_issue = TextAreaField("What issue has occurred:", validators=[InputRequired(),
-        Length(min=20, max=500)],
-        render_kw={"class": "form-control",
-        "placeholder": "Tell us what problem you're having and we will try to fix it or get back to you.",
-        "minlength": "20", "maxlength": "500", "rows":"7"})
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     """
@@ -240,48 +321,7 @@ def contact():
         return redirect(url_for("contact", faqs=faqs, contactform=contactform))
         
     return render_template("contactus.html", faqs=faqs, contactform=contactform)
-
-
-class RegistrationForm(Form):
-    username = StringField(
-        # Use of render keywords for html data found at
-        # https://pythonpedia.com/en/knowledge-base/20440056/custom-attributes-for
-        # -flask-wtforms
-        "Username", validators=[InputRequired(), Length(max=20, min=4)],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'usernameLabel',
-            'minlength': '4',
-            'maxlength': '20',
-            'placeholder': 'Enter username'
-        })
-    password = PasswordField(
-        "Password", validators=[InputRequired(), Length(min=10),
-        EqualTo('confirm_password', message="Passwords must match")],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'passwordLabel',
-            'minlength': '10',
-            'placeholder': 'Password'
-        })
-    confirm_password = PasswordField("Repeat Password",
-        validators=[InputRequired()],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'confirmLabel',
-            'placeholder': 'Confirm Password'
-        })
-    email = html5.EmailField("Email", validators=[InputRequired(),
-        Email(message='This field requires a valid email')],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'emailLabel',
-            'placeholder': 'Email Address'
-        })
-    agree = BooleanField("I agree to the terms and conditions of this site.",
-        validators=[InputRequired()],
-        render_kw={'class':'form-check-input'})
-
+ 
 
 @app.route("/register", methods={"GET", "POST"})
 def register():
@@ -315,25 +355,9 @@ def register():
     return render_template("register.html", regform=regform)
 
 
-class logInForm(Form):
-    login_username = StringField(
-        "Username", validators=[InputRequired()],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'loginUsernameLabel',
-            'placeholder': 'Enter username',
-            'autocomplete': 'off'
-        })
-    login_password = PasswordField(
-        "Password", validators=[InputRequired()],
-        render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'loginPasswordLabel',
-            'placeholder': 'Password'
-        })
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["POST"])
 def login():
     """
     Loads login page, allows user to insert username and password for database
@@ -381,25 +405,6 @@ def user_profile(username):
     routes = list(mongo.db.routes.find())
     return render_template("userprofile.html", username=username, routes=routes)
 
-
-class SearchForm(Form):
-    query = html5.SearchField("", render_kw={"class": "form-control",
-    "placeholder":"Search", "aria-label":"Search"})
-
-    difficulty = SelectField("Difficulty",
-    choices=[("Choose...")], render_kw={"class": "form-control"})
-
-    category_name = SelectField("Walk type", choices=[("Choose...")],
-    render_kw={"class": "form-control"})
-    
-    dogs_allowed = BooleanField("Dog Friendly",
-        render_kw={'class': 'custom-control-input'})
-        
-    free_parking = BooleanField("Free Parking",
-        render_kw={'class': 'custom-control-input'})
-        
-    paid_parking = BooleanField("Paid Parking",
-        render_kw={'class': 'custom-control-input'})
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
