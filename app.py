@@ -6,7 +6,8 @@ from flask_wtf import Form
 from wtforms import (
     StringField, PasswordField, BooleanField, SelectField, TextAreaField)
 from wtforms.fields import html5
-from wtforms.validators import InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional
+from wtforms.validators import (
+    InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -366,6 +367,9 @@ def user_profile(username):
 
 
 class SearchForm(Form):
+    query = html5.SearchField("", render_kw={"class": "form-control",
+    "placeholder":"Search", "aria-label":"Search"})
+
     difficulty = SelectField("Difficulty",
     choices=[("Choose...")], render_kw={"class": "form-control"})
 
@@ -419,6 +423,7 @@ def search():
         
         if query != "":
             filters["$text"] = {"$search": query}
+            filterform.query.data=query            
 
         # Checkboxes added this way so will only limit search for checked boxes,
         # won't select for walks with unchecked boxes, only those with checked.
@@ -443,7 +448,7 @@ def search():
             filterform.category_name.data = filters["category_name"]
 
         print(filters)
-        print(filterform.category_name.data)
+        print(filterform.query.data)
 
         routes = list(mongo.db.routes.find(filters))
         return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters)
