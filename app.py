@@ -11,17 +11,53 @@ from wtforms.validators import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import (
+    LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+)
 if os.path.exists("env.py"):
     import env
 
 
 app = Flask(__name__)
-
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
-
 mongo = PyMongo(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+
+class User:
+    def __init__(self, username):
+        self.username = username
+
+    @staticmethod
+    def is_authenticated():
+        return True
+
+    @staticmethod
+    def is_active():
+        return True
+
+    @staticmethod
+    def is_anonymous():
+        return False
+
+    def get_id(self):
+        return self.username
+
+    @staticmethod
+    def check_password(password_hash, password):
+        return check_password_hash(password_hash, password)
+
+    
+@login_manager.user_loader
+def load_user(username):
+    u = mongo.db.Users.find_one({"Name": username})
+    if not u:
+        return None
+    return User(username=u['Name'])
 
 
 class RegistrationForm(Form):
@@ -186,8 +222,8 @@ def home():
     return render_template("index.html", routes=routes)
 
 
-
-@app.route("/add_walk",methods={"GET","POST"})
+@app.route("/add_walk", methods={"GET", "POST"})
+@login_required
 def add_walk():
     """ 
     User form to add data for a new walk to the Mongo Database.
@@ -226,8 +262,9 @@ def add_walk():
             "dogs_allowed" : dogs_allowed,
             "free_parking" : free_parking,
             "paid_parking": paid_parking,
-            "user": mongo.db.users.find_one(
-                {"username": session["user"]})["username"]
+            "user": current_user.username
+            #"user": mongo.db.users.find_one(
+            #   {"username": session["user"]})["username"]
         }
         mongo.db.routes.insert_one(walk)
         flash("Walk successfully added!")
@@ -236,7 +273,8 @@ def add_walk():
     return render_template("addwalk.html", addform=addform)
 
 
-@app.route("/edit_walk/<route_id>", methods={"GET","POST"})
+@app.route("/edit_walk/<route_id>", methods={"GET", "POST"})
+@login_required
 def edit_walk(route_id):
     """ 
     Reloads the add_walk def and pre-fills information to update database.
@@ -329,7 +367,9 @@ def register():
     Route to registration form if not logged in.
     When form posted, if the user already exists in database the user is 
     redirected to the register page and asked to log in instead.
-    """
+    """    
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     regform = RegistrationForm()
     if regform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
@@ -349,15 +389,14 @@ def register():
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for("user_profile", username=session["user"], regform=regform))
+        #return redirect(url_for("user_profile", username=session["user"], regform=regform))
+        return redirect(url_for("user_profile", regform=regform))
 
 
     return render_template("register.html", regform=regform)
 
 
-
-
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """
     Loads login page, allows user to insert username and password for database
@@ -365,6 +404,8 @@ def login():
     If a match is found they are directed to userpage, else returned to
     login with an error message.
     """
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     logform = logInForm()
     if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
@@ -372,8 +413,15 @@ def login():
             
         if existing_user:
             if check_password_hash(existing_user["password"], request.form.get("login_password")):
-                session["user"] = request.form.get("login_username").lower()
-                return redirect(url_for("user_profile", username=session["user"]))
+                user_obj = User(username=existing_user['username'])
+                #session["user"] = request.form.get("login_username").lower()
+                print(user_obj.username)
+                login_user(user_obj)
+                next_page = request.args.get('next')
+                if not next_page or url_parse(next_page).netloc != '':
+                    next_page = url_for('home')
+                return redirect(next_page)
+                #return redirect(url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
                 return redirect(url_for("login", logform=logform))
@@ -389,21 +437,23 @@ def logout():
     """    
     Removes user from session cookie to log them out.
     """
-    session.pop("user")
+    #session.pop("user")
+    logout_user()
     return redirect(url_for("login"))
 
 
-
 @app.route("/user_profile/<username>")
+#@login_required
 def user_profile(username):
     """
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    #username = mongo.db.users.find_one(
+    #    {"username": session["user"]})["username"]
     routes = list(mongo.db.routes.find())
-    return render_template("userprofile.html", username=username, routes=routes)
+    return render_template("userprofile.html", routes=routes)
+    #return render_template("userprofile.html", routes=routes, username=username)
 
 
 @app.route("/search", methods=["GET", "POST"])

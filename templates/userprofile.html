@@ -19,8 +19,8 @@
         {% endif %}
         {% endwith %}
         <!-- User's routes diplay-->
-        {% for route in routes %}
-        {% if username == route.user.lower() %}
+        <!-- {% for route in routes %}
+        {% if current_user.username == route.user.lower() %}
         <div class="col-12 card bg-dark text-white">
             <img class="card-img" src="{{ route.imageUrl }}" alt="Card image">
             <div class="card-img-overlay">
@@ -28,21 +28,21 @@
                 <p class="card-text">Created by {{route.user}}</p>
                 <p class="card-text">Last updated 3 mins ago</p>
                 <!-- Edit walk button-->
-                <a href="{{ url_for('edit_walk',route_id=route._id) }}"
-                    class="btn btn-primary">Edit Walk</a>
-                <!-- View walk button-->
-                <a href="{{ url_for('show_walk',route_id=route._id) }}"
-                    class="btn btn-primary">View Walk</a>
-                <!-- Delete button-->
-                <!-- onclick code provided by mentor, literal quotes inside argument to 
+        <a href="{{ url_for('edit_walk',route_id=route._id) }}"
+            class="btn btn-primary">Edit Walk</a>
+        <!-- View walk button-->
+        <a href="{{ url_for('show_walk',route_id=route._id) }}"
+            class="btn btn-primary">View Walk</a>
+        <!-- Delete button-->
+        <!-- onclick code provided by mentor, literal quotes inside argument to 
                 avoid jinja errors-->
-                <button
-                    onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
-                    class="btn btn-primary">Delete
-                    Walk</button>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+        <button
+            onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
+            class="btn btn-primary">Delete
+            Walk</button>
+    </div>
+    </div>
+    {% endif %}
+    {% endfor %} -->
 </section>
 {% endblock %}
