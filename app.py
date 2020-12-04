@@ -431,18 +431,24 @@ def user_profile(username):
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
+    #request.url found https://developer.mozilla.org/en-US/docs/Web/API/Request/url
     current_url = request.url
+    # Idea for splitting url and index found on stack overflow:
+    # https://stackoverflow.com/questions/7253803/how-to-get-everything-after-last-slash-in-a-url/7253830
     url_owner = current_url.rsplit('/', 1)[-1]
-
+ 
     if session.get('user') is None:
         return redirect(url_for("home"))
-    elif session.get('user') != url_owner:
-        routes = list(mongo.db.routes.find())
-        flash("Please refrain from accessing other's userpages")
-        return redirect(url_for("user_profile", username=session["user"]))
+    # elif session.get('user') != url_owner:
+    #     routes = list(mongo.db.routes.find())
+    #     flash("Please refrain from accessing other's userpages")
+    #     return redirect(url_for("user_profile", username=session["user"]))
+        
+    # assigns username to session user selects routes based on the page owner
+    # as usernames are unique.
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    routes = list(mongo.db.routes.find())
+        {"username": session['user']})["username"]
+    routes = list(mongo.db.routes.find({"user": url_owner}))
     return render_template("userprofile.html", username=username, routes=routes)
 
 
