@@ -246,16 +246,19 @@ def edit_walk(route_id):
     Reloads the add_walk def and pre-fills information to update database.
     Same logic as add_walk but loads walk data using the Object Id.
     """
-     # If session 'user' is not there, redirect to register
+    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+    editform = Walkform(data=walk)
+     # If session 'user' is not there, redirect to register.
     if session.get('user') is None:
         return redirect(url_for("login"))
+    # If user tries to edit a walk which doesn't belong to them, redirected.
+    elif session.get('user') != walk['user']:
+        return redirect(url_for("home"))
 
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
 
     # cycles through each entry for challenge field to maintain ordering.
-    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
-    editform = Walkform(data=walk)
     # .data as means to update form code/join found at respectively:
     #https://stackoverflow.com/questions/42984453/wtforms-populate-form-with-
     # data-if-data-exists?noredirect=1&lq=1
