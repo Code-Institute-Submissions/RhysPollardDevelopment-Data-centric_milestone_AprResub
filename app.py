@@ -387,6 +387,9 @@ def login():
     If a match is found they are directed to userpage, else returned to
     login with an error message.
     """
+    #Code suggestion for identifying cookies found at stack overflow
+    #https://stackoverflow.com/questions/28925602/how-can-i-detect-whether
+    # -a-variable-exists-in-flask-session/39204060
     if session.get('user') is not None:
         return redirect(url_for("home"))
 
@@ -427,6 +430,7 @@ def user_profile(username):
     """
     if session.get('user') is None:
         return redirect(url_for("home"))
+    elif session.get('user') != 
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     print(session['user'])
