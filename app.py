@@ -195,6 +195,10 @@ def add_walk():
     checkboxes are assigned as booleans rather than "On"/"Off" as unchecked
     returns null and is less useful for other logic.
     """
+    # If session 'user' is not there, redirect to register
+    if session.get('user') is None:
+        return redirect(url_for("login"))
+
     addform = Walkform()
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
@@ -242,6 +246,10 @@ def edit_walk(route_id):
     Reloads the add_walk def and pre-fills information to update database.
     Same logic as add_walk but loads walk data using the Object Id.
     """
+     # If session 'user' is not there, redirect to register
+    if session.get('user') is None:
+        return redirect(url_for("login"))
+
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
 
@@ -330,6 +338,9 @@ def register():
     When form posted, if the user already exists in database the user is 
     redirected to the register page and asked to log in instead.
     """
+    # If session cookie field 'user' exists, then redirects to other page
+    if session.get('user') is not None:
+        return redirect(url_for("home"))
     regform = RegistrationForm()
     if regform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
@@ -355,6 +366,17 @@ def register():
     return render_template("register.html", regform=regform)
 
 
+def validate_user(func):
+    """
+    Checks for a user variable/field in the session, if it is not nothing
+    then it will redirect the user as they must be logged in.
+    """
+    def check_user_session(*args, **kwargs):
+        if session.get('user') is not None:
+            print("Im inside the validate user method")
+            return redirect(url_for("home"))
+        return func(*args, **kwargs)
+    return check_user_session
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -365,6 +387,9 @@ def login():
     If a match is found they are directed to userpage, else returned to
     login with an error message.
     """
+    if session.get('user') is not None:
+        return redirect(url_for("home"))
+
     logform = logInForm()
     if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
@@ -400,8 +425,11 @@ def user_profile(username):
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
+    if session.get('user') is None:
+        return redirect(url_for("home"))
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    print(session['user'])
     routes = list(mongo.db.routes.find())
     return render_template("userprofile.html", username=username, routes=routes)
 
