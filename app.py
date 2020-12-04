@@ -431,12 +431,17 @@ def user_profile(username):
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
+    current_url = request.url
+    url_owner = current_url.rsplit('/', 1)[-1]
+
     if session.get('user') is None:
         return redirect(url_for("home"))
-    elif session.get('user') != 
+    elif session.get('user') != url_owner:
+        routes = list(mongo.db.routes.find())
+        flash("Please refrain from accessing other's userpages")
+        return redirect(url_for("user_profile", username=session["user"]))
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    print(session['user'])
     routes = list(mongo.db.routes.find())
     return render_template("userprofile.html", username=username, routes=routes)
 
