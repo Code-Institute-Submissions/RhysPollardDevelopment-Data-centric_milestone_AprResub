@@ -256,13 +256,16 @@ def edit_walk(route_id):
     # cycles through each entry for challenge field to maintain ordering.
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
     editform = Walkform(data=walk)
+    # .data as means to update form code/join found at respectively:
+    #https://stackoverflow.com/questions/42984453/wtforms-populate-form-with-
+    # data-if-data-exists?noredirect=1&lq=1
+    # https://www.w3schools.com/python/ref_string_join.asp
     editform.directions.data = "".join(walk["directions"])
     for d in difficulties:
         editform.difficulty.choices.append(d['challenge'])
 
     #editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category_name.choices = [(category, category) for category in categories]
-    print(editform.directions.data)
     if editform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
         free_parking = True if request.form.get("free_parking") else False
