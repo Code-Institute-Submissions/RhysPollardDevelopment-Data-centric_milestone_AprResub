@@ -63,7 +63,7 @@ fav_icon.addEventListener("change", function () {
   /* need full version of ajax apparently */
   $.ajax({
     type:"POST",
-    url: './favourite',
+    url: '/toggle_favourite',
     data: {
       id: url,
       checkbox: fav_icon.checked

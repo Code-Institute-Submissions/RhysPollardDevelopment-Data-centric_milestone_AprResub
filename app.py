@@ -333,7 +333,7 @@ def delete_walk(route_id):
     """
     mongo.db.routes.remove({'_id': ObjectId(route_id)})
     return redirect(url_for(
-        "user_profile", username=session["user"], page_title=page_title))
+        "user_profile", username=session["user"]))
 
 
 @app.route("/show_route/<route_id>")
@@ -584,6 +584,23 @@ def search():
 
     routes = list(mongo.db.routes.find())
     return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, page_title=page_title)
+
+
+@app.route("/toggle_favourite", methods=["POST"])
+def toggle_favourite():
+    checkbox = request.form["checkbox"]
+    print(checkbox)
+    output = request.form["id"]
+    print(output)
+    mongo.db.users.update_one(
+        {"username": session["user"]},
+        { '$push': { "favourites": output }}
+    )
+
+    favs = mongo.db.users.find_one({"username": session["user"]})
+    print(favs)
+    return str("Favourite added")
+
 
 
 if __name__ == "__main__":
