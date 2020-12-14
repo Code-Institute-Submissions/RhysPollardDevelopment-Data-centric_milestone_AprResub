@@ -52,3 +52,21 @@ function confirm_delete(recipe_delete_url){
       window.location.href = recipe_delete_url;
   }
 }
+
+
+/* Checks the state of a pages heart icon and updates user data
+ with route name as required*/
+let fav_icon = document.getElementById("favourite")
+fav_icon.addEventListener("change", function () {
+  url = window.location.pathname
+  url = url.replace("/show_route/", "")
+  /* need full version of ajax apparently */
+  $.ajax({
+    type:"POST",
+    url: './favourite',
+    data: {
+      id: url,
+      checkbox: fav_icon.checked
+      }
+    })
+  })

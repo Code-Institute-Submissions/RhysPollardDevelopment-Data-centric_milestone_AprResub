@@ -137,6 +137,7 @@
   position:relative;
   cursor:pointer;
   box-shadow: 0 0 0 00px rgb(236 216 0);
+  cursor: pointer;
 }
 
 .heart-box{
@@ -149,6 +150,10 @@
   z-index:99999;
   opacity:0;
 } 
+
+.fav-box input[type="checkbox"] ~ .unchecked {
+    border: solid black 1px;
+}
 
 .fav-box input[type="checkbox"] ~ .checked {
     display: none;
@@ -191,5 +196,6 @@
     to{
         box-shadow: 0 0 0 30px rgb(236 216 0/0%);
         border-radius: 50%;
+        
     }
 }
