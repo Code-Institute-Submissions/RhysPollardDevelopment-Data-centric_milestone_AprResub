@@ -340,13 +340,17 @@ def delete_walk(route_id):
 def show_walk(route_id):
     """
     Selects data for indiviual walk using ObjectId and loads to a template.
+    Restricts user favouriting their own walk.
     """
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+
+    user = mongo.db.users.find_one(
+        {"username": session['user']})["username"]
     
     page_title = walk['title']
 
-    return render_template("walkpage.html", walk=walk, page_title=page_title)
+    return render_template("walkpage.html", walk=walk, user=user, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -493,19 +497,14 @@ def user_profile(username):
     if session.get('user') is None:
         return redirect(url_for("login"))
 
-    # elif session.get('user') != url_owner:
-    #     routes = list(mongo.db.routes.find())
-    #     flash("Please refrain from accessing other's userpages")
-    #     return redirect(url_for("user_profile", username=session["user"]))
-        
-    # assigns username to session user selects routes based on the page owner
-    # as usernames are unique.
     username = mongo.db.users.find_one(
         {"username": session['user']})["username"]
         
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
-    fav_ids = mongo.db.users.find({"username": session["user"]})
+    fav_ids = mongo.db.users.find({"username": url_owner})
+    print(fav_ids)
+
     favourites=list()
     for favs in fav_ids:
         if favs["favourites"]:

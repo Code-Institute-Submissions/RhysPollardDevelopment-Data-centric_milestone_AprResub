@@ -9,14 +9,20 @@
             </h2>
             <div class="heart-shape"></div>
         </div>
+        {% if user != walk.user %}
         <div class="fav-box">
             <input type="checkbox" class="heart-box" id="favourite"></input>
             <i class="far fa-heart unchecked heart"></i>
             <i class="fas fa-heart checked"></i>
         </div>
+        {% endif %}
 
         <div class="col-8">
             <p>{{walk.description}}</p>
+        </div>
+        <div class="col-8">
+            <a
+                href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}</a>
         </div>
         <div class="col-4 key-details-container">
             <h4>Key Details</h4>
