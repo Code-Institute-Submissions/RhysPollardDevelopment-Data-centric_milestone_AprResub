@@ -452,7 +452,7 @@ def login():
         if existing_user:
             if check_password_hash(existing_user["password"], request.form.get("login_password")):
                 session["user"] = request.form.get("login_username").lower()
-                return redirect(url_for("user_profile", username=session["user"], page_title=page_title))
+                return redirect(url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
                 return redirect(url_for("login", logform=logform, page_title=page_title))
@@ -491,7 +491,7 @@ def user_profile(username):
     page_title = page_text.capitalize()
  
     if session.get('user') is None:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     # elif session.get('user') != url_owner:
     #     routes = list(mongo.db.routes.find())
