@@ -502,10 +502,18 @@ def user_profile(username):
     # as usernames are unique.
     username = mongo.db.users.find_one(
         {"username": session['user']})["username"]
-
+        
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
-    return render_template("userprofile.html", username=username, routes=routes, page_title=page_title)
+    fav_ids = mongo.db.users.find({"username": session["user"]})
+    favourites=list()
+    for favs in fav_ids:
+        if favs["favourites"]:
+            for f in favs["favourites"]:
+                walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
+                favourites.append(walk)
+
+    return render_template("userprofile.html", username=username, routes=routes, favourites=favourites, page_title=page_title)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -588,6 +596,10 @@ def search():
 
 @app.route("/toggle_favourite", methods=["POST"])
 def toggle_favourite():
+    """
+    Collects walk id number and checkbox boolean value and either adds walk to
+    a favourites array or removes it from the array if checkbox is unchecked.
+    """
     checkbox = request.form["checkbox"]
     print(type(checkbox))
     output = request.form["id"]
