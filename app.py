@@ -589,17 +589,31 @@ def search():
 @app.route("/toggle_favourite", methods=["POST"])
 def toggle_favourite():
     checkbox = request.form["checkbox"]
-    print(checkbox)
+    print(type(checkbox))
     output = request.form["id"]
     print(output)
-    mongo.db.users.update_one(
-        {"username": session["user"]},
-        { '$push': { "favourites": output }}
-    )
+    if checkbox == "true":
+        mongo.db.users.update_one(
+            {"username": session["user"]},
+            { '$push': { "favourites": output }}
+        )
+        favs = mongo.db.users.find_one({"username": session["user"]})
+        print(favs)
+        return "Added"
+    else:
+        mongo.db.users.update_one(
+            {"username": session["user"]},
+            {'$pull': { "favourites": output }}
+        )
+        favs = mongo.db.users.find_one({"username": session["user"]})
+        print(favs)
+        return "Removed"
+
 
     favs = mongo.db.users.find_one({"username": session["user"]})
     print(favs)
-    return str("Favourite added")
+    return "Favs"
+
 
 
 
