@@ -250,7 +250,7 @@ def add_walk():
         mongo.db.routes.insert_one(walk)
         flash("Walk successfully added!")
         return redirect(url_for(
-            "user_profile", username=session["user"], page_title=page_title))
+            "user_profile", username=session["user"]))
 
     return render_template(
         "addwalk.html", addform=addform, page_title=page_title)
@@ -320,7 +320,7 @@ def edit_walk(route_id):
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
         flash("Walk edited successfully!")
         return redirect(url_for(
-            "user_profile", username=session["user"], page_title=page_title))
+            "user_profile", username=session["user"]))
 
     return render_template(
         "editwalk.html", walk=walk, editform=editform, page_title=page_title)
@@ -333,20 +333,31 @@ def delete_walk(route_id):
     """
     mongo.db.routes.remove({'_id': ObjectId(route_id)})
     return redirect(url_for(
-        "user_profile", username=session["user"], page_title=page_title))
+        "user_profile", username=session["user"]))
 
 
 @app.route("/show_route/<route_id>")
 def show_walk(route_id):
     """
     Selects data for indiviual walk using ObjectId and loads to a template.
+    Restricts user favouriting their own walk.
     """
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+
+    user = mongo.db.users.find_one(
+        {"username": session['user']})
+
+    # Checks each id in favourite field array and checks if matches route_id
+    favourited = False
+    for favourite in user["favourites"]:
+        if favourite == route_id:
+            favourited = True
     
     page_title = walk['title']
 
-    return render_template("walkpage.html", walk=walk, page_title=page_title)
+    return render_template(
+        "walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -395,19 +406,22 @@ def register():
 
         if existing_user:
             flash("Sorry, that username already exists")
-            return redirect(url_for("register", regform=regform, page_title=page_title))
+            return redirect(url_for("register", regform=regform))
 
         # New user is generated if a matching username is not found.
         new_user = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
-            "email": request.form.get("email").lower()
+            "email": request.form.get("email").lower(),
+            "favourites": []
         }
         mongo.db.users.insert_one(new_user)
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for("user_profile", username=session["user"], regform=regform, page_title=page_title))
+        return redirect(
+            url_for(
+                "home", username=session["user"], regform=regform))
 
 
     return render_template("register.html", regform=regform, page_title=page_title)
@@ -452,13 +466,13 @@ def login():
         if existing_user:
             if check_password_hash(existing_user["password"], request.form.get("login_password")):
                 session["user"] = request.form.get("login_username").lower()
-                return redirect(url_for("user_profile", username=session["user"], page_title=page_title))
+                return redirect(url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
-                return redirect(url_for("login", logform=logform, page_title=page_title))
+                return redirect(url_for("login", logform=logform))
         else:
             flash("Incorrect Username and/or Password.")
-            return redirect(url_for("login", logform=logform, page_title=page_title))
+            return redirect(url_for("login", logform=logform))
 
     return render_template("login.html", logform=logform, page_title=page_title)
 
@@ -491,21 +505,26 @@ def user_profile(username):
     page_title = page_text.capitalize()
  
     if session.get('user') is None:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
-    # elif session.get('user') != url_owner:
-    #     routes = list(mongo.db.routes.find())
-    #     flash("Please refrain from accessing other's userpages")
-    #     return redirect(url_for("user_profile", username=session["user"]))
-        
-    # assigns username to session user selects routes based on the page owner
-    # as usernames are unique.
     username = mongo.db.users.find_one(
         {"username": session['user']})["username"]
-
+        
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
-    return render_template("userprofile.html", username=username, routes=routes, page_title=page_title)
+    # Finds the details of the user document for the page owner.
+    # Then checks each option in their favourite field and adds the route 
+    # to a list of routes which can be loaded.
+    fav_ids = mongo.db.users.find_one({"username": url_owner})
+
+    favourites = list()
+    print(fav_ids["favourites"])
+    if fav_ids["favourites"]:
+        for f in fav_ids["favourites"]:
+            walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
+            favourites.append(walk)
+
+    return render_template("userprofile.html", username=username, routes=routes, favourites=favourites, page_title=page_title)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -584,6 +603,42 @@ def search():
 
     routes = list(mongo.db.routes.find())
     return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, page_title=page_title)
+
+
+@app.route("/toggle_favourite", methods=["POST"])
+def toggle_favourite():
+    """
+    Collects walk id number and checkbox boolean value and either adds walk to
+    a favourites array or removes it from the array if checkbox is unchecked.
+    """
+    # How to access data from ajax found at:
+    # https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post
+    checkbox = request.form["checkbox"]
+
+    output = request.form["id"]
+    # pushes walk id to user favourite array if checkbox is true,
+    # removes if false.
+    if checkbox == "true":
+        mongo.db.users.update_one(
+            {"username": session["user"]},
+            { '$push': { "favourites": output }}
+        )
+        favs = mongo.db.users.find_one({"username": session["user"]})
+        print(favs)
+        return "Added"
+    else:
+        mongo.db.users.update_one(
+            {"username": session["user"]},
+            {'$pull': { "favourites": output }}
+        )
+        favs = mongo.db.users.find_one({"username": session["user"]})
+        print(favs)
+        return "Removed"
+
+
+    favs = mongo.db.users.find_one({"username": session["user"]})
+    print(favs)
+    return "Favs"
 
 
 if __name__ == "__main__":

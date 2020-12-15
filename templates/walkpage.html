@@ -7,9 +7,27 @@
             <h2>
                 {{walk.title}}
             </h2>
+            <div class="heart-shape"></div>
         </div>
+        {% if user.username != walk.user %}
+        <div class="fav-box">
+            {% if favourited %}
+            <input type="checkbox" class="heart-box" id="favourite"
+                checked></input>
+            {% else %}
+            <input type="checkbox" class="heart-box" id="favourite"></input>
+            {% endif %}
+            <i class="far fa-heart unchecked heart"></i>
+            <i class="fas fa-heart checked"></i>
+        </div>
+        {% endif %}
+
         <div class="col-8">
             <p>{{walk.description}}</p>
+        </div>
+        <div class="col-8">
+            <a
+                href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}</a>
         </div>
         <div class="col-4 key-details-container">
             <h4>Key Details</h4>

@@ -128,3 +128,74 @@
 .faq-container{
     margin: 2rem;
 }
+
+.fav-box{
+  background:none;
+  display:inline-block;
+  padding:15px 18px;
+  border-radius:2px;
+  position:relative;
+  cursor:pointer;
+  box-shadow: 0 0 0 00px rgb(236 216 0);
+  cursor: pointer;
+}
+
+.heart-box{
+  display:block;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:99999;
+  opacity:0;
+} 
+
+.fav-box input[type="checkbox"] ~ .unchecked {
+    border: solid black 1px;
+}
+
+.fav-box input[type="checkbox"] ~ .checked {
+    display: none;
+    box-shadow: 0 0 0 00px rgb(236 216 0);
+}
+ 
+.fav-box input[type="checkbox"]:checked ~ .checked
+{
+    display: inline-block;
+    color: rgba(236 216 0);
+    animation: pulse 1s;
+    border-radius: 50%;
+}
+ 
+.fav-box input[type="checkbox"]:checked ~ .unchecked
+{
+    display: none;
+}
+
+/* .heart{
+    height: 1em;
+    width: 1rem;
+    box-shadow: 0 0 0 00px rgb(236 216 0);
+    background: none;
+    border: none;
+    border-radius: 50%;
+}  */
+
+ /* .fav-box:active{
+    animation: pulse 1s;
+    color: yellow;
+} */
+
+.yellow{
+    color: rgba(236 216 0);
+}
+
+
+@keyframes pulse{
+    to{
+        box-shadow: 0 0 0 30px rgb(236 216 0/0%);
+        border-radius: 50%;
+        
+    }
+}
