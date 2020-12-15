@@ -187,7 +187,7 @@ def home():
     # random choices found at w3schools.com
     # https://www.w3schools.com/python/ref_random_choices.asp
     complete = list(mongo.db.routes.find())
-    routes = random.choices(complete, k=3)
+    routes = random.choices(complete, k=6)
     return render_template(
         "index.html", routes=routes, page_title=page_title)
 

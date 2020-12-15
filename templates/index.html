@@ -27,22 +27,18 @@
     </div>
 </section>
 <section class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         {% for route in routes %}
-        <article class="card text-center col-12 col-md-4">
-            <div class="card-header">
-                Top voted
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ route.title}}</h5>
-                <p class="card-text">Created by {{route.user}}</p>
-                <a href="{{ url_for('show_walk',route_id=route._id) }}"
-                    class="btn btn-primary">View Walk</a>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
-        </article>
+        <div class=" col-lg-4 col-md-6 col-sm-12">
+            <a href="{{ url_for('show_walk',route_id=route._id) }}">
+                <h5 class="overlay-text">{{route.title}}</h5>
+                <div class="square mb-2">
+                    <img src="{{ route.imageUrl }}">
+
+                    <div class="overlay"></div>
+                </div>
+            </a>
+        </div>
         {% endfor %}
     </div>
 </section>
@@ -70,7 +66,8 @@
         <div class="col-sm-12 col-md-6 box-space">
             <div class="click-box box green">
                 <h3 class="click-box"><a href="{{ url_for('contact') }}">Contact
-                        Us<i class="fas fa-angle-right"></i></a>
+                        Us<i class="fas fa-angle-right"></i>
+                    </a>
                 </h3>
             </div>
         </div>
