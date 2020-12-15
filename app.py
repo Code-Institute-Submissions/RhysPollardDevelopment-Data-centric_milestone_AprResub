@@ -641,9 +641,9 @@ def toggle_favourite():
     return "Favs"
 
 
-@app.route("/walking_tips")
-def walking_tips():
-    return "Ok"
+# @app.route("/walking_tips")
+# def walking_tips():
+#     return "Ok"
 
 
 @app.route("/terms_of_service")
