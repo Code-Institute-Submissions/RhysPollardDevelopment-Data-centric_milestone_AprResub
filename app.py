@@ -611,6 +611,8 @@ def toggle_favourite():
     Collects walk id number and checkbox boolean value and either adds walk to
     a favourites array or removes it from the array if checkbox is unchecked.
     """
+    # How to access data from ajax found at:
+    # https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post
     checkbox = request.form["checkbox"]
 
     output = request.form["id"]
@@ -637,8 +639,6 @@ def toggle_favourite():
     favs = mongo.db.users.find_one({"username": session["user"]})
     print(favs)
     return "Favs"
-
-
 
 
 if __name__ == "__main__":
