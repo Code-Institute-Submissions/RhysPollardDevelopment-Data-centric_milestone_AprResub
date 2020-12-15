@@ -410,13 +410,14 @@ def register():
         new_user = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
-            "email": request.form.get("email").lower()
+            "email": request.form.get("email").lower(),
+            "favourites": []
         }
         mongo.db.users.insert_one(new_user)
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for("user_profile", username=session["user"], regform=regform, page_title=page_title))
+        return redirect(url_for("home", username=session["user"], regform=regform, page_title=page_title))
 
 
     return render_template("register.html", regform=regform, page_title=page_title)
@@ -503,19 +504,19 @@ def user_profile(username):
         return redirect(url_for("login"))
 
     username = mongo.db.users.find_one(
-        {"username": session['user']})["username"]
+        {"username": session['user']})
         
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
-    fav_ids = mongo.db.users.find({"username": url_owner})
+    fav_ids = mongo.db.users.find_one({"username": url_owner})
     print(fav_ids)
+    print(fav_ids["username"])
 
-    favourites=list()
-    for favs in fav_ids:
-        if favs["favourites"]:
-            for f in favs["favourites"]:
-                walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
-                favourites.append(walk)
+    favourites = list()
+    if fav_ids["favourites"]:
+        for f in fav_ids["favourites"]:
+            walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
+            favourites.append(walk)
 
     return render_template("userprofile.html", username=username, routes=routes, favourites=favourites, page_title=page_title)
 
