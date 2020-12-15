@@ -250,7 +250,7 @@ def add_walk():
         mongo.db.routes.insert_one(walk)
         flash("Walk successfully added!")
         return redirect(url_for(
-            "user_profile", username=session["user"], page_title=page_title))
+            "user_profile", username=session["user"]))
 
     return render_template(
         "addwalk.html", addform=addform, page_title=page_title)
@@ -320,7 +320,7 @@ def edit_walk(route_id):
         mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
         flash("Walk edited successfully!")
         return redirect(url_for(
-            "user_profile", username=session["user"], page_title=page_title))
+            "user_profile", username=session["user"]))
 
     return render_template(
         "editwalk.html", walk=walk, editform=editform, page_title=page_title)
@@ -348,6 +348,7 @@ def show_walk(route_id):
     user = mongo.db.users.find_one(
         {"username": session['user']})
 
+    # Checks each id in favourite field array and checks if matches route_id
     favourited = False
     for favourite in user["favourites"]:
         if favourite == route_id:
@@ -355,7 +356,8 @@ def show_walk(route_id):
     
     page_title = walk['title']
 
-    return render_template("walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
+    return render_template(
+        "walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -404,7 +406,7 @@ def register():
 
         if existing_user:
             flash("Sorry, that username already exists")
-            return redirect(url_for("register", regform=regform, page_title=page_title))
+            return redirect(url_for("register", regform=regform))
 
         # New user is generated if a matching username is not found.
         new_user = {
@@ -417,7 +419,9 @@ def register():
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for("home", username=session["user"], regform=regform, page_title=page_title))
+        return redirect(
+            url_for(
+                "home", username=session["user"], regform=regform))
 
 
     return render_template("register.html", regform=regform, page_title=page_title)
@@ -465,10 +469,10 @@ def login():
                 return redirect(url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
-                return redirect(url_for("login", logform=logform, page_title=page_title))
+                return redirect(url_for("login", logform=logform))
         else:
             flash("Incorrect Username and/or Password.")
-            return redirect(url_for("login", logform=logform, page_title=page_title))
+            return redirect(url_for("login", logform=logform))
 
     return render_template("login.html", logform=logform, page_title=page_title)
 
@@ -504,15 +508,17 @@ def user_profile(username):
         return redirect(url_for("login"))
 
     username = mongo.db.users.find_one(
-        {"username": session['user']})
+        {"username": session['user']})["username"]
         
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
+    # Finds the details of the user document for the page owner.
+    # Then checks each option in their favourite field and adds the route 
+    # to a list of routes which can be loaded.
     fav_ids = mongo.db.users.find_one({"username": url_owner})
-    print(fav_ids)
-    print(fav_ids["username"])
 
     favourites = list()
+    print(fav_ids["favourites"])
     if fav_ids["favourites"]:
         for f in fav_ids["favourites"]:
             walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
@@ -606,9 +612,10 @@ def toggle_favourite():
     a favourites array or removes it from the array if checkbox is unchecked.
     """
     checkbox = request.form["checkbox"]
-    print(type(checkbox))
+
     output = request.form["id"]
-    print(output)
+    # pushes walk id to user favourite array if checkbox is true,
+    # removes if false.
     if checkbox == "true":
         mongo.db.users.update_one(
             {"username": session["user"]},
