@@ -346,11 +346,16 @@ def show_walk(route_id):
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
 
     user = mongo.db.users.find_one(
-        {"username": session['user']})["username"]
+        {"username": session['user']})
+
+    favourited = False
+    for favourite in user["favourites"]:
+        if favourite == route_id:
+            favourited = True
     
     page_title = walk['title']
 
-    return render_template("walkpage.html", walk=walk, user=user, page_title=page_title)
+    return render_template("walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])

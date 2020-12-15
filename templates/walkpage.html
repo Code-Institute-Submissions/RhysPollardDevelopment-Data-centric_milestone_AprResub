@@ -9,9 +9,14 @@
             </h2>
             <div class="heart-shape"></div>
         </div>
-        {% if user != walk.user %}
+        {% if user.username != walk.user %}
         <div class="fav-box">
+            {% if favourited %}
+            <input type="checkbox" class="heart-box" id="favourite"
+                checked></input>
+            {% else %}
             <input type="checkbox" class="heart-box" id="favourite"></input>
+            {% endif %}
             <i class="far fa-heart unchecked heart"></i>
             <i class="fas fa-heart checked"></i>
         </div>

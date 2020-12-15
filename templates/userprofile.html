@@ -21,6 +21,11 @@
         <div class="col-6">
             <div class="row">
                 <!-- user fav walks-->
+                {% if not favourites %}
+                <h4>No favourites added yet.</h4>
+                {% elif favourites == [] %}
+                <h4>No Favourites to show.</h4>
+                {% endif %}
                 {% for favourite in favourites %}
                 <div class="col-sm-12 col-lg-6 card bg-dark text-white">
                     <img class="card-img" src="{{ favourite.imageUrl }}"
