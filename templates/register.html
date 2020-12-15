@@ -51,7 +51,10 @@
                     </div>
                     <div class="form-group form-check">
                         {{ regform.agree }}
-                        {{ regform.agree.label }}
+                        {{ regform.agree.label }} <a
+                            href="{{ url_for('terms_of_service') }}"
+                            target="_blank">Terms Of
+                            Service</a>
                         <div class="invalid-feedback">
                             <p>You need to agree to register</p>
                         </div>

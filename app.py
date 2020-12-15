@@ -641,6 +641,21 @@ def toggle_favourite():
     return "Favs"
 
 
+@app.route("/walking_tips")
+def walking_tips():
+    return "Ok"
+
+
+@app.route("/terms_of_service")
+def terms_of_service():
+    return render_template("termsofservice.html")
+
+
+@app.route("/privacy_policy")
+def privacy_policy():
+    return render_template("privacypolicy.html")
+
+
 if __name__ == "__main__":
     """
     If the domain name matches __main__ then will load environmental vars.

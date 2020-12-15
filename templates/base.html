@@ -44,28 +44,33 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
+                            href="{{ url_for('walking_tips') }}">Walking
+                            Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
                             href="{{ url_for('contact') }}">Contact Us</a>
                     </li>
                     {% if session.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('add_walk')}}">Add
+                        <a class="nav-link" href="{{ url_for('add_walk') }}">Add
                             Walk</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('user_profile', username=session['user'])}}">Userpage</a>
+                            href="{{ url_for('user_profile', username=session['user']) }}">Userpage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('logout')}}">Logout</a>
+                            href="{{ url_for('logout') }}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ url_for('register')}}">Register</a>
+                            href="{{ url_for('register') }}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login')}}">Log
+                        <a class="nav-link" href="{{ url_for('login') }}">Log
                             in</a>
                     </li>
                     {% endif %}
@@ -79,6 +84,8 @@
         <footer>
             <div class="footer">
                 <p>footer</p>
+                <a href="{{ url_for('terms_of_service') }}">Terms Of Service</a>
+                <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
             </div>
         </footer>
 

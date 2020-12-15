@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block content %}
+
+<article class="container">
+    <section class="row">
+        <div class="col-12">
+            <!-- Privacy policy template:
+            https://gdpr.eu/wp-content/uploads/2019/01/Our-Company-Privacy-Policy.pdf-->
+            <h2 class="justify-content-center d-flex">
+                Privacy Policy
+            </h2>
+        </div>
+        <!--What data collected-->
+        <div class="col-12">
+            <h5>What personal data do we collect?</h5>
+            <p>We will collect and use your personal data (in this case your
+                username, email address and any walks you have submitted
+                to the website). We only collect the essentials required for
+                identifying you on the website, allowing you to create
+                content and contacting you when requested.
+
+                We do not collect or monitor your viewing habits or favourites.
+                However, we will intervene if sensitive,
+                harmful or dangerous information is posted on this site in your
+                userpage or content added, especially if brought
+                to out attention from other users.
+            </p>
+        </div>
+        <!--Data collection-->
+        <div class="col-12">
+            <h5>How do we collect your data?</h5>
+            <p>The majority of data we collect is provided upon registration in
+                the form of your
+                username and email address.
+
+                We also collect data in the form of cookies when you register or
+                log in.
+
+                Any other information is volunteered to the website for the
+                creation of walks and
+                in the context of comments/issues or compliments sent to our <a
+                    href="{{ url_for('contact') }}" target="_blank">email
+                    account and social
+                    media</a> accounts.
+            </p>
+        </div>
+        <!--Use of data-->
+        <div class="col-12">
+            <h5>How will we use your data?</h5>
+            <p>Our company collects your data for two purposes:
+            <ul>
+                <li>For the creation and distribution of walks to and from
+                    users.
+                    This allows for us to provide a platform where likeminded
+                    walkers and explorers can share their experiences and
+                    interests.
+                </li>
+                <li>
+                    To respond to any queries or comments you have provided to
+                    us; most often forgotten passwords, incorrect material on
+                    created walks or concerns with the websites functionality.
+                </li>
+            </ul>
+            We do not sell or share any of your data with any third parties or
+            companies.
+            </p>
+        </div>
+        <!--Data protection rights-->
+        <div class="col-12">
+            <h5>What are your data protection rights?</h5>
+            <p>Every user is entitled to the following:
+            <ul>
+                <li><strong>The right to access -</strong> You have the right to
+                    request us for copies of any personal data you have on our
+                    site.</li>
+                <li><strong>The right to erasure -</strong> You have the right
+                    to
+                    request that we delete your personal data, with confirmation
+                    and
+                    under certain conditions.</li>
+                <li><strong>The right to rectification/completion -</strong> You
+                    have the right to request that we correct or complete any
+                    information which you feel is incorrect or incomplete.</li>
+                <li><strong>The right to access -</strong> You have the right to
+                    request us for
+                    copies of any personal data you have on our site.</li>
+                <li><strong>The right to prevent processing -</strong> You have
+                    the
+                    right to ask that we do not process or restrict processing
+                    of
+                    any personal data.</li>
+            </ul>
+            If you would like to make a request, we have one month to
+            respond. Requests can be made at our <a
+                href="{{ url_for('contact') }}" target="_blank">email
+                or contact us</a>.
+            </p>
+        </div>
+        <!--Cookies-->
+        <div class="col-12">
+            <h5>What are cookies?</h5>
+            <p>Cookies are text files placed on your computer when you visit a
+                website to collect basic internet log information and behaviour.
+                When you visit websites, information can be collected
+                automatically through cookies.
+
+                We use cookies exclusively to keep you signed in when you log in
+                and to allow access to features such as adding/editing walks and
+                making a list of favourite walking routes.
+            </p>
+        </div>
+        <!--Managing cookies-->
+        <div class="col-12">
+            <h5>Can I manage my cookies?</h5>
+            <p>Yes you can, your browser can be set to not accept cookies
+                (though most websites accept cookies by default) and remove them
+                from your browser. More information
+                can be found at <a href="https://www.aboutcookies.org.uk/"
+                    target="_blank">https://www.aboutcookies.org.uk/</a> if you
+                would
+                like to explore these options.
+
+                However, the features offered by cookies in the above section
+                will no longer be available if you do restrict cookies.
+            </p>
+        </div>
+        <!--Changes-->
+        <div class="col-12">
+            <h5>Changes to our Privacy Policy</h5>
+            <p>We will always try to conform to the best practices for
+                safeguarding user information and will inform all registered
+                users by email of any policy changes to our terms of service.
+            </p>
+        </div>
+        <!--Complaints-->
+        <div class="col-12">
+            <h5>If you have any complaints</h5>
+            <p>If you have any complaints about how we have handled your
+                personal data or information you are welcome to contact us and
+                we will respond to discuss the problems at hand.
+
+                If you feel we are not addressing your concern correctly then
+                you can contact the Information Commissioner's Office (ICO) at
+                <a href="https://ico.org.uk/" target="_blank">their website</a>
+                and sent them our email address.
+            </p>
+        </div>
+    </section>>
+</article>
+{% endblock %}
