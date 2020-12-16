@@ -3,12 +3,12 @@ import random
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_wtf import Form
+from flask_pymongo import PyMongo
 from wtforms import (
     StringField, PasswordField, BooleanField, SelectField, TextAreaField)
 from wtforms.fields import html5
 from wtforms.validators import (
     InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional)
-from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -65,7 +65,7 @@ class RegistrationForm(Form):
         render_kw={'class':'form-check-input'})
 
 
-class logInForm(Form):
+class LogInForm(Form):
     login_username = StringField(
         "Username", validators=[InputRequired()],
         render_kw={
@@ -148,7 +148,8 @@ class ContactForm(Form):
     user_issue = TextAreaField("What issue has occurred:", validators=[InputRequired(),
         Length(min=20, max=500)],
         render_kw={"class": "form-control",
-        "placeholder": "Tell us what problem you're having and we will try to fix it or get back to you.",
+        "placeholder":("Tell us what problem you're "
+                        "having and we will try to fix it or get back to you."),
         "minlength": "20", "maxlength": "500", "rows": "7"})
         
 
@@ -185,9 +186,9 @@ def home():
     page_title = 'Welcome To Cornwall'
 
     # random choices found at w3schools.com
-    # https://www.w3schools.com/python/ref_random_choices.asp
+    # https://www.w3schools.com/python/ref_random_sample.asp
     complete = list(mongo.db.routes.find())
-    routes = random.choices(complete, k=6)
+    routes = random.sample(complete, k=6)
     return render_template(
         "index.html", routes=routes, page_title=page_title)
 

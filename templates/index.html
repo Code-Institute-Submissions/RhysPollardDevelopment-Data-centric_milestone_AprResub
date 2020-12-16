@@ -4,32 +4,36 @@
 <div class="container-fluid">
     <div class="row">
         <div class="jumbotron-fluid index-header col-12">
-            <h1 class="display-4">Kernow a'gas dynnergh</h1>
-            <h3>Welcome to Cornwall</h3>
+            <div class="borderline">
+                <h1 class="display-4">Kernow a'gas dynnergh</h1>
+                <h3>Welcome to Cornwall</h3>
+            </div>
         </div>
     </div>
 </div>
 <section class="container">
     <div class="row">
         <div class="index-intro col-12">
-            <h3>Company name!</h3>
-            <p>Welcome to the best local walks and strolls Cornwall has to
-                offer.</p>
-            <p>How can we find the best kept walks and secrets of the county?
-                That's because our walks are created by the locals who enjoy
+            <h2 class="text-center text-uppercase">The best walks
+                in Cornwall</h2>
+            <p>How can we find the best kept walks and secrets of the
+                county?</p>
+            <p>That's because our walks are created by the locals who enjoy
                 them the most and know them best,
-                next best thing to a local guide showing you around. So come and
-                take the back road, that unsuspecting pathway or even a classic
+                like a local guide showing you around. </p>
+            <p> So come and take the back road, that unsuspecting pathway or
+                even a classic
                 well known walk which is really
                 just that good.
             </p>
         </div>
     </div>
 </section>
-<section class="container">
+<section class="container featured">
+    <h2 class="feature-header text-capitalize">Featured walks</h2>
     <div class="row justify-content-center">
         {% for route in routes %}
-        <div class=" col-lg-4 col-md-6 col-sm-12">
+        <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
                 <h5 class="overlay-text">{{route.title}}</h5>
                 <div class="square mb-2">
@@ -43,27 +47,54 @@
     </div>
 </section>
 <section class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6 box-space">
-            <div class="click-box box blue">
-                <h3 class="click-box">Discover<i class="fas fa-angle-right"></i>
-                </h3>
+    <div class="row website-info">
+        <h2 class="col-12 text-center text-capitalize">How it works</h2>
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
+            <div class="bubble image one">
+                <i class="fas fa-search-location"></i>
             </div>
+            <h4>Search our walks</h4>
+            <p>Take a look at our walks around Cornwall, search and filter for
+                types of walk and key features such as parking.</p>
         </div>
-        <div class="col-sm-12 col-md-6 box-space">
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
+            <div class="bubble green image two">
+                <i class="fas fa-share-alt"></i>
+            </div>
+            <h4>Share your strolls</h4>
+            <p>Think you know a great local walk? Things are best when shared by
+                those who know them best.</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
+            <div class="bubble red image three">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h4>Save Your Favourites</h4>
+            <p>Sign up and save your favourite walks for you to find later and
+                share with others.</p>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
+            <div class="bubble blue image four">
+                <i class="fas fa-mountain"></i>
+            </div>
+            <h4>Take a trip</h4>
+            <p>Get out and explore, anyone can miss gems when they're
+                hidden. Stay safe and have fun!</p>
+        </div>
+    </div>
+    <!-- <div class="row bubbles">
+        <div class="col-sm-12 col-md-6 col-lg-4 box-link blue">
+            <h3 class="click-box col-12">Discover<i
+                    class="fas fa-angle-right"></i>
+            </h3>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4  box-space">
             <div class="click-box box image-1">
                 <h3 class="click-box">Sign Up<i class="fas fa-angle-right"></i>
                 </h3>
             </div>
         </div>
-        <article class="col-sm-12 col-md-6 box-space">
-            <div class="click-box box image-2">
-                <h3 class="click-box">Walking Tips<i
-                        class="fas fa-angle-right"></i>
-                </h3>
-            </div>
-        </article>
-        <div class="col-sm-12 col-md-6 box-space">
+        <div class="col-sm-12 col-md-6 col-lg-4  box-space">
             <div class="click-box box green">
                 <h3 class="click-box"><a href="{{ url_for('contact') }}">Contact
                         Us<i class="fas fa-angle-right"></i>
@@ -71,7 +102,7 @@
                 </h3>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
 
 {% endblock %}

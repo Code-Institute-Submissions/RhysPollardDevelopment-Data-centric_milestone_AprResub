@@ -1,3 +1,4 @@
+/*---------------Base----------*/
 .main{
     min-height:90vh;
 }
@@ -21,11 +22,49 @@
 /*---------Index--------------*/
 .index-header{
     background-image: url("https://nt.global.ssl.fastly.net/images/1431762236176-1247347-resize.jpg?width=1920&auto=webp&crop=16:7");
-    height: 30rem;
+    height: 45rem;
     overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
+}
 
+.borderline{
+    border: 1px solid #fff;
+    height: 90%;
+    width: 96%;
+    position: relative;
+    left: 2%;
+    top: 5%;
+}
+
+.index-intro{
+    margin-bottom: 3rem;
+}
+
+.index-intro h2{
+    margin-bottom: 2rem;
+}
+
+.index-intro p{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.featured{
+    padding: 2rem;
+    background-color: teal;
+}
+
+.feature-header{
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    color: #fefffa;
+}
+
+.feature-walk{
+    margin: 1rem 0;
+    box-shadow: ;
 }
 
 .square {
@@ -45,7 +84,8 @@
     bottom: 6%;
     color: #fff;
     z-index: 1000;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
+    padding-right: 1.5rem;
 }
 
 .overlay{
@@ -57,6 +97,37 @@
     height: 5rem;
     overflow: hidden;
     width: 100%;
+    filter: blur(2px);
+}
+
+.website-info{
+    margin: 3rem 1rem;
+}
+
+.website-info h2{
+    margin: 1rem;
+}
+
+.bubble{
+    height: 12rem;
+    width: 12rem;
+    background: rgb(236, 106, 0);
+    border-radius: 50%;
+    margin:auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 3.75rem;
+}
+
+.bubble i{
+    font-size: 4rem;
+    color: #fffef7;
+    filter: drop-shadow(2px 3px 3px black);
+}
+
+.bubble:hover{
+    box-shadow: 0px 0px 0px rgb(236 216 0);
+    animation: pulse 0.5s;
 }
 
 /*--------Search page------------*/
@@ -104,6 +175,7 @@
     display: flex;
     color: #ffffff;
     line-height: 1.5rem;
+    border-radius: 50%;
 }
 
 .blue{
@@ -111,19 +183,31 @@
 }
 
 .green{
-    background-color: #500522;
+    background-color: #1d4b0c;
 }
 
-.image-1{
-    background-image: url(https://www.falriver.co.uk/_media/12799/image?fit=crop&w=1200&h=675);
+.red{
+    background-color: #830c0c;
+}
+
+.image{
     background-size: cover;
     overflow: hidden;
 }
 
-.image-2{
-    background-image: url(https://www.falriver.co.uk/_media/11487/image?fit=crop&w=1200&h=675);
-    background-size: cover;
-    overflow: hidden;
+.one{
+    background-image: url(/static/img/20200801_152124.jpg);
+}
+.two{
+    background-image: url(/static/img/20200516_150338.jpg);
+}
+
+.three{
+    background-image: url(/static/img/20200815_131709.jpg);
+}
+
+.four{
+    background-image: url(/static/img/20200829_140159.jpg);
 }
 
 /*-------------Register/Login Page------------*/
