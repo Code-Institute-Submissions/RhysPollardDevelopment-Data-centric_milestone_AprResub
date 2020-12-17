@@ -67,12 +67,13 @@ a.button{
 }
 
 .borderline{
-    border: 1px solid #fff;
+    border: 2px solid #fff;
     height: 90%;
     width: 96%;
     position: relative;
     left: 2%;
     top: 5%;
+    /*     filter: drop-shadow(1px 2px 4px black);? */
 }
 
 .landing-header{
