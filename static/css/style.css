@@ -7,6 +7,27 @@ body{
     min-height:90vh;
 }
 
+.custom-nav{
+    z-index: 1000;
+    width: 100%;
+    background-color: #343a40;
+}
+
+.custom-nav a{
+    color: aliceblue;
+}
+
+.custom-link{
+    color: aliceblue;
+    /* only needed when in small screen */
+    text-align: center;
+}
+
+.custom-link:hover{
+    color: #343a40;
+    background: aliceblue;
+}
+
 .center-flex{
     flex:auto;
 }
@@ -21,6 +42,19 @@ body{
 .slider-padding{
     display: flex;
     justify-content: center;
+}
+
+.custom-dropdown{
+    right: 0;
+    left: auto;
+    background-color: #343a40;
+}
+
+.dropdown-format{
+    flex-direction:column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
 
 /*---------Buttons------------*/
@@ -45,15 +79,23 @@ a.button{
 
 .clear{
     background: transparent;
-    border: 2px solid white;
+    border: 2px solid aliceblue;
     color: aliceblue;
     font-weight: 600;
 }
 
 .clear:hover{
     background-color: aliceblue;
-    color: teal;
+    color: #343a40;
     text-decoration: none;
+}
+
+.user-dropdown{
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: 1px solid aliceblue;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 /*---------Index--------------*/
