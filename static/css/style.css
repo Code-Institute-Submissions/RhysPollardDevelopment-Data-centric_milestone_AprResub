@@ -1,4 +1,8 @@
 /*---------------Base----------*/
+body{
+    background-color: antiquewhite;
+}
+
 .main{
     min-height:90vh;
 }
@@ -19,13 +23,47 @@
     justify-content: center;
 }
 
+/*---------Buttons------------*/
+.button{
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #2e9033;
+    border: 2px solid #19561c;
+    border-radius: 50px;
+    padding: 1rem .75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+a.button{
+    color:aliceblue;
+}
+
+.clear{
+    background: transparent;
+    border: 2px solid white;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.clear:hover{
+    background-color: aliceblue;
+    color: teal;
+    text-decoration: none;
+}
+
 /*---------Index--------------*/
 .index-header{
-    background-image: url("https://nt.global.ssl.fastly.net/images/1431762236176-1247347-resize.jpg?width=1920&auto=webp&crop=16:7");
+    background-image: url(/static/img/alt-head.png);
     height: 45rem;
     overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .borderline{
@@ -35,6 +73,29 @@
     position: relative;
     left: 2%;
     top: 5%;
+}
+
+.landing-header{
+    color: aliceblue;
+    font-weight: 400;
+    text-align: center;
+    top: 18%;
+    position: relative;
+    filter: drop-shadow(1px 2px 4px black);
+    font-size: 3.5rem;
+}
+
+.landing-sub{
+    position: relative;
+    top: 20%;
+    text-align: center;
+    color: aliceblue;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.landing-button{
+    position: relative;
+    top: 32%;
 }
 
 .index-intro{
@@ -64,7 +125,7 @@
 
 .feature-walk{
     margin: 1rem 0;
-    box-shadow: ;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .square {

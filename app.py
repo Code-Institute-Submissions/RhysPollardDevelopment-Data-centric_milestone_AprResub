@@ -458,7 +458,7 @@ def login():
     if session.get('user') is not None:
         return redirect(url_for("home"))
 
-    logform = logInForm()
+    logform = LogInForm()
 
     if logform.validate_on_submit():
         existing_user = mongo.db.users.find_one(
