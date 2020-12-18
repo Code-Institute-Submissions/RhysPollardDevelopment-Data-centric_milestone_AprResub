@@ -12,6 +12,7 @@ body{
     z-index: 1000;
     width: 100%;
     background-color: #343a40;
+    height: auto;
 }
 
 .custom-nav a{
@@ -21,12 +22,30 @@ body{
 .custom-link{
     color: aliceblue;
     /* only needed when in small screen */
-    text-align: center;
+    text-align: center;   
+    transition: ease-in-out 0.51s
+}
+
+.custom-dropdown{
+    right: 0;
+    left: auto;
+    background-color: #343a40;
+}
+
+.dropdown-format{
+    flex-direction:column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
 
 .custom-link:hover{
-    color: #343a40;
-    background: aliceblue;
+    /* color: #343a40;
+    background: aliceblue; */
+    margin: 0rem 1rem;
+    font-size: 110%;
+    color: white;
+
 }
 
 .center-flex{
@@ -66,30 +85,68 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
 
 /*------------Footer-----------*/
 .footer{
-    background: rgb(206, 206, 206);
-    height: 3rem;
+    background: #343a40;
+    height: auto;
     bottom:0;
     width: 100%;
+    padding: 1rem;
 }
 
-.slider-padding{
-    display: flex;
-    justify-content: center;
+.footer-content{
+    margin: 1rem 1rem;
+    color: aliceblue;
 }
 
-.custom-dropdown{
-    right: 0;
-    left: auto;
-    background-color: #343a40;
+.footer-content h2{
+    margin: 0.5rem 0;
 }
 
-.dropdown-format{
-    flex-direction:column;
-    padding-left: 0;
-    margin-bottom: 0;
+.footer-nav{
     list-style: none;
+    padding: 0;
 }
 
+.h-rule{
+    border-bottom: 1px solid aliceblue;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.social-links{
+list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 1rem -1rem;
+    justify-content: center;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.social-links li {
+    padding: 0.5rem;
+    background: red;
+    border-radius: 50%;
+    margin: auto;
+    height: 3rem;
+    width: 3rem;
+}
+
+.social-links li a{
+    color: aliceblue;
+}
+
+.social-links li:hover{
+    color: aliceblue;
+    background: blue;
+}
+
+.copyright{
+    font-size: 0.75rem;
+    margin: 1rem auto;
+    text-align: center;
+    color: aliceblue;
+}
 /*---------Buttons------------*/
 .button{
     display: inline-block;
@@ -130,6 +187,12 @@ a.button{
     left: 50%;
     transform: translate(-50%, 0);
 }
+
+.slider-padding{
+    display: flex;
+    justify-content: center;
+}
+
 
 /*---------Index--------------*/
 .index-header{
