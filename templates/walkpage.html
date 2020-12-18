@@ -12,7 +12,7 @@
                     <p>By <a
                             href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}
                         </a></p>
-
+                    {% if user.username %}
                     {% if user.username != walk.user %}
                     <div class="fav-box">
                         {% if favourited %}
@@ -25,6 +25,7 @@
                         <i class="far fa-heart unchecked heart"></i>
                         <i class="fas fa-heart checked"></i>
                     </div>
+                    {% endif %}
                     {% endif %}
                 </div>
 

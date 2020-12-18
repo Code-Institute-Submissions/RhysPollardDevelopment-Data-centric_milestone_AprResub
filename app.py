@@ -346,19 +346,23 @@ def show_walk(route_id):
 
     walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
 
-    user = mongo.db.users.find_one(
-        {"username": session['user']})
-
-    # Checks each id in favourite field array and checks if matches route_id
-    favourited = False
-    for favourite in user["favourites"]:
-        if favourite == route_id:
-            favourited = True
-    
     page_title = walk['title']
 
-    return render_template(
+    if session.get('user') is not None:
+        user = mongo.db.users.find_one(
+            {"username": session['user']})
+
+        # Checks each id in favourite field array and checks if matches route_id
+        favourited = False
+        for favourite in user["favourites"]:
+            if favourite == route_id:
+                favourited = True
+
+        return render_template(
         "walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
+    else:
+        return render_template(
+            "walkpage.html", user=False, favourited=False, walk=walk, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -506,7 +510,8 @@ def user_profile(username):
     page_title = page_text.capitalize()
  
     if session.get('user') is None:
-        return redirect(url_for("login"))
+        flash('Must be logged in to see other`s userpages.', 'error')
+        return redirect(url_for("register"))
 
     username = mongo.db.users.find_one(
         {"username": session['user']})["username"]

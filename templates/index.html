@@ -78,9 +78,14 @@
         <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
                 <h5 class="overlay-text">{{route.title}}</h5>
+                <div class="full-text">
+                    <h5>{{route.title}}</h5>
+                    <p>{{route.difficulty}}</p>
+                    <p>{{route.time}}</p>
+                    <p>Posted by: {{route.user}}</p>
+                </div>
                 <div class="square mb-2">
                     <img src="{{ route.imageUrl }}">
-
                     <div class="overlay"></div>
                 </div>
             </a>
@@ -88,42 +93,5 @@
         {% endfor %}
     </div>
 </section>
-<!-- <section class="container">
-    <div class="row website-info">
-        <h2 class="col-12 text-center text-capitalize">How it works</h2>
-        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
-            <div class="bubble image one">
-                <i class="fas fa-search-location"></i>
-            </div>
-            <h4>Search</h4>
-            <p>Take a look at our walks around Cornwall, search and filter for
-                types of walk and key features such as parking.</p>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
-            <div class="bubble green image two">
-                <i class="fas fa-share-alt"></i>
-            </div>
-            <h4>Share</h4>
-            <p>Think you know a great local walk? Things are best when shared by
-                those who know them best.</p>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
-            <div class="bubble red image three">
-                <i class="fas fa-heart"></i>
-            </div>
-            <h4>Save</h4>
-            <p>Sign up and save your favourite walks for you to find later and
-                share with others.</p>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-3 text-center">
-            <div class="bubble blue image four">
-                <i class="fas fa-mountain"></i>
-            </div>
-            <h4>See</h4>
-            <p>Get out and explore, anyone can miss gems when they're
-                hidden. Stay safe and have fun!</p>
-        </div>
-    </div>
-</section> -->
 
 {% endblock %}
