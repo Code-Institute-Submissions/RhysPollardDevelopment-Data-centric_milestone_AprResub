@@ -1,3 +1,12 @@
+$(document).ready(function () {
+  // Fix found at https://api.jquery.com/toggleclass/
+  // Tried ()=> but 'this' targeted window now #toggler-icon.
+  // Changes the hamburger icon to an X when mobile nav opened.
+  $('#toggler-icon').click(function(){
+    $(this).toggleClass("change")
+  })
+});
+
 let password = document.getElementById("password");
 let confirm_password = document.getElementById("confirm_password");
 
@@ -8,7 +17,7 @@ if (password) {
     confirm_password.addEventListener('keyup', validatePassword);
 }
 
-/*Checks that both Passwords are same after each character and sets the
+/* Checks that both Passwords are same after each character and sets the
 warning for validity.
 Idea for validate password found at https://codepen.io/diegoleme/pen/surIK
 */ https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/setCustomValidity
