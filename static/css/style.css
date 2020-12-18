@@ -124,7 +124,7 @@ list-style: none;
 
 .social-links li {
     padding: 0.5rem;
-    background: red;
+    background: aliceblue;
     border-radius: 50%;
     margin: auto;
     height: 3rem;
@@ -132,12 +132,16 @@ list-style: none;
 }
 
 .social-links li a{
-    color: aliceblue;
+    color: #343a43;
 }
 
-.social-links li:hover{
-    color: aliceblue;
-    background: blue;
+.social-links li:hover a i{
+    animation: spin 1s;
+}
+
+@keyframes spin{
+    0%{ transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
 }
 
 .copyright{
@@ -506,7 +510,7 @@ a.button{
 /*----------------Media Queries--------------*/
 @media(min-width: 768px){
     .footer{
-        padding: 3rem;
+        padding-top: 2rem;
     }
 
     .h-rule{
