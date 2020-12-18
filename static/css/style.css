@@ -87,7 +87,6 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
 .footer{
     background: #343a40;
     height: auto;
-    bottom:0;
     width: 100%;
     padding: 1rem;
 }
@@ -491,20 +490,6 @@ a.button{
     display: none;
 }
 
-/* .heart{
-    height: 1em;
-    width: 1rem;
-    box-shadow: 0 0 0 00px rgb(236 216 0);
-    background: none;
-    border: none;
-    border-radius: 50%;
-}  */
-
- /* .fav-box:active{
-    animation: pulse 1s;
-    color: yellow;
-} */
-
 .yellow{
     color: rgba(236 216 0);
 }
@@ -516,4 +501,25 @@ a.button{
         border-radius: 50%;
         
     }
+}
+
+/*----------------Media Queries--------------*/
+@media(min-width: 768px){
+    .footer{
+        padding: 3rem;
+    }
+
+    .h-rule{
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .v-rule{
+        border-right: 1px solid aliceblue;
+        margin-right: 1rem;
+        margin-left: -1rem;
+        padding-right: 1rem;
+    }
+
 }

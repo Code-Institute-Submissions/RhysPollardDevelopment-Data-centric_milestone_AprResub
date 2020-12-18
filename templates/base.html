@@ -108,81 +108,83 @@
         </main>
 
         <!--Footer-->
-        <footer class="footer container-fluid">
-            <div class="row footer-content">
-                <div class="col-sm-12 col-md-6 col-lg-4 h-rule">
-                    <h3>Cornish Walks</h3>
-                    <h5>Come for a proper walk.</h5>
+        <footer class="footer">
+            <div class="container">
+                <div class="row footer-content">
+                    <div class="col-sm-12 col-md-6 col-lg-3 h-rule v-rule">
+                        <h3>Cornish Walks</h3>
+                        <h5>Come for a proper walk.</h5>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <ul class="footer-nav">
+                            <li class="footer-item">
+                                <a class="custom-link"
+                                    href="{{ url_for('home') }}">Home Page
+                                    <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="custom-link"
+                                    href="{{ url_for('search') }}">Discover
+                                    <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="custom-link"
+                                    href="{{ url_for('contact') }}">Contact Us
+                                    <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3 h-rule v-rule">
+                        <ul class="footer-nav">
+                            <li class="footer-item">
+                                <a class="custom-link"
+                                    href="{{ url_for('privacy_policy') }}">Privacy
+                                    Policy</a>
+                            </li>
+                            <li class="footer-item">
+                                <a class="custom-link"
+                                    href="{{ url_for('terms_of_service') }}">Terms
+                                    Of
+                                    Service</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <ul class="social-links">
+                            <li>
+                                <a class="social-bubble"
+                                    href="https://www.twitter.com"
+                                    target="_blank"><i
+                                        class="fab fa-twitter"></i></a>
+                                <span class="sr-only">Twitter</span>
+                            </li>
+                            <li>
+                                <a class="social-bubble"
+                                    href="https://www.facebook.com"
+                                    target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <span class="sr-only">Facebook</span>
+                            </li>
+                            <li>
+                                <a class="social-bubble"
+                                    href="https://www.instagram.com"
+                                    target="_blank"><i
+                                        class="fab fa-instagram"></i></a>
+                                <span class="sr-only">instagram</span>
+                            </li>
+                            <li>
+                                <a class="social-bubble"
+                                    href="https://www.linkedin.com"
+                                    target="_blank"><i
+                                        class="fab fa-linkedin-in"></i></a>
+                                <span class="sr-only">Linked-in</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <ul class="footer-nav">
-                        <li class="footer-item">
-                            <a class="custom-link"
-                                href="{{ url_for('home') }}">Home Page
-                                <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="footer-item">
-                            <a class="custom-link"
-                                href="{{ url_for('search') }}">Discover
-                                <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="footer-item">
-                            <a class="custom-link"
-                                href="{{ url_for('contact') }}">Contact Us
-                                <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
+                <div class="copyright">
+                    <p>&#169; 2020 Cornish Walks / RhysPollardDevelopment</p>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 h-rule">
-                    <ul class="footer-nav">
-                        <li class="footer-item">
-                            <a class="custom-link"
-                                href="{{ url_for('privacy_policy') }}">Privacy
-                                Policy</a>
-                        </li>
-                        <li class="footer-item">
-                            <a class="custom-link"
-                                href="{{ url_for('terms_of_service') }}">Terms
-                                Of
-                                Service</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <ul class="social-links">
-                        <li>
-                            <a class="social-bubble"
-                                href="https://www.twitter.com"
-                                target="_blank"><i
-                                    class="fab fa-twitter"></i></a>
-                            <span class="sr-only">Twitter</span>
-                        </li>
-                        <li>
-                            <a class="social-bubble"
-                                href="https://www.facebook.com"
-                                target="_blank"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <span class="sr-only">Facebook</span>
-                        </li>
-                        <li>
-                            <a class="social-bubble"
-                                href="https://www.instagram.com"
-                                target="_blank"><i
-                                    class="fab fa-instagram"></i></a>
-                            <span class="sr-only">instagram</span>
-                        </li>
-                        <li>
-                            <a class="social-bubble"
-                                href="https://www.linkedin.com"
-                                target="_blank"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                            <span class="sr-only">Linked-in</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&#169; 2020 Cornish Walks / RhysPollardDevelopment</p>
             </div>
         </footer>
 
