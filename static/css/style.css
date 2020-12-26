@@ -393,6 +393,14 @@ a.button{
     font-size: 1.5rem;
 }
 
+.user-fav a{
+    color: #fffb88;
+}
+
+.user-fav a:hover{
+    text-decoration: underline;
+}
+
 .directions{
     margin: 1rem 0;
 }
@@ -426,10 +434,6 @@ a.button{
 
 .title-box p{
     margin: 1rem;
-}
-
-.title-box a{
-    color: antiquewhite;
 }
 
 .img-container{
