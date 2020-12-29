@@ -33,7 +33,7 @@
 </section>
 <section class="faq-container">
     <div class="row">
-        <div class="accordion col-6" id="accordionExample">
+        <div class="accordion col-sm-12 col-lg-6" id="accordionExample">
             {% for faq in faqs %}
             <div class="card">
                 <div class="card-header" id="heading{{ faq._id }}">
@@ -58,7 +58,7 @@
             {% endfor %}
         </div>
         {{ contactform.csrf_token }}
-        <form class="col-5 needs-validation" method="POST"
+        <form class="col-sm-12 col-lg-5 needs-validation" method="POST"
             action="{{ url_for('contact') }}" novalidate>
             {{ contactform.csrf_token }}
 

@@ -402,7 +402,7 @@ a.button{
 }
 
 .directions{
-    margin: 1rem 0;
+    margin: 3rem 0;
 }
 
 .directions li{
@@ -419,6 +419,13 @@ a.button{
 .directions li::marker {
     font-size: 2rem;
     border: 1px solid white;
+} 
+
+.finish{
+    color: aliceblue;
+    text-align: center;
+    padding: 3rem 0;
+    background: teal;
 }
 
 .title-box{
@@ -439,7 +446,6 @@ a.button{
 .img-container{
     height: 29rem;
     position: absolute;
-    top: 6.75%;
     z-index: -1;
     width: 100%;
 }
@@ -607,8 +613,7 @@ a.button{
     }
 
     .img-container{
-        top: 6%;
-        height: 29.25rem;
+        height: 29rem;
     }
 
     .overlay-text{
