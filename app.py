@@ -154,8 +154,9 @@ class ContactForm(Form):
         
 
 class SearchForm(Form):
-    query = html5.SearchField("", render_kw={"class": "form-control",
-    "placeholder":"Search", "aria-label":"Search"})
+    query = html5.SearchField("", render_kw={
+        "class": "form-contol",
+    "placeholder":"Search by location or keyword", "aria-label":"Search"})
 
     difficulty = SelectField("Difficulty",
     choices=[("Choose...")], render_kw={"class": "form-control"})
@@ -556,6 +557,8 @@ def search():
 
     difficulties = mongo.db.difficulty.find()
 
+    post = False
+
     # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
         filterform.difficulty.choices.append(d['challenge'])
@@ -564,6 +567,8 @@ def search():
         filterform.category_name.choices.append(c)
    
     if request.method == "POST":
+        post = True
+
         query = request.form.get("query")
 
         dogs_allowed = request.form.get("dogs_allowed")
@@ -605,7 +610,13 @@ def search():
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
             flash("Nothing matched your search, try changing your search word or filter.", 'error')
-        return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, page_title=page_title)
+        return render_template(
+            "searchwalks.html",
+            routes=routes,
+            filterform=filterform,
+            filters=filters,
+            post=post,
+            page_title=page_title)
 
     routes = list(mongo.db.routes.find())
     return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, page_title=page_title)

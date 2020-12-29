@@ -4,8 +4,8 @@
 <section class="container-fluid">
     <div class="row">
         <!-- Top image and search form-->
-        <div class="index-header col-12">
-            <h1 class="display-4">Hello, world!</h1>
+        <div class="search-header col-12">
+            <h2 class="landing-header">Discover</h2>
         </div>
     </div>
 </section>
@@ -39,12 +39,12 @@
             {{ filterform.paid_parking }}
             {{ filterform.paid_parking.label(class="custom-control-label") }}
         </div>
-        <button class="btn btn-success my-2 my-sm-0"
-            type="submit">Search</button>
+        <button class="button search" type="submit">Search</button>
     </div>
 </form>
 <section class="container">
-    <div class="row">
+    <div class="row" {% if post %}id="results" {% endif %}>
+
         {% with messages = get_flashed_messages(category_filter =["error"]) %}
         {% if messages %}
         {% for message in messages %}

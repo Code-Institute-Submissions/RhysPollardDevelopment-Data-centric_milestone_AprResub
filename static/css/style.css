@@ -356,11 +356,53 @@ a.button{
 }
 
 /*--------Search page------------*/
+.search-header{
+    background-image: url(/static/img/20201015_095453.jpg);
+    height: 35rem;
+    position: absolute;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+}
+
 .search-box{
+    max-width: 100%;
+    margin: 0;
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+    color: aliceblue;
+}
+
+.search-header .landing-header{
+    top: 2%;
+}
+
+.search-box input{
+    border-radius: 2rem;
+    margin-bottom: 0.5rem;
+    border: 1px black solid;
+}
+
+.search{
+    background: teal;
+    color: aliceblue;
+    border: 2px solid aliceblue;
     margin: auto;
-    padding: 1rem 2rem;
     width: 75%;
-    background-color: rgba(250,235,215, 0.8);
+    font-weight: 500;
+    font-size: large;
+}
+
+.search-box label{
+    font-weight: 500;
+    font-size: large;
+
+}
+
+.search-box select{
+    border-radius: 1.5rem;
 }
 
 
@@ -627,4 +669,11 @@ a.button{
     .full-text{
         opacity: 0%;
     }
+
+    .search-box{
+    margin: auto;
+    padding: 1rem 2rem;
+    width: 75%;
+    background-color: rgba(250,235,215, 0.8);
+}
 }

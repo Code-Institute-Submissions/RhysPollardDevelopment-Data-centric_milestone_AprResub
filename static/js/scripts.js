@@ -5,6 +5,12 @@ $(document).ready(function () {
   $('#toggler-icon').click(function(){
     $(this).toggleClass("change")
   })
+  
+  // Finds results id when search is posted and scrolls to results on page.
+  // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+  var results = document.getElementById("results")
+  if(results)
+    results.scrollIntoView({ behavior: "smooth" });
 });
 
 let password = document.getElementById("password");
