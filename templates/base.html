@@ -16,7 +16,7 @@
             type="text/css" />
         <!-- CSS external file-->
         <link rel="stylesheet"
-            href="{{ url_for('static', filename='/css/style.css') }}"
+            href="{{ url_for('static', filename='css/style.css') }}"
             type="text/css">
         <title class="text-capitalize">Cornish Walks | {{page_title}}</title>
     </head>
@@ -61,7 +61,18 @@
                     {% endif %}
                 </ul>
                 {% if session.user %}
-                <div class="dropdown">
+                <ul
+                    class="center-flex justify-content-center dropdown-format d-lg-none d-xl-none">
+                    <li class="nav-item">
+                        <a class="nav-link custom-link"
+                            href="/user_profile/admin">Userpage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link"
+                            href="/logout">Logout</a>
+                    </li>
+                </ul>
+                <div class="dropdown d-none d-lg-block">
                     <button class="button clear user-dropdown dropdown-toggle"
                         type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-=""
@@ -80,8 +91,6 @@
                                 <a class="nav-link custom-link"
                                     href="/logout">Logout</a>
                             </li>
-                            <ul>
-                            </ul>
                         </ul>
                     </div>
                 </div>

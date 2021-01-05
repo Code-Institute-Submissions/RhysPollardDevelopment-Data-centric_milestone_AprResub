@@ -358,7 +358,7 @@ a.button{
 /*--------Search page------------*/
 .search-header{
     background-image: url(/static/img/20201015_095453.jpg);
-    height: 35rem;
+    height: 36rem;
     position: absolute;
     overflow: hidden;
     background-size: cover;
@@ -395,6 +395,12 @@ a.button{
     font-size: large;
 }
 
+.search:hover{
+    background-color: aliceblue;
+    color: teal;
+
+}
+
 .search-box label{
     font-weight: 500;
     font-size: large;
@@ -405,7 +411,11 @@ a.button{
     border-radius: 1.5rem;
 }
 
-
+.down-arrow{
+    margin: auto;
+    text-align: center;
+    font-size: x-large;
+}
 /*------- Walk Page ----------*/
 
 .walk-title-container{
@@ -415,6 +425,7 @@ a.button{
 .key-details-container{
     padding: 2rem 2rem 1rem 2rem;
     background: teal;
+    max-height: 29rem;
     color: aliceblue;
 }
 
@@ -433,6 +444,10 @@ a.button{
 .key-details-container i{
     padding-right: 0.5rem;
     font-size: 1.5rem;
+}
+
+.key-details-container h5:last-child{
+    border-bottom: none;
 }
 
 .user-fav a{
@@ -670,10 +685,27 @@ a.button{
         opacity: 0%;
     }
 
-    .search-box{
-    margin: auto;
-    padding: 1rem 2rem;
-    width: 75%;
-    background-color: rgba(250,235,215, 0.8);
-}
+    .search-header .landing-header{
+        top: 14%;
+    }
+
+    .search-header{
+        height: 35rem;
+    }
+
+    .search-box {
+        margin: auto;
+        margin-top: 16rem;
+        padding: 2rem 2rem;
+        width: 75%;
+        background-color: teal;
+    }
+    .key-details-container{
+        padding-top: 1rem;
+        background-color: #008080db;
+    }
+
+    .key-header{
+        margin-bottom: 0;
+    }
 }
