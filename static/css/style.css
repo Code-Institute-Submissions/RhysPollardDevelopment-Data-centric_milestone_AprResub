@@ -465,7 +465,7 @@ a.button{
 .directions li{
     padding-bottom: 2rem;
     margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     border-bottom: 2px dashed lightslategrey;
 }
 
@@ -700,12 +700,36 @@ a.button{
         width: 75%;
         background-color: teal;
     }
+
+    .title-box{
+        padding: 2rem 3rem;
+    }
+
     .key-details-container{
-        padding-top: 1rem;
+        padding: 2rem 4rem;
         background-color: #008080db;
+    }
+
+    .key-details-container h5:last-child{
+        border-bottom: 1px solid aliceblue;
     }
 
     .key-header{
         margin-bottom: 0;
+    }
+}
+
+@media(min-width: 992px){
+    .custom-nav{
+        height: 3.5rem;
+    }
+
+    .walk-header{
+        max-width: 1140px;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
