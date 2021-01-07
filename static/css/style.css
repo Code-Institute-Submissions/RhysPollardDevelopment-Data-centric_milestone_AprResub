@@ -561,12 +561,75 @@ a.button{
 }
 
 /*-------------Register/Login Page------------*/
+.login-register{
+    background: teal;
+    color: aliceblue;
+}
 
-.register-button{
-    color: #fff;
-    background-color: #12964b;
+.custom-navlink{
+    display: block;
+    padding: .5rem 1rem;
+    text-align: center;
+    padding: 1rem;
+    background-color: #b1b1b1;
+    color: #495057be;
+}
+
+.custom-navlink.active{
+    color: #495057;
+    background:aliceblue;
+    font-weight: 500;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs.custom {
+    margin: -1rem -1rem 0 -1rem;
+}
+
+.nav-item.custom {
+    width: 50%;
+}
+
+.login-register h2 {
+    text-align: center;
+    padding: 1rem 1rem;
+}
+
+.register-box{
+    margin: 1rem;
+    padding: 1rem;
+    background: aliceblue;
+    color: black;
+    border-radius: 4px;
+}
+
+.register-box form {
+    margin-top: 1rem;
+}
+
+.register {
+    background: #008016;
+    color: aliceblue;
+    border: 2px solid #ffffff;
+    margin: auto;
     width: 100%;
-    font-size: larger;
+    font-weight: 500;
+    font-size: large;
+}
+
+.benefits{
+    margin: 2rem 0;
+}
+
+.benefits h3 {
+    padding: 1rem 0.5rem 0;
+}
+
+.benefits li {
+    padding: 1rem 0;
+    padding-right: 0.5rem;
+    margin: auto;
+    font-weight: 500;
 }
 
 /*---------Search Page---------*/

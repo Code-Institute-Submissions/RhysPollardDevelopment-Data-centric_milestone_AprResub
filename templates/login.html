@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="container">
+<section class="container-fluid login-register">
     <div class="row">
-        <div class="col-12">
-            <ul class="nav nav-tabs">
+        <div class="col-sm-12 col-md-6 col-lg-6 register-box">
+            <ul class="nav nav-tabs custom">
                 <!-- Link to register page -->
-                <li class="nav-item">
-                    <a class="nav-link"
+                <li class="nav-item custom">
+                    <a class="custom-navlink"
                         href="{{ url_for('register')}}">Register</a>
                 </li>
                 <!-- Link to login page -->
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ url_for('login')}}">Log
+                <li class="nav-item custom">
+                    <a class="custom-navlink active"
+                        href="{{ url_for('login')}}">Log
                         In</a>
                 </li>
             </ul>
@@ -44,9 +45,28 @@
                     {% endif %}
                     {% endwith %}
                     <!-- Log in Button -->
-                    <button type="submit" class="btn register-button">Log
+                    <button type="submit" class="button register">Log
                         In</button>
                 </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 benefits">
+            <h2 class="d-none d-md-block">Register or Log in</h2>
+            <div class="border">
+                <div class="">
+                    <h3>Reasons to Sign Up:</h3>
+                    <ul>
+                        <li>
+                            Add and edit your own walks for others to see.
+                        </li>
+                        <li>
+                            Save your favourite walks for later.
+                        </li>
+                        <li>
+                            View other user's pages and see walks made by them.
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
