@@ -73,7 +73,8 @@ function confirm_delete(recipe_delete_url){
  with route name as required. Advice found at:
  https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post*/
 let fav_icon = document.getElementById("favourite")
-fav_icon.addEventListener("change", function () {
+if (fav_icon) {
+  fav_icon.addEventListener("change", function () {
   url = window.location.pathname
   url = url.replace("/show_route/", "")
   /* need full version of ajax apparently */
@@ -86,3 +87,5 @@ fav_icon.addEventListener("change", function () {
       }
     })
   })
+}
+
