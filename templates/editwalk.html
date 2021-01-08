@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Edit Walk</h2>
-<form class="container needs-validation" method="POST"
+
+<form class="container needs-validation walk-form" method="POST"
     action="{{ url_for('edit_walk', route_id=walk._id) }}" novalidate>
     {{ editform.csrf_token }}
+    <h2>Edit a Walk</h2>
     <div class="row">
         {% for field, errors in editform.errors.items() %}
         <div class="alert alert-danger alert-dismissible fade show col-12"
@@ -105,7 +106,7 @@
                 placeholder="Anything interesting to share?&#10;Let others know here!"></textarea>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="button submit">Submit</button>
 </form>
 
 {% endblock %}

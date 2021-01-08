@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Add a New Walk</h2>
-<form class="container needs-validation" method="POST"
+
+<form class="container needs-validation walk-form" method="POST"
     action="{{ url_for('add_walk') }}" novalidate>
     {{ addform.csrf_token }}
+    <h2>Add a New Walk</h2>
     <div class="row">
         {% for field, errors in addform.errors.items() %}
         <div class="alert alert-danger alert-dismissible fade show col-12"
@@ -85,7 +86,8 @@
             {{ addform.paid_parking }}
             {{ addform.paid_parking.label(class="custom-control-label") }}
         </div>
-        <h6 class="mx-auto">Please use the Enter key to seperate direction steps
+        <h6 class="mx-auto text-center">Please use the Enter key to seperate
+            direction steps
             from
             each other.</h6>
         <!-- Text area for directions -->
@@ -107,7 +109,7 @@
         <!-- Error message fixed from stackoverflow answer-->
         <!--https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors-->
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="button submit">Submit</button>
 </form>
 
 {% endblock %}

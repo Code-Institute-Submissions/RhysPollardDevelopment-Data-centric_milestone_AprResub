@@ -1,7 +1,7 @@
 /*---------------Base----------*/
 /*--------------Navbar----------*/
 body{
-    background-color: antiquewhite;
+    /*background-color: rgb(255, 250, 244);*/
 }
 
 .main{
@@ -180,6 +180,7 @@ a.button{
     background-color: aliceblue;
     color: #343a40;
     text-decoration: none;
+    transition: 0.25s;
 }
 
 .user-dropdown{
@@ -190,9 +191,50 @@ a.button{
     transform: translate(-50%, 0);
 }
 
+.search{
+    background: teal;
+    color: aliceblue;
+    border: 2px solid aliceblue;
+    margin: auto;
+    width: 75%;
+    font-weight: 500;
+    font-size: large;
+}
+
+.search:hover{
+    background-color: aliceblue;
+    color: teal;
+    transition: 0.25s;
+}
+
 .slider-padding{
     display: flex;
     justify-content: center;
+}
+
+.register {
+    background: #008016;
+    color: aliceblue;
+    border: 2px solid #ffffff;
+    margin: auto;
+    width: 100%;
+    font-weight: 500;
+    font-size: large;
+}
+
+.submit {
+    background: teal;
+    width: 100%;
+    font-weight: 500;
+    margin-top: 1rem;
+    /* text-transform: capitalize; */
+    border: 1px solid #007979;
+}
+
+.submit:hover{
+    background: #004444;
+    color: aliceblue;
+    transition: 0.25s;
 }
 
 
@@ -386,22 +428,6 @@ a.button{
     border: 1px black solid;
 }
 
-.search{
-    background: teal;
-    color: aliceblue;
-    border: 2px solid aliceblue;
-    margin: auto;
-    width: 75%;
-    font-weight: 500;
-    font-size: large;
-}
-
-.search:hover{
-    background-color: aliceblue;
-    color: teal;
-
-}
-
 .search-box label{
     font-weight: 500;
     font-size: large;
@@ -417,6 +443,26 @@ a.button{
     text-align: center;
     font-size: x-large;
 }
+
+/*------- Add/Edit Walk--------*/
+
+.walk-form{
+    margin-bottom: 3rem;
+}
+
+.walk-form h2{
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.walk-form h6{
+    margin-top: 1rem;
+}
+
+.walk-form label{
+    font-weight: 500;
+}
+
 /*------- Walk Page ----------*/
 
 .walk-title-container{
@@ -630,16 +676,6 @@ a.button{
     margin-top: 2rem;
 }
 
-.register {
-    background: #008016;
-    color: aliceblue;
-    border: 2px solid #ffffff;
-    margin: auto;
-    width: 100%;
-    font-weight: 500;
-    font-size: large;
-}
-
 .signin-box .register{
     margin-top: 1rem;
 }
@@ -840,4 +876,9 @@ a.button{
         margin-right: auto;
         margin-left: auto;
     }
+
+    .submit{
+        width: 10rem;
+    }
+
 }
