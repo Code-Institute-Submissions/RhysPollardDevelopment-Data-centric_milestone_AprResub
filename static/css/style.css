@@ -606,10 +606,28 @@ a.button{
     background: aliceblue;
     color: black;
     border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.signin-box{
+    margin: 1rem;
+    padding: 1rem;
+    background: aliceblue;
+    color: black;
+    border-radius: 4px;
+    margin-top: 5%;
 }
 
 .register-box form {
     margin-top: 1rem;
+}
+
+.signin-box form{
+    margin-top: 1.5rem;
+}
+
+.signin-box .form-group{
+    margin-top: 2rem;
 }
 
 .register {
@@ -620,6 +638,10 @@ a.button{
     width: 100%;
     font-weight: 500;
     font-size: large;
+}
+
+.signin-box .register{
+    margin-top: 1rem;
 }
 
 .benefits{
@@ -636,6 +658,15 @@ a.button{
     margin: auto;
     font-weight: 500;
 }
+
+.box-subtext{
+    text-align: center;
+    padding: 1rem;
+    background: #343a40;
+    color: aliceblue;
+    margin: 1rem -1rem -1rem;
+}
+
 
 /*---------Search Page---------*/
 .search-card{
