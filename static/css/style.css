@@ -5,7 +5,8 @@ body{
 }
 
 .main{
-    min-height:90vh;
+    min-height:75vh;
+    display: grid;
 }
 
 .custom-nav{
@@ -566,6 +567,10 @@ a.button{
     color: aliceblue;
 }
 
+.login-wrapper{
+    margin-top: 1rem;
+}
+
 .custom-navlink{
     display: block;
     padding: .5rem 1rem;
@@ -788,6 +793,15 @@ a.button{
     }
 
     .walk-header{
+        max-width: 1140px;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .login-wrapper{
         max-width: 1140px;
         width: 100%;
         padding-right: 15px;
