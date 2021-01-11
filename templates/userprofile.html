@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+<section class="container-fluid user-header">
+    <div class="test-1">
+        <i class="fas fa-user" aria-hidden="true"></i>
+        <h6 class="username">{{username}}</h6>
+    </div>
+    <div class="row test-2">
+        <div class="col-6">
+            <p>Favourites</p>
+            <p>{{favourites|length}}</p>
+        </div>
+        <div class="col-6">
+            <p>Walks</p>
+            <p>{{routes|length}}</p>
+        </div>
+
+    </div>
+</section>
 <section class="container">
     <div class="row">
         <!-- Warning/Update Messages-->
@@ -27,17 +45,20 @@
                 <h4>No Favourites to show.</h4>
                 {% endif %}
                 {% for favourite in favourites %}
-                <div class="col-sm-12 col-lg-6 card bg-dark text-white">
-                    <img class="card-img" src="{{ favourite.imageUrl }}"
-                        alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">{{ favourite.title }}</h5>
-                        <p class="card-text">Created by {{favourite.user}}</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                        <!-- View walk button-->
-                        <a href="{{ url_for('show_walk',route_id=favourite._id) }}"
-                            class="btn btn-primary">View Walk</a>
-                    </div>
+                <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
+                    <a href="{{ url_for('show_walk',route_id=favourite._id) }}">
+                        <h5 class="overlay-text">{{favourite.title}}</h5>
+                        <div class="full-text">
+                            <h5>{{favourite.title}}</h5>
+                            <p>{{favourite.difficulty}}</p>
+                            <p>{{favourite.time}}</p>
+                            <p>Posted by: {{favourite.user}}</p>
+                        </div>
+                        <div class="square mb-2">
+                            <img src="{{ favourite.imageUrl }}">
+                            <div class="overlay"></div>
+                        </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>

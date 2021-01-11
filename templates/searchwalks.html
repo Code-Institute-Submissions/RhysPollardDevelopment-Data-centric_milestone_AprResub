@@ -49,7 +49,6 @@
 </form>
 <section class="container">
     <div class="row" {% if post %}id="results" {% endif %}>
-
         {% with messages = get_flashed_messages(category_filter =["error"]) %}
         {% if messages %}
         {% for message in messages %}
