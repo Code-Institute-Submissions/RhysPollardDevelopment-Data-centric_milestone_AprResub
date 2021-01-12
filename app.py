@@ -514,8 +514,7 @@ def user_profile(username):
         flash('Must be logged in to see other`s userpages.', 'error')
         return redirect(url_for("register"))
 
-    username = mongo.db.users.find_one(
-        {"username": session['user']})["username"]
+    username = username
         
     routes = list(mongo.db.routes.find({"user": url_owner}))
 
@@ -525,7 +524,7 @@ def user_profile(username):
     fav_ids = mongo.db.users.find_one({"username": url_owner})
 
     favourites = list()
-    print(fav_ids["favourites"])
+    print(fav_ids)
     if fav_ids["favourites"]:
         for f in fav_ids["favourites"]:
             walk = mongo.db.routes.find_one({"_id": ObjectId(f)})

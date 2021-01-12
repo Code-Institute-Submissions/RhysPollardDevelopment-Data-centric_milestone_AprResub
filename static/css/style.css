@@ -384,7 +384,13 @@ a.button{
     z-index: 1000;
     padding: 0.75rem;
     padding-right: 1.5rem;
-    opacity:0
+    opacity:0;
+    /* text-overflow used to make uniform styles for longer previews
+    https://www.w3schools.com/cssref/css3_pr_text-overflow.asp */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .overlay{
@@ -792,7 +798,6 @@ a.button{
     background: teal;
     margin-bottom: 3rem;
     top: 0%;
-    z-index: 1100;
 }
 
 .user-icon{
@@ -820,7 +825,7 @@ a.button{
     position: relative;
     top: 20%;
     margin: auto;
-    max-width: 100%;
+    max-width: 500px;
     text-align: center;
 }
 
@@ -848,15 +853,50 @@ a.button{
     width: 100vw;
     background-color: lightgray;
     padding: 1rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
 
-.scrolling-wrapper .fav-walk{
+.fav-walk{
     display: inline-block;
     margin: 0 0.1rem;
+    scroll-snap-align: center;
 }
 
 .scrolling-wrapper .fav-walk:last-child {
     padding-right: 1rem;
+}
+
+.left-scroll i {
+    color: aliceblue;
+    font-size: 2rem;
+    padding: 0.5rem;
+}
+
+.left-scroll{
+    background: #000000bf;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 49%;
+    border: none;
+    position: absolute;
+    top: 66%;
+}
+
+.right-scroll{
+    background: #000000bf;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 49%;
+    border: none;
+    position: absolute;
+    top: 66%;
+    right: 0%;
+}
+.right-scroll i {
+    color: aliceblue;
+    font-size: 2rem;
+    padding: 0.5rem rem;
 }
 
 .rectangle {
@@ -883,13 +923,14 @@ a.button{
     margin: 0 0 0 0.5rem;
 }
 
-.rectangle i{
-    color: yellow;
-}
-
 .no-favourites {
     margin: 3rem 0;
     text-align: center;
+}
+
+.user-walks{
+    padding: 0 1rem;
+    margin-bottom: 3rem;
 }
 
 .user-input {
@@ -979,6 +1020,22 @@ a.button{
     .key-header{
         margin-bottom: 0;
     }
+
+    .left-scroll{
+        left: 2%;
+    }
+
+    .right-scroll{
+        right: 2%;
+    }
+
+    .user-walks .overlay{
+        height: 35%;
+    }
+
+    .user-walks .overlay-text{
+        height: 28%;
+    }
 }
 
 @media(min-width: 992px){
@@ -1013,4 +1070,47 @@ a.button{
         width: 10rem;
     }
 
+    .scrolling-wrapper {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    /*Hide scroll Bar for chrome, safari and Opera
+    https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+    .scrolling-wrapper::-webkit-scrollbar{
+        display: none; 
+    }
+
+    .rectangle{
+        width: 20rem;
+        height: 28rem;
+    }
+
+    .fav-walk{
+        margin:0 0.5rem;
+    }
+
+    .favourites{
+        max-width: 90vw;
+    }
+
+    .favourites h3{
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .user-walks h3{
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+ 
+     .left-scroll{
+        top: 63%;
+        left: 4%;
+    }
+
+    .right-scroll{
+        top: 63%;
+        right: 4%;
+    } 
 }

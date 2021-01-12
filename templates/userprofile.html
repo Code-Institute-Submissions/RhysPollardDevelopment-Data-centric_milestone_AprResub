@@ -4,12 +4,12 @@
 <section class="container-fluid user-header">
     <div class="user-icon">
         <i class="fas fa-user" aria-hidden="true"></i>
-        <h6 class="username">{{username}}</h6>
+        <h6 class="username">{{username|capitalize}}</h6>
     </div>
     <div class="row user-stats">
         <div class="col-6">
             <p>Favourites</p>
-            <p>{{favourites|length}}</p>
+            <p id=favNumber>{{favourites|length}}</p>
         </div>
         <div class="col-6">
             <p>Walks</p>
@@ -40,17 +40,17 @@
 <!-- user fav walks-->
 <div class="container favourites">
     <div class="row">
-        <h3 class="justify-content-center col-12">Favourites</h3>
-        {% if not favourites %}
-        <div class="col-12 no-favourites">
-            <h4>No favourites added yet.</h4>
-        </div>
-        {% elif favourites == [] %}
-        <div class="col-12 no-favourites">
-            <h4>No Favourites to show.</h4>
-        </div>
-        {% endif %}
-        <div class="scrolling-wrapper col-12">
+        <h3 class="col-12">Favourites</h3>
+        <div class="scrolling-wrapper col-12" id="favScroll">
+            {% if not favourites %}
+            <div class="col-12 no-favourites">
+                <h4>No favourites added yet.</h4>
+            </div>
+            {% elif favourites == [] %}
+            <div class="col-12 no-favourites">
+                <h4>No Favourites to show.</h4>
+            </div>
+            {% endif %}
             {% for favourite in favourites %}
             <a href="{{ url_for('show_walk',route_id=favourite._id) }}"
                 class="fav-walk">
@@ -63,17 +63,22 @@
                     </div>
                     <img src="{{ favourite.imageUrl }}">
                     <div class="overlay"></div>
-
                 </div>
             </a>
             {% endfor %}
         </div>
+        <button class="left-scroll" id="leftScroll">
+            <i class="fas fa-angle-left"></i>
+        </button>
+        <button class="right-scroll" id="rightScroll">
+            <i class="fas fa-angle-right"></i>
+        </button>
     </div>
 </div>
 <!-- User's routes diplay-->
 <section class="container user-walks">
     <div class="row">
-        <h3 class="justify-content-center col-12">{{username}}'s Walks</h3>
+        <h3 class="col-12">{{username|capitalize}}'s Walks</h3>
         {% for route in routes %}
         <div class="col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
@@ -90,7 +95,7 @@
             </a>
             <!-- Only shows the view and edit buttons if the current 
             user is the same as the page owner-->
-            {% if username == route.user.lower() %}
+            {% if session['user'] == route.user.lower() %}
             <div class="user-input row">
                 <!-- Edit walk button-->
                 <a href="{{ url_for('edit_walk',route_id=route._id) }}"

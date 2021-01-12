@@ -2,15 +2,38 @@ $(document).ready(function () {
   // Fix found at https://api.jquery.com/toggleclass/
   // Tried ()=> but 'this' targeted window now #toggler-icon.
   // Changes the hamburger icon to an X when mobile nav opened.
-  $('#toggler-icon').click(function(){
+  $('#toggler-icon').click(function () {
     $(this).toggleClass("change")
   })
   
   // Finds results id when search is posted and scrolls to results on page.
   // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
   var results = document.getElementById("results")
-  if(results)
+  if (results)
     results.scrollIntoView({ behavior: "smooth" });
+  
+  
+  // Suggestion for use of scrollLeft found at
+  // https://stackoverflow.com/questions/56392199/
+  // make - a - button - to - scroll - horizontally -in -div
+  const leftButton = document.getElementById("leftScroll");
+  const rightButton = document.getElementById("rightScroll");
+  const scrollArea = document.getElementById("favScroll");
+  const favCount = document.getElementById("favNumber");
+  // Removes buttons if less favourite items than overflow requires.
+  if (scrollArea) {
+    if (favCount.innerHTML < 4) {
+      leftButton.style.visibility = "hidden";
+      rightButton.style.visibility = "hidden";
+    } else {
+      leftButton.onclick = function () {
+        scrollArea.scrollLeft -= 320;
+      }
+      rightButton.onclick = function () {
+        scrollArea.scrollLeft += 320;
+      }
+    }
+  }
 });
 
 let password = document.getElementById("password");
