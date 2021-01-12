@@ -834,6 +834,10 @@ a.button{
     padding-top: 0.5rem;
 }
 
+.divider{
+    border-right: 1px solid #8080806e;
+}
+
 .username {
     margin-top: 0.5rem;
     text-align: center;
@@ -845,6 +849,8 @@ a.button{
     margin-bottom: 2rem;
     margin-top: 1rem;
 }
+
+/*---------User-profile: Scroll------------*/
 
 .scrolling-wrapper {
     display: flex;
@@ -927,6 +933,8 @@ a.button{
     margin: 3rem 0;
     text-align: center;
 }
+
+/*----------User-Profile: User walks----------*/
 
 .user-walks{
     padding: 0 1rem;
@@ -1084,10 +1092,27 @@ a.button{
     .rectangle{
         width: 20rem;
         height: 28rem;
+        transition: 0.25s;
     }
 
+    .fav-walk:hover{
+        margin: -1rem 1rem;
+        transition: 0.25s;
+    }
+
+    .fav-walk:hover .rectangle {
+        width: 21rem;
+        height: 30rem;
+        transition: 0.25s;
+    }
+    .fav-walk:hover .overlay {
+        opacity: 30%;
+        top: 0%;
+    }
+    
     .fav-walk{
         margin:0 0.5rem;
+        transition: 0.25s;
     }
 
     .favourites{
