@@ -402,6 +402,7 @@ a.button{
     height: 100%;
     overflow: hidden;
     width: 100%;
+    transition: 0.25s;
 }
 
 .full-text{
@@ -1109,7 +1110,7 @@ a.button{
         opacity: 30%;
         top: 0%;
     }
-    
+
     .fav-walk{
         margin:0 0.5rem;
         transition: 0.25s;
