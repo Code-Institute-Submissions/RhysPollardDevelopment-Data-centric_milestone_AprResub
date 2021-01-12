@@ -79,6 +79,11 @@
 <section class="container user-walks">
     <div class="row">
         <h3 class="col-12">{{username|capitalize}}'s Walks</h3>
+        {% if routes == [] %}
+        <div class="col-12 no-favourites">
+            <h4>No walks added yet.</h4>
+        </div>
+        {% endif %}
         {% for route in routes %}
         <div class="col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
