@@ -349,7 +349,7 @@ a.button{
 }
 
 .featured{
-    padding: 2rem 18%;
+    padding: 2rem 10%;
     background-color: teal;
 }
 
@@ -791,23 +791,20 @@ a.button{
     height: 11rem;
     background: teal;
     margin-bottom: 3rem;
-    position: sticky;
     top: 0%;
-    z-index: 1000;
+    z-index: 1100;
 }
 
-.test-1 {
+.user-icon{
     border: 2px solid aliceblue;
-    /* padding: 1rem; */
     border-radius: 50%;
     height: 4rem;
     width: 4rem;
     margin: auto;
-    /* position: fixed; */
     margin-top: 2rem;
 }
 
-.test-1 i {
+.user-icon i {
     font-size: 2rem;
     color: aliceblue;
     margin: auto;
@@ -815,7 +812,7 @@ a.button{
     text-align: center;
 }
 
-.test-2 {
+.user-stats{
     background-color: white;
     border-radius: 11px;
     height: 5rem;
@@ -827,7 +824,7 @@ a.button{
     text-align: center;
 }
 
-.test-2 p{
+.user-stats p{
     margin: 0;
     padding-top: 0.5rem;
 }
@@ -839,6 +836,77 @@ a.button{
     color: aliceblue;
 }
 
+.favourites{
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100vw;
+    background-color: lightgray;
+    padding: 1rem;
+}
+
+.scrolling-wrapper .fav-walk{
+    display: inline-block;
+    margin: 0 0.1rem;
+}
+
+.scrolling-wrapper .fav-walk:last-child {
+    padding-right: 1rem;
+}
+
+.rectangle {
+    width: 15rem;
+    height: 26rem;
+}
+
+.rectangle img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rectangle .overlay {
+    width: inherit;
+    left: auto;
+    height: inherit;
+    top: 3.5%;
+}
+
+.rectangle .full-text {
+    left: auto;
+    width: inherit;
+    margin: 0 0 0 0.5rem;
+}
+
+.rectangle i{
+    color: yellow;
+}
+
+.no-favourites {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.user-input {
+    position: absolute;
+    bottom: 6%;
+    width: 85%;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    left: 7.5%;
+}
+
+.delete {
+    background: red;
+    border: 1px solid red;
+    margin-top: 0.25rem;
+}
 
 /*----------------Media Queries--------------*/
 @media(min-width: 768px){
@@ -873,6 +941,10 @@ a.button{
 
     .full-text{
         opacity: 0%;
+    }
+
+    .rectangle .full-text{
+        opacity: 100%;
     }
 
     .search-header .landing-header{
@@ -913,6 +985,11 @@ a.button{
     .custom-nav{
         height: 3.5rem;
     }
+
+    .featured{
+        padding: 2rem 18%;
+    }
+
 
     .walk-header{
         max-width: 1140px;

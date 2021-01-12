@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-
 <section class="container-fluid user-header">
-    <div class="test-1">
+    <div class="user-icon">
         <i class="fas fa-user" aria-hidden="true"></i>
         <h6 class="username">{{username}}</h6>
     </div>
-    <div class="row test-2">
+    <div class="row user-stats">
         <div class="col-6">
             <p>Favourites</p>
             <p>{{favourites|length}}</p>
@@ -19,9 +18,9 @@
 
     </div>
 </section>
+<!-- Warning/Update Messages-->
 <section class="container">
     <div class="row">
-        <!-- Warning/Update Messages-->
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <div class="alert alert-success alert-dismissible fade show col-12"
@@ -36,67 +35,82 @@
         </div>
         {% endif %}
         {% endwith %}
-        <div class="col-6">
-            <div class="row">
-                <!-- user fav walks-->
-                {% if not favourites %}
-                <h4>No favourites added yet.</h4>
-                {% elif favourites == [] %}
-                <h4>No Favourites to show.</h4>
-                {% endif %}
-                {% for favourite in favourites %}
-                <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
-                    <a href="{{ url_for('show_walk',route_id=favourite._id) }}">
-                        <h5 class="overlay-text">{{favourite.title}}</h5>
-                        <div class="full-text">
-                            <h5>{{favourite.title}}</h5>
-                            <p>{{favourite.difficulty}}</p>
-                            <p>{{favourite.time}}</p>
-                            <p>Posted by: {{favourite.user}}</p>
-                        </div>
-                        <div class="square mb-2">
-                            <img src="{{ favourite.imageUrl }}">
-                            <div class="overlay"></div>
-                        </div>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
+    </div>
+</section>
+<!-- user fav walks-->
+<div class="container favourites">
+    <div class="row">
+        <h3 class="justify-content-center col-12">Favourites</h3>
+        {% if not favourites %}
+        <div class="col-12 no-favourites">
+            <h4>No favourites added yet.</h4>
         </div>
-        <div class="col-6">
-            <div class="row">
-                <!-- User's routes diplay-->
-                {% for route in routes %}
-                <div class="col-sm-12 col-lg-6 card bg-dark text-white">
-                    <img class="card-img" src="{{ route.imageUrl }}"
-                        alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">{{ route.title }}</h5>
-                        <p class="card-text">Created by {{route.user}}</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
-                        <!-- Only shows the view and edit buttons if the current user
-                        is the same as the page owner-->
-                        {% if username == route.user.lower() %}
-                        <!-- Edit walk button-->
-                        <a href="{{ url_for('edit_walk',route_id=route._id) }}"
-                            class="button clear">Edit Walk</a>
-                        <!-- Delete button-->
-                        <!-- onclick code provided by mentor, literal quotes inside argument to 
-                        avoid jinja errors-->
-                        <button
-                            onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
-                            class="btn btn-primary">Delete
-                            Walk</button>
-                        {% endif %}
-                        <!-- View walk button-->
-                        <a href="{{ url_for('show_walk',route_id=route._id) }}"
-                            class="btn btn-primary">View Walk</a>
+        {% elif favourites == [] %}
+        <div class="col-12 no-favourites">
+            <h4>No Favourites to show.</h4>
+        </div>
+        {% endif %}
+        <div class="scrolling-wrapper col-12">
+            {% for favourite in favourites %}
+            <a href="{{ url_for('show_walk',route_id=favourite._id) }}"
+                class="fav-walk">
+                <div class="rectangle">
+                    <div class="full-text">
+                        <h5>{{favourite.title}}</h5>
+                        <p>{{favourite.difficulty}}</p>
+                        <p>{{favourite.time}}</p>
+                        <p>Posted by: {{favourite.user}}</p>
+                    </div>
+                    <img src="{{ favourite.imageUrl }}">
+                    <div class="overlay"></div>
+
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- User's routes diplay-->
+<section class="container user-walks">
+    <div class="row">
+        <h3 class="justify-content-center col-12">{{username}}'s Walks</h3>
+        {% for route in routes %}
+        <div class="col-lg-4 col-md-6 col-sm-12 feature-walk">
+            <a href="{{ url_for('show_walk',route_id=route._id) }}">
+                <div class="square mb-2">
+                    <img src="{{ route.imageUrl }}">
+                    <div class="overlay"></div>
+                    <h5 class="overlay-text">{{route.title}}</h5>
+                    <div class="full-text">
+                        <h5>{{route.title}}</h5>
+                        <p>{{route.difficulty}}</p>
+                        <p>{{route.time}}</p>
                     </div>
                 </div>
-                {% endfor %}
-
+            </a>
+            <!-- Only shows the view and edit buttons if the current 
+            user is the same as the page owner-->
+            {% if username == route.user.lower() %}
+            <div class="user-input row">
+                <!-- Edit walk button-->
+                <a href="{{ url_for('edit_walk',route_id=route._id) }}"
+                    class="button clear col-sm-6">Edit Walk</a>
+                <!-- Delete button-->
+                <!-- onclick code provided by mentor, literal quotes 
+                inside argument to avoid jinja errors-->
+                <button
+                    onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
+                    class="button delete col-sm-6">Delete
+                    Walk</button>
             </div>
+            {% endif %}
         </div>
+
+
+        {% endfor %}
+
+    </div>
+    </div>
 
 
     </div>
