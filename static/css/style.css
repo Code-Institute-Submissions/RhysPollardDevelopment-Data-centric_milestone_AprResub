@@ -1159,11 +1159,6 @@ a.button{
         top: 15%;
     }
 
-    .faq-container{
-        max-width: 960px;
-        padding: 2rem 1rem;
-    }
-
     .faq-container h3{
         padding-left: 1rem;
         padding-bottom: 1rem;
@@ -1185,7 +1180,7 @@ a.button{
     }
 
     .walk-header{
-        max-width: 1140px;
+        max-width: 960px;
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
@@ -1194,7 +1189,7 @@ a.button{
     }
 
     .login-wrapper{
-        max-width: 1140px;
+        max-width: 960px;
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
@@ -1263,7 +1258,27 @@ a.button{
         transition: 0s;
     }
 
+    /*-------Contact Page--------*/
+
     .contact-img{
         height: 50vh;
+    }
+    .faq-container{
+        max-width: 960px;
+        padding: 2rem 1rem;
+    }
+}
+
+@media(min-width: 1200px){
+    .walk-header{
+        max-width: 1140px;
+    }
+
+    .login-wrapper{
+        max-width: 1140px;
+    }
+
+    .faq-container{
+        max-width: 1140px;
     }
 }
