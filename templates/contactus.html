@@ -20,37 +20,64 @@
             {% endwith %}
             <div class="contact-card">
                 <h2>Get in Touch</h2>
-                <p>Contact us by email if you have any comments about the site,
-                    or DM us on twitter and someone will get back to you.</p>
+                <p>Contact us by email or DM on social media if you have any
+                    comments about the site.
+                </p>
+                <p>Or use our report form below and well get back to you.</p>
                 <h5>Email</h5>
-                <p>COMPANY@email.com</p>
-                <h5>Twitter</h5>
-                <p>Twitter.com/COMPANY</p>
+                <p>support@cornishwalks.co.uk</p>
+                <ul class="social-links contact">
+                    <li>
+                        <a class="social-bubble" href="https://www.twitter.com"
+                            target="_blank"><i class="fab fa-twitter"></i></a>
+                        <span class="sr-only">Twitter</span>
+                    </li>
+                    <li>
+                        <a class="social-bubble" href="https://www.facebook.com"
+                            target="_blank"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <span class="sr-only">Facebook</span>
+                    </li>
+                    <li>
+                        <a class="social-bubble"
+                            href="https://www.instagram.com" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                        <span class="sr-only">instagram</span>
+                    </li>
+                    <li>
+                        <a class="social-bubble" href="https://www.linkedin.com"
+                            target="_blank"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <span class="sr-only">Linked-in</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
 </section>
-<section class="faq-container">
+<section class="container-fluid faq-container">
     <div class="row">
-        <div class="accordion col-sm-12 col-lg-6" id="accordionExample">
+        <div class="accordion-custom col-sm-12 col-lg-6" id="accordionExample">
+            <h3 class="d-none d-lg-block d-xl-block">Frequently Asked Questions
+            </h3>
             {% for faq in faqs %}
-            <div class="card">
+            <div class="accordion-card">
                 <div class="card-header" id="heading{{ faq._id }}">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" type="button"
+                        <button class="btn accordion-link" type="button"
                             data-toggle="collapse"
                             data-target="#collapse{{ faq._id }}"
                             aria-expanded="false"
                             aria-controls="collapse{{ faq._id }}">
                             {{ faq.FAQ }}
+                            <i class="fas fa-angle-down"></i>
                         </button>
                     </h5>
                 </div>
                 <div id="collapse{{ faq._id }}" class="collapse"
                     aria-labelledby="heading{{ faq._id }}"
                     data-parent="#accordionExample">
-                    <div class="card-body">
+                    <div class="accordion-body">
                         {{ faq.Answer }}
                     </div>
                 </div>
@@ -58,10 +85,9 @@
             {% endfor %}
         </div>
         {{ contactform.csrf_token }}
-        <form class="col-sm-12 col-lg-5 needs-validation" method="POST"
+        <form class="report col-sm-12 col-lg-5 needs-validation" method="POST"
             action="{{ url_for('contact') }}" novalidate>
             {{ contactform.csrf_token }}
-
             <div class="form-group">
                 {{ contactform.problem.label }}
                 {{ contactform.problem }}
@@ -83,7 +109,7 @@
                 </button>
             </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Report</button>
+            <button type="submit" class="button submit">Report</button>
         </form>
     </div>
 </section>

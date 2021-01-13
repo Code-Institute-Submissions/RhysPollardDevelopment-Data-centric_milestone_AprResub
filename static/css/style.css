@@ -524,6 +524,10 @@ a.button{
     font-weight: 500;
 }
 
+.walk-form .form-control{
+    border-color: teal;
+}
+
 /*------- Walk Page ----------*/
 
 .walk-title-container{
@@ -771,26 +775,105 @@ a.button{
 }
 
 /*---------contact us---------*/
-.contact-img{
-    height: 75vh;
+.contact-img {
+    height: 56vh;
     background-size: cover;
-    width:100%;
+    width: 100%;
+    position: relative;
     background-image: url(https://www.falriver.co.uk/_media/12883/image?fit=crop&w=1200&h=675);
+    background-blend-mode: multiply;
     background-repeat: no-repeat;
+    background-color: #0000009c;
 }
 
 .contact-card{
-    background-color: ivory;
-    position: relative;
-    width: 50%;
+    position: absolute;
     text-align: center;
-    height: 50%;
     margin: auto;
-    top: 25%;
+    top: 10%;
+    color: aliceblue;
+    padding: 0 1rem;
+    left: 0%;
 }
 
-.faq-container{
-    margin: 2rem;
+.contact-card h2{
+    margin-bottom: 2rem;
+}
+
+.faq-container .form-control{
+    border-color: teal;
+}
+
+.accordion-custom{
+    padding: 0;
+}
+
+.accordion-card{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: teal;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.accordion-body{
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+    background-color: aliceblue;
+    color: rgb(24, 24, 24);
+}
+
+.accordion-link {
+    font-weight: 400;
+    color: aliceblue;
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+
+.accordion-link i{
+    font-size: 1.25rem;
+    position: absolute;
+    right: 0%;
+    top: 34%;
+}
+
+.report {
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+
+.social-links.contact{
+    margin: auto;
+    line-height: 1.75rem;
+}
+
+.social-links.contact li{
+    margin: 0.75rem;
+    background: none;
+    border: 2px solid aliceblue;
+}
+
+.social-links.contact li a{
+    color: aliceblue;
+}
+
+.social-links.contact li:hover{
+    background:aliceblue;
+}
+
+.social-links.contact li:hover a i{
+    color: #343a43;
+    animation: none;
 }
 
 /*--------------User Profile----------------*/
