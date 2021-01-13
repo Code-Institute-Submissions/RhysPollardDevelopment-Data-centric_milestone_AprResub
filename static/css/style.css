@@ -837,6 +837,9 @@ a.button{
     width: 100%;
     text-align: left;
     position: relative;
+    border: none;
+    background: none;
+    padding: 0.5rem;
 }
 
 .accordion-link i{
@@ -874,6 +877,10 @@ a.button{
 .social-links.contact li:hover a i{
     color: #343a43;
     animation: none;
+}
+
+.button.accordion-link:focus{
+    outline: none;
 }
 
 /*--------------User Profile----------------*/
