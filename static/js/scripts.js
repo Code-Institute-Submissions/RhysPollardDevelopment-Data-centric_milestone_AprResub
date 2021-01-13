@@ -22,7 +22,7 @@ $(document).ready(function () {
   const favCount = document.getElementById("favNumber");
   // Removes buttons if less favourite items than overflow requires.
   if (scrollArea) {
-    if (favCount.innerHTML < 4) {
+    if (scrollArea.clientWidth >= scrollArea.scrollWidth) {
       leftButton.style.visibility = "hidden";
       rightButton.style.visibility = "hidden";
     } else {

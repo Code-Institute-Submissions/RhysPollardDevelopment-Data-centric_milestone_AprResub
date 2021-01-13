@@ -849,6 +849,7 @@ a.button{
 .favourites{
     margin-bottom: 2rem;
     margin-top: 1rem;
+    position: relative;
 }
 
 /*---------User-profile: Scroll------------*/
@@ -860,6 +861,8 @@ a.button{
     width: 100vw;
     background-color: lightgray;
     padding: 1rem;
+    /* Use of scroll-snap and scroll-behavior found from mozilla
+    https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 }
@@ -877,33 +880,36 @@ a.button{
 .left-scroll i {
     color: aliceblue;
     font-size: 2rem;
-    padding: 0.5rem;
+    margin-left: -0.5rem;
 }
 
 .left-scroll{
     background: #000000bf;
     height: 3rem;
     width: 3rem;
-    border-radius: 49%;
+    padding: 0 1.5rem;
+    border-radius: 50%;
     border: none;
     position: absolute;
-    top: 66%;
+    top: 50%;
+    left: 1%;
 }
 
 .right-scroll{
     background: #000000bf;
     height: 3rem;
+    padding: 0 1.5rem;
     width: 3rem;
-    border-radius: 49%;
+    border-radius: 50%;
     border: none;
     position: absolute;
-    top: 66%;
-    right: 0%;
+    top: 50%;
+    right: 1%;
 }
 .right-scroll i {
     color: aliceblue;
     font-size: 2rem;
-    padding: 0.5rem rem;
+    margin-left: -0.4rem;
 }
 
 .rectangle {
@@ -1031,11 +1037,11 @@ a.button{
     }
 
     .left-scroll{
-        left: 2%;
+        left: -1%;
     }
 
     .right-scroll{
-        right: 2%;
+        right: -1%;
     }
 
     .user-walks .overlay{
@@ -1096,21 +1102,6 @@ a.button{
         transition: 0.25s;
     }
 
-    .fav-walk:hover{
-        margin: -1rem 1rem;
-        transition: 0.25s;
-    }
-
-    .fav-walk:hover .rectangle {
-        width: 21rem;
-        height: 30rem;
-        transition: 0.25s;
-    }
-    .fav-walk:hover .overlay {
-        opacity: 30%;
-        top: 0%;
-    }
-
     .fav-walk{
         margin:0 0.5rem;
         transition: 0.25s;
@@ -1129,14 +1120,25 @@ a.button{
         text-align: center;
         margin-bottom: 1rem;
     }
- 
-     .left-scroll{
-        top: 63%;
-        left: 4%;
+
+    /*-------User profile scroll animation--------*/
+    .rectangle .overlay{
+        transition: 0s;
     }
 
-    .right-scroll{
-        top: 63%;
-        right: 4%;
-    } 
+    .fav-walk:hover{
+        margin: -1rem 1rem;
+        transition: 0.25s;
+    }
+
+    .fav-walk:hover .rectangle {
+        width: 21rem;
+        height: 30rem;
+        transition: 0.25s;
+    }
+    .fav-walk:hover .rectangle .overlay {
+        opacity: 30%;
+        top: 0%;
+        transition: 0s;
+    }
 }
