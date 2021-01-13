@@ -847,6 +847,12 @@ a.button{
     position: absolute;
     right: 0%;
     top: 34%;
+    transition: 0.2s;
+}
+
+.accordion-link.collapsed i{
+    transform: rotate(180deg);
+    transition: 0.2s;
 }
 
 .report {

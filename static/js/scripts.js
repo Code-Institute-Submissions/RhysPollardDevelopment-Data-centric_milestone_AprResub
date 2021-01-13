@@ -5,6 +5,10 @@ $(document).ready(function () {
   $('#toggler-icon').click(function () {
     $(this).toggleClass("change")
   })
+
+  $('#toggler-icon').click(function () {
+    $(this).toggleClass("change")
+  })
   
   // Finds results id when search is posted and scrolls to results on page.
   // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
