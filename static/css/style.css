@@ -100,6 +100,15 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
     margin: 0.5rem 0;
 }
 
+.footer-link{
+    color: aliceblue;
+    text-align: center;
+}
+
+a.footer-link:hover{
+    color: aliceblue;
+}
+
 .footer-nav{
     list-style: none;
     padding: 0;
@@ -390,7 +399,7 @@ a.button{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 100%;
+    width: 90%;
 }
 
 .overlay{
@@ -469,6 +478,8 @@ a.button{
     background-repeat: no-repeat;
     background-position: center;
     z-index: -1;
+    background-color: #0000005e;
+    background-blend-mode: multiply;
 }
 
 .search-box{
@@ -477,6 +488,10 @@ a.button{
     padding-top: 7rem;
     padding-bottom: 2rem;
     color: aliceblue;
+}
+
+.search-results{
+    margin-bottom: 3rem;
 }
 
 .search-header .landing-header{
@@ -1111,6 +1126,10 @@ a.button{
         padding: 2rem 2rem;
         width: 75%;
         background-color: teal;
+    }
+
+    .search-results{
+        margin-top: 2rem;
     }
     /*--------Walk Page----------*/
     .img-container{
