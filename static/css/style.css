@@ -1056,6 +1056,7 @@ a.button{
 
 /*----------------Media Queries--------------*/
 @media(min-width: 768px){
+    /*--------General/Base----------*/
     .footer{
         padding-top: 2rem;
     }
@@ -1073,10 +1074,7 @@ a.button{
         padding-right: 1rem;
     }
 
-    .img-container{
-        height: 29rem;
-    }
-
+    /*------- Index/Search Page-------*/
     .overlay-text{
         opacity: 100%;
     }
@@ -1108,6 +1106,10 @@ a.button{
         width: 75%;
         background-color: teal;
     }
+    /*--------Walk Page----------*/
+    .img-container{
+        height: 29rem;
+    }
 
     .title-box{
         padding: 2rem 3rem;
@@ -1126,6 +1128,8 @@ a.button{
         margin-bottom: 0;
     }
 
+    /*---------User Profile--------*/
+
     .left-scroll{
         left: -1%;
     }
@@ -1141,6 +1145,28 @@ a.button{
     .user-walks .overlay-text{
         height: 28%;
     }
+
+    /*-------------Contact Page----------*/
+    .contact-card{
+        left: 0%;
+        right: 0%;
+        top: 15%;
+    }
+
+    .faq-container{
+        max-width: 960px;
+        padding: 2rem 1rem;
+    }
+
+    .faq-container h3{
+        padding-left: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .report{
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+    }
 }
 
 @media(min-width: 992px){
@@ -1151,7 +1177,6 @@ a.button{
     .featured{
         padding: 2rem 18%;
     }
-
 
     .walk-header{
         max-width: 1140px;
@@ -1230,5 +1255,9 @@ a.button{
         opacity: 30%;
         top: 0%;
         transition: 0s;
+    }
+
+    .contact-img{
+        height: 50vh;
     }
 }
