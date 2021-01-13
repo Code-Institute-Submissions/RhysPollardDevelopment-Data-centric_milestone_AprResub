@@ -247,6 +247,34 @@ a.button{
     transition: 0.25s;
 }
 
+.button.cancel {
+    background: transparent;
+    border: 2px solid aliceblue;
+    width: 6rem;
+    font-weight: 500;
+}
+
+.button.cancel:hover{
+    background-color: aliceblue;
+    color: #343a40;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.button.confirm {
+    background: #ff4336;
+    border: 2px solid #ff4336;
+    width: 6rem;
+    font-weight: 500;
+}
+
+.button.confirm:hover{
+    background: #862018;
+    border: 2px solid #862018;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
 .heart-box{
   display:block;
   position:absolute;
@@ -960,7 +988,21 @@ a.button{
 .favourites{
     margin-bottom: 2rem;
     margin-top: 1rem;
-    position: relative;
+    position: relative;    
+}
+
+.modal.custom{
+    top: 10%;
+}
+
+.modal-body.custom{
+    color: aliceblue;
+    text-align: center;
+    background: #343a40;
+}
+
+.modal-title.custom{
+    padding: 1rem;
 }
 
 /*---------User-profile: Scroll------------*/

@@ -88,11 +88,24 @@ Args:
   recipe_delete_url: string. The URL endpoint to delete a given recipe.
 */
 
-function confirm_delete(recipe_delete_url){
-  var delete_confirmed = confirm("Delete this recipe?")
-  if (delete_confirmed){
-      window.location.href = recipe_delete_url;
-  }
+// function confirm_delete(recipe_delete_url){
+//   var delete_confirmed = confirm("Delete this recipe?")
+//   if (delete_confirmed){
+//       window.location.href = recipe_delete_url;
+//   }
+// }
+
+
+function confirm_delete(recipe_delete_url) {
+  $("#deleteConfirm").modal("show");
+  $("#confirm").click(function () {
+    window.location.href = recipe_delete_url;
+    console.log("deleted")
+  })
+  $("#cancel").click(function () {
+    $("#deleteConfirm").modal("hide");
+    console.log("cancelled")
+  })
 }
 
 
