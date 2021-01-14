@@ -432,7 +432,7 @@ a.button{
 
 .overlay{
     background-color: black;
-    opacity: 50%;
+    opacity: 40%;
     position: absolute;
     bottom: 0%;
     left: 0%;
@@ -514,7 +514,6 @@ a.button{
 .search-box input{
     border-radius: 2rem;
     margin-bottom: 0.5rem;
-    border: 1px black solid;
 }
 
 .search-box label{
@@ -1157,15 +1156,14 @@ a.button{
     }
 
     .search-header{
-        height: 32rem;
+        height: 30rem;
     }
 
     .search-box {
         margin: auto;
-        margin-top: 13rem;
+        margin-top: 10rem;
         padding: 2rem 2rem;
         width: 75%;
-        background-color: teal;
     }
 
     .search-results{
