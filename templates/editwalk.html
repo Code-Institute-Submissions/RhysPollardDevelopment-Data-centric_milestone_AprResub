@@ -3,13 +3,13 @@
 
 <form class="container needs-validation walk-form" method="POST"
     action="{{ url_for('edit_walk', route_id=walk._id) }}" novalidate>
-    {{ editform.csrf_token }}
+    {{ editForm.csrf_token }}
     <h2>Edit a Walk</h2>
     <div class="row">
-        {% for field, errors in editform.errors.items() %}
+        {% for field, errors in editForm.errors.items() %}
         <div class="alert alert-danger alert-dismissible fade show col-12"
             role="alert">
-            {{ editform[field].label }}: {{ ', '.join(errors) }}
+            {{ editForm[field].label }}: {{ ', '.join(errors) }}
             <button type="button" class="close" data-dismiss="alert"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -18,26 +18,26 @@
         {% endfor %}
         <!-- Title of walking route-->
         <div class="form-group col-12">
-            {{ editform.title.label }}
-            {{ editform.title }}
+            {{ editForm.title.label }}
+            {{ editForm.title }}
         </div>
         <!-- Select input for category_name of walk-->
         <div class="form-group col-12">
-            {{ editform.category_name.label }}
-            {{ editform.category_name }}
+            {{ editForm.category_name.label }}
+            {{ editForm.category_name }}
             <div class="valid-feedback">
                 Is this correct?
             </div>
         </div>
         <!-- Input for walk route description -->
         <div class="form-group col-12">
-            {{ editform.description.label }}
-            {{ editform.description }}
+            {{ editForm.description.label }}
+            {{ editForm.description }}
         </div>
         <!-- Image url saved to load picture-->
         <div class="form-group col-12">
-            {{ editform.imageUrl.label }}
-            {{ editform.imageUrl }}
+            {{ editForm.imageUrl.label }}
+            {{ editForm.imageUrl }}
             <div class="invalid-feedback">
                 Must begin with http or https, please paste/enter a valid URL
                 for your image.
@@ -45,46 +45,46 @@
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
-            {{ editform.difficulty.label }}
-            {{ editform.difficulty }}
+            {{ editForm.difficulty.label }}
+            {{ editForm.difficulty }}
             <div class="valid-feedback">
                 Is this correct?
             </div>
         </div>
         <!--Text input for walking time-->
         <div class="form-group col-sm-12 col-md-6">
-            {{ editform.time.label }}
-            {{ editform.time }}
+            {{ editForm.time.label }}
+            {{ editForm.time }}
         </div>
         <!-- Text Input for distance-->
         <div class="form-group col-sm-12 col-md-6">
-            {{ editform.distance.label }}
-            {{ editform.distance }}
+            {{ editForm.distance.label }}
+            {{ editForm.distance }}
         </div>
         <!-- Text Input for startpoint-->
         <div class="form-group col-sm-12 col-md-6">
-            {{ editform.startpoint.label }}
-            {{ editform.startpoint }}
+            {{ editForm.startpoint.label }}
+            {{ editForm.startpoint }}
         </div>
         <!-- Custom toggle switch found at
         https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp-->
         <!-- Dog Friendly checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ editform.dogs_allowed }}
-            {{ editform.dogs_allowed.label(class="custom-control-label") }}
+            {{ editForm.dogs_allowed }}
+            {{ editForm.dogs_allowed.label(class="custom-control-label") }}
         </div>
         <!-- Free parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ editform.free_parking }}
-            {{ editform.free_parking.label(class="custom-control-label") }}
+            {{ editForm.free_parking }}
+            {{ editForm.free_parking.label(class="custom-control-label") }}
         </div>
         <!--paid parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ editform.paid_parking }}
-            {{ editform.paid_parking.label(class="custom-control-label") }}
+            {{ editForm.paid_parking }}
+            {{ editForm.paid_parking.label(class="custom-control-label") }}
         </div>
         <h6 class="mx-auto">Please use the Enter key to seperate direction steps
             from
@@ -93,8 +93,8 @@
         <div class="form-group col-12">
             <!-- use of unicode for newline found at
             http://www.amp-what.com/unicode/search/newline -->
-            {{ editform.directions.label }}
-            {{ editform.directions }}
+            {{ editForm.directions.label }}
+            {{ editForm.directions }}
             <div class="invalid-feedback">
                 Directions must be between 100-1600 characters.
             </div>

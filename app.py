@@ -1,12 +1,9 @@
 import os
 import random
+from forms import RegistrationForm, LogInForm, WalkForm, ContactForm, SearchForm
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
-from flask_wtf import Form
 from flask_pymongo import PyMongo
-from wtforms import (
-    StringField, PasswordField, BooleanField, SelectField, TextAreaField)
-from wtforms.fields import html5
 from wtforms.validators import (
     InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional)
 from bson.objectid import ObjectId
@@ -22,156 +19,6 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
-
-
-class RegistrationForm(Form):
-    username = StringField(
-        # Use of render keywords for html data found at
-        # https://pythonpedia.com/en/knowledge-base/20440056/custom-attributes-for
-        # -flask-wtforms
-        "Username", validators=[InputRequired(), Length(max=20, min=4)],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "usernameLabel",
-            "minlength": "4",
-            "maxlength": "20",
-            "placeholder": "Enter username"
-        })
-    password = PasswordField(
-        "Password", validators=[InputRequired(), Length(min=10),
-        EqualTo("confirm_password", message="Passwords must match")],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "passwordLabel",
-            "minlength": "10",
-            "placeholder": "Password"
-        })
-    confirm_password = PasswordField("Repeat Password",
-        validators=[InputRequired()],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "confirmLabel",
-            "placeholder": "Confirm Password"
-        })
-    email = html5.EmailField("Email", validators=[InputRequired(),
-        Email(message="This field requires a valid email")],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "emailLabel",
-            "placeholder": "Email Address"
-        })
-    agree = BooleanField("I agree to the terms and conditions of this site.",
-        validators=[InputRequired()],
-        render_kw={"class":"form-check-input"})
-
-
-class LogInForm(Form):
-    login_username = StringField(
-        "Username", validators=[InputRequired()],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "loginUsernameLabel",
-            "placeholder": "Enter username",
-            "autocomplete": "off"
-        })
-    login_password = PasswordField(
-        "Password", validators=[InputRequired()],
-        render_kw={
-            "class": "form-control",
-            "aria-describedby": "loginPasswordLabel",
-            "placeholder": "Password"
-        })
-
-
-class Walkform(Form):
-    title = StringField("Walking Route Title", validators=[InputRequired(),
-        Length(min=5, max=40)],
-        render_kw={"class": "form-control",
-        "placeholder": "Pendennis point walking loop",
-        "minlength":"5", "maxlength":"40"})
-        
-    difficulty = SelectField("Difficulty", validators=[InputRequired()],
-        choices=[], render_kw={"class": "form-control"})
-
-    category_name = SelectField("Walk type", validators=[InputRequired()],
-        choices=[], render_kw={"class": "form-control"})
-
-    imageUrl = html5.URLField("Image Url/Address", validators=[InputRequired(),
-        Length(min=20, max=250), URL()],
-        render_kw={"class": "form-control",
-        "placeholder": "Please paste a copied web address/url for the walk's main image",
-        "minlength": "20", "maxlength": "250",
-        # regex simulated at https://www.regextester.com/20
-        "pattern" : "^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$"})
-
-    description = StringField("Description", validators=[InputRequired(),
-        Length(min=20, max=200)],
-        render_kw={"class": "form-control",
-        "placeholder": "Pendennis point walking loop",
-        "minlength": "20", "maxlength": "200"})
-        
-    time = StringField("Time", validators=[InputRequired(), Length(max=20)],
-        render_kw={"class": "form-control",
-        "placeholder": "1 hour 30 minutes", "maxlength": "20"})
-        
-    startpoint = StringField("Start Point", validators=[InputRequired(),
-        Length(min=5, max=40)],
-        render_kw={"class": "form-control",
-        "placeholder": "Pendennis Carpark",
-        "minlength": "5", "maxlength": "40"})
-        
-    distance = StringField("Distance", validators=[InputRequired(), Length(max=10)],
-        render_kw={"class": "form-control",
-        "placeholder": "3.5 miles",
-        "maxlength": "10"})
-        
-    dogs_allowed = BooleanField("Dog Friendly",
-        render_kw={"class": "custom-control-input"})
-        
-    free_parking = BooleanField("Free Parking",
-        render_kw={"class": "custom-control-input"})
-        
-    paid_parking = BooleanField("Paid Parking",
-        render_kw={"class": "custom-control-input"})
-
-    directions = TextAreaField("Enter your Directions", validators=[InputRequired(),
-        Length(min=100, max=1600)],
-        render_kw={"class": "form-control",
-        "placeholder": "Please enter your directions here.\rNext instruction on a new line without any spaces.\rAnd so on and so forth.",
-        "minlength": "100", "maxlength": "1600", "rows":"10"})
-
-
-class ContactForm(Form):
-    problem = SelectField("Report a Problem", validators=[InputRequired()],
-        choices=[("Other")], render_kw={"class": "form-control"})
-        
-    user_issue = TextAreaField("What issue has occurred:", validators=[InputRequired(),
-        Length(min=20, max=500)],
-        render_kw={"class": "form-control",
-        "placeholder":("Tell us what problem you're "
-                        "having and we will try to fix it or get back to you."),
-        "minlength": "20", "maxlength": "500", "rows": "7"})
-        
-
-class SearchForm(Form):
-    query = html5.SearchField("", render_kw={
-        "class": "form-contol",
-    "placeholder":"Search by location or keyword", "aria-label":"Search"})
-
-    difficulty = SelectField("Difficulty",
-    choices=[("Choose...")], render_kw={"class": "form-control"})
-
-    category_name = SelectField("Walk type", choices=[("Choose...")],
-    render_kw={"class": "form-control"})
-    
-    dogs_allowed = BooleanField("Dog Friendly",
-        render_kw={"class": "custom-control-input"})
-        
-    free_parking = BooleanField("Free Parking",
-        render_kw={"class": "custom-control-input"})
-        
-    paid_parking = BooleanField("Paid Parking",
-        render_kw={"class": "custom-control-input"})
 
 
 @app.route("/")
@@ -210,20 +57,20 @@ def add_walk():
     if session.get("user") is None:
         return redirect(url_for("login"))
 
-    addform = Walkform()
+    addForm = WalkForm()
 
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
-    addform.category_name.choices = [(category, category) for category in categories]
+    addForm.category_name.choices = [(category, category) for category in categories]
 
     difficulties = mongo.db.difficulty.find()
 
     # # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
-        addform.difficulty.choices.append(d["challenge"])
+        addForm.difficulty.choices.append(d["challenge"])
 
-    if addform.validate_on_submit():
+    if addForm.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
 
         free_parking = True if request.form.get("free_parking") else False
@@ -255,7 +102,7 @@ def add_walk():
             "user_profile", username=session["user"]))
 
     return render_template(
-        "addwalk.html", addform=addform, page_title=page_title)
+        "addwalk.html", addForm=addForm, page_title=page_title)
 
 
 @app.route("/edit_walk/<route_id>", methods={"GET","POST"})
@@ -268,7 +115,7 @@ def edit_walk(route_id):
     page_title = "Change A Walk"
 
     walk = mongo.db.routes.find_one({"_id": ObjectId(route_id)})
-    editform = Walkform(data=walk)
+    editForm = Walkform(data=walk)
 
      # If session "user" is not there, redirect to register.
     if session.get("user") is None:
@@ -285,14 +132,14 @@ def edit_walk(route_id):
     #https://stackoverflow.com/questions/42984453/wtforms-populate-form-with-
     # data-if-data-exists?noredirect=1&lq=1
     # https://www.w3schools.com/python/ref_string_join.asp
-    editform.directions.data = "".join(walk["directions"])
+    editForm.directions.data = "".join(walk["directions"])
     for d in difficulties:
-        editform.difficulty.choices.append(d["challenge"])
+        editForm.difficulty.choices.append(d["challenge"])
 
-    #editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
-    editform.category_name.choices = [(category, category) for category in categories]
+    #editForm.difficulty.choices = [(challenge, challenge) for challenge in challenges]
+    editForm.category_name.choices = [(category, category) for category in categories]
 
-    if editform.validate_on_submit():
+    if editForm.validate_on_submit():
 
         dogs_allowed = True if request.form.get("dogs_allowed") else False
 
@@ -325,7 +172,7 @@ def edit_walk(route_id):
             "user_profile", username=session["user"]))
 
     return render_template(
-        "editwalk.html", walk=walk, editform=editform, page_title=page_title)
+        "editwalk.html", walk=walk, editForm=editForm, page_title=page_title)
 
 
 @app.route("/delete_walk/<route_id>")
@@ -376,20 +223,20 @@ def contact():
 
     page_title = "How To Contact Us/ FAQs"
 
-    contactform = ContactForm()
+    contactForm = ContactForm()
     faqs = list(mongo.db.FAQs.find())
     for faq in faqs:
         for f in faq:
             if f == "report_problem":
-                contactform.problem.choices.append(faq[f])
+                contactForm.problem.choices.append(faq[f])
 
-    if contactform.validate_on_submit():
+    if contactForm.validate_on_submit():
         flash("Your message has been sent, thanks!")
         return redirect(url_for(
-            "contact", faqs=faqs, contactform=contactform, page_title=page_title))
+            "contact", faqs=faqs, contactForm=contactForm, page_title=page_title))
         
     return render_template(
-        "contactus.html", faqs=faqs, contactform=contactform, page_title=page_title)
+        "contactus.html", faqs=faqs, contactForm=contactForm, page_title=page_title)
  
 
 @app.route("/register", methods={"GET", "POST"})
@@ -405,14 +252,14 @@ def register():
     # If session cookie field "user" exists, then redirects to other page
     if session.get("user") is not None:
         return redirect(url_for("home"))
-    regform = RegistrationForm()
-    if regform.validate_on_submit():
+    regForm = RegistrationForm()
+    if regForm.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
             flash("Sorry, that username already exists")
-            return redirect(url_for("register", regform=regform))
+            return redirect(url_for("register", regForm=regForm))
 
         # New user is generated if a matching username is not found.
         new_user = {
@@ -427,23 +274,10 @@ def register():
         session["user"] = request.form.get("username").lower()
         return redirect(
             url_for(
-                "home", username=session["user"], regform=regform))
+                "home", username=session["user"], regForm=regForm))
 
 
-    return render_template("register.html", regform=regform, page_title=page_title)
-
-
-# def validate_user(func):
-#     """
-#     Checks for a user variable/field in the session, if it is not nothing
-#     then it will redirect the user as they must be logged in.
-#     """
-#     def check_user_session(*args, **kwargs):
-#         if session.get("user") is not None:
-#             print("Im inside the validate user method")
-#             return redirect(url_for("home"))
-#         return func(*args, **kwargs)
-#     return check_user_session
+    return render_template("register.html", regForm=regForm, page_title=page_title)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -463,9 +297,9 @@ def login():
     if session.get("user") is not None:
         return redirect(url_for("home"))
 
-    logform = LogInForm()
+    logForm = LogInForm()
 
-    if logform.validate_on_submit():
+    if logForm.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("login_username").lower()})
             
@@ -475,12 +309,12 @@ def login():
                 return redirect(url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
-                return redirect(url_for("login", logform=logform))
+                return redirect(url_for("login", logForm=logForm))
         else:
             flash("Incorrect Username and/or Password.")
-            return redirect(url_for("login", logform=logform))
+            return redirect(url_for("login", logForm=logForm))
 
-    return render_template("login.html", logform=logform, page_title=page_title)
+    return render_template("login.html", logForm=logForm, page_title=page_title)
 
 
 @app.route("/logout")
@@ -490,7 +324,6 @@ def logout():
     """
     session.pop("user")
     return redirect(url_for("login"))
-
 
 
 @app.route("/user_profile/<username>")
@@ -550,7 +383,7 @@ def search():
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
 
-    filterform = SearchForm()
+    filterForm = SearchForm()
 
     categories = mongo.db.categories.distinct("category_name")
 
@@ -560,10 +393,10 @@ def search():
 
     # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
-        filterform.difficulty.choices.append(d["challenge"])
+        filterForm.difficulty.choices.append(d["challenge"])
 
     for c in categories:
-        filterform.category_name.choices.append(c)
+        filterForm.category_name.choices.append(c)
    
     if request.method == "POST":
         post = True
@@ -582,29 +415,29 @@ def search():
         
         if query != "":
             filters["$text"] = {"$search": query}
-            filterform.query.data=query            
+            filterForm.query.data=query            
 
         # Checkboxes added this way so will only limit search for checked boxes,
         # won"t select for walks with unchecked boxes, only those with checked.
         if dogs_allowed:
             filters["dogs_allowed"] = True
-            filterform.dogs_allowed.data = filters["dogs_allowed"]
+            filterForm.dogs_allowed.data = filters["dogs_allowed"]
 
         if free_parking:
             filters["free_parking"] = True
-            filterform.free_parking.data = filters["free_parking"]
+            filterForm.free_parking.data = filters["free_parking"]
         
         if paid_parking:
             filters["paid_parking"] = True
-            filterform.paid_parking.data = filters["paid_parking"]
+            filterForm.paid_parking.data = filters["paid_parking"]
             
         if difficulty != "Choose...":
             filters["difficulty"] = difficulty
-            filterform.difficulty.data = filters["difficulty"]
+            filterForm.difficulty.data = filters["difficulty"]
 
         if category != "Choose...":
             filters["category_name"] = category
-            filterform.category_name.data = filters["category_name"]
+            filterForm.category_name.data = filters["category_name"]
             
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
@@ -612,13 +445,13 @@ def search():
         return render_template(
             "searchwalks.html",
             routes=routes,
-            filterform=filterform,
+            filterForm=filterForm,
             filters=filters,
             post=post,
             page_title=page_title)
 
     routes = list(mongo.db.routes.find())
-    return render_template("searchwalks.html", routes=routes, filterform=filterform, filters=filters, page_title=page_title)
+    return render_template("searchwalks.html", routes=routes, filterForm=filterForm, filters=filters, page_title=page_title)
 
 
 @app.route("/toggle_favourite", methods=["POST"])
@@ -629,12 +462,12 @@ def toggle_favourite():
     """
     # How to access data from ajax found at:
     # https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post
-    checkbox = request.form["checkbox"]
+    check_box = request.form["checkbox"]
 
     output = request.form["id"]
-    # pushes walk id to user favourite array if checkbox is true,
+    # pushes walk id to user favourite array if check_box is true,
     # removes if false.
-    if checkbox == "true":
+    if check_box == "true":
         mongo.db.users.update_one(
             {"username": session["user"]},
             { "$push": { "favourites": output }}
@@ -655,11 +488,6 @@ def toggle_favourite():
     favs = mongo.db.users.find_one({"username": session["user"]})
     print(favs)
     return "Favs"
-
-
-# @app.route("/walking_tips")
-# def walking_tips():
-#     return "Ok"
 
 
 @app.route("/terms_of_service")

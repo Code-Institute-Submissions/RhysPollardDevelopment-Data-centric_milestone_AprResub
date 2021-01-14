@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{{ filterform.csrf_token }}
+{{ filterForm.csrf_token }}
 <section class="container-fluid">
     <div class="row">
         <!-- Top image and search form-->
@@ -12,32 +12,32 @@
 <form class="container-fluid" method="POST" action="{{ url_for('search') }}">
     <div class="row search-box">
         <div class="col-12">
-            {{ filterform.query(class="form-control mr-sm-2") }}
+            {{ filterForm.query(class="form-control mr-sm-2") }}
         </div>
         <div class="form-group col-sm-12 col-md-6">
-            {{ filterform.category_name.label }}
-            {{ filterform.category_name }}
+            {{ filterForm.category_name.label }}
+            {{ filterForm.category_name }}
         </div>
         <div class="form-group col-sm-12 col-md-6">
-            {{ filterform.difficulty.label }}
-            {{ filterform.difficulty }}
+            {{ filterForm.difficulty.label }}
+            {{ filterForm.difficulty }}
         </div>
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ filterform.dogs_allowed }}
-            {{ filterform.dogs_allowed.label(class="custom-control-label") }}
+            {{ filterForm.dogs_allowed }}
+            {{ filterForm.dogs_allowed.label(class="custom-control-label") }}
         </div>
         <!-- Free parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ filterform.free_parking }}
-            {{ filterform.free_parking.label(class="custom-control-label") }}
+            {{ filterForm.free_parking }}
+            {{ filterForm.free_parking.label(class="custom-control-label") }}
         </div>
         <!--paid parking checkbox-->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
-            {{ filterform.paid_parking }}
-            {{ filterform.paid_parking.label(class="custom-control-label") }}
+            {{ filterForm.paid_parking }}
+            {{ filterForm.paid_parking.label(class="custom-control-label") }}
         </div>
         <button class="button search" type="submit">Search</button>
         <div class="col-12 down-arrow d-sm-block d-md-none">

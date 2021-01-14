@@ -19,18 +19,18 @@
                 <form method="POST" action="{{ url_for('register')}}"
                     class="needs-validation" novalidate>
                     <!-- Crsf token checks secret key to ensure is a legitimate webpage -->
-                    {{ regform.csrf_token }}
+                    {{ regForm.csrf_token }}
                     <div class="form-group">
                         <!-- uses WTForms to do backed validity, applies classes,etc in backend-->
-                        {{ regform.email.label(id='emailLabel') }}
-                        {{ regform.email }}
+                        {{ regForm.email.label(id='emailLabel') }}
+                        {{ regForm.email }}
                         <div class="invalid-feedback">
                             Please Enter a correct email.
                         </div>
                     </div>
                     <div class="form-group">
-                        {{ regform.username.label(id='usernameLabel') }}
-                        {{ regform.username }}
+                        {{ regForm.username.label(id='usernameLabel') }}
+                        {{ regForm.username }}
                         <div class="invalid-feedback">
                             Please choose a username.
                         </div>
@@ -39,20 +39,20 @@
                             login.</small>
                     </div>
                     <div class="form-group">
-                        {{ regform.password.label(id='passwordLabel') }}
-                        {{ regform.password }}
+                        {{ regForm.password.label(id='passwordLabel') }}
+                        {{ regForm.password }}
                     </div>
                     <!-- Custom javascript code compares this to the above password-->
                     <div class="form-group">
-                        {{ regform.confirm_password.label(id='confirmLabel') }}
-                        {{ regform.confirm_password }}
+                        {{ regForm.confirm_password.label(id='confirmLabel') }}
+                        {{ regForm.confirm_password }}
                         <div class="invalid-feedback">
                             <p>Passwords do not match!</p>
                         </div>
                     </div>
                     <div class="form-group form-check">
-                        {{ regform.agree }}
-                        {{ regform.agree.label }} <a
+                        {{ regForm.agree }}
+                        {{ regForm.agree.label }} <a
                             href="{{ url_for('terms_of_service') }}"
                             target="_blank">Terms Of
                             Service</a>

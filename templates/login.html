@@ -19,11 +19,11 @@
             </ul>
             <div>
                 <form method="POST" action="{{ url_for('login')}}" novalidate>
-                    {{ logform.csrf_token }}
+                    {{ logForm.csrf_token }}
                     <!-- Username label and input-->
                     <div class="form-group">
-                        {{ logform.login_username.label(id='logUsernameLabel') }}
-                        {{ logform.login_username }}
+                        {{ logForm.login_username.label(id='logUsernameLabel') }}
+                        {{ logForm.login_username }}
                         <small id="usernameHelp"
                             class="form-text text-muted">We'll
                             never share
@@ -31,8 +31,8 @@
                     </div>
                     <!-- Login password label and input-->
                     <div class="form-group">
-                        {{ logform.login_password.label(id='logPasswordLabel') }}
-                        {{ logform.login_password }}
+                        {{ logForm.login_password.label(id='logPasswordLabel') }}
+                        {{ logForm.login_password }}
                     </div>
                     <!-- Incorrect Login warning-->
                     {% with messages = get_flashed_messages() %}
