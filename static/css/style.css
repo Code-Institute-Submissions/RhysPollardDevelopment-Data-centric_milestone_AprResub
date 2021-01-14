@@ -1120,6 +1120,17 @@ a.button{
     margin-top: 0.25rem;
 }
 
+/*--------------404 page-------------------*/
+.wrong-page{
+    margin: auto;
+    text-align: center;
+}
+
+.wrong-page i{
+    font-size: 5rem;
+    padding: 1rem;
+}
+
 /*----------------Media Queries--------------*/
 @media(min-width: 768px){
     /*--------General/Base----------*/

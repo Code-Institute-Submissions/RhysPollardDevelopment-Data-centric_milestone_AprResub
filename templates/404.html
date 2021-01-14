@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="container wrong-page">
+    <div>
+        <h2>404: This page does not exist.</h2>
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>Seems you've gotten lost and ended up at a dead end.</p>
+        <p>Best to either return the way you came or let us get you back on
+            <a href="{{ url_for('home') }}">track</a>.
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

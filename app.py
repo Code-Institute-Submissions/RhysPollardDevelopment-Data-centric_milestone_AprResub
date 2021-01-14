@@ -333,6 +333,8 @@ def user_profile(username):
     """
     page_text = username +"'s Page"
     page_title = page_text.capitalize()
+
+    does_exist = mongo.db.users.find_one_or_404({"username":username})
  
     if session.get("user") is None:
         flash("Must be logged in to see other`s userpages.", "error")
@@ -479,6 +481,16 @@ def terms_of_service():
 @app.route("/privacy_policy")
 def privacy_policy():
     return render_template("privacypolicy.html")
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template("500.html"), 500
 
 
 if __name__ == "__main__":
