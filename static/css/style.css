@@ -845,8 +845,9 @@ a.button{
     word-wrap: break-word;
     background-color: teal;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 2px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    margin-bottom: 0.15rem;
 }
 
 .accordion-body{
@@ -1167,7 +1168,8 @@ a.button{
     }
 
     .search-results{
-        margin-top: 2rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
     }
     /*--------Walk Page----------*/
     .img-container{
