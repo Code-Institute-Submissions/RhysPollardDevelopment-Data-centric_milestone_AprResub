@@ -24,7 +24,8 @@
     <body>
         <!-- Navbar-->
         <nav class="navbar navbar-expand-lg custom-nav">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><i
+                    class="fas fa-map-signs"></i>Cornish Walks</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -49,7 +50,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link custom-link"
-                            href="{{ url_for('contact') }}">Contact Us</a>
+                            href="{{ url_for('contact') }}">Contact
+                            Us</a>
                     </li>
 
                     {% if session.user %}

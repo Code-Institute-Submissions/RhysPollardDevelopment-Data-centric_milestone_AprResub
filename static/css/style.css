@@ -1,9 +1,5 @@
 /*---------------Base----------*/
 /*--------------Navbar----------*/
-body{
-    /*background-color: rgb(255, 250, 244);*/
-}
-
 .main{
     min-height:75vh;
     display: grid;
@@ -15,6 +11,10 @@ body{
     background-color: #343a40;
     height: auto;
     /*position: fixed;*/
+}
+
+.navbar-brand i{
+    padding-right: 0.5rem;
 }
 
 .custom-nav a{
@@ -1337,7 +1337,7 @@ a.button{
     }
     .faq-container{
         max-width: 960px;
-        padding: 2rem 1rem;
+        padding: 4rem 1rem;
     }
 }
 
