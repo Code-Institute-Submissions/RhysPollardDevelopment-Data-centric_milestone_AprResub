@@ -41,7 +41,6 @@ def home():
         "index.html", routes=routes, page_title=page_title)
 
 
-
 @app.route("/add_walk",methods={"GET","POST"})
 def add_walk():
     """ 
@@ -357,7 +356,6 @@ def user_profile(username):
     fav_ids = mongo.db.users.find_one({"username": url_owner})
 
     favourites = list()
-    print(fav_ids)
     if fav_ids["favourites"]:
         for f in fav_ids["favourites"]:
             walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
@@ -472,21 +470,15 @@ def toggle_favourite():
             {"username": session["user"]},
             { "$push": { "favourites": output }}
         )
-        favs = mongo.db.users.find_one({"username": session["user"]})
-        print(favs)
         return "Added"
     else:
         mongo.db.users.update_one(
             {"username": session["user"]},
             {"$pull": { "favourites": output }}
         )
-        favs = mongo.db.users.find_one({"username": session["user"]})
-        print(favs)
         return "Removed"
 
-
     favs = mongo.db.users.find_one({"username": session["user"]})
-    print(favs)
     return "Favs"
 
 
