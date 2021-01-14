@@ -477,8 +477,7 @@ def toggle_favourite():
             {"$pull": { "favourites": output }}
         )
         return "Removed"
-
-    favs = mongo.db.users.find_one({"username": session["user"]})
+        
     return "Favs"
 
 
