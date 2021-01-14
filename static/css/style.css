@@ -10,7 +10,10 @@
     width: 100%;
     background-color: #343a40;
     height: auto;
-    /*position: fixed;*/
+}
+
+.navbar-brand{
+    margin-right: 0;
 }
 
 .navbar-brand img{
@@ -160,7 +163,11 @@ list-style: none;
     color: aliceblue;
 }
 /*---------Buttons------------*/
-.button{
+button:focus{
+    outline: none;
+}
+
+.button-custom{
     display: inline-block;
     font-weight: 400;
     color: #ffffff;
@@ -175,7 +182,7 @@ list-style: none;
     line-height: 1.5;
 }
 
-a.button{
+a.button-custom{
     color:aliceblue;
 }
 
@@ -247,28 +254,28 @@ a.button{
     transition: 0.25s;
 }
 
-.button.cancel {
+.button-custom.cancel {
     background: transparent;
     border: 2px solid aliceblue;
     width: 6rem;
     font-weight: 500;
 }
 
-.button.cancel:hover{
+.button-custom.cancel:hover{
     background-color: aliceblue;
     color: #343a40;
     text-decoration: none;
     transition: 0.25s;
 }
 
-.button.confirm {
+.button-custom.confirm {
     background: #ff4336;
     border: 2px solid #ff4336;
     width: 6rem;
     font-weight: 500;
 }
 
-.button.confirm:hover{
+.button-custom.confirm:hover{
     background: #862018;
     border: 2px solid #862018;
     text-decoration: none;
@@ -913,7 +920,7 @@ a.button{
     animation: none;
 }
 
-.button.accordion-link:focus{
+.button-custom.accordion-link:focus{
     outline: none;
 }
 

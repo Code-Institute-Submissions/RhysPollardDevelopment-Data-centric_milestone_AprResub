@@ -103,13 +103,14 @@
             <div class="user-input row">
                 <!-- Edit walk button-->
                 <a href="{{ url_for('edit_walk',route_id=route._id) }}"
-                    class="button clear col-sm-6">Edit Walk</a>
+                    class="button-custom clear col-sm-6">Edit Walk</a>
                 <!-- Delete button-->
                 <!-- onclick code provided by mentor, literal quotes 
                 inside argument to avoid jinja errors-->
                 <button
                     onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
-                    class="button delete col-sm-6" data-toggle="modal">Delete
+                    class="button-custom delete col-sm-6"
+                    data-toggle="modal">Delete
                     Walk</button>
             </div>
             {% endif %}
@@ -126,8 +127,9 @@
                 <h4 class="modal-title custom">
                     Delete this walk?
                 </h4>
-                <button class="button cancel" id="cancel"> Cancel </button>
-                <button class="button confirm" id="confirm">
+                <button class="button-custom cancel" id="cancel"> Cancel
+                </button>
+                <button class="button-custom confirm" id="confirm">
                     Confirm
                 </button>
             </div>
