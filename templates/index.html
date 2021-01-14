@@ -16,24 +16,6 @@
         </div>
     </div>
 </div>
-<!-- <section class="container">
-    <div class="row">
-        <div class="index-intro col-12">
-            <h2 class="text-center text-uppercase">The best walks
-                in Cornwall</h2>
-            <p>How can we find the best kept walks and secrets of the
-                county?</p>
-            <p>That's because our walks are created by the locals who enjoy
-                them the most and know them best,
-                like a local guide showing you around. </p>
-            <p> So come and take the back road, that unsuspecting pathway or
-                even a classic
-                well known walk which is really
-                just that good.
-            </p>
-        </div>
-    </div>
-</section> -->
 <section class="container">
     <div class="row website-info">
         <h2 class="col-12 text-center text-capitalize">How it works</h2>
@@ -77,7 +59,6 @@
         {% for route in routes %}
         <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
-                <h5 class="overlay-text">{{route.title}}</h5>
                 <div class="full-text">
                     <h5>{{route.title}}</h5>
                     <p>{{route.difficulty}}</p>

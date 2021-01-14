@@ -446,24 +446,15 @@ a.button{
     position: absolute;
     top: 6%;
     margin: 0 1rem;
-    left: 7%;
+    max-width: 90%;
+    word-break: break-word;
     z-index: 100;
-    max-height: 100%;
+    height: 100%;
     color: aliceblue;
 }
 
-.feature-walk:hover .overlay{
-    height: 100%;
-    transition: 0.5s ease;
-}
-.feature-walk:hover .overlay-text{
-    display: none;
-    transition: 0.5s ease;
-}
-
-.feature-walk:hover .full-text{
-    opacity: 100%;
-    transition: 1s ease;
+.full-text p{
+    font-weight: 500;
 }
 
 .website-info{
@@ -1078,9 +1069,7 @@ a.button{
 }
 
 .rectangle .full-text {
-    left: auto;
     width: inherit;
-    margin: 0 0 0 0.5rem;
 }
 
 .no-favourites {
@@ -1163,22 +1152,6 @@ a.button{
     }
 
     /*------- Index/Search Page-------*/
-    .overlay-text{
-        opacity: 100%;
-    }
-
-    .overlay{
-        height: 30%;
-    }
-
-    .full-text{
-        opacity: 0%;
-    }
-
-    .rectangle .full-text{
-        opacity: 100%;
-    }
-
     .search-header .landing-header{
         top: 14%;
     }
@@ -1228,14 +1201,6 @@ a.button{
 
     .right-scroll{
         right: -1%;
-    }
-
-    .user-walks .overlay{
-        height: 35%;
-    }
-
-    .user-walks .overlay-text{
-        height: 28%;
     }
 
     /*-------------Contact Page----------*/
