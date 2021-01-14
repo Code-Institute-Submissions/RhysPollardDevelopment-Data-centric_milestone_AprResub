@@ -69,7 +69,7 @@ class WalkForm(Form):
     title = StringField("Walking Route Title", validators=[InputRequired(),
         Length(min=5, max=40)],
         render_kw={"class": "form-control",
-        "placeholder": "Pendennis point walking loop",
+        "placeholder": "Enter your route title here",
         "minlength":"5", "maxlength":"40"})
         
     difficulty = SelectField("Difficulty", validators=[InputRequired()],
@@ -89,22 +89,23 @@ class WalkForm(Form):
     description = StringField("Description", validators=[InputRequired(),
         Length(min=20, max=200)],
         render_kw={"class": "form-control",
-        "placeholder": "Pendennis point walking loop",
+        "placeholder": "Enter a brief description of the walk and area",
         "minlength": "20", "maxlength": "200"})
         
     time = StringField("Time", validators=[InputRequired(), Length(max=20)],
         render_kw={"class": "form-control",
-        "placeholder": "1 hour 30 minutes", "maxlength": "20"})
+        "placeholder": "Enter time estimate", "maxlength": "20"})
         
     startpoint = StringField("Start Point", validators=[InputRequired(),
         Length(min=5, max=40)],
         render_kw={"class": "form-control",
-        "placeholder": "Pendennis Carpark",
+        "placeholder": "Starting landmark or address",
         "minlength": "5", "maxlength": "40"})
         
-    distance = StringField("Distance", validators=[InputRequired(), Length(max=10)],
+    distance = StringField("Distance", validators=[InputRequired(),
+     Length(max=10)],
         render_kw={"class": "form-control",
-        "placeholder": "3.5 miles",
+        "placeholder": "Enter miles or kilometres",
         "maxlength": "10"})
         
     dogs_allowed = BooleanField("Dog Friendly",
