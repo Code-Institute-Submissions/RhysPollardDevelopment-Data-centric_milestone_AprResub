@@ -112,6 +112,19 @@
                     class="button delete col-sm-6" data-toggle="modal">Delete
                     Walk</button>
             </div>
+            {% elif session['user'] == "admin" %}
+            <div class="user-input row">
+                <!-- Edit walk button-->
+                <a href="{{ url_for('edit_walk',route_id=route._id) }}"
+                    class="button clear col-sm-6">Edit Walk</a>
+                <!-- Delete button-->
+                <!-- onclick code provided by mentor, literal quotes 
+                                        inside argument to avoid jinja errors-->
+                <button
+                    onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
+                    class="button delete col-sm-6" data-toggle="modal">Delete
+                    Walk</button>
+            </div>
             {% endif %}
         </div>
         {% endfor %}
