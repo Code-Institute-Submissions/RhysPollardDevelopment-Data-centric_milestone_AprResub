@@ -1131,6 +1131,22 @@ a.button{
     font-weight: 500;
 }
 
+/*----Terms and Conditions/Privacy Policy------*/
+
+.legal-form{
+    margin: 3rem 0;
+}
+
+.legal-form h2{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.legal-form li{
+    padding-top: 1rem;
+}
+
+
 /*----------------Media Queries--------------*/
 @media(min-width: 768px){
     /*--------General/Base----------*/
