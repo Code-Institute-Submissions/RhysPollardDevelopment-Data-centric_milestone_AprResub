@@ -4,8 +4,8 @@
 <section class="container-fluid user-header">
     <div class="user-icon">
         <i class="fas fa-user" aria-hidden="true"></i>
-        <h6 class="username">{{username|capitalize}}</h6>
     </div>
+    <h6 class="username">{{username|capitalize}}</h6>
     <div class="row user-stats">
         <div class="col-6 divider">
             <p>Favourites</p>
@@ -77,8 +77,8 @@
 </div>
 <!-- User's routes diplay-->
 <section class="container user-walks">
-    <div class="row">
-        <h3 class="col-12">{{username|capitalize}}'s Walks</h3>
+    <h3>{{username|capitalize}}'s Walks</h3>
+    <div class="row walk-background justify-content-center">
         {% if routes == [] %}
         <div class="col-12 no-favourites">
             <h4>No walks added yet.</h4>

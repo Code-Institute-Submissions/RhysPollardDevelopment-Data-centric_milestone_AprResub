@@ -963,7 +963,7 @@ a.button{
     height: 5rem;
     filter: drop-shadow(2px 4px 6px black);
     position: relative;
-    top: 20%;
+    top: 3%;
     margin: auto;
     max-width: 500px;
     text-align: center;
@@ -1011,6 +1011,7 @@ a.button{
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    background-color: lightgray;
     width: 100vw;
     padding: 1rem;
     /* Use of scroll-snap and scroll-behavior found from mozilla
@@ -1089,8 +1090,9 @@ a.button{
 }
 
 .no-favourites {
-    margin: 3rem 0;
+    padding: 3rem 0;
     text-align: center;
+    background: lightgray;
 }
 
 .fav-walk.rectangle, .rectangle .overlay, .fav-walk img{
@@ -1112,6 +1114,10 @@ a.button{
     justify-content: center;
     text-align: center;
     left: 7.5%;
+}
+
+.walk-background{
+    background-color: lightgray;
 }
 
 .delete {
