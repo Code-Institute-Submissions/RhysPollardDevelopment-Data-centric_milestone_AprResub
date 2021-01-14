@@ -1116,7 +1116,7 @@ a.button{
     background: teal;
     color: aliceblue;
     max-height: 75vh;
-    padding-top: 20%;
+    padding-top: 10%;
     height: 100%;
 }
 
@@ -1337,7 +1337,7 @@ a.button{
     }
     .faq-container{
         max-width: 960px;
-        padding: 4rem 1rem;
+        padding: 3rem 1rem;
     }
 }
 
