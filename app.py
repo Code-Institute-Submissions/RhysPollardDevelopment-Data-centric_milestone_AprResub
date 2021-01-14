@@ -31,55 +31,55 @@ class RegistrationForm(Form):
         # -flask-wtforms
         "Username", validators=[InputRequired(), Length(max=20, min=4)],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'usernameLabel',
-            'minlength': '4',
-            'maxlength': '20',
-            'placeholder': 'Enter username'
+            "class": "form-control",
+            "aria-describedby": "usernameLabel",
+            "minlength": "4",
+            "maxlength": "20",
+            "placeholder": "Enter username"
         })
     password = PasswordField(
         "Password", validators=[InputRequired(), Length(min=10),
-        EqualTo('confirm_password', message="Passwords must match")],
+        EqualTo("confirm_password", message="Passwords must match")],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'passwordLabel',
-            'minlength': '10',
-            'placeholder': 'Password'
+            "class": "form-control",
+            "aria-describedby": "passwordLabel",
+            "minlength": "10",
+            "placeholder": "Password"
         })
     confirm_password = PasswordField("Repeat Password",
         validators=[InputRequired()],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'confirmLabel',
-            'placeholder': 'Confirm Password'
+            "class": "form-control",
+            "aria-describedby": "confirmLabel",
+            "placeholder": "Confirm Password"
         })
     email = html5.EmailField("Email", validators=[InputRequired(),
-        Email(message='This field requires a valid email')],
+        Email(message="This field requires a valid email")],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'emailLabel',
-            'placeholder': 'Email Address'
+            "class": "form-control",
+            "aria-describedby": "emailLabel",
+            "placeholder": "Email Address"
         })
     agree = BooleanField("I agree to the terms and conditions of this site.",
         validators=[InputRequired()],
-        render_kw={'class':'form-check-input'})
+        render_kw={"class":"form-check-input"})
 
 
 class LogInForm(Form):
     login_username = StringField(
         "Username", validators=[InputRequired()],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'loginUsernameLabel',
-            'placeholder': 'Enter username',
-            'autocomplete': 'off'
+            "class": "form-control",
+            "aria-describedby": "loginUsernameLabel",
+            "placeholder": "Enter username",
+            "autocomplete": "off"
         })
     login_password = PasswordField(
         "Password", validators=[InputRequired()],
         render_kw={
-            'class': 'form-control',
-            'aria-describedby': 'loginPasswordLabel',
-            'placeholder': 'Password'
+            "class": "form-control",
+            "aria-describedby": "loginPasswordLabel",
+            "placeholder": "Password"
         })
 
 
@@ -126,13 +126,13 @@ class Walkform(Form):
         "maxlength": "10"})
         
     dogs_allowed = BooleanField("Dog Friendly",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
         
     free_parking = BooleanField("Free Parking",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
         
     paid_parking = BooleanField("Paid Parking",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
 
     directions = TextAreaField("Enter your Directions", validators=[InputRequired(),
         Length(min=100, max=1600)],
@@ -165,13 +165,13 @@ class SearchForm(Form):
     render_kw={"class": "form-control"})
     
     dogs_allowed = BooleanField("Dog Friendly",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
         
     free_parking = BooleanField("Free Parking",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
         
     paid_parking = BooleanField("Paid Parking",
-        render_kw={'class': 'custom-control-input'})
+        render_kw={"class": "custom-control-input"})
 
 
 @app.route("/")
@@ -184,7 +184,7 @@ def home():
 
     #sets html head tag, idea inspired by 
     # https://github.com/faithy80/dcd-project/blob/master/run.py
-    page_title = 'Welcome To Cornwall'
+    page_title = "Welcome To Cornwall"
 
     # random choices found at w3schools.com
     # https://www.w3schools.com/python/ref_random_sample.asp
@@ -204,10 +204,10 @@ def add_walk():
     returns null and is less useful for other logic.
     """
 
-    page_title = 'Add A Walk'
+    page_title = "Add A Walk"
 
-    # If session 'user' is not there, redirect to register
-    if session.get('user') is None:
+    # If session "user" is not there, redirect to register
+    if session.get("user") is None:
         return redirect(url_for("login"))
 
     addform = Walkform()
@@ -221,7 +221,7 @@ def add_walk():
 
     # # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
-        addform.difficulty.choices.append(d['challenge'])
+        addform.difficulty.choices.append(d["challenge"])
 
     if addform.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
@@ -265,16 +265,16 @@ def edit_walk(route_id):
     Same logic as add_walk but loads walk data using the Object Id.
     """
 
-    page_title = 'Change A Walk'
+    page_title = "Change A Walk"
 
-    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+    walk = mongo.db.routes.find_one({"_id": ObjectId(route_id)})
     editform = Walkform(data=walk)
 
-     # If session 'user' is not there, redirect to register.
-    if session.get('user') is None:
+     # If session "user" is not there, redirect to register.
+    if session.get("user") is None:
         return redirect(url_for("login"))
-    # If user tries to edit a walk which doesn't belong to them, redirected.
-    elif session.get('user') != walk['user']:
+    # If user tries to edit a walk which doesn"t belong to them, redirected.
+    elif session.get("user") != walk["user"]:
         return redirect(url_for("home"))
 
     categories = mongo.db.categories.distinct("category_name")
@@ -287,7 +287,7 @@ def edit_walk(route_id):
     # https://www.w3schools.com/python/ref_string_join.asp
     editform.directions.data = "".join(walk["directions"])
     for d in difficulties:
-        editform.difficulty.choices.append(d['challenge'])
+        editform.difficulty.choices.append(d["challenge"])
 
     #editform.difficulty.choices = [(challenge, challenge) for challenge in challenges]
     editform.category_name.choices = [(category, category) for category in categories]
@@ -319,7 +319,7 @@ def edit_walk(route_id):
                 {"username": session["user"]})["username"]
         }
 
-        mongo.db.routes.update({'_id': ObjectId(route_id)}, updated)
+        mongo.db.routes.update({"_id": ObjectId(route_id)}, updated)
         flash("Walk edited successfully!")
         return redirect(url_for(
             "user_profile", username=session["user"]))
@@ -333,7 +333,7 @@ def delete_walk(route_id):
     """ 
     Removes the data for a walk from database collection.
     """
-    mongo.db.routes.remove({'_id': ObjectId(route_id)})
+    mongo.db.routes.remove({"_id": ObjectId(route_id)})
     return redirect(url_for(
         "user_profile", username=session["user"]))
 
@@ -345,13 +345,13 @@ def show_walk(route_id):
     Restricts user favouriting their own walk.
     """
 
-    walk = mongo.db.routes.find_one({'_id': ObjectId(route_id)})
+    walk = mongo.db.routes.find_one({"_id": ObjectId(route_id)})
 
-    page_title = walk['title']
+    page_title = walk["title"]
 
-    if session.get('user') is not None:
+    if session.get("user") is not None:
         user = mongo.db.users.find_one(
-            {"username": session['user']})
+            {"username": session["user"]})
 
         # Checks each id in favourite field array and checks if matches route_id
         favourited = False
@@ -374,13 +374,13 @@ def contact():
     problems to report using form.
     """
 
-    page_title = 'How To Contact Us/ FAQs'
+    page_title = "How To Contact Us/ FAQs"
 
     contactform = ContactForm()
     faqs = list(mongo.db.FAQs.find())
     for faq in faqs:
         for f in faq:
-            if f == 'report_problem':
+            if f == "report_problem":
                 contactform.problem.choices.append(faq[f])
 
     if contactform.validate_on_submit():
@@ -402,8 +402,8 @@ def register():
 
     page_title = "Register Today"
 
-    # If session cookie field 'user' exists, then redirects to other page
-    if session.get('user') is not None:
+    # If session cookie field "user" exists, then redirects to other page
+    if session.get("user") is not None:
         return redirect(url_for("home"))
     regform = RegistrationForm()
     if regform.validate_on_submit():
@@ -423,7 +423,7 @@ def register():
         }
         mongo.db.users.insert_one(new_user)
 
-        # put the new user into 'session' cookie
+        # put the new user into "session" cookie
         session["user"] = request.form.get("username").lower()
         return redirect(
             url_for(
@@ -439,7 +439,7 @@ def register():
 #     then it will redirect the user as they must be logged in.
 #     """
 #     def check_user_session(*args, **kwargs):
-#         if session.get('user') is not None:
+#         if session.get("user") is not None:
 #             print("Im inside the validate user method")
 #             return redirect(url_for("home"))
 #         return func(*args, **kwargs)
@@ -460,7 +460,7 @@ def login():
     #Code suggestion for identifying cookies found at stack overflow
     #https://stackoverflow.com/questions/28925602/how-can-i-detect-whether
     # -a-variable-exists-in-flask-session/39204060
-    if session.get('user') is not None:
+    if session.get("user") is not None:
         return redirect(url_for("home"))
 
     logform = LogInForm()
@@ -505,13 +505,13 @@ def user_profile(username):
 
     # Idea for splitting url and index found on stack overflow:
     # https://stackoverflow.com/questions/7253803/how-to-get-everything-after-last-slash-in-a-url/7253830
-    url_owner = current_url.rsplit('/', 1)[-1]
+    url_owner = current_url.rsplit("/", 1)[-1]
 
     page_text = url_owner +"'s Page"
     page_title = page_text.capitalize()
  
-    if session.get('user') is None:
-        flash('Must be logged in to see other`s userpages.', 'error')
+    if session.get("user") is None:
+        flash("Must be logged in to see other`s userpages.", "error")
         return redirect(url_for("register"))
 
     username = username
@@ -560,7 +560,7 @@ def search():
 
     # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
-        filterform.difficulty.choices.append(d['challenge'])
+        filterform.difficulty.choices.append(d["challenge"])
 
     for c in categories:
         filterform.category_name.choices.append(c)
@@ -585,7 +585,7 @@ def search():
             filterform.query.data=query            
 
         # Checkboxes added this way so will only limit search for checked boxes,
-        # won't select for walks with unchecked boxes, only those with checked.
+        # won"t select for walks with unchecked boxes, only those with checked.
         if dogs_allowed:
             filters["dogs_allowed"] = True
             filterform.dogs_allowed.data = filters["dogs_allowed"]
@@ -608,7 +608,7 @@ def search():
             
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
-            flash("Nothing matched your search, try changing your search word or filter.", 'error')
+            flash("Nothing matched your search, try changing your search word or filter.", "error")
         return render_template(
             "searchwalks.html",
             routes=routes,
@@ -637,7 +637,7 @@ def toggle_favourite():
     if checkbox == "true":
         mongo.db.users.update_one(
             {"username": session["user"]},
-            { '$push': { "favourites": output }}
+            { "$push": { "favourites": output }}
         )
         favs = mongo.db.users.find_one({"username": session["user"]})
         print(favs)
@@ -645,7 +645,7 @@ def toggle_favourite():
     else:
         mongo.db.users.update_one(
             {"username": session["user"]},
-            {'$pull': { "favourites": output }}
+            {"$pull": { "favourites": output }}
         )
         favs = mongo.db.users.find_one({"username": session["user"]})
         print(favs)
