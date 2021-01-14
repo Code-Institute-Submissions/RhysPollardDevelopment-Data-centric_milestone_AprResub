@@ -75,14 +75,12 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
 }
 
 .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
 }
 
 .change .bar2 {opacity: 0;}
 
 .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
 }
 
@@ -270,16 +268,27 @@ a.button{
 
 .button.confirm {
     background: #ff4336;
-    border: 2px solid #ff4336;
+    border: 2px solid #d33a2f;
     width: 6rem;
     font-weight: 500;
 }
 
 .button.confirm:hover{
     background: #862018;
-    border: 2px solid #862018;
+    border: 2px solid #6b0c05;
     text-decoration: none;
     transition: 0.25s;
+}
+
+.delete {
+    background: rgb(255, 68, 68);
+    border: 2px solid rgb(197, 37, 37);
+    margin-top: 0.25rem;
+}
+
+.delete:hover{
+    background: rgb(181, 0, 0);
+    border: 2px solid rgb(115, 0, 0);
 }
 
 .heart-box{
@@ -458,7 +467,7 @@ a.button{
     top: 6%;
     margin: 0 1rem;
     max-width: 90%;
-    word-break: break-word;
+    word-break: normal;
     z-index: 100;
     color: aliceblue;
 }
@@ -615,7 +624,7 @@ a.button{
     margin-right: 1rem;
     margin-bottom: 2rem;
     border-bottom: 2px dashed lightslategrey;
-    word-break: break-word;
+    word-break: normal;
 }
 
 .directions li:last-child{
@@ -847,9 +856,7 @@ a.button{
 
 .accordion-card{
     position: relative;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
@@ -1108,17 +1115,6 @@ a.button{
     background-color: lightgray;
 }
 
-.delete {
-    background: rgb(255, 68, 68);
-    border: 2px solid rgb(255, 68, 68);
-    margin-top: 0.25rem;
-}
-
-.delete:hover{
-    background: rgb(181, 0, 0);
-    border: 2px solid rgb(115, 0, 0);
-}
-
 /*--------------404 page-------------------*/
 .wrong-page {
     margin: auto;
@@ -1281,11 +1277,6 @@ a.button{
 
     .submit{
         width: 10rem;
-    }
-
-    .scrolling-wrapper {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
     }
 
     /*Hide scroll Bar for chrome, safari and Opera
