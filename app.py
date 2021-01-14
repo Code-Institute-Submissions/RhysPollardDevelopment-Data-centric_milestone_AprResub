@@ -113,8 +113,8 @@ def edit_walk(route_id):
 
     page_title = "Change A Walk"
 
-    walk = mongo.db.routes.find_one({"_id": ObjectId(route_id)})
-    editForm = Walkform(data=walk)
+    walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
+    editForm = WalkForm(data=walk)
 
      # If session "user" is not there, redirect to register.
     if session.get("user") is None:
@@ -191,7 +191,7 @@ def show_walk(route_id):
     Restricts user favouriting their own walk.
     """
 
-    walk = mongo.db.routes.find_one({"_id": ObjectId(route_id)})
+    walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
 
     page_title = walk["title"]
 
@@ -331,29 +331,19 @@ def user_profile(username):
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
-
-    #request.url found https://developer.mozilla.org/en-US/docs/Web/API/Request/url
-    current_url = request.url
-
-    # Idea for splitting url and index found on stack overflow:
-    # https://stackoverflow.com/questions/7253803/how-to-get-everything-after-last-slash-in-a-url/7253830
-    url_owner = current_url.rsplit("/", 1)[-1]
-
-    page_text = url_owner +"'s Page"
+    page_text = username +"'s Page"
     page_title = page_text.capitalize()
  
     if session.get("user") is None:
         flash("Must be logged in to see other`s userpages.", "error")
         return redirect(url_for("register"))
-
-    username = username
         
-    routes = list(mongo.db.routes.find({"user": url_owner}))
+    routes = list(mongo.db.routes.find({"user": username}))
 
     # Finds the details of the user document for the page owner.
     # Then checks each option in their favourite field and adds the route 
     # to a list of routes which can be loaded.
-    fav_ids = mongo.db.users.find_one({"username": url_owner})
+    fav_ids = mongo.db.users.find_one({"username": username})
 
     favourites = list()
     if fav_ids["favourites"]:
@@ -477,7 +467,7 @@ def toggle_favourite():
             {"$pull": { "favourites": output }}
         )
         return "Removed"
-        
+
     return "Favs"
 
 
