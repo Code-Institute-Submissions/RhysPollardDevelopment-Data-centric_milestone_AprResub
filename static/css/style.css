@@ -167,7 +167,7 @@ button:focus{
     outline: none;
 }
 
-.button-custom{
+.button{
     display: inline-block;
     font-weight: 400;
     color: #ffffff;
@@ -182,7 +182,7 @@ button:focus{
     line-height: 1.5;
 }
 
-a.button-custom{
+a.button{
     color:aliceblue;
 }
 
@@ -254,28 +254,28 @@ a.button-custom{
     transition: 0.25s;
 }
 
-.button-custom.cancel {
+.button.cancel {
     background: transparent;
     border: 2px solid aliceblue;
     width: 6rem;
     font-weight: 500;
 }
 
-.button-custom.cancel:hover{
+.button.cancel:hover{
     background-color: aliceblue;
     color: #343a40;
     text-decoration: none;
     transition: 0.25s;
 }
 
-.button-custom.confirm {
+.button.confirm {
     background: #ff4336;
     border: 2px solid #ff4336;
     width: 6rem;
     font-weight: 500;
 }
 
-.button-custom.confirm:hover{
+.button.confirm:hover{
     background: #862018;
     border: 2px solid #862018;
     text-decoration: none;
@@ -407,6 +407,10 @@ a.button-custom{
 .feature-walk{
     margin: 1rem 0;
     filter: drop-shadow(2px 4px 6px black);
+}
+
+.feature-walk:hover .overlay{
+    opacity: 0.2;
 }
 
 .square {
@@ -920,7 +924,7 @@ a.button-custom{
     animation: none;
 }
 
-.button-custom.accordion-link:focus{
+.button.accordion-link:focus{
     outline: none;
 }
 
@@ -1003,6 +1007,7 @@ a.button-custom{
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
     background-color: lightgray;
     width: 100vw;
     padding: 1rem;
@@ -1022,13 +1027,7 @@ a.button-custom{
     padding-right: 1rem;
 }
 
-.left-scroll i {
-    color: aliceblue;
-    font-size: 2rem;
-    margin-left: -0.5rem;
-}
-
-.left-scroll{
+.left-scroll, .right-scroll{
     background: #000000bf;
     height: 3rem;
     width: 3rem;
@@ -1037,24 +1036,24 @@ a.button-custom{
     border: none;
     position: absolute;
     top: 50%;
+    z-index: 101;
+}
+
+.left-scroll{
     left: 1%;
 }
 
 .right-scroll{
-    background: #000000bf;
-    height: 3rem;
-    padding: 0 1.5rem;
-    width: 3rem;
-    border-radius: 50%;
-    border: none;
-    position: absolute;
-    top: 50%;
     right: 1%;
 }
-.right-scroll i {
+.right-scroll i, .left-scroll i {
     color: aliceblue;
     font-size: 2rem;
     margin-left: -0.4rem;
+}
+
+.left-scroll i {
+    margin-left: -0.5rem;
 }
 
 .rectangle {
