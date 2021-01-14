@@ -1121,14 +1121,25 @@ a.button{
 }
 
 /*--------------404 page-------------------*/
-.wrong-page{
+.wrong-page {
     margin: auto;
     text-align: center;
+    background: teal;
+    color: aliceblue;
+    max-height: 75vh;
+    padding-top: 20%;
+    height: 100%;
 }
 
 .wrong-page i{
     font-size: 5rem;
     padding: 1rem;
+}
+
+.wrong-page a{
+    color: aliceblue;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
 /*----------------Media Queries--------------*/
