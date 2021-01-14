@@ -475,12 +475,14 @@ def toggle_favourite():
 
 @app.route("/terms_of_service")
 def terms_of_service():
-    return render_template("termsofservice.html")
+    page_title = "Terms and Conditions"
+    return render_template("termsofservice.html", page_title=page_title)
 
 
 @app.route("/privacy_policy")
 def privacy_policy():
-    return render_template("privacypolicy.html")
+    page_title = "Privacy Policy"
+    return render_template("privacypolicy.html", page_title=page_title)
 
 
 @app.errorhandler(404)
