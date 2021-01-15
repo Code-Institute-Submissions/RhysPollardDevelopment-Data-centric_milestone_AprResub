@@ -497,6 +497,11 @@ def internal_server_error(error):
     return render_template("500.html", page_title=page_title), 500
 
 
+@app.route("/testing")
+def testing():
+    return render_template("testing.html")
+
+
 if __name__ == "__main__":
     """
     If the domain name matches __main__ then will load environmental vars.
