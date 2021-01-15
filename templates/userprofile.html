@@ -99,7 +99,8 @@
             </a>
             <!-- Only shows the view and edit buttons if the current 
             user is the same as the page owner-->
-            {% if session['user'] == route.user.lower() %}
+            {% if (session['user'] == route.user.lower() or session['user'] ==
+            "admin") %}
             <div class="user-input row">
                 <!-- Edit walk button-->
                 <a href="{{ url_for('edit_walk',route_id=route._id) }}"
@@ -107,22 +108,9 @@
                 <!-- Delete button-->
                 <!-- onclick code provided by mentor, literal quotes 
                 inside argument to avoid jinja errors-->
-                <button
-                    onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
-                    class="button delete col-sm-6" data-toggle="modal">Delete
-                    Walk</button>
-            </div>
-            {% elif session['user'] == "admin" %}
-            <div class="user-input row">
-                <!-- Edit walk button-->
-                <a href="{{ url_for('edit_walk',route_id=route._id) }}"
-                    class="button clear col-sm-6">Edit Walk</a>
-                <!-- Delete button-->
-                <!-- onclick code provided by mentor, literal quotes 
-                                        inside argument to avoid jinja errors-->
-                <button
-                    onclick="confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`)"
-                    class="button delete col-sm-6" data-toggle="modal">Delete
+                <button class="button delete col-sm-6" data-toggle="modal"
+                    data-info="{{url_for('delete_walk',route_id=route._id)}}">Delete
+
                     Walk</button>
             </div>
             {% endif %}
