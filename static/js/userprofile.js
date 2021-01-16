@@ -1,11 +1,7 @@
 $(document).ready(function () {
   setScrollState();
 
-  $(".button.delete").on('click', function () {
-    confirm_delete($(this).attr('data-info'))
-  })
- //confirm_delete( $('#M,YBUTTON').attr('data-info'))
- // $(".button.delete").on("click", confirm_delete(`{{url_for('delete_walk',route_id=route._id)}}`));
+  bindEvents();
 });
 
 function setScrollState() {
@@ -33,14 +29,18 @@ function setScrollState() {
   }
 }
 
+function bindEvents() {
+  $(".button.delete").on('click', function () {
+    confirm_delete($(this).attr('data-info'))
+  })
+};
+
 function confirm_delete(recipe_delete_url) {
   $("#deleteConfirm").modal("show");
   $("#confirm").on("click", function () {
     window.location.href = recipe_delete_url;
-    console.log("deleted")
   })
   $("#cancel").on("click", function () {
     $("#deleteConfirm").modal("hide");
-    console.log("cancelled")
   })
 }

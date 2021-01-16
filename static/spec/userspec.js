@@ -1,6 +1,6 @@
 describe("User Profile tests", () => {
     let form;
-    var originalTimeout;
+    const hrefInfo = "/delete_walk/5fd8ca1b500712aacd3b2fa3";
     beforeEach(() => {
         form = $(`        
         <div class="row">
@@ -18,11 +18,11 @@ describe("User Profile tests", () => {
             <a href="{{ url_for('edit_walk',route_id=route._id) }}"
                 class="button clear col-sm-6">Edit Walk</a>
             <button class="button delete col-sm-6" data-toggle="modal"
-                data-info="/delete_walk/5fd8ca1b500712aacd3b2fa3">
+                data-info="${hrefInfo}" id="openModal">
                 Delete Walk
             </button>
         </div>        
-        <div class="modal custom fade" tabindex="-1" role="dialog" id="deleteConfirm"
+        <div class="modal custom" tabindex="-1" role="dialog" id="deleteConfirm"
             aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -40,15 +40,11 @@ describe("User Profile tests", () => {
             </div>
         </div>`)
         $(document.body).append(form);
-
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
 
     afterEach(() => {
         form.remove();
         form = null;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
 
     it("should hide buttons and center when scrollwidth and width match", () => {
@@ -102,20 +98,33 @@ describe("User Profile tests", () => {
 
     it("should open a modal on clicking the delete walk", () => {
         const confirmModal = document.getElementById("deleteConfirm");
-        const cancel = document.getElementById("cancel");
         confirm_delete();
-        var POLL_TIME = 20;
-        var endTime = new Date().getTime() + 5000;
-
-        var checkCondition = function() {
-            if (new Date().getTime() <= endTime && confirmModal.classList.contains("show")) {
-                setTimeout(checkCondition, POLL_TIME);
-            } else {
-                expect(confirmModal).toContain("show");
-                cancel.click();
-            }
-        };
-        checkCondition();
-
+        expect(confirmModal.classList).toContain("show");
+        // hide the modal
+        $(confirmModal).modal("hide");
     })
+
+    it("should call confirm delete with url when clicked", () => {
+        const confirmSpy = spyOn(window, "confirm_delete")
+        const confirmModal = document.getElementById("deleteConfirm");
+        const openModal = document.getElementById("openModal");
+        bindEvents();
+        openModal.click();
+        expect(confirmSpy).toHaveBeenCalledWith(hrefInfo)
+        $(confirmModal).modal("hide");
+        confirmSpy.and.callThrough();
+    })
+
+    it("should close the modal when cancel is clicked", () => {
+        const cancel = document.getElementById("cancel");
+        const confirmModal = document.getElementById("deleteConfirm");
+        const openModal = document.getElementById("openModal");
+        bindEvents();
+        confirm_delete();
+        cancel.click();
+        expect(openModal.classList).not.toContain("show");
+    })
+
+
+
 })
