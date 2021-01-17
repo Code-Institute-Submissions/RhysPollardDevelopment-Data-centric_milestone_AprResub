@@ -47,6 +47,8 @@
     </div>
 
 </form>
+<!-- If post checks if truthy to add id so that search.js can scroll to 
+this sections, otherwise it cannot scroll.-->
 <section class="container search-results">
     <div class="row" {% if post %}id="results" {% endif %}>
         {% with messages = get_flashed_messages(category_filter =["error"]) %}
@@ -76,4 +78,8 @@
         {% endfor %}
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/search.js"></script>
 {% endblock %}

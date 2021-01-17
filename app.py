@@ -389,6 +389,8 @@ def search():
         filterForm.category_name.choices.append(c)
    
     if request.method == "POST":
+        # Post true adds id to results section HTML, this allows javascript
+        # to scroll to the div.
         post = True
 
         query = request.form.get("query")
