@@ -12,7 +12,7 @@ describe("Search Page tests", () => {
         form = null;
     });
 
-    it("should hide buttons and center when scrollwidth and width match", () => {
+    it("should call scrollIntoView when results id is present", () => {
         const results = document.getElementById("results");
         const scrollSpy = spyOn(results, "scrollIntoView");
         scrollResults();

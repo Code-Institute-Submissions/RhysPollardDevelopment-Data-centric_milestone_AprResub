@@ -125,6 +125,6 @@ describe("User Profile tests", () => {
         expect(openModal.classList).not.toContain("show");
     })
 
-
-
+    /*Could not test the window.location.href for delete button, cannot
+    spy on window.location or edit values. */
 })
