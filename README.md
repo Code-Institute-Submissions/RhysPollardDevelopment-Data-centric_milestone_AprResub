@@ -201,6 +201,11 @@ TBA
 ### Acknowledgements
 Special thanks to my mentor Brian Macharia for his help and advice in development this project.
 Libraries for google fonts, bootstrap, jQuery and font-awesome were used throughout my project.
+
+Inspiration and techniques for pagination found from three main sources:
+* [Pretty Printed Tutorial](https://www.youtube.com/watch?v=Lnt6JqtzM7I&feature=emb_logo)
+* [faithy80's milestone project](https://github.com/faithy80/dcd-project/blob/master/run.py)
+* [The top comment by mangoed on this reddit post](https://www.reddit.com/r/flask/comments/fxtfzm/is_there_a_way_to_add_pagination_to_my_webapp/)
                             
 ### Disclaimer
 This project has been made for purely academic purposes.

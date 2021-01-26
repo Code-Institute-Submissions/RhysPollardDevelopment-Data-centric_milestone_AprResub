@@ -1,6 +1,7 @@
 import os
 import random
 import math
+import ast
 from forms import RegistrationForm, LogInForm, WalkForm, ContactForm, SearchForm
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
@@ -372,6 +373,9 @@ def search():
 
     page_size = 3
 
+    # https://stackoverflow.com/questions/12455484/
+    # checking-for-the-existence-of-a-key-in-request-args-in-flask
+    # checks if page_num was in request arguments and updates current page.
     if "page_num" in request.args:
         current_page = int(request.args["page_num"])
     else:
@@ -441,41 +445,134 @@ def search():
             
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
-            flash("Nothing matched your search, try changing your search word or filter.", "error")
+            flash(
+                "Nothing matched your search, try changing your search word or filter.",
+                 "error")
+
+        # Calculates max pages and then selects walks on current page number.
+        walks = len(routes)
+
+        max_pages = math.ceil(walks/page_size)
+
+        # skip() and limit() found
+        # https://www.codementor.io/@arpitbhayani/
+        # fast-and-efficient-pagination-in-mongodb-9095flbqr
+        routes = list(
+            mongo.db.routes.find(
+                filters).skip((current_page - 1) * page_size).limit(page_size))
         
+        prev_page = url_for(
+            "search", filters=filters,
+             page_num=current_page-1) if current_page >1 else None
+        next_page = url_for(
+            "search", filters=filters,
+             page_num=current_page + 1) if current_page < max_pages else None
+
+        print(filters)
+        print("filtered")
+
         return render_template(
             "searchwalks.html",
             routes=routes,
             filterForm=filterForm,
             filters=filters,
             post=post,
-            page_title=page_title)
+            page_title=page_title,
+            current_page=current_page,
+            max_pages=max_pages,
+            prev_page=prev_page,
+            next_page=next_page)
 
-    walks = len(list(mongo.db.routes.find()))
+    # Checks for mention of filters in request.args when changing page, else
+    # the POST condition will not be met and results will not be filtered on 
+    # page change.
+    if "filters" in request.args:
 
-    max_pages = math.ceil(walks/page_size)
+        # uses t0_dict() to change arguments from MultiDict to string.
+        # https://stackoverflow.com/questions/19680103/
+        # flask-convert-request-args-to-dict
+        args = request.args.to_dict()
 
-    print(max_pages)
+        # converts string to dictionary which is required type.
+        # https://stackoverflow.com/questions/988228/
+        # convert-a-string-representation-of-a-dictionary-to-a-dictionary
+        filters = ast.literal_eval(args["filters"])
 
-    routes = list(mongo.db.routes.find().skip((current_page - 1) * page_size).limit(page_size))
-    
-    prev_page = url_for("search", filters=filters, page_num=current_page-1) if current_page >1 else None
-    next_page = url_for("search", filters=filters, page_num=current_page + 1) if current_page < max_pages else None
-    
-    print(prev_page)
-    print(next_page)
+        # Added so page scrolls to results on each new page.
+        post = True
 
+        # Checks all keys found in filters and if one matches updates HTML data
+        # with the submitted information.
+        if "difficulty" in filters.keys():
+            filterForm.difficulty.data = filters["difficulty"]
+        if "dogs_allowed" in filters.keys():
+            filterForm.dogs_allowed.data = filters["dogs_allowed"]
+        if "free_parking" in filters.keys():
+            filterForm.free_parking.data = filters["free_parking"]
+        if "paid_parking" in filters.keys():
+            filterForm.paid_parking.data = filters["paid_parking"]
+        if "category_name" in filters.keys():
+            filterForm.category_name.data = filters["category_name"]
+        if "$text" in filters.keys():
+            filterForm.query.data = filters["$text"]["$search"]
 
-    return render_template(
-        "searchwalks.html",
-        routes=routes,
-        filterForm=filterForm,
-        filters=filters,
-        page_title=page_title,
-        current_page=current_page,
-        max_pages=max_pages,
-        prev_page=prev_page,
-        next_page=next_page)
+        routes = list(mongo.db.routes.find(filters))
+        if routes == []:
+            flash("Nothing matched your search, try changing your search word or filter.", "error")
+
+        walks = len(routes)
+        # Calculates max pages and then selects walks on current page number.
+        max_pages = math.ceil(walks/page_size)
+
+        routes = list(
+            mongo.db.routes.find(filters).skip((
+                current_page - 1) * page_size).limit(page_size))
+        
+        prev_page = url_for(
+            "search", filters=filters,
+            page_num=current_page-1) if current_page >1 else None
+        next_page = url_for(
+            "search", filters=filters,
+            page_num=current_page + 1) if current_page < max_pages else None
+
+        return render_template(
+            "searchwalks.html",
+            routes=routes,
+            filterForm=filterForm,
+            filters=filters,
+            post=post,
+            page_title=page_title,
+            current_page=current_page,
+            max_pages=max_pages,
+            prev_page=prev_page,
+            next_page=next_page)
+    else:
+        walks = len(list(mongo.db.routes.find()))
+
+        max_pages = math.ceil(walks/page_size)
+
+        routes = list(
+            mongo.db.routes.find().skip((
+                current_page - 1) * page_size).limit(page_size))
+        
+        prev_page = url_for(
+            "search", filters=filters,
+             page_num=current_page-1) if current_page >1 else None
+        next_page = url_for(
+            "search", filters=filters,
+             page_num=current_page + 1) if current_page < max_pages else None
+
+        print("normal")
+        
+        return render_template(
+            "searchwalks.html",
+            routes=routes,
+            filterForm=filterForm,
+            page_title=page_title,
+            current_page=current_page,
+            max_pages=max_pages,
+            prev_page=prev_page,
+            next_page=next_page)
 
 
 @app.route("/toggle_favourite", methods=["POST"])
@@ -485,7 +582,8 @@ def toggle_favourite():
     a favourites array or removes it from the array if checkbox is unchecked.
     """
     # How to access data from ajax found at:
-    # https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post
+    # https://stackoverflow.com/questions/37631388/
+    # how-to-get-data-in-flask-from-ajax-post
     check_box = request.form["checkbox"]
 
     output = request.form["id"]
