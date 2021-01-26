@@ -78,6 +78,12 @@ this sections, otherwise it cannot scroll.-->
         {% endfor %}
     </div>
 </section>
+<section>
+    <a href="{{prev_page}}"
+        class="button {% if prev_page==None %} disabled {% endif %}">Prev</a>
+    <a href="{{next_page}}"
+        class="button {% if next_page==None %} disabled {% endif %}">Next</a>
+</section>
 {% endblock %}
 
 {% block scripts %}

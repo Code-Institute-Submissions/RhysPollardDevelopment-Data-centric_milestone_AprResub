@@ -1,5 +1,6 @@
 import os
 import random
+import math
 from forms import RegistrationForm, LogInForm, WalkForm, ContactForm, SearchForm
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
@@ -369,6 +370,13 @@ def search():
 
     page_title = "Discover Somewhere New"
 
+    page_size = 3
+
+    if "page_num" in request.args:
+        current_page = int(request.args["page_num"])
+    else:
+        current_page = 1
+
     # Suggestion of adding to dictionary found on stack overflow
     # https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary
     filters = {}
@@ -434,6 +442,7 @@ def search():
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
             flash("Nothing matched your search, try changing your search word or filter.", "error")
+        
         return render_template(
             "searchwalks.html",
             routes=routes,
@@ -442,8 +451,31 @@ def search():
             post=post,
             page_title=page_title)
 
-    routes = list(mongo.db.routes.find())
-    return render_template("searchwalks.html", routes=routes, filterForm=filterForm, filters=filters, page_title=page_title)
+    walks = len(list(mongo.db.routes.find()))
+
+    max_pages = math.ceil(walks/page_size)
+
+    print(max_pages)
+
+    routes = list(mongo.db.routes.find().skip((current_page - 1) * page_size).limit(page_size))
+    
+    prev_page = url_for("search", filters=filters, page_num=current_page-1) if current_page >1 else None
+    next_page = url_for("search", filters=filters, page_num=current_page + 1) if current_page < max_pages else None
+    
+    print(prev_page)
+    print(next_page)
+
+
+    return render_template(
+        "searchwalks.html",
+        routes=routes,
+        filterForm=filterForm,
+        filters=filters,
+        page_title=page_title,
+        current_page=current_page,
+        max_pages=max_pages,
+        prev_page=prev_page,
+        next_page=next_page)
 
 
 @app.route("/toggle_favourite", methods=["POST"])
