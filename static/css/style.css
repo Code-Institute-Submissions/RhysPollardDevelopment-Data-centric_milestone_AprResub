@@ -222,6 +222,11 @@ a.button{
     transition: 0.25s;
 }
 
+.pagination-wrapper{
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
 .slider-padding{
     display: flex;
     justify-content: center;

@@ -78,12 +78,22 @@ this sections, otherwise it cannot scroll.-->
         {% endfor %}
     </div>
 </section>
-<section>
-    <a href="{{prev_page}}"
-        class="button {% if prev_page==None %} disabled {% endif %}">Prev</a>
-    <a href="{{next_page}}"
-        class="button {% if next_page==None %} disabled {% endif %}">Next</a>
-</section>
+<nav aria-label="pagination-nav" class="pagination-wrapper">
+    <ul class="pagination">
+        <li class="page-item {% if prev_page==None %}disabled{% endif %}">
+            <a class="page-link" href="{{prev_page}}" tabindex="-1">Previous</a>
+        </li>
+        {% for page in range(1, max_pages+1) %}
+        <li class="page-item {% if current_page==page %}active{% endif %}">
+            <a class="page-link"
+                href="{{ url_for('search', page_num=page)}}">{{page}}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item {% if next_page==None %}disabled{% endif %}">
+            <a class="page-link" href="{{next_page}}">Next</a>
+        </li>
+    </ul>
+</nav>
 {% endblock %}
 
 {% block scripts %}
