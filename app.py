@@ -232,6 +232,11 @@ def contact():
                 contactForm.problem.choices.append(faq[f])
 
     if contactForm.validate_on_submit():
+        message = {
+            "Issue": request.form.get("problem"),
+            "Message": request.form.get("user_issue")
+        }
+        mongo.db.messages.insert_one(message)
         flash("Your message has been sent, thanks!")
         return redirect(url_for(
             "contact", faqs=faqs, contactForm=contactForm, page_title=page_title))
@@ -371,7 +376,7 @@ def search():
 
     page_title = "Discover Somewhere New"
 
-    page_size = 2
+    page_size = 18
 
     # https://stackoverflow.com/questions/12455484/
     # checking-for-the-existence-of-a-key-in-request-args-in-flask
