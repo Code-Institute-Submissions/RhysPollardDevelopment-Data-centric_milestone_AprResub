@@ -227,6 +227,17 @@ a.button{
     margin-bottom: 2rem;
 }
 
+.custom .page-link{
+    color: #005656;
+    border-color: teal;
+    margin: 1px;
+}
+
+.custom .page-item.active .page-link{
+    background-color: teal;
+    border-color: #005656;
+}
+
 .slider-padding{
     display: flex;
     justify-content: center;
@@ -289,6 +300,7 @@ a.button{
     background: rgb(255, 68, 68);
     border: 2px solid rgb(197, 37, 37);
     margin-top: 0.25rem;
+    margin-left: 0.1rem;
 }
 
 .delete:hover{
@@ -1331,7 +1343,7 @@ a.button{
         transition: 0.25s;
     }
     .fav-walk:hover .rectangle .overlay {
-        opacity: 30%;
+        opacity: 10%;
         top: 0%;
         transition: 0s;
     }

@@ -371,7 +371,7 @@ def search():
 
     page_title = "Discover Somewhere New"
 
-    page_size = 3
+    page_size = 6
 
     # https://stackoverflow.com/questions/12455484/
     # checking-for-the-existence-of-a-key-in-request-args-in-flask
@@ -392,6 +392,7 @@ def search():
     difficulties = mongo.db.difficulty.find()
 
     post = False
+    get = False
 
     # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
@@ -499,7 +500,7 @@ def search():
         filters = ast.literal_eval(args["filters"])
 
         # Added so page scrolls to results on each new page.
-        post = True
+        get = True
 
         # Checks all keys found in filters and if one matches updates HTML data
         # with the submitted information.
@@ -540,7 +541,7 @@ def search():
             routes=routes,
             filterForm=filterForm,
             filters=filters,
-            post=post,
+            get=get,
             page_title=page_title,
             current_page=current_page,
             max_pages=max_pages,
