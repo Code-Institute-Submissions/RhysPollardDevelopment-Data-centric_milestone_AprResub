@@ -117,7 +117,8 @@ TBA
 ⦁	TBA
 
 ### Features to Implement:
-⦁	TBA
+⦁	Responsive Pagination: As there are not many walks currently uploaded to the website it was not required to make the pagination more expansive than it already is. However, if this
+were to become a larger database of walking routes, pagination which is responsive to not stretch smaller screens would be required.
 
 ---
 ## Technologies

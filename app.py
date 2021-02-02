@@ -371,7 +371,7 @@ def search():
 
     page_title = "Discover Somewhere New"
 
-    page_size = 6
+    page_size = 2
 
     # https://stackoverflow.com/questions/12455484/
     # checking-for-the-existence-of-a-key-in-request-args-in-flask
@@ -497,7 +497,8 @@ def search():
         # converts string to dictionary which is required type.
         # https://stackoverflow.com/questions/988228/
         # convert-a-string-representation-of-a-dictionary-to-a-dictionary
-        filters = ast.literal_eval(args["filters"])
+        if args["filters"]:
+            filters = ast.literal_eval(args["filters"])
 
         # Added so page scrolls to results on each new page.
         get = True
