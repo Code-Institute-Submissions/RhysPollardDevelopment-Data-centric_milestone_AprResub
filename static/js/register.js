@@ -19,6 +19,8 @@ Idea for validate password found at https://codepen.io/diegoleme/pen/surIK
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/
 setCustomValidity */
 function validatePassword() {
+    let password = document.getElementById("password");
+    let confirm_password = document.getElementById("confirm_password");
     if (password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Passwords do not match!");
     }

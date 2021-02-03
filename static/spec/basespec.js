@@ -6,20 +6,19 @@ describe("Base Navbar tests", () => {
                 <div class="bar1"></div>
                 <div class="bar2"></div>
                 <div class="bar3"></div>
-            </div>`)
+            </div>`);
         $(document.body).append(form);
-        setupToggle()
-    })
+        setupToggle();
+    });
 
     afterEach(() => {
         form.remove();
-        form=null;
-    })
+        form = null;
+    });
 
     it("add the change class on button click", () => {
         const toggledIcon = document.getElementById("toggler-icon");
         toggledIcon.click();
         expect(toggledIcon.classList).toContain("change");
-    })
-    
-})
+    });    
+});

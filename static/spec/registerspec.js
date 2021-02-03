@@ -20,15 +20,15 @@ describe("Register Page tests", () => {
                 <div class="invalid-feedback">
                     <p>Passwords do not match!</p>
                 </div>
-            </div>`)
+            </div>`);
         $(document.body).append(form);
-        setupToggle()
-    })
+        setupToggle();
+    });
 
     afterEach(() => {
         form.remove();
-        form=null;
-    })
+        form = null;
+    });
 
     it("should validate password match on keyup", () => {
         addPasswordEvents();
@@ -38,9 +38,9 @@ describe("Register Page tests", () => {
         console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
         confirmPassword[0].value = "a";
-        password[0].dispatchEvent(new KeyboardEvent('keyup',{'key':'a'}));
+        password[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("");
-    })
+    });
 
     it("should validate password does not match on keyup", () => {
         addPasswordEvents();
@@ -49,9 +49,9 @@ describe("Register Page tests", () => {
         confirmPassword[0].setCustomValidity("Test");
         console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
-        password[0].dispatchEvent(new KeyboardEvent('keyup',{'key':'a'}));
+        password[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("Passwords do not match!");
-    })
+    });
     
     it("should validate confirm_password match on keyup", () => {
         addPasswordEvents();
@@ -61,19 +61,18 @@ describe("Register Page tests", () => {
         console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
         confirmPassword[0].value = "a";
-        confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup',{'key':'a'}));
+        confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("");
-    })
+    });
     
-    it("should validate confirm_password does not match on keyup", () => { 
+    it("should validate confirm_password does not match on keyup", () => {
         addPasswordEvents();
-        const password = $("#password");
         const confirmPassword = $("#confirm_password");
         confirmPassword[0].setCustomValidity("Test");
         console.log(confirmPassword[0].validationMessage);
         confirmPassword[0].value = "a";
-        confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup',{'key':'a'}));
+        confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("Passwords do not match!");
-    })
+    });
     
-})
+});

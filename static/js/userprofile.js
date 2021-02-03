@@ -17,30 +17,30 @@ function setScrollState() {
     if (scrollArea.clientWidth === scrollArea.scrollWidth) {
       leftButton.style.visibility = "hidden";
       rightButton.style.visibility = "hidden";
-      scrollArea.classList.add("justify-content-center")
+      scrollArea.classList.add("justify-content-center");
     } else {
       leftButton.onclick = function () {
         scrollArea.scrollLeft -= 320;
-      }
+      };
       rightButton.onclick = function () {
         scrollArea.scrollLeft += 320;
-      }
+      };
     }
   }
 }
 
 function bindEvents() {
   $(".button.delete").on('click', function () {
-    confirm_delete($(this).attr('data-info'))
-  })
-};
+    confirm_delete($(this).attr('data-info'));
+  });
+}
 
 function confirm_delete(recipe_delete_url) {
   $("#deleteConfirm").modal("show");
   $("#confirm").on("click", function () {
     window.location.href = recipe_delete_url;
-  })
+  });
   $("#cancel").on("click", function () {
     $("#deleteConfirm").modal("hide");
-  })
+  });
 }

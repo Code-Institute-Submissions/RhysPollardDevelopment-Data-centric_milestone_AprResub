@@ -3,7 +3,7 @@ describe("Search Page tests", () => {
     beforeEach(() => {
         form = $(`
         <div class="row" id="results">
-        </div>`)
+        </div>`);
         $(document.body).append(form);
     });
 
@@ -16,6 +16,6 @@ describe("Search Page tests", () => {
         const results = document.getElementById("results");
         const scrollSpy = spyOn(results, "scrollIntoView");
         scrollResults();
-        expect(scrollSpy).toHaveBeenCalledWith({ behavior: "smooth"});
+        expect(scrollSpy).toHaveBeenCalledWith({ behavior: "smooth" });
     });
-})
+});

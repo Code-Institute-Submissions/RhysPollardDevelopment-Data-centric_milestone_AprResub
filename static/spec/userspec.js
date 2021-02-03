@@ -38,7 +38,7 @@ describe("User Profile tests", () => {
                     </div>
                 </div>
             </div>
-        </div>`)
+        </div>`);
         $(document.body).append(form);
     });
 
@@ -51,11 +51,11 @@ describe("User Profile tests", () => {
         const leftScroll = document.getElementById("leftScroll");
         const rightScroll = document.getElementById("rightScroll");
         const scrollArea = document.getElementById("favScroll");
-        setScrollState()
+        setScrollState();
         expect(leftScroll.style.visibility).toEqual('hidden');
         expect(rightScroll.style.visibility).toEqual('hidden');
         expect(scrollArea.classList).toContain('justify-content-center');
-    })
+    });
     
     it("should not hide buttons or center when scrollwidth > clientwidth", () => {
         const leftScroll = document.getElementById("leftScroll");
@@ -63,11 +63,11 @@ describe("User Profile tests", () => {
         const scrollArea = document.getElementById("favScroll");
         const sizedDiv = document.getElementById("sized-div");
         sizedDiv.style.minWidth = "5000px";
-        setScrollState()
+        setScrollState();
         expect(leftScroll.style.visibility).not.toEqual('hidden');
         expect(rightScroll.style.visibility).not.toEqual('hidden');
         expect(scrollArea.classList).not.toContain('justify-content-center');
-    })
+    });
 
     it("should change the value of scrollLeft when leftButton clicked", () => {
         const leftScroll = document.getElementById("leftScroll");
@@ -76,12 +76,12 @@ describe("User Profile tests", () => {
         sizedDiv.style.minWidth = "5000px";
         scrollArea.style.overflow = "scroll";
         scrollArea.style.maxWidth = "800px";
-        scrollArea.style.scrollBehavior="auto"
+        scrollArea.style.scrollBehavior = "auto";
         scrollArea.scrollLeft = 500;
         setScrollState();
         leftScroll.click();
         expect(scrollArea.scrollLeft).toEqual(180);
-    })
+    });
 
     it("should change the value of scrollLeft when rightButton clicked", () => {
         const rightScroll = document.getElementById("rightScroll");
@@ -90,11 +90,11 @@ describe("User Profile tests", () => {
         sizedDiv.style.minWidth = "5000px";
         scrollArea.style.overflow = "scroll";
         scrollArea.style.maxWidth = "800px";
-        scrollArea.style.scrollBehavior="auto"
+        scrollArea.style.scrollBehavior = "auto";
         setScrollState();
         rightScroll.click();
         expect(scrollArea.scrollLeft).toEqual(320);
-    })
+    });
 
     it("should open a modal on clicking the delete walk", () => {
         const confirmModal = document.getElementById("deleteConfirm");
@@ -102,29 +102,28 @@ describe("User Profile tests", () => {
         expect(confirmModal.classList).toContain("show");
         // hide the modal
         $(confirmModal).modal("hide");
-    })
+    });
 
     it("should call confirm delete with url when clicked", () => {
-        const confirmSpy = spyOn(window, "confirm_delete")
+        const confirmSpy = spyOn(window, "confirm_delete");
         const confirmModal = document.getElementById("deleteConfirm");
         const openModal = document.getElementById("openModal");
         bindEvents();
         openModal.click();
-        expect(confirmSpy).toHaveBeenCalledWith(hrefInfo)
+        expect(confirmSpy).toHaveBeenCalledWith(hrefInfo);
         $(confirmModal).modal("hide");
         confirmSpy.and.callThrough();
-    })
+    });
 
     it("should close the modal when cancel is clicked", () => {
         const cancel = document.getElementById("cancel");
-        const confirmModal = document.getElementById("deleteConfirm");
         const openModal = document.getElementById("openModal");
         bindEvents();
         confirm_delete();
         cancel.click();
         expect(openModal.classList).not.toContain("show");
-    })
+    });
 
     /*Could not test the window.location.href for delete button, cannot
     spy on window.location or edit values. */
-})
+});

@@ -2,7 +2,8 @@ import os
 import random
 import math
 import ast
-from forms import RegistrationForm, LogInForm, WalkForm, ContactForm, SearchForm
+from forms import (
+    RegistrationForm, LogInForm, WalkForm, ContactForm, SearchForm)
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_pymongo import PyMongo
@@ -30,8 +31,7 @@ def home():
     Routes user to the home/index page.
     Loads a list of all routes and randomly selects 3 of them to feature.
     """
-
-    #sets html head tag, idea inspired by 
+    # Sets html head tag, idea inspired by
     # https://github.com/faithy80/dcd-project/blob/master/run.py
     page_title = "Welcome To Cornwall"
 
@@ -43,9 +43,9 @@ def home():
         "index.html", routes=routes, page_title=page_title)
 
 
-@app.route("/add_walk",methods={"GET","POST"})
+@app.route("/add_walk", methods={"GET", "POST"})
 def add_walk():
-    """ 
+    """
     User form to add data for a new walk to the Mongo Database.
     If method is POST, selects all named inputs on form and retrieves info,
     checkboxes are assigned as booleans rather than "On"/"Off" as unchecked
@@ -63,7 +63,8 @@ def add_walk():
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
-    addForm.category_name.choices = [(category, category) for category in categories]
+    addForm.category_name.choices = [
+        (category, category) for category in categories]
 
     difficulties = mongo.db.difficulty.find()
 
@@ -79,20 +80,20 @@ def add_walk():
         paid_parking = True if request.form.get("paid_parking") else False
 
         walk = {
-            "category_name" : request.form.get("category_name"),
-            "title" : request.form.get("title"),
+            "category_name": request.form.get("category_name"),
+            "title": request.form.get("title"),
             "description": request.form.get("description"),
             # Split function references from w3 schools at
             # https://www.w3schools.com/python/ref_string_split.asp
-            # Split used instead of splitline to maintain carriage return 
+            # Split used instead of splitline to maintain carriage return
             "directions": request.form.get("directions").split("\n"),
             "imageUrl": request.form.get("imageUrl"),
-            "difficulty" : request.form.get("difficulty"),
-            "time" : request.form.get("time"),
-            "distance" : request.form.get("distance"),
-            "startpoint" : request.form.get("startpoint"),
-            "dogs_allowed" : dogs_allowed,
-            "free_parking" : free_parking,
+            "difficulty": request.form.get("difficulty"),
+            "time": request.form.get("time"),
+            "distance": request.form.get("distance"),
+            "startpoint": request.form.get("startpoint"),
+            "dogs_allowed": dogs_allowed,
+            "free_parking": free_parking,
             "paid_parking": paid_parking,
             "user": mongo.db.users.find_one(
                 {"username": session["user"]})["username"]
@@ -106,9 +107,9 @@ def add_walk():
         "addwalk.html", addForm=addForm, page_title=page_title)
 
 
-@app.route("/edit_walk/<route_id>", methods={"GET","POST"})
+@app.route("/edit_walk/<route_id>", methods={"GET", "POST"})
 def edit_walk(route_id):
-    """ 
+    """
     Reloads the add_walk def and pre-fills information to update database.
     Same logic as add_walk but loads walk data using the Object Id.
     """
@@ -118,7 +119,7 @@ def edit_walk(route_id):
     walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
     editForm = WalkForm(data=walk)
 
-     # If session "user" is not there, redirect to register.
+    # If session "user" is not there, redirect to register.
     if session.get("user") is None:
         return redirect(url_for("login"))
     # If user tries to edit a walk which doesn"t belong to them, redirected.
@@ -128,17 +129,17 @@ def edit_walk(route_id):
     categories = mongo.db.categories.distinct("category_name")
     difficulties = mongo.db.difficulty.find()
 
-    # cycles through each entry for challenge field to maintain ordering.
+    # Cycles through each entry for challenge field to maintain ordering.
     # .data as means to update form code/join found at respectively:
-    #https://stackoverflow.com/questions/42984453/wtforms-populate-form-with-
+    # https://stackoverflow.com/questions/42984453/wtforms-populate-form-with-
     # data-if-data-exists?noredirect=1&lq=1
     # https://www.w3schools.com/python/ref_string_join.asp
     editForm.directions.data = "".join(walk["directions"])
     for d in difficulties:
         editForm.difficulty.choices.append(d["challenge"])
 
-    #editForm.difficulty.choices = [(challenge, challenge) for challenge in challenges]
-    editForm.category_name.choices = [(category, category) for category in categories]
+    editForm.category_name.choices = [
+        (category, category) for category in categories]
 
     if editForm.validate_on_submit():
 
@@ -149,19 +150,19 @@ def edit_walk(route_id):
         paid_parking = True if request.form.get("paid_parking") else False
 
         updated = {
-            "category_name" : request.form.get("category_name"),
-            "title" : request.form.get("title"),
+            "category_name": request.form.get("category_name"),
+            "title": request.form.get("title"),
             "description": request.form.get("description"),
             # Splitlines function references from w3 schools at
             # https://www.w3schools.com/python/ref_string_split.asp
             "directions": request.form.get("directions").split("\n"),
             "imageUrl": request.form.get("imageUrl"),
-            "difficulty" : request.form.get("difficulty"),
-            "time" : request.form.get("time"),
-            "distance" : request.form.get("distance"),
-            "startpoint" : request.form.get("startpoint"),
-            "dogs_allowed" : dogs_allowed,
-            "free_parking" : free_parking,
+            "difficulty": request.form.get("difficulty"),
+            "time": request.form.get("time"),
+            "distance": request.form.get("distance"),
+            "startpoint": request.form.get("startpoint"),
+            "dogs_allowed": dogs_allowed,
+            "free_parking": free_parking,
             "paid_parking": paid_parking,
             "user": mongo.db.users.find_one(
                 {"username": session["user"]})["username"]
@@ -178,7 +179,7 @@ def edit_walk(route_id):
 
 @app.route("/delete_walk/<route_id>")
 def delete_walk(route_id):
-    """ 
+    """
     Removes the data for a walk from database collection.
     """
     mongo.db.routes.remove({"_id": ObjectId(route_id)})
@@ -201,17 +202,20 @@ def show_walk(route_id):
         user = mongo.db.users.find_one(
             {"username": session["user"]})
 
-        # Checks each id in favourite field array and checks if matches route_id
+        # Checks each id in favourite field array and checks if
+        # matches route_id
         favourited = False
         for favourite in user["favourites"]:
             if favourite == route_id:
                 favourited = True
 
         return render_template(
-        "walkpage.html", walk=walk, user=user, favourited=favourited, page_title=page_title)
+            "walkpage.html", walk=walk, user=user,
+            favourited=favourited, page_title=page_title)
     else:
         return render_template(
-            "walkpage.html", user=False, favourited=False, walk=walk, page_title=page_title)
+            "walkpage.html", user=False,
+            favourited=False, walk=walk, page_title=page_title)
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -239,17 +243,19 @@ def contact():
         mongo.db.messages.insert_one(message)
         flash("Your message has been sent, thanks!")
         return redirect(url_for(
-            "contact", faqs=faqs, contactForm=contactForm, page_title=page_title))
-        
+            "contact", faqs=faqs, contactForm=contactForm,
+            page_title=page_title))
+
     return render_template(
-        "contactus.html", faqs=faqs, contactForm=contactForm, page_title=page_title)
- 
+        "contactus.html", faqs=faqs, contactForm=contactForm,
+        page_title=page_title)
+
 
 @app.route("/register", methods={"GET", "POST"})
 def register():
     """
     Route to registration form if not logged in.
-    When form posted, if the user already exists in database the user is 
+    When form posted, if the user already exists in database the user is
     redirected to the register page and asked to log in instead.
     """
 
@@ -282,8 +288,8 @@ def register():
             url_for(
                 "home", username=session["user"], regForm=regForm))
 
-
-    return render_template("register.html", regForm=regForm, page_title=page_title)
+    return render_template(
+        "register.html", regForm=regForm, page_title=page_title)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -297,8 +303,8 @@ def login():
 
     page_title = "Login"
 
-    #Code suggestion for identifying cookies found at stack overflow
-    #https://stackoverflow.com/questions/28925602/how-can-i-detect-whether
+    # Code suggestion for identifying cookies found at stack overflow
+    # https://stackoverflow.com/questions/28925602/how-can-i-detect-whether
     # -a-variable-exists-in-flask-session/39204060
     if session.get("user") is not None:
         return redirect(url_for("home"))
@@ -308,11 +314,14 @@ def login():
     if logForm.validate_on_submit():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("login_username").lower()})
-            
+
         if existing_user:
-            if check_password_hash(existing_user["password"], request.form.get("login_password")):
+            if check_password_hash(
+                    existing_user["password"],
+                    request.form.get("login_password")):
                 session["user"] = request.form.get("login_username").lower()
-                return redirect(url_for("user_profile", username=session["user"]))
+                return redirect(
+                    url_for("user_profile", username=session["user"]))
             else:
                 flash("Incorrect Username and/or Password.")
                 return redirect(url_for("login", logForm=logForm))
@@ -320,12 +329,13 @@ def login():
             flash("Incorrect Username and/or Password.")
             return redirect(url_for("login", logForm=logForm))
 
-    return render_template("login.html", logForm=logForm, page_title=page_title)
+    return render_template(
+        "login.html", logForm=logForm, page_title=page_title)
 
 
 @app.route("/logout")
 def logout():
-    """    
+    """
     Removes user from session cookie to log them out.
     """
     session.pop("user")
@@ -338,19 +348,19 @@ def user_profile(username):
     Loads user page which holds a list of all walking routes matching username.
     If no user is logged in, redirect to login page so check it first.
     """
-    page_text = username +"'s Page"
+    page_text = username + "'s Page"
     page_title = page_text.capitalize()
 
-    does_exist = mongo.db.users.find_one_or_404({"username":username})
- 
+    does_exist = mongo.db.users.find_one_or_404({"username": username})
+
     if session.get("user") is None:
         flash("Must be logged in to see other`s userpages.", "error")
         return redirect(url_for("register"))
-        
+
     routes = list(mongo.db.routes.find({"user": username}))
 
     # Finds the details of the user document for the page owner.
-    # Then checks each option in their favourite field and adds the route 
+    # Then checks each option in their favourite field and adds the route
     # to a list of routes which can be loaded.
     fav_ids = mongo.db.users.find_one({"username": username})
 
@@ -360,7 +370,9 @@ def user_profile(username):
             walk = mongo.db.routes.find_one({"_id": ObjectId(f)})
             favourites.append(walk)
 
-    return render_template("userprofile.html", username=username, routes=routes, favourites=favourites, page_title=page_title)
+    return render_template(
+        "userprofile.html", username=username, routes=routes,
+        favourites=favourites, page_title=page_title)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -369,7 +381,7 @@ def search():
     Loads search page and a list of all possible walks with other data values.
     Filters is a list which will add database search categories depending on
     which form inputs have been selected. This was done so that an empty query
-    string would not return an error. 
+    string would not return an error.
     Necessary to load prior to is method== POST so empty list can be passed to
     page loading without any search criteria.
     """
@@ -405,7 +417,7 @@ def search():
 
     for c in categories:
         filterForm.category_name.choices.append(c)
-   
+
     if request.method == "POST":
         # Post true adds id to results section HTML, this allows javascript
         # to scroll to the div.
@@ -414,7 +426,7 @@ def search():
         query = request.form.get("query")
 
         dogs_allowed = request.form.get("dogs_allowed")
-        
+
         free_parking = request.form.get("free_parking")
 
         paid_parking = request.form.get("paid_parking")
@@ -422,13 +434,13 @@ def search():
         difficulty = request.form.get("difficulty")
 
         category = request.form.get("category_name")
-        
+
         if query != "":
             filters["$text"] = {"$search": query}
-            filterForm.query.data=query            
+            filterForm.query.data = query
 
-        # Checkboxes added this way so will only limit search for checked boxes,
-        # won"t select for walks with unchecked boxes, only those with checked.
+        # Checkboxes added this way so will only search for checked boxes,
+        # won't select for walks with unchecked boxes, only those with checked.
         if dogs_allowed:
             filters["dogs_allowed"] = True
             filterForm.dogs_allowed.data = filters["dogs_allowed"]
@@ -436,11 +448,11 @@ def search():
         if free_parking:
             filters["free_parking"] = True
             filterForm.free_parking.data = filters["free_parking"]
-        
+
         if paid_parking:
             filters["paid_parking"] = True
             filterForm.paid_parking.data = filters["paid_parking"]
-            
+
         if difficulty != "Choose...":
             filters["difficulty"] = difficulty
             filterForm.difficulty.data = filters["difficulty"]
@@ -448,12 +460,15 @@ def search():
         if category != "Choose...":
             filters["category_name"] = category
             filterForm.category_name.data = filters["category_name"]
-            
+
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
+            error = (
+                "Nothing matched your search,"
+                " try changing your search word or filter.")
             flash(
-                "Nothing matched your search, try changing your search word or filter.",
-                 "error")
+                error,
+                "error")
 
         # Calculates max pages and then selects walks on current page number.
         walks = len(routes)
@@ -466,16 +481,13 @@ def search():
         routes = list(
             mongo.db.routes.find(
                 filters).skip((current_page - 1) * page_size).limit(page_size))
-        
+
         prev_page = url_for(
             "search", filters=filters,
-             page_num=current_page-1) if current_page >1 else None
+            page_num=current_page - 1) if current_page > 1 else None
         next_page = url_for(
             "search", filters=filters,
-             page_num=current_page + 1) if current_page < max_pages else None
-
-        print(filters)
-        print("filtered")
+            page_num=current_page + 1) if current_page < max_pages else None
 
         return render_template(
             "searchwalks.html",
@@ -490,7 +502,7 @@ def search():
             next_page=next_page)
 
     # Checks for mention of filters in request.args when changing page, else
-    # the POST condition will not be met and results will not be filtered on 
+    # the POST condition will not be met and results will not be filtered on
     # page change.
     if "filters" in request.args:
 
@@ -525,7 +537,12 @@ def search():
 
         routes = list(mongo.db.routes.find(filters))
         if routes == []:
-            flash("Nothing matched your search, try changing your search word or filter.", "error")
+            error = (
+                "Nothing matched your search,"
+                " try changing your search word or filter.")
+            flash(
+                error,
+                "error")
 
         walks = len(routes)
         # Calculates max pages and then selects walks on current page number.
@@ -534,10 +551,10 @@ def search():
         routes = list(
             mongo.db.routes.find(filters).skip((
                 current_page - 1) * page_size).limit(page_size))
-        
+
         prev_page = url_for(
             "search", filters=filters,
-            page_num=current_page-1) if current_page >1 else None
+            page_num=current_page - 1) if current_page > 1 else None
         next_page = url_for(
             "search", filters=filters,
             page_num=current_page + 1) if current_page < max_pages else None
@@ -561,16 +578,14 @@ def search():
         routes = list(
             mongo.db.routes.find().skip((
                 current_page - 1) * page_size).limit(page_size))
-        
+
         prev_page = url_for(
             "search", filters=filters,
-             page_num=current_page-1) if current_page >1 else None
+            page_num=current_page-1) if current_page > 1 else None
         next_page = url_for(
             "search", filters=filters,
-             page_num=current_page + 1) if current_page < max_pages else None
+            page_num=current_page + 1) if current_page < max_pages else None
 
-        print("normal")
-        
         return render_template(
             "searchwalks.html",
             routes=routes,
@@ -599,13 +614,13 @@ def toggle_favourite():
     if check_box == "true":
         mongo.db.users.update_one(
             {"username": session["user"]},
-            { "$push": { "favourites": output }}
+            {"$push": {"favourites": output}}
         )
         return "Added"
     else:
         mongo.db.users.update_one(
             {"username": session["user"]},
-            {"$pull": { "favourites": output }}
+            {"$pull": {"favourites": output}}
         )
         return "Removed"
 
@@ -645,6 +660,7 @@ if __name__ == "__main__":
     """
     If the domain name matches __main__ then will load environmental vars.
     """
-    app.run(host=os.environ.get("IP"),
-    port=int(os.environ.get("PORT")),
-    debug=True)
+    app.run(
+        host=os.environ.get("IP"),
+        port=int(os.environ.get("PORT")),
+        debug=True)

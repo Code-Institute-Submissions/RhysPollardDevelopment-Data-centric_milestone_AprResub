@@ -3,7 +3,7 @@ describe("Favourite Icon tests", () => {
     beforeEach(() => {
         form = $(`
         <input type="checkbox" class="heart-box"
-        id="favourite"></input>`)
+        id="favourite"></input>`);
         $(document.body).append(form);
     });
 
@@ -16,7 +16,7 @@ describe("Favourite Icon tests", () => {
         const favIcon = document.getElementById("favourite");
         const eventSpy = spyOn(favIcon, "addEventListener");
         bindFavourite();
-        expect(eventSpy).toHaveBeenCalledWith( "change", jasmine.any(Function) );
+        expect(eventSpy).toHaveBeenCalledWith("change", jasmine.any(Function));
     });
 
     /*Could not test the window.location.pathname string manipulation, cannot
@@ -26,14 +26,14 @@ describe("Favourite Icon tests", () => {
         const eventSpy = spyOn(favIcon, "addEventListener");
         bindFavourite();
         const ajaxSpy = spyOn($, "ajax");
-        eventSpy.calls.mostRecent().args[1]();        
+        eventSpy.calls.mostRecent().args[1]();
         expect(ajaxSpy).toHaveBeenCalledWith({
-            type:"POST",
+            type: "POST",
             url: '/toggle_favourite',
             data: {
                 id: `/testing`,
                 checkbox: false
-                }
-            });
+            }
+        });
     });
-})
+});
