@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<article class="container">
-    <section class="row legal-form">
+<article class="container article-header">
+    <h2>Privacy Policy</h2>
+</article>
+<section class="container">
+    <div class="row legal-form">
         <div class="col-12">
             <!-- Privacy policy template:
             https://gdpr.eu/wp-content/uploads/2019/01/Our-Company-Privacy-Policy.pdf-->
-            <h2>
-                Privacy Policy
-            </h2>
+
         </div>
         <!--What data collected-->
         <div class="col-12">
@@ -47,7 +48,7 @@
         <!--Use of data-->
         <div class="col-12">
             <h5>How will we use your data?</h5>
-            <p>Our company collects your data for two purposes:
+            <p>Our company collects your data for two purposes:</p>
             <ul>
                 <li>For the creation and distribution of walks to and from
                     users.
@@ -61,14 +62,14 @@
                     created walks or concerns with the websites functionality.
                 </li>
             </ul>
-            We do not sell or share any of your data with any third parties or
-            companies.
-            </p>
+            <p>We do not sell or share any of your data with any third parties
+                or
+                companies.</p>
         </div>
         <!--Data protection rights-->
         <div class="col-12">
             <h5>What are your data protection rights?</h5>
-            <p>Every user is entitled to the following:
+            <p>Every user is entitled to the following:</p>
             <ul>
                 <li><strong>The right to access -</strong> You have the right to
                     request us for copies of any personal data you have on our
@@ -90,10 +91,11 @@
                     of
                     any personal data.</li>
             </ul>
-            If you would like to make a request, we have one month to
-            respond. Requests can be made at our <a
-                href="{{ url_for('contact') }}" target="_blank">email
-                or contact us</a>.
+            <p>If you would like to make a request, we have one month to
+                respond. Requests can be made at our
+                <a href="{{ url_for('contact') }}" target="_blank">email or
+                    contact
+                    us.</a>
             </p>
         </div>
         <!--Cookies-->
@@ -145,6 +147,6 @@
                 and sent them our email address.
             </p>
         </div>
-    </section>>
-</article>
+    </div>
+</section>
 {% endblock %}

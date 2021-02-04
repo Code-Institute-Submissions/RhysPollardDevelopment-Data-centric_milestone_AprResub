@@ -1,90 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
 
-<article>
-    <div class="img-container">
-        <img src="{{ walk.imageUrl }}" alt="Photo of walking route">
-    </div>
-    <section class="container-fluid walk-header">
-        <div class="row">
-            <div class="col-sm-11 col-md-12 col-lg-8 text-capitalize title-box">
-                <h2>
-                    {{walk.title}}
-                </h2>
-                <div class="user-fav">
-                    <p>By <a
-                            href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}
-                        </a></p>
-                    {% if user.username %}
-                    {% if user.username != walk.user %}
-                    <div class="fav-box">
-                        {% if favourited %}
-                        <input type="checkbox" class="heart-box" id="favourite"
-                            checked></input>
-                        {% else %}
-                        <input type="checkbox" class="heart-box"
-                            id="favourite"></input>
-                        {% endif %}
-                        <i class="far fa-heart unchecked heart"></i>
-                        <i class="fas fa-heart checked"></i>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                </div>
 
-                <div class="">
-                    <p>{{walk.description}}</p>
-
+<div class="img-container">
+    <img src="{{ walk.imageUrl }}" alt="Photo of walking route">
+</div>
+<article class="container-fluid walk-header">
+    <div class="row">
+        <div class="col-sm-11 col-md-12 col-lg-8 text-capitalize title-box">
+            <h2>
+                {{walk.title}}
+            </h2>
+            <div class="user-fav">
+                <p>By <a
+                        href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}
+                    </a></p>
+                {% if user.username %}
+                {% if user.username != walk.user %}
+                <div class="fav-box">
+                    {% if favourited %}
+                    <input type="checkbox" class="heart-box" id="favourite"
+                        checked></input>
+                    {% else %}
+                    <input type="checkbox" class="heart-box"
+                        id="favourite"></input>
+                    {% endif %}
+                    <i class="far fa-heart unchecked heart"></i>
+                    <i class="fas fa-heart checked"></i>
                 </div>
+                {% endif %}
+                {% endif %}
             </div>
-            <div class="col-sm-12 col-lg-4 key-details-container">
-                <h3 class="key-header">Key Details</h3>
-                <div class="row">
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-hiking"></i>{{ walk.difficulty }}</h5>
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="far fa-clock"></i>{{ walk.time }}</h5>
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-map-signs"></i>{{ walk.distance }}
-                    </h5>
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-map-marked-alt"></i>{{ walk.startpoint }}
-                    </h5>
-                    {% if walk.dogs_allowed %}
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-paw"></i>Dog Friendly</h5>
-                    {% endif %}
-                    {% if walk.free_parking %}
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-parking"></i>Free Parking</h5>
-                    {% endif %}
-                    {% if walk.paid_parking %}
-                    <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
-                            class="fas fa-pound-sign"></i></i>Paid Parking</h5>
-                    {% endif %}
-                </div>
+            <p>{{walk.description}}</p>
+        </div>
+        <div class="col-sm-12 col-lg-4 key-details-container">
+            <h3 class="key-header">Key Details</h3>
+            <div class="row">
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-hiking"></i>{{ walk.difficulty }}</h5>
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="far fa-clock"></i>{{ walk.time }}</h5>
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-map-signs"></i>{{ walk.distance }}
+                </h5>
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-map-marked-alt"></i>{{ walk.startpoint }}
+                </h5>
+                {% if walk.dogs_allowed %}
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-paw"></i>Dog Friendly</h5>
+                {% endif %}
+                {% if walk.free_parking %}
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-parking"></i>Free Parking</h5>
+                {% endif %}
+                {% if walk.paid_parking %}
+                <h5 class="col-sm-12 col-md-6 col-lg-12 h-rule"><i
+                        class="fas fa-pound-sign"></i></i>Paid Parking</h5>
+                {% endif %}
             </div>
         </div>
-    </section>
-
-    <section class="container">
-        <div class="row directions">
-            <div class="col-12">
-                <ol>
-                    {% for direction in walk.directions %}
-                    <li>{{ direction }}</li>
-                    {% endfor %}
-                </ol>
-            </div>
-    </section>
-
-    <section class="container-fluid finish">
-        <h3>And Finished!</h3>
-        <p>Check out more of our great walks.</p>
-        <a href="{{ url_for('search') }}" class="button clear">Search
-            our Walks</a>
-    </section>
+    </div>
 </article>
+
+<section class="container">
+    <div class="row directions">
+        <h3 class="col-12 text-align-center d-none">Directions</h3>
+        <div class="col-12">
+            <ol>
+                {% for direction in walk.directions %}
+                <li>{{ direction }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid finish">
+    <h3>And Finished!</h3>
+    <p>Check out more of our great walks.</p>
+    <a href="{{ url_for('search') }}" class="button clear">Search
+        our Walks</a>
+</section>
+
 {% endblock %}
 
 {% block scripts %}

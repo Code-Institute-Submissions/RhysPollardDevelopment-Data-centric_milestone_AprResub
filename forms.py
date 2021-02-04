@@ -63,7 +63,7 @@ class LogInForm(Form):
         "Username", validators=[InputRequired()],
         render_kw={
             "class": "form-control",
-            "aria-describedby": "loginUsernameLabel",
+            "aria-describedby": "logUsernameLabel",
             "placeholder": "Enter username",
             "autocomplete": "off"
         })
@@ -71,7 +71,7 @@ class LogInForm(Form):
         "Password", validators=[InputRequired()],
         render_kw={
             "class": "form-control",
-            "aria-describedby": "loginPasswordLabel",
+            "aria-describedby": "logPasswordLabel",
             "placeholder": "Password"
         })
 
@@ -91,13 +91,13 @@ class WalkForm(Form):
         "Difficulty",
         validators=[
             InputRequired()],
-        choices=[],
+        choices=[("","Select Difficulty")],
         render_kw={"class": "form-control"})
 
     category_name = SelectField(
         "Walk type",
         validators=[InputRequired()],
-        choices=[],
+        choices=[("","Select Category")],
         render_kw={"class": "form-control"})
 
     imageUrl = html5.URLField(
@@ -188,7 +188,8 @@ class ContactForm(Form):
     problem = SelectField(
         "Report a Problem",
         validators=[InputRequired()],
-        choices=[("Other")],
+        choices=[("","Select Issue"),("Other","Other")],
+        default="Choose...",
         render_kw={"class": "form-control"})
 
     user_issue = TextAreaField(

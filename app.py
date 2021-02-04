@@ -63,14 +63,17 @@ def add_walk():
     # distinct used to select only the fields wanted from collection.
     # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
     categories = mongo.db.categories.distinct("category_name")
-    addForm.category_name.choices = [
+    category_choices = [
         (category, category) for category in categories]
+    addForm.category_name.choices.extend(category_choices)
 
     difficulties = mongo.db.difficulty.find()
 
+    difficulty_choices = []
     # # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
-        addForm.difficulty.choices.append(d["challenge"])
+        difficulty_choices.append((d["challenge"], d["challenge"]))
+    addForm.difficulty.choices.extend(difficulty_choices)
 
     if addForm.validate_on_submit():
         dogs_allowed = True if request.form.get("dogs_allowed") else False
@@ -229,12 +232,14 @@ def contact():
     page_title = "How To Contact Us/ FAQs"
 
     contactForm = ContactForm()
+    choices=[]
     faqs = list(mongo.db.FAQs.find())
     for faq in faqs:
         for f in faq:
             if f == "report_problem":
-                contactForm.problem.choices.append(faq[f])
-
+                choices.append((faq[f], faq[f]))
+    contactForm.problem.choices.extend(choices)
+    
     if contactForm.validate_on_submit():
         message = {
             "Issue": request.form.get("problem"),

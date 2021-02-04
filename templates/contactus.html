@@ -84,7 +84,6 @@
             </div>
             {% endfor %}
         </div>
-        {{ contactForm.csrf_token }}
         <form class="report col-sm-12 col-lg-5 needs-validation" method="POST"
             action="{{ url_for('contact') }}" novalidate>
             {{ contactForm.csrf_token }}

@@ -19,7 +19,7 @@
     </div>
 </section>
 <!-- Warning/Update Messages-->
-<section class="container">
+<div class="container">
     <div class="row">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -36,7 +36,7 @@
         {% endif %}
         {% endwith %}
     </div>
-</section>
+</div>
 <!-- user fav walks-->
 <div class="container favourites">
     <div class="row">
@@ -51,19 +51,21 @@
                 <h4>No Favourites to show.</h4>
             </div>
             {% endif %}
+            <!-- Loads up all favourited walks for the user -->
             {% for favourite in favourites %}
             <a href="{{ url_for('show_walk',route_id=favourite._id) }}"
                 class="fav-walk">
-                <div class="rectangle">
+                <article class="rectangle">
                     <div class="full-text">
                         <h5>{{favourite.title}}</h5>
                         <p>{{favourite.difficulty}}</p>
                         <p>{{favourite.time}}</p>
                         <p>Posted by: {{favourite.user}}</p>
                     </div>
-                    <img src="{{ favourite.imageUrl }}">
+                    <img src="{{ favourite.imageUrl }}"
+                        alt="Picture of {{favourite.title}}.">
                     <div class="overlay"></div>
-                </div>
+                </article>
             </a>
             {% endfor %}
         </div>
@@ -84,11 +86,13 @@
             <h4>No walks added yet.</h4>
         </div>
         {% endif %}
+        <!-- Loads a list of all walks created by user -->
         {% for route in routes %}
         <div class="col-lg-4 col-md-6 col-sm-12 feature-walk">
             <a href="{{ url_for('show_walk',route_id=route._id) }}">
                 <div class="square mb-2">
-                    <img src="{{ route.imageUrl }}">
+                    <img src="{{ route.imageUrl }}"
+                        alt="Picture of {{route.title}}.">
                     <div class="overlay"></div>
                     <div class="full-text">
                         <h5>{{route.title}}</h5>
@@ -118,9 +122,9 @@
         {% endfor %}
     </div>
 </section>
-
+<!-- Delete confirmation modal -->
 <div class="modal custom fade" tabindex="-1" role="dialog" id="deleteConfirm"
-    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body custom">

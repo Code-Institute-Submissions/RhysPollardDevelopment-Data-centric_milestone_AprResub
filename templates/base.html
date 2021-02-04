@@ -21,7 +21,7 @@
             href="{{ url_for('static', filename='img//favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16"
             href="{{ url_for('static', filename='img//favicon-16x16.png') }}">
-        <link rel="manifest" href="/site.webmanifest">
+        <link rel="manifest" href="/static/img/site.webmanifest">
         <!-- CSS external file-->
         <link rel="stylesheet"
             href="{{ url_for('static', filename='css/style.css') }}"
@@ -35,15 +35,15 @@
             <a class="navbar-brand" href="{{ url_for('home') }}"><img
                     src="/static/img/favicon-32x32.png"
                     alt="CW Cornish Walks">Cornish Walks</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
+            <button class="navbar-toggler toggler-icon" type="button"
+                data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <div class="toggler-icon" id="toggler-icon">
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div>
+                <span class="toggler-icon" id="toggler-icon">
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -86,8 +86,8 @@
                 <div class="dropdown d-none d-lg-block">
                     <button class="button clear user-dropdown dropdown-toggle"
                         type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-=""
-                        expanded="false" aria-expanded="false">
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         <i class="fas fa-user" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu custom-dropdown"
@@ -206,30 +206,28 @@
                 </div>
             </div>
         </footer>
-
+        <!--Scripts-->
+        <!--Jquery-->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <!-- CloudFlare popper-->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <!--Bootstrap-->
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <!--Font-Awesome-->
+        <script src="https://kit.fontawesome.com/d57b53712b.js"
+            crossorigin="anonymous"></script>
+        <!--Scripts-->
+        <script src="/static/js/base.js"></script>
+        {% block scripts %}
+        {% endblock -%}
     </body>
-    <!--Scripts-->
-    <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <!-- CloudFlare popper-->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <!--Bootstrap-->
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <!--Font-Awesome-->
-    <script src="https://kit.fontawesome.com/d57b53712b.js"
-        crossorigin="anonymous"></script>
-    <!--Scripts-->
-    <script src="/static/js/base.js"></script>
-    {% block scripts %}
-
-    {% endblock %}
 
 </html>

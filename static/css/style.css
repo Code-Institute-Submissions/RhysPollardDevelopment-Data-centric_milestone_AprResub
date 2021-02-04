@@ -72,6 +72,7 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
     background-color: aliceblue;
     margin: 6px 0;
     transition: 0.4s;
+    display: block;
 }
 
 .change .bar1 {
@@ -1155,9 +1156,14 @@ a.button{
 }
 
 /*----Terms and Conditions/Privacy Policy------*/
+.article-header{
+    margin: auto;
+    margin-top: 2rem;
+    text-align: center;
+}
 
 .legal-form{
-    margin: 3rem 0;
+    margin: 1rem 0;
 }
 
 .legal-form h2{
