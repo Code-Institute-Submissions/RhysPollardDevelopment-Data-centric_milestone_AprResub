@@ -6,6 +6,7 @@
     {{ addForm.csrf_token }}
     <h2>Add a New Walk</h2>
     <div class="row">
+        <!-- Error Messages -->
         {% for field, errors in addForm.errors.items() %}
         <div class="alert alert-danger alert-dismissible fade show col-12"
             role="alert">

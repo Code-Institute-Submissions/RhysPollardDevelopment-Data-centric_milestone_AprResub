@@ -4,6 +4,7 @@
 <section class="container-fluid">
     <div class="row">
         <div class="col-12 contact-img">
+            <!-- Error messages -->
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             <div class="alert alert-success alert-dismissible fade show col-12"
@@ -18,12 +19,13 @@
             </div>
             {% endif %}
             {% endwith %}
+            <!-- Contact Header and details -->
             <div class="contact-card">
                 <h2>Get in Touch</h2>
                 <p>Contact us by email or DM on social media if you have any
                     comments about the site.
                 </p>
-                <p>Or use our report form below and well get back to you.</p>
+                <p>Or use our report form below and we'll sort it out.</p>
                 <h5>Email</h5>
                 <p>support@cornishwalks.co.uk</p>
                 <ul class="social-links contact">
@@ -55,6 +57,7 @@
         </div>
     </div>
 </section>
+<!-- FAQ Accordion -->
 <section class="container-fluid faq-container">
     <div class="row">
         <div class="accordion-custom col-sm-12 col-lg-6" id="accordionExample">
@@ -84,6 +87,7 @@
             </div>
             {% endfor %}
         </div>
+        <!-- Report problem form -->
         <form class="report col-sm-12 col-lg-5 needs-validation" method="POST"
             action="{{ url_for('contact') }}" novalidate>
             {{ contactForm.csrf_token }}

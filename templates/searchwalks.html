@@ -9,19 +9,23 @@
         </div>
     </div>
 </section>
+<!-- Search Form and filters -->
 <form class="container-fluid" method="POST" action="{{ url_for('search') }}">
     <div class="row search-box">
         <div class="col-12">
             {{ filterForm.query(class="form-control mr-sm-2") }}
         </div>
+        <!-- Type of walk select element -->
         <div class="form-group col-sm-12 col-md-6">
             {{ filterForm.category_name.label }}
             {{ filterForm.category_name }}
         </div>
+        <!-- Difficulty select element -->
         <div class="form-group col-sm-12 col-md-6">
             {{ filterForm.difficulty.label }}
             {{ filterForm.difficulty }}
         </div>
+        <!-- Dogs allowed checkbox -->
         <div
             class="form-group custom-control custom-switch col-12 col-md-4 slider-padding">
             {{ filterForm.dogs_allowed }}
@@ -43,9 +47,7 @@
         <div class="col-12 down-arrow d-sm-block d-md-none">
             <i class="fas fa-angle-down"></i>
         </div>
-
     </div>
-
 </form>
 <!-- If post checks if truthy to add id so that search.js can scroll to 
 this sections, otherwise it cannot scroll.-->

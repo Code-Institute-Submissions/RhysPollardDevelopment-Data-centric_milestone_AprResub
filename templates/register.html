@@ -4,6 +4,7 @@
 <section class="container-fluid login-register">
     <div class="row login-wrapper">
         <div class="col-sm-12 col-md-6 col-lg-5 register-box">
+            <!-- Navigation Tabs-->
             <ul class="nav nav-tabs custom">
                 <li class="nav-item custom">
                     <a class="custom-navlink active"
@@ -28,6 +29,7 @@
                             Please Enter a correct email.
                         </div>
                     </div>
+                    <!-- username input -->
                     <div class="form-group">
                         {{ regForm.username.label(id='usernameLabel') }}
                         {{ regForm.username }}
@@ -38,6 +40,7 @@
                             class="form-text text-muted">You'll need this to
                             login.</small>
                     </div>
+                    <!-- Password Input -->
                     <div class="form-group">
                         {{ regForm.password.label(id='passwordLabel') }}
                         {{ regForm.password }}
@@ -46,6 +49,7 @@
                             least 10 characters long.</small>
                     </div>
                     <!-- Custom javascript code compares this to the above password-->
+                    <!-- Confirm Password -->
                     <div class="form-group">
                         {{ regForm.confirm_password.label(id='confirmLabel') }}
                         {{ regForm.confirm_password }}
@@ -53,6 +57,7 @@
                             <p>Passwords do not match!</p>
                         </div>
                     </div>
+                    <!-- Agreement checkbox-->
                     <div class="form-group form-check">
                         {{ regForm.agree }}
                         {{ regForm.agree.label }} <a
@@ -77,6 +82,7 @@
                 </form>
             </div>
         </div>
+        <!-- Reasons to sign up-->
         <div class="col-sm-12 col-md-5 col-lg-6 benefits">
             <h2 class="d-none d-md-block">Register or Sign In</h2>
             <div class="border">

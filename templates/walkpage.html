@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-
-
+<!-- Header Image-->
 <div class="img-container">
     <img src="{{ walk.imageUrl }}" alt="Photo of walking route">
 </div>
+<!-- Article Title and key info -->
 <article class="container-fluid walk-header">
     <div class="row">
         <div class="col-sm-11 col-md-12 col-lg-8 text-capitalize title-box">
@@ -15,6 +15,7 @@
                 <p>By <a
                         href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}
                     </a></p>
+                <!-- Toggle favourite if logged in-->
                 {% if user.username %}
                 {% if user.username != walk.user %}
                 <div class="fav-box">
@@ -33,6 +34,7 @@
             </div>
             <p>{{walk.description}}</p>
         </div>
+        <!-- Key details -->
         <div class="col-sm-12 col-lg-4 key-details-container">
             <h3 class="key-header">Key Details</h3>
             <div class="row">
@@ -62,7 +64,7 @@
         </div>
     </div>
 </article>
-
+<!-- Directions-->
 <section class="container">
     <div class="row directions">
         <h3 class="col-12 text-align-center d-none">Directions</h3>
@@ -75,14 +77,14 @@
         </div>
     </div>
 </section>
-
+<!-- Link to search page -->
 <section class="container-fluid finish">
     <h3>And Finished!</h3>
     <p>Check out more of our great walks.</p>
-    <a href="{{ url_for('search') }}" class="button clear">Search
+    <a href="{{ url_for('search') }}" class="button clear"
+        aria-label="Checkout out more walks on the search page">Search
         our Walks</a>
 </section>
-
 {% endblock %}
 
 {% block scripts %}
