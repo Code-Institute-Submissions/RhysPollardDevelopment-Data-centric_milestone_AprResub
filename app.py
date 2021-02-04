@@ -138,11 +138,21 @@ def edit_walk(route_id):
     # data-if-data-exists?noredirect=1&lq=1
     # https://www.w3schools.com/python/ref_string_join.asp
     editForm.directions.data = "".join(walk["directions"])
-    for d in difficulties:
-        editForm.difficulty.choices.append(d["challenge"])
 
-    editForm.category_name.choices = [
+    # distinct used to select only the fields wanted from collection.
+    # https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
+    categories = mongo.db.categories.distinct("category_name")
+    category_choices = [
         (category, category) for category in categories]
+    editForm.category_name.choices.extend(category_choices)
+
+    difficulties = mongo.db.difficulty.find()
+
+    difficulty_choices = []
+    # # cycles through each entry for challenge field to maintain ordering.
+    for d in difficulties:
+        difficulty_choices.append((d["challenge"], d["challenge"]))
+    editForm.difficulty.choices.extend(difficulty_choices)
 
     if editForm.validate_on_submit():
 
