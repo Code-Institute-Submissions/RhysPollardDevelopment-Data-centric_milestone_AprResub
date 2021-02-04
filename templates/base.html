@@ -45,7 +45,7 @@
                     <span class="bar3"></span>
                 </span>
             </button>
-
+            <!-- Navbar collapse for mobile/tablet -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav center-flex justify-content-center">
                     <li class="nav-item">
@@ -62,7 +62,7 @@
                             href="{{ url_for('contact') }}">Contact
                             Us</a>
                     </li>
-
+                    <!-- Add walk only visible if logged in-->
                     {% if session.user %}
                     <li class="nav-item">
                         <a class="nav-link custom-link"
@@ -71,6 +71,8 @@
                     </li>
                     {% endif %}
                 </ul>
+                <!-- If session has a valid user then display userpage and logout links
+                along with drop down button for larger screens -->
                 {% if session.user %}
                 <ul
                     class="center-flex justify-content-center dropdown-format d-lg-none d-xl-none">
@@ -80,7 +82,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link custom-link"
-                            href="/logout">Logout</a>
+                            href="{{ url_for('logout')}}">Logout</a>
                     </li>
                 </ul>
                 <div class="dropdown d-none d-lg-block">
@@ -118,15 +120,13 @@
                     </li>
                 </ul>
                 {% endif %}
-
             </div>
         </nav>
-
-        <main class=main>
+        <!-- Block for main body of html content per page -->
+        <main class="main">
             {% block content %}
             {% endblock %}
         </main>
-
         <!--Footer-->
         <footer class="footer">
             <div class="container">
@@ -168,6 +168,7 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- Social Media links-->
                     <div class="col-sm-12 col-md-6 col-lg-3">
                         <ul class="social-links">
                             <li>
