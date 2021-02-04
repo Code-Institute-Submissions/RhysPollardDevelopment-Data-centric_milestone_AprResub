@@ -58,7 +58,8 @@
     <div class="row justify-content-center">
         {% for route in routes %}
         <div class=" col-lg-4 col-md-6 col-sm-12 feature-walk">
-            <a href="{{ url_for('show_walk',route_id=route._id) }}">
+            <a href="{{ url_for('show_walk',route_id=route._id) }}"
+                aria-label="See more about the walk route for {{route.title}}">
                 <div class="full-text">
                     <h5>{{route.title}}</h5>
                     <p>{{route.difficulty}}</p>

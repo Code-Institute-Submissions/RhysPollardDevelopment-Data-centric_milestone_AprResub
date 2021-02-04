@@ -54,6 +54,7 @@
             <!-- Loads up all favourited walks for the user -->
             {% for favourite in favourites %}
             <a href="{{ url_for('show_walk',route_id=favourite._id) }}"
+                aria-label="See more about the walk route for {{favourite.title}}"
                 class="fav-walk">
                 <article class="rectangle">
                     <div class="full-text">
@@ -69,10 +70,12 @@
             </a>
             {% endfor %}
         </div>
-        <button class="left-scroll col-1" id="leftScroll">
+        <button class="left-scroll col-1" id="leftScroll"
+            aria-label="Scroll favourites left">
             <i class="fas fa-angle-left"></i>
         </button>
-        <button class="right-scroll col-1" id="rightScroll">
+        <button class="right-scroll col-1" id="rightScroll"
+            aria-label="Scroll favourites right">
             <i class="fas fa-angle-right"></i>
         </button>
     </div>
@@ -89,7 +92,8 @@
         <!-- Loads a list of all walks created by user -->
         {% for route in routes %}
         <div class="col-lg-4 col-md-6 col-sm-12 feature-walk">
-            <a href="{{ url_for('show_walk',route_id=route._id) }}">
+            <a href="{{ url_for('show_walk',route_id=route._id) }}"
+                aria-label="See more about the walk route for {{route.title}}">
                 <div class="square mb-2">
                     <img src="{{ route.imageUrl }}"
                         alt="Picture of {{route.title}}.">
@@ -108,13 +112,13 @@
             <div class="user-input row">
                 <!-- Edit walk button-->
                 <a href="{{ url_for('edit_walk',route_id=route._id) }}"
+                    aria-label="Click to edit this walking route information."
                     class="button clear col-sm-6">Edit Walk</a>
                 <!-- Delete button-->
                 <!-- onclick code provided by mentor, literal quotes 
                 inside argument to avoid jinja errors-->
                 <button class="button delete col-sm-6" data-toggle="modal"
                     data-info="{{url_for('delete_walk',route_id=route._id)}}">Delete
-
                     Walk</button>
             </div>
             {% endif %}
