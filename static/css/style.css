@@ -495,8 +495,7 @@ a.button{
 
 .full-text{
     position: absolute;
-    top: 6%;
-    margin: 0 1rem;
+    padding: 1rem;
     max-width: 90%;
     word-break: normal;
     z-index: 100;
@@ -857,6 +856,7 @@ a.button{
 /*---------contact us---------*/
 .contact-img {
     background-size: cover;
+    height: 26rem;
     width: 100%;
     position: relative;
     background-image: url(https://www.falriver.co.uk/_media/12883/image?fit=crop&w=1200&h=675);

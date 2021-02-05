@@ -18,11 +18,11 @@ The goal of this project is to build a full-stack website that allows users to m
 
 ---
 ## Live Site
-The live deployed demo is hosted by Heroku and can be found here.
+The live deployed demo is hosted by Heroku and can be found [here](http://data-centric-milestone-rhys.herokuapp.com/home).
 
 ---
 ## User Experience
-WEBSITE NAME was designed as a website for people interested in outdoors walking to find and follow user input walking routes. Equally, users may input and store their own walking routes for others to read and follow. 
+Cornish Walks was designed as a website for people interested in outdoors walking to find and follow user input walking routes. Equally, users may input and store their own walking routes for others to read and follow. 
 This site is tailored to walkers as many sites are, but was also meant to be focussed on more locally known walks and routes which may not be known to more commercial websites.
 
 ### User Stories
@@ -35,7 +35,7 @@ This site is tailored to walkers as many sites are, but was also meant to be foc
 7.	As a registered user, I would like to be able to save routes for later.
 
 ### Database Collections
-Categories:
+##### Categories:
 ```
     {
         "_id":<ObjectId>,
@@ -43,45 +43,48 @@ Categories:
     }
 ```
 
-Difficulty:
+##### Difficulty:
 ```
     {
         "_id":<ObjectId>,
         "challenge":<string>
     }
 ```
+Both categories and difficulty are used to complete select element options dynamically. This way if the difficulties were changed or updated, they only need to be corrected at the source. This also allows for them to be more easily validated if changed.
 
-Routes:
+##### Routes:
 ``` 
     {
         "_id":<ObjectId>,
         "title":<string>,
         "description":<string>,
         "directions":<array>,
-        "user":<string>,
+        "imageUrl":<string>,
         "category_name":<string>,
-        "difficulty":<array>,
+        "difficulty":<string>,
         "time":<string>,
         "distance":<string>,
         "startpoint":<string>,
         "dogs_allowed":<boolean>,
         "free_parking":<boolean>,
         "paid_parking":<boolean>,
-        "saved":<boolean>
+        "user":<string>
     }
 ```
+All the data required to fill a walking route page.
 
-Users:
+##### Users:
 ```
     {
         "_id":<ObjectId>,
         "username":<string>,
         "password":<string>,
-        "saved":<array of ObjectId>
+        "favourites":<array of ObjectId>
     }
 ```
+All users must have an empty favourite array upon creation at minimum to prevent errors entering pages which look for a `favourites` field.
 
-FAQs:
+##### FAQs:
 ```
     {
         "_id":<ObjectId>,
@@ -91,7 +94,7 @@ FAQs:
     }
 ```
 
-Messages:
+##### Messages:
 ```
     {
         "_id":<ObjectId>,
@@ -135,6 +138,7 @@ All wireframes were constructed using the Balsamiq Tool. As some webpages served
 * Add/edit Route page: Forms for the creation and addition of personal walking routes  into the database which can be presented on the website. Also offers the change to edit content 
 * Route page: This has not only a description and directions section, but key features and details of the walk along with images and maybe a map.
 * Favourite walk scroll window.
+* Changing icon for mobile navbar/burger icon.
 
 #### Back end features:
 * Create and add new walking routes to the MongoDB data base collections.
@@ -190,6 +194,7 @@ were to become a larger database of walking routes, pagination which is responsi
 20. [WTForms/FlaskForms](https://wtforms.readthedocs.io/en/2.3.x/): Flask library used to create forms using flask and add backend validation.
 21. [Am i responsive](http://ami.responsivedesign.is/): Tool used to see if a webpage is responsive across multiple screens.
 22. [Responsinator](http://www.responsinator.com/): Website which mocks multiple phones and devices of different sizes and orientations.
+23. [Clip Paint Studio](https://www.clipstudio.net/en/): Used to adjust some images and create landing page header.
 
 ---
 ## Testing
@@ -229,7 +234,7 @@ Seperate testing specs were made for each javascript file to ensure they were di
 
 Two specs which had a limited testing application were `favtogglespec.js` and `userspec.js`. This occurred as the `bindFavourite` function and `confirm_delete` function both used AJAX requests and window.location to perform their actions. However, it was found to not be possible to spy on these elements easily or select their actions without processing the request and leaving the current window to a new href. To prevent accidentally aborting the testing suite it was decided that these could only be tested manually and at least check if the actions leading upto their calling was correct.
 
-To view testing can be found [here](https://data-centric-milestone-rhys.herokuapp.com/testing).
+To view testing please click [here](https://data-centric-milestone-rhys.herokuapp.com/testing).
 
 ### Integration Testing
 
@@ -282,7 +287,9 @@ A Procfile is also required to to determine how the app is run. Please ensure th
 TBA 
 
 ### Media
-TBA            
+All headers and website images have been taken or generated by myself and owned [RhysPollardDevelopment](https://github.com/RhysPollardDevelopment).
+
+Any images used for walking routes made by the Admin account were chosen from [falriver.co.uk](https://www.falriver.co.uk/), while other images were used from various pictures found on google are not owned by me.
 
 ### Acknowledgements
 Special thanks to my mentor Brian Macharia for his help and advice in development this project.
