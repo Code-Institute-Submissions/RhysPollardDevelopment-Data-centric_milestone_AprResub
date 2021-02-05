@@ -117,8 +117,9 @@ TBA
 ⦁	TBA
 
 ### Features to Implement:
-⦁	Responsive Pagination: As there are not many walks currently uploaded to the website it was not required to make the pagination more expansive than it already is. However, if this
+* Responsive Pagination: As there are not many walks currently uploaded to the website it was not required to make the pagination more expansive than it already is. However, if this
 were to become a larger database of walking routes, pagination which is responsive to not stretch smaller screens would be required.
+* Automated emails and the ability to change email address: Email was requested on registration for these two features from the contact page report form and userpage respectively. Currently email is only used when a user needs to ask for a temporary log in as shown in the FAQ section. The goal would be to have the form check for a signed in user and send an automated reply upon submission of report but this was not made due to time constraints.
 
 ---
 ## Technologies

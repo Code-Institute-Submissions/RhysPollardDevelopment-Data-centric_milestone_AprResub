@@ -1,4 +1,17 @@
-/*---------------Base----------*/
+/*---------------Typography----------*/
+
+h1, h2, h3, h4, h5, h6, button, a{
+    font-family: 'Oswald', sans-serif;
+}
+
+p, label{
+    font-family: 'Raleway', sans-serif;
+}
+
+.custom-link, .footer-link{
+    font-family: 'Raleway', sans-serif;
+}
+
 /*--------------Navbar----------*/
 .main{
     min-height:75vh;
@@ -652,6 +665,7 @@ a.button{
 .directions li::marker {
     font-size: 2rem;
     border: 1px solid white;
+    color: teal;
 } 
 
 .finish{
@@ -662,7 +676,7 @@ a.button{
 }
 
 .title-box{
-    background: #00000061;
+    background: #00000082;
     color: aliceblue;
     height: 29rem;
 
@@ -674,6 +688,8 @@ a.button{
 
 .title-box p{
     margin: 1rem;
+    filter: drop-shadow(0px 0px 1px black);
+    font-size: large;
 }
 
 .img-container{
