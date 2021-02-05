@@ -465,25 +465,9 @@ a.button{
   object-fit: cover;
 }
 
-.overlay-text{
-    position: absolute;
-    bottom: 6%;
-    color: #fff;
-    z-index: 1000;
-    padding: 0.75rem;
-    padding-right: 1.5rem;
-    opacity:0;
-    /* text-overflow used to make uniform styles for longer previews
-    https://www.w3schools.com/cssref/css3_pr_text-overflow.asp */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 90%;
-}
-
 .overlay{
     background-color: black;
-    opacity: 40%;
+    opacity: 0.4;
     position: absolute;
     bottom: 0%;
     left: 0%;
@@ -491,6 +475,7 @@ a.button{
     overflow: hidden;
     width: 100%;
     transition: 0.25s;
+    -moz-opacity:0.5;
 }
 
 .full-text{
@@ -1364,7 +1349,7 @@ a.button{
         transition: 0.25s;
     }
     .fav-walk:hover .rectangle .overlay {
-        opacity: 10%;
+        opacity: 0.1;
         top: 0%;
         transition: 0s;
     }

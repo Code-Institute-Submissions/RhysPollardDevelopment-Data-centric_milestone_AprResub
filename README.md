@@ -237,6 +237,12 @@ Two specs which had a limited testing application were `favtogglespec.js` and `u
 To view testing please click [here](https://data-centric-milestone-rhys.herokuapp.com/testing).
 
 ### Integration Testing
+The live website was tested across all current browsers (chrome, firefox, safari, edge, opera) and some which were technically no longer in service (Internet explorer) to see whether any browser specific issues occurred. The site was also used on a range of phones and sites using browserstack and family and friends voluntarily testing the site.
+
+The main issues found from integration were:
+1. Opacity cannot be set to a percentage as found with the squars on index page, search page and userpage else they will appear black in safari, yandex and internet explorer. This was noticed to be easily fixed as hover still affected the opacity as it was set to `opacity:0.1` not `opacity:10%`. Changing all opacity to the same 0.4 etc style corrected this.
+2. Internet explorer does not do multipy background or accept certain colour values with altered alpha levels. My headers were all edited in Clip Paint Studio to have a permanent darker overlay to prevent white text being lost without contrast.
+3. Full text on some links to walks was not sitting correctly and overflowed. Found that editing the margins to a padding setting and removing top positioning solved this.
 
 ### Responsive design
 The use of responsive design is key to developing new websites. This website was build with a mobile first view and a large laptop view following second, once the back end frame work had been decided upon. Key details were then created for intermediate sizes from the smallest mobile to a large laptop. 
