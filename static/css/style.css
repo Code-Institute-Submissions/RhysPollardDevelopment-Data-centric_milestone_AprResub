@@ -856,7 +856,6 @@ a.button{
 
 /*---------contact us---------*/
 .contact-img {
-    height: 56vh;
     background-size: cover;
     width: 100%;
     position: relative;
@@ -1373,7 +1372,7 @@ a.button{
     /*-------Contact Page--------*/
 
     .contact-img{
-        height: 50vh;
+        height: 26rem;
     }
     .faq-container{
         max-width: 960px;
