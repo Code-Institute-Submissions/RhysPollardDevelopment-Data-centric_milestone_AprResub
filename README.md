@@ -146,6 +146,7 @@ All wireframes were constructed using the Balsamiq Tool. As some webpages served
 * Password validation through Javascript which in turns can present a front end response informing the user.
 * Addition and removal of favourite walks from a user profile to allow storage later.
 * Pagination calculations and routing for search page number.
+* Login capabilities and restrictions on content depending on user.
 
 ### Features to Implement:
 * Responsive Pagination: As there are not many walks currently uploaded to the website it was not required to make the pagination more expansive than it already is. However, if this
@@ -187,6 +188,8 @@ were to become a larger database of walking routes, pagination which is responsi
 18. [ESLint](https://eslint.org/): Linting tool installed in visual studio code.
 19. [Pep8 Online](http://pep8online.com/): Linting tool online used to correct python code and ensure was pep8 compliant.
 20. [WTForms/FlaskForms](https://wtforms.readthedocs.io/en/2.3.x/): Flask library used to create forms using flask and add backend validation.
+21. [Am i responsive](http://ami.responsivedesign.is/): Tool used to see if a webpage is responsive across multiple screens.
+22. [Responsinator](http://www.responsinator.com/): Website which mocks multiple phones and devices of different sizes and orientations.
 
 ---
 ## Testing
@@ -195,6 +198,11 @@ Testing was performed throughout this project when any new feature was implement
 The use of branches was introduced for any major changes or possibly bug inducing changes. This can be seen in the range of branches made throughout this project which were then merged back into the master branch. Some have been deleted from github and local directories due to error or being very early on in the project life cycle.
 
 My mentor Brian was also key in identifying possible future errors or issues which were missed in production or just beyond my current understanding of the topic.
+
+### Defensive Programming
+Following the course material and discussions with my mentor Brian, it was made clear that programming my website defensively was key to ensuring no accidental or malicious breaks occurred.
+
+This can be seen in various examples such as the use of a confirmation modal when trying to delete a walk from your own user page. Equally the strict use of validation in front and back end of the project is to prevent users incorrectly inserting information which could lead to errors when accessing data from specific pages. If designed correctly no user should be able to
 
 ### User Story Testing
 
@@ -224,6 +232,15 @@ Two specs which had a limited testing application were `favtogglespec.js` and `u
 To view testing can be found [here](https://data-centric-milestone-rhys.herokuapp.com/testing).
 
 ### Integration Testing
+
+### Responsive design
+The use of responsive design is key to developing new websites. This website was build with a mobile first view and a large laptop view following second, once the back end frame work had been decided upon. Key details were then created for intermediate sizes from the smallest mobile to a large laptop. 
+
+The responsiveness of this was finally testing using [Am i responsive](http://ami.responsivedesign.is/) and [Responsinator](http://www.responsinator.com/). Am I responsive showed no issues with the variable design, however responsinator did hightlight an issue on the contact page where the header was in vertical heights (vh) and would often be presented too small for its height on shorter screens or landscape orientation. This was corrected by choosing rem as a standard measurement. 
+
+It also highlighted that the walk-header of walkpage was incorrectly set to `col-sm-11` not `col-sm-12`.
+
+The only flaw is that due to these services limitations, it was not possible to log in or access restricted material through them so I could not check the user pages or any add/edit forms.
 
 ### Bugs
 * Older posts done before the WTForm update, could not be edited properly. This might be that they were failing validation before even being loaded so could not be stored. Unsure as most of these were unfit for purpose anyway and were deleted for new data which could not be entered with missing information.
