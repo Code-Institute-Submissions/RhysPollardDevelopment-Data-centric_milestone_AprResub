@@ -525,8 +525,6 @@ a.button{
     background-repeat: no-repeat;
     background-position: center;
     z-index: -1;
-    background-color: #0000005e;
-    background-blend-mode: multiply;
 }
 
 .search-box{
@@ -844,10 +842,8 @@ a.button{
     height: 26rem;
     width: 100%;
     position: relative;
-    background-image: url(https://www.falriver.co.uk/_media/12883/image?fit=crop&w=1200&h=675);
-    background-blend-mode: multiply;
+    background-image: url(/static/img/20200926_144903.jpg);
     background-repeat: no-repeat;
-    background-color: #0000007a;
 }
 
 .contact-card{
