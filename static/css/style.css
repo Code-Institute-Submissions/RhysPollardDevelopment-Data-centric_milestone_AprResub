@@ -1052,12 +1052,13 @@ a.button{
 }
 
 .left-scroll, .right-scroll{
-    background: #000000bf;
+    background: #000000;
     height: 3rem;
     width: 3rem;
     padding: 0 1.5rem;
     border-radius: 50%;
     border: none;
+    opacity: 0.75;
     position: absolute;
     top: 50%;
     z-index: 101;
@@ -1070,6 +1071,7 @@ a.button{
 .right-scroll{
     right: 1%;
 }
+
 .right-scroll i, .left-scroll i {
     color: aliceblue;
     font-size: 2rem;
@@ -1083,6 +1085,10 @@ a.button{
 .rectangle {
     width: 15rem;
     height: 26rem;
+}
+
+.right-scroll:hover, .left-scroll:hover{
+    opacity: 0.9;
 }
 
 .rectangle img{

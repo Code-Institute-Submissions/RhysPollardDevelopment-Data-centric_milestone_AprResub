@@ -495,7 +495,7 @@ def search():
         # fast-and-efficient-pagination-in-mongodb-9095flbqr
         routes = list(
             mongo.db.routes.find(
-                filters).skip((current_page - 1) * page_size).limit(page_size))
+                filters).sort("title").skip((current_page - 1) * page_size).limit(page_size))
 
         prev_page = url_for(
             "search", filters=filters,
@@ -550,7 +550,7 @@ def search():
         if "$text" in filters.keys():
             filterForm.query.data = filters["$text"]["$search"]
 
-        routes = list(mongo.db.routes.find(filters))
+        routes = list(mongo.db.routes.find(filters).sort("title"))
         if routes == []:
             error = (
                 "Nothing matched your search,"
@@ -564,7 +564,7 @@ def search():
         max_pages = math.ceil(walks/page_size)
 
         routes = list(
-            mongo.db.routes.find(filters).skip((
+            mongo.db.routes.find(filters).sort("title").skip((
                 current_page - 1) * page_size).limit(page_size))
 
         prev_page = url_for(
@@ -591,7 +591,7 @@ def search():
         max_pages = math.ceil(walks/page_size)
 
         routes = list(
-            mongo.db.routes.find().skip((
+            mongo.db.routes.find().sort("title").skip((
                 current_page - 1) * page_size).limit(page_size))
 
         prev_page = url_for(

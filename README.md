@@ -210,6 +210,30 @@ Following the course material and discussions with my mentor Brian, it was made 
 This can be seen in various examples such as the use of a confirmation modal when trying to delete a walk from your own user page. Equally the strict use of validation in front and back end of the project is to prevent users incorrectly inserting information which could lead to errors when accessing data from specific pages. If designed correctly no user should be able to
 
 ### User Story Testing
+1.	As a user I want to be able to search for local walks in a desired area.
+    * *To search for a walk the user must select the "Discover" option in the navbar, or on the landing page image.* This link shows interactivity suggesting action and works correctly at loading the new page.
+    * *The user can type in a location or name of an area.* This works correctly, but is limited by user created names and naming conventions.
+    * *The user checks a slider option such as free-parking.* The slider animates when selected signifying selection.
+    * *The user chooses a difficulty from the drop down selection element.* This element reacts when selected with a drop down list as expected.
+    * *The user presses the search button for their results.* The search button has a hover effect to show interactivity and upon retrieval, the page is scroll to the results.
+2.	As a user, I want to have the option to log in and add my own walks/routes.
+    * *To make an account in the user can either register or log-in on the respective pages.* Both register and log-in navigation links are interactive and correctly call routing for their pages.
+    * *To register the user must enter details to the correct specifications and agree to terms.* The register form has comments suggesting the required information and coloured validation to inform user of errors/success.
+3.	As a user, I need a page to add my route and upload it to the website.
+    * *Once logged in the user should select "Add walk" on navbar and then enter the key details.* As with other navigation links, the link is interactive and has been shown to call correct routing. As with the search filter forms the buttons and sliders all show interactivity and the form has hints and coloured validation.
+    * *Once completed the user can validate their form and/or submit by pressing "submit".* The submit button is interactive when hovered over or clicked to show its use and coloured validation and notes will emerge on incorrectly completed inputs.
+4.	As a registered user, i need to be able to edit or remove any routes I have added.
+    * *The registered user must go to the user dropdown on the navbar and select "Userpage".* The dropdown has a user/person icon which is well known as being linked to the person logged in and shows a drop down icon with interactive elements.
+    * *The user must then select their walk from the list provided and either select edit or delete.* Userpage has a list and tally of user created walks and large accessible buttons for "edit" and "delete".
+    * *If selecting delete, the user can confirm or cancel the action on the pop-up.* A modal correctly appears when delete is selected, offered the option or remove the walk entirely or not.
+5.	As a registered user, it would be good to have an easy way of showing the route on a map.
+    * This was not implemented and is currently been stored as a future feature the implement.
+6.	As a user, it would be useful to have extra information for each route available.
+    * *The viewer of each walk can select the desired route and inspect the key details.* Walking route links do react to user action and correctly call the desired routing to the specific walk page.
+    * *On the walk, users may see a list of key details along side the directions for their walk.* By the user selected image there is a list of key details and features of the walking route before being able to scroll down and see a correctly loaded list of directions.
+7.	As a registered user, I would like to be able to save routes for later.
+    * *On a viewed walk, registered or logged in users can see a heart icon which when clicked changes colour.* The heard checkbox reacts when clicked and changes colour as feedback.
+    * *Upon returning to their personal userpage, the favourited/saved walks are stored for viewing.* Userpage contains a scrolling view bar which can be moved by left or right scroll buttons on a computer of also swiping on the phone. The buttons are functional but also suggest interactivity or more information available. Saved walks are correctly stored for the independent user.
 
 ### Validation
 #### W3C CSS Validator:
@@ -258,6 +282,7 @@ The only flaw is that due to these services limitations, it was not possible to 
 * Very long words or long strings of characters lacking a space in directions could cause the page to over extend to the right. This has been investigated and corrected using word-break but could still be an error in rare cases where this does this apply correctly.
 * W3C validator for CSS does provide warning for webkit-scrollbar and scroll bar width. These are technically non-standard but do not have any problem with regression if not applicable on any website.
 * As mentioned above, could not test some parts correctly in unit testing with Jasmine as it is impossible to test or spy on window.location. Doing so changes the actual window from testing and therefore negates any outcome.
+* The favourites slide show has a small issue when when hovered over, the overlay has a delay in resizing compared to the image box and can be seen not quite overlapping for a moment. This is most likely due to how the overlay calculates its height and width only after the parent element has already met its new proportions.
 
 ## Deployment
 The source code for this website was deployed and stored in a GitHub repository while the website application is hosted by Heroku. The two are linked so any new commits or pushes to GitHub's master branch are also updated on the Heroku hosting service.
@@ -290,7 +315,7 @@ A Procfile is also required to to determine how the app is run. Please ensure th
 
 ## Credits
 ### Content
-TBA 
+All walking content and routes created under the user account "Admin" has been selected from [falriver.co.uk](https://www.falriver.co.uk/) and 
 
 ### Media
 All headers and website images have been taken or generated by myself and owned [RhysPollardDevelopment](https://github.com/RhysPollardDevelopment).
@@ -299,6 +324,8 @@ Any images used for walking routes made by the Admin account were chosen from [f
 
 ### Acknowledgements
 Special thanks to my mentor Brian Macharia for his help and advice in development this project.
+Extra thanks go to the testers composed of family and friends.
+Pretty printed channel was very helpful for base concepts and tutorials throughout this project.
 Libraries for google fonts, bootstrap, jQuery and font-awesome were used throughout my project.
 
 Inspiration and techniques for pagination found from three main sources:
