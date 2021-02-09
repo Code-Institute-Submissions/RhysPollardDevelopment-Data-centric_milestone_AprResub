@@ -8,6 +8,9 @@ function bindUrlEvent() {
         urlInput.addEventListener("change", loadImage);
 };
 
+/*idea for url validator found at 
+https://stackoverflow.com/questions/31398473/
+load-image-in-div-from-url-obtained-from-a-text-box */
 function loadImage(event) {
     let url = event.currentTarget.value;
     let imgContainer = document.getElementById("imgContainer");

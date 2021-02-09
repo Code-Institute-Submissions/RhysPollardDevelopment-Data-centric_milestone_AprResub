@@ -589,7 +589,7 @@ a.button{
 
 .image-container{
     visibility: hidden;
-    height: 0rem;
+    height: 0;
     margin: auto;
     justify-content: center;
     display: flex;

@@ -43,12 +43,16 @@
                 image address" and paste it here. If mobile, tap
                 and hold
                 image or open image in new tab and copy address.</small>
-            <div class="image-container"><img src="data:," alt="Image preview"
-                    id="imgContainer"></div>
             <div class="invalid-feedback">
                 Must begin with http or https, please paste/enter a valid URL
                 for your image.
             </div>
+            <!-- idea for url validator found at 
+            https://stackoverflow.com/questions/31398473/
+            load-image-in-div-from-url-obtained-from-a-text-box -->
+            <div class="image-container"><img
+                    src="/static/img/android-chrome-192x192.png"
+                    alt="Image preview" id="imgContainer"></div>
         </div>
         <!--Walk difficulty selector-->
         <div class="form-group col-sm-12 col-md-6">
