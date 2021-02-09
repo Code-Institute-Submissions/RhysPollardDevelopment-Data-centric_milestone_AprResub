@@ -4,6 +4,7 @@
 ---
 
 The goal of this project is to build a full-stack website that allows users to manage a common dataset about a particular domain. The website must include front end technologies (HMTL, CSS) and backend technologies (JavaScript, Python+Flask and MongoDB).
+
 ---
 ## Table of Contents
 
@@ -107,6 +108,15 @@ The message collection was used as an alternative to a email system as most mess
 
 ### Wireframes
 All wireframes were constructed using the Balsamiq Tool. As some webpages served very similar services, such as log in/register and add walk/edit walk, these were made using the same page template but with required information completed using the database.
+
+[Home page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/indexpage.pdf)
+[Search page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/searchpage.pdf)
+[Contact page -mobile](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/contactpagemobile.pdf)
+[Contact page -laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/contactpagelaptop.pdf)
+[Login/register -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/loginregisterpage.pdf)
+[User page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/userpage.pdf)
+[Walk page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/walkpage.pdf)
+[Add/Edit walk page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/walkformpage.pdf)
 
 ### Surface Design
 * #### Colour Scheme:
