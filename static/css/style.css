@@ -587,6 +587,21 @@ a.button{
     border-color: teal;
 }
 
+.image-container{
+    visibility: hidden;
+    height: 0rem;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.show-image{
+    visibility: visible;
+    height: 15rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 /*------- Walk Page ----------*/
 
 .walk-title-container{

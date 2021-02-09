@@ -22,7 +22,6 @@ describe("Register Page tests", () => {
                 </div>
             </div>`);
         $(document.body).append(form);
-        setupToggle();
     });
 
     afterEach(() => {
@@ -35,7 +34,6 @@ describe("Register Page tests", () => {
         const password = $("#password");
         const confirmPassword = $("#confirm_password");
         confirmPassword[0].setCustomValidity("Test");
-        console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
         confirmPassword[0].value = "a";
         password[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
@@ -47,7 +45,6 @@ describe("Register Page tests", () => {
         const password = $("#password");
         const confirmPassword = $("#confirm_password");
         confirmPassword[0].setCustomValidity("Test");
-        console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
         password[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("Passwords do not match!");
@@ -58,7 +55,6 @@ describe("Register Page tests", () => {
         const password = $("#password");
         const confirmPassword = $("#confirm_password");
         confirmPassword[0].setCustomValidity("Test");
-        console.log(confirmPassword[0].validationMessage);
         password[0].value = "a";
         confirmPassword[0].value = "a";
         confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
@@ -69,7 +65,6 @@ describe("Register Page tests", () => {
         addPasswordEvents();
         const confirmPassword = $("#confirm_password");
         confirmPassword[0].setCustomValidity("Test");
-        console.log(confirmPassword[0].validationMessage);
         confirmPassword[0].value = "a";
         confirmPassword[0].dispatchEvent(new KeyboardEvent('keyup', { 'key': 'a' }));
         expect(confirmPassword[0].validationMessage).toEqual("Passwords do not match!");

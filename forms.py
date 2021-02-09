@@ -173,14 +173,14 @@ class WalkForm(Form):
         "Enter your Directions",
         validators=[
             InputRequired(),
-            Length(min=100, max=1600)],
+            Length(min=100, max=5000)],
         render_kw={
             "class": "form-control",
             "placeholder": ("Please enter your directions here.\r"
                             "Next instruction on a new line without"
                             " any spaces.\rAnd so on and so forth."),
             "minlength": "100",
-            "maxlength": "1600",
+            "maxlength": "5000",
             "rows": "10"})
 
 

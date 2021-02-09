@@ -41,6 +41,8 @@
             <small id="imageHelp" class="form-text text-muted">To add an url of
                 an image, find a picture on a website or google and right click.
                 Select "copy image address" and paste it here.</small>
+            <div class="image-container"><img src="data:," alt="Image preview"
+                    id="imgContainer"></div>
             <div class="invalid-feedback">
                 Must begin with http or https, please paste/enter a valid URL
                 for your image.
@@ -98,6 +100,9 @@
             http://www.amp-what.com/unicode/search/newline -->
             {{ editForm.directions.label }}
             {{ editForm.directions }}
+            <small id="imageHelp" class="form-text text-muted">Each new
+                direction on a new line without empty lines between
+                them.</small>
             <div class="invalid-feedback">
                 Directions must be between 100-1600 characters.
             </div>
@@ -109,4 +114,5 @@
 
 {% block scripts %}
 <script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/walkform.js"></script>
 {% endblock %}
