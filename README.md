@@ -26,6 +26,21 @@ The live deployed demo is hosted by Heroku and can be found [here](http://data-c
 Cornish Walks was designed as a website for people interested in outdoors walking to find and follow user input walking routes. Equally, users may input and store their own walking routes for others to read and follow. 
 This site is tailored to walkers as many sites are, but was also meant to be focussed on more locally known walks and routes which may not be known to more commercial websites.
 
+### Business Goals:
+Cornish walks as a company website is based on the collection of users and sharing of information:
+* Registering users for a returning viewer baser.
+* User's adding walks to grow content and encourage site traffic.
+* Eventually add in some form of monetization or revenue such as advertisements, endorsements or subscriptions.
+* Encourage a healthy activity for users in a safe environment.
+
+### User Goals:
+Users are the primary goal and content of this website so their goals must align with the core concepts of designing and implementing any service offered on this project:
+* Find walks in their local area.
+* Find trips or walks for a holiday.
+* Undertake walks they like the look of.
+* Bookmark and retry walks they have enjoyed.
+* Add personal experiences and walks to share with others.
+
 ### User Stories
 1.	As a user I want to be able to search for local walks in a desired area.
 2.	As a user, I want to have the option to log in and add my own walks/routes
@@ -35,7 +50,7 @@ This site is tailored to walkers as many sites are, but was also meant to be foc
 6.	As a user, it would be useful to have extra information for each route available.
 7.	As a registered user, I would like to be able to save routes for later.
 
-### Database Collections
+### Structure/Database Collections
 ##### Categories:
 ```
     {
@@ -109,7 +124,7 @@ The message collection was used as an alternative to a email system as most mess
 ### Wireframes
 All wireframes were constructed using the Balsamiq Tool. As some webpages served very similar services, such as log in/register and add walk/edit walk, these were made using the same page template but with required information completed using the database.
 
-**Images may be poor quality as an issue with Balsamiq's licence ending meant images could not be saved/exported directly and no solution was readily available to solve it.**
+Initial designs were designed to have large images and easily selectable objects without too much distracting or confusing information. This was decided as most people after a walking route will only take a few moments to see and decide on a walk and will not be interested if the information is hard to find. Also, walking is a common activity for older users who may not be as technical as younger users might be.
 
 * [Home page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/indexpage.pdf)
 * [Search page -mobile/laptop](https://github.com/RhysPollardDevelopment/Data-centric_milestone/tree/master/wireframes/searchpage.pdf)
@@ -193,7 +208,7 @@ were to become a larger database of walking routes, pagination which is responsi
 7. [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools): Online resource in Chrome browser, used to make edit pages quickly to diagnose problems or test changes.
 8. [Google Fonts](https://fonts.google.com/): Library used to embed and link expanded font choices into the project.
 9. [Font-Awesome](https://fontawesome.com/): Library offering a wide icon set for use in projects.
-10. [Favicon.io](): Favicon generator which converts images into favicons for use in the browser tab.
+10. [favicon-generator](https://www.favicon-generator.org/): Favicon generator which converts images into favicons for use in the browser tab.
 11. [Adobe Color](https://color.adobe.com/explore): Online tool used for identifying colour palettes and themes. Used to extrapolate colours from images and find suitable colour ranges.
 12. [Balsamiq](https://balsamiq.com/): Wireframing tool for concept creation and design for website.
 13. [MongoDB](https://mongodb.com): NoSQL database used to store and read information for this project.
@@ -210,113 +225,32 @@ were to become a larger database of walking routes, pagination which is responsi
 
 ---
 ## Testing
-Testing was performed throughout this project when any new feature was implemented or changed. This was mostly done through the use of repeat exercises and changing each attempt by editing one variable. Equally chrome developer Tools was of key importance for any javascript or HTML issues which occured.
 
-The use of branches was introduced for any major changes or possibly bug inducing changes. This can be seen in the range of branches made throughout this project which were then merged back into the master branch. Some have been deleted from github and local directories due to error or being very early on in the project life cycle.
-
-My mentor Brian was also key in identifying possible future errors or issues which were missed in production or just beyond my current understanding of the topic.
-
-### Defensive Programming
-Following the course material and discussions with my mentor Brian, it was made clear that programming my website defensively was key to ensuring no accidental or malicious breaks occurred.
-
-This can be seen in various examples such as the use of a confirmation modal when trying to delete a walk from your own user page. Equally the strict use of validation in front and back end of the project is to prevent users incorrectly inserting information which could lead to errors when accessing data from specific pages. If designed correctly no user should be able to
-
-### User Story Testing
-1.	As a user I want to be able to search for local walks in a desired area.
-    * *To search for a walk the user must select the "Discover" option in the navbar, or on the landing page image.* This link shows interactivity suggesting action and works correctly at loading the new page.
-    * *The user can type in a location or name of an area.* This works correctly, but is limited by user created names and naming conventions.
-    * *The user checks a slider option such as free-parking.* The slider animates when selected signifying selection.
-    * *The user chooses a difficulty from the drop down selection element.* This element reacts when selected with a drop down list as expected.
-    * *The user presses the search button for their results.* The search button has a hover effect to show interactivity and upon retrieval, the page is scroll to the results.
-2.	As a user, I want to have the option to log in and add my own walks/routes.
-    * *To make an account in the user can either register or log-in on the respective pages.* Both register and log-in navigation links are interactive and correctly call routing for their pages.
-    * *To register the user must enter details to the correct specifications and agree to terms.* The register form has comments suggesting the required information and coloured validation to inform user of errors/success.
-3.	As a user, I need a page to add my route and upload it to the website.
-    * *Once logged in the user should select "Add walk" on navbar and then enter the key details.* As with other navigation links, the link is interactive and has been shown to call correct routing. As with the search filter forms the buttons and sliders all show interactivity and the form has hints and coloured validation.
-    * *Once completed the user can validate their form and/or submit by pressing "submit".* The submit button is interactive when hovered over or clicked to show its use and coloured validation and notes will emerge on incorrectly completed inputs.
-4.	As a registered user, i need to be able to edit or remove any routes I have added.
-    * *The registered user must go to the user dropdown on the navbar and select "Userpage".* The dropdown has a user/person icon which is well known as being linked to the person logged in and shows a drop down icon with interactive elements.
-    * *The user must then select their walk from the list provided and either select edit or delete.* Userpage has a list and tally of user created walks and large accessible buttons for "edit" and "delete".
-    * *If selecting delete, the user can confirm or cancel the action on the pop-up.* A modal correctly appears when delete is selected, offered the option or remove the walk entirely or not.
-5.	As a registered user, it would be good to have an easy way of showing the route on a map.
-    * This was not implemented and is currently been stored as a future feature the implement.
-6.	As a user, it would be useful to have extra information for each route available.
-    * *The viewer of each walk can select the desired route and inspect the key details.* Walking route links do react to user action and correctly call the desired routing to the specific walk page.
-    * *On the walk, users may see a list of key details along side the directions for their walk.* By the user selected image there is a list of key details and features of the walking route before being able to scroll down and see a correctly loaded list of directions.
-7.	As a registered user, I would like to be able to save routes for later.
-    * *On a viewed walk, registered or logged in users can see a heart icon which when clicked changes colour.* The heard checkbox reacts when clicked and changes colour as feedback.
-    * *Upon returning to their personal userpage, the favourited/saved walks are stored for viewing.* Userpage contains a scrolling view bar which can be moved by left or right scroll buttons on a computer of also swiping on the phone. The buttons are functional but also suggest interactivity or more information available. Saved walks are correctly stored for the independent user.
-
-### Validation
-#### W3C CSS Validator:
-My CSS file are now parsed by the above validators with no errors and two warnings:
-* Both warnings are the use of `wekbit-scroll` and `scroll-bar width` settings which are considered non-standard. Upon researching it is not considered non-standard to use `webkit-scroll` due to their usage in all modern and most previous browsers. Since both also regress gracefully there is no reason I feel to remove them.
-* Other warnings which have been removed are obselete styles, an example is the use of `word-break: break-word` now being the same as `word-break: normal` and no longer used.
-
-#### W3C HTML Validator:
-All HTML is now parsed by the above validator with no errors or warnings:
-* The only possible issue is if a user does not upload a valid image-url. If no Url is added this causes an error, but validation front and back end should prevent this case.
-
-#### JSLint:
-An online tool was used to parse all of my javascript files; no errors were found or warnings, although one or two "unused variables" were found, particularly in the spec files as jasmine code was not suitable for the linter.
-
-#### PEP8 Online:
-All python code is now parsed with the above validator and no warnings or errors are present.
-
-### Unit Testing
-Unit testing was performed using the Jasmine testing suite installed into VSCode.
-
-Seperate testing specs were made for each javascript file to ensure they were directed at each correctly and did not interfere with other specs. For each spec the use of HTML was inserted and removed before each test with out key elements being targeted remaining. This was essential as most of the javascript functions were related to interactivity with HTML elements and performed very few external processes.
-
-Two specs which had a limited testing application were `favtogglespec.js` and `userspec.js`. This occurred as the `bindFavourite` function and `confirm_delete` function both used AJAX requests and window.location to perform their actions. However, it was found to not be possible to spy on these elements easily or select their actions without processing the request and leaving the current window to a new href. To prevent accidentally aborting the testing suite it was decided that these could only be tested manually and at least check if the actions leading upto their calling was correct.
-
-To view testing please click [here](https://data-centric-milestone-rhys.herokuapp.com/testing).
-
-### Integration Testing
-The live website was tested across all current browsers (chrome, firefox, safari, edge, opera) and some which were technically no longer in service (Internet explorer) to see whether any browser specific issues occurred. The site was also used on a range of phones and sites using browserstack and family and friends voluntarily testing the site.
-
-The main issues found from integration were:
-1. Opacity cannot be set to a percentage as found with the squars on index page, search page and userpage else they will appear black in safari, yandex and internet explorer. This was noticed to be easily fixed as hover still affected the opacity as it was set to `opacity:0.1` not `opacity:10%`. Changing all opacity to the same 0.4 etc style corrected this.
-2. Internet explorer does not do multipy background or accept certain colour values with altered alpha levels. My headers were all edited in Clip Paint Studio to have a permanent darker overlay to prevent white text being lost without contrast.
-3. Full text on some links to walks was not sitting correctly and overflowed. Found that editing the margins to a padding setting and removing top positioning solved this.
-
-### Responsive design
-The use of responsive design is key to developing new websites. This website was build with a mobile first view and a large laptop view following second, once the back end frame work had been decided upon. Key details were then created for intermediate sizes from the smallest mobile to a large laptop. 
-
-The responsiveness of this was finally testing using [Am i responsive](http://ami.responsivedesign.is/) and [Responsinator](http://www.responsinator.com/). Am I responsive showed no issues with the variable design, however responsinator did hightlight an issue on the contact page where the header was in vertical heights (vh) and would often be presented too small for its height on shorter screens or landscape orientation. This was corrected by choosing rem as a standard measurement. 
-
-It also highlighted that the walk-header of walkpage was incorrectly set to `col-sm-11` not `col-sm-12`.
-
-The only flaw is that due to these services limitations, it was not possible to log in or access restricted material through them so I could not check the user pages or any add/edit forms.
-
-### Bugs
-* Older posts done before the WTForm update, could not be edited properly. This might be that they were failing validation before even being loaded so could not be stored. Unsure as most of these were unfit for purpose anyway and were deleted for new data which could not be entered with missing information.
-* Very long words or long strings of characters lacking a space in directions could cause the page to over extend to the right. This has been investigated and corrected using word-break but could still be an error in rare cases where this does this apply correctly.
-* W3C validator for CSS does provide warning for webkit-scrollbar and scroll bar width. These are technically non-standard but do not have any problem with regression if not applicable on any website.
-* As mentioned above, could not test some parts correctly in unit testing with Jasmine as it is impossible to test or spy on window.location. Doing so changes the actual window from testing and therefore negates any outcome.
-* The favourites slide show has a small issue when when hovered over, the overlay has a delay in resizing compared to the image box and can be seen not quite overlapping for a moment. This is most likely due to how the overlay calculates its height and width only after the parent element has already met its new proportions.
-* Going back after posting a new walk will reload the page and allow creation of a identical page. Have attempted Post/redirect/get to prevent this but was unsuccessful.
+Testing can be found [here](https://github.com/RhysPollardDevelopment/Data-centric_milestone/blob/master/Testing.md)
 
 ## Deployment
 The source code for this website was deployed and stored in a GitHub repository while the website application is hosted by Heroku. The two are linked so any new commits or pushes to GitHub's master branch are also updated on the Heroku hosting service.
 The database for this website is hosted in a cluster on MongoDB.
 
 ### Heroku Cloud
-Heroku service allows for the deployment of our app as a live website, however two files are required for upload.
-A requirements.txt file includes the majority applications and dependencies required for this app to be run correctly. This was created using the pip3 freeze --local > requirements.txt command in the terminal.
-
-A Procfile is also required to to determine how the app is run. Please ensure the file has no extra lines below the text as this can cause problems with Heroku.
+Heroku service allows for the deployment of our app as a live website, below are the steps required to host a project:
 
 #### Create a new app linked to Github:
-1. Assuming you are already logged into Heroku, from your dashboard click the _"New"_ button in the top right and select _"Create App"_.
-2. Name your app and chose region (name must be unique and have no spaces)
-3. On the new app's main page, go to the deployment method section and select _"Github: Connect to Github"_.
-4. A new searchbar will appear below, check the user is correct and search for the relevant repository.
-5. Once the correct repository has been found, scroll to the top of the page and select the "Settings" menu.
-6. In Settings, locate the _"Reveal Config Vars"_ button and enter any private configuration variables required to run the app (I.E. Port, IP address, etc)
-7. Assuming a Procfile and requirements file already exist, return to the _"Deploy"_ page in the top menu and select the _"Enable Automatic Deploys"_ button.
-8. The bottom of the page should now build the app and present a message titled _"Your app was successfully deployed"_.
-9. Your app should now be deployed and any Github pushes also pushed to the Heroku app.
+1. Travel to the heroku website and create a user account as required.
+2. Once registered, click  _"New"_ in the top right and _"Create App"_ from the dropdown.
+3. Choose a name and region best suited for you before pressing the create app button.
+4. Once on your new app page, select the _"Settings"_ header and scroll to Config Var. Here you can click _"reveal Config Vars"_ to add new configuration details.
+5. Initially you want to ass a variable of 'IP' with a value of '0.0.0.0', once done add another named 'PORT' with a value of '5000'. You should also add any URI, DBNAME, SECRET_KEYS or other variables you have used in your environment which you do not want to be public.
+6. Before connecting your github account to your Heroku app, return to your gitpod/VSCode and create a file named Procfile. Open this new file and enter 'web: python app.py', this will help Heroku define what sort of app you are creating.
+7. Once your Procfile has been created, in the command line type 'pip3 freeze --local > requirements.txt'. This will automatically generate a file with any flask or python tools which are used in creating/using your project.
+8. Return to Heroku and choose the _"Deploy"_ tab. In the section named _"Deployment method"_, choose the _"Github: Connect to Github"_ service.
+9. When you created your account, you had the option to link a Git account to this heroku account. If so, then type in the repository which you want to host and search. If valid an option to connect will appear below which you can click.
+10. Once connected you will be given an option to _"Choose branch to deploy"_ which should ideally be master. Once chosen, click the _"Enable Automatic Deploys"_ button below to create an updated site anytime you push to the master branch.
+11. At the bottom of the page, make sure you are still using the master branch and click _"Deploy branch"_.
+12. The website will now build your app and install any requirements found in 'requirements.txt'. Once built successfully.
+13. The bottom of the page should now build the app and present a message titled _"Your app was successfully deployed"_.
+14. Your app should now be deployed and any Github pushes also pushed to the Heroku app.
+
 
 #### How to clone the repository:
 1. Navigate to the correct repository from the GitHub dashboard.
@@ -326,9 +260,40 @@ A Procfile is also required to to determine how the app is run. Please ensure th
 5. Type git clone, and past the URL you have copied. (Should be in the format $ git clone https://github.com/username/repository.)
 6. Press _"Enter"_ to create your local clone.
 
+#### Running the application locally:
+1. Clone the repository as defined above.
+2. Install the necessary libraries specified in the requirements.txt.
+3. Create a new file names env.py and add your environment variables to it, such as IP, PORT SECRET_KEYS.
+4. Create a gitignore file in your root directly and ensure env.py is in the list so it does get pushed to your master branch.
+5. At the top of your app.py file which runs the project, 'Import' your env.py file.
+6. Finally you can run the application from command line using 'python3 app.py'.
+
 ## Credits
-### Content
-All walking content and routes created under the user account "Admin" has been selected from [falriver.co.uk](https://www.falriver.co.uk/). All other users are either self made or created by friends and families acting as testers.
+### Content:
+* All walking content and routes created under the user account "Admin" has been selected from [falriver.co.uk](https://www.falriver.co.uk/). This includes images used for the links.
+* Images used for walks created by myself as "heather crawford" and "r pollard" have come from the following sources:
+    1. [https://www.cornwalls.co.uk/sites/default/files/attractions/kennall-vale-2_2.jpeg](https://www.cornwalls.co.uk/sites/default/files/attractions/kennall-vale-2_2.jpeg)
+    2. [https://media-cdn.tripadvisor.com/media/photo-s/18/5e/3e/f7/the-pandora-inn-viewed.jpg](https://media-cdn.tripadvisor.com/media/photo-s/18/5e/3e/f7/the-pandora-inn-viewed.jpg)
+    3. [https://www.visitcornwall.com/sites/default/files/styles/product_image_breakpoints_theme_visitcornwall2_mobile_2x/public/maenporth-beach.jpg?itok=j3wxDY-e&timestamp=1314804350](https://www.visitcornwall.com/sites/default/files/styles/product_image_breakpoints_theme_visitcornwall2_mobile_2x/public/maenporth-beach.jpg?itok=j3wxDY-e&timestamp=1314804350)
+    4. [https://www.eatoutcornwall.com/wp/wp-content/uploads/Carn-Brea.jpg](https://www.eatoutcornwall.com/wp/wp-content/uploads/Carn-Brea.jpg)
+    5.  [http://127.0.0.1:5000/edit_walk/60253aea30607e9616f4ed48](http://127.0.0.1:5000/edit_walk/60253aea30607e9616f4ed48)
+* All other users are created by friends and families acting as testers.
+
+### Code:
+During construction of this project, many tutorials on the uses of functions or even the names of functions have been found and applied to this project. These have been noted in the code when they are beyond my previous understanding or required more application in concept than just assessing the function's usability but no specific code was copied.
+
+#### Bibliography:
+Any code which was copied entirely or, as with most cases, used as a strong reference and emulated by example are referenced here:
+1. w3schools animated navbar icon, copied majority as changes from burger to X from [tutorial].(https://www.w3schools.com/howto/howto_css_menu_icon.asp)
+2. Stack Overflow: Answered issue where error messages did not appear from this [post].(https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors)
+3. The image viewer for add and edit walk forms was inspired by a stack overflow answer from [this link]. Though none of the code was directly used, the idea of assigning src to input value was found here.(https://stackoverflow.com/questions/31398473/load-image-in-div-from-url-obtained-from-a-text-box)
+4. w3schools tutorial on custom sliders for checkboxes was [copied] to achieve the same effect.(https://www.w3schools.com/bootstrap4/bootstrap_forms_custom.asp)
+5. This code by [diegoleme] was used to make my register page password validator.(https://codepen.io/diegoleme/pen/surIK)
+6. The format for using an ajax post to send data was found [here]. This information is technically standard and no specific code was copied but similar enough to be worth identifying.(https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post)
+7. Inspiration for how to use scrollLeft in the userpage. While made clearer in mozilla developer documentation, [this post] was what gave the idea originally.(https://stackoverflow.com/questions/56392199/make-a-button-to-scroll-horizontally-in-div)
+8. Bootstrap validation was achieved using their [bootstrap validator] entirely.(https://getbootstrap.com/docs/4.0/components/forms/#validation)
+9. Idea that page title can be changed for each page loaded was found from another students work: [faithy80](https://github.com/faithy80/dcd-project/blob/master/run.py)
+10. My mentor discussed the confirmation/delete code through a skype message and my work was taken from this advice.
 
 ### Media
 All headers and website images have been taken or generated by myself and owned [RhysPollardDevelopment](https://github.com/RhysPollardDevelopment).
@@ -338,12 +303,12 @@ Any images used for walking routes made by the Admin account were chosen from [f
 ### Acknowledgements
 Special thanks to my mentor Brian Macharia for his help and advice in development this project.
 Extra thanks go to the testers composed of family and friends.
-Pretty printed channel was very helpful for base concepts and tutorials throughout this project.
+Pretty printed channel was very helpful for base concepts and tutorials throughout this project, no code was copied but much of their tutorial proved useful for grasping new concepts.
 Libraries for google fonts, bootstrap, jQuery and font-awesome were used throughout my project.
 
 Inspiration and techniques for pagination found from three main sources:
 * [Pretty Printed Tutorial](https://www.youtube.com/watch?v=Lnt6JqtzM7I&feature=emb_logo)
-* [faithy80's milestone project](https://github.com/faithy80/dcd-project/blob/master/run.py)
+* [faithy80's milestone project](https://github.com/faithy80/dcd-project)
 * [The top comment by mangoed on this reddit post](https://www.reddit.com/r/flask/comments/fxtfzm/is_there_a_way_to_add_pagination_to_my_webapp/)
                             
 ### Disclaimer

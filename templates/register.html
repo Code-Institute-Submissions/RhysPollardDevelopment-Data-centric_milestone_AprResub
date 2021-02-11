@@ -19,10 +19,12 @@
                 <!-- Registration form -->
                 <form method="POST" action="{{ url_for('register')}}"
                     class="needs-validation" novalidate>
-                    <!-- Crsf token checks secret key to ensure is a legitimate webpage -->
+                    <!-- Crsf token checks secret key
+                         to ensure is a legitimate webpage -->
                     {{ regForm.csrf_token }}
                     <div class="form-group">
-                        <!-- uses WTForms to do backed validity, applies classes,etc in backend-->
+                        <!-- uses WTForms to do backed 
+                        validity, applies classes,etc in backend-->
                         {{ regForm.email.label(id='emailLabel') }}
                         {{ regForm.email }}
                         <div class="invalid-feedback">
@@ -48,7 +50,8 @@
                             class="form-text text-muted">Password must be at
                             least 10 characters long.</small>
                     </div>
-                    <!-- Custom javascript code compares this to the above password-->
+                    <!-- Custom javascript code compares 
+                    this to the above password-->
                     <!-- Confirm Password -->
                     <div class="form-group">
                         {{ regForm.confirm_password.label(id='confirmLabel') }}

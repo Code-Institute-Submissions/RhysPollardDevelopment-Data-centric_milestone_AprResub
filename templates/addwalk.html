@@ -6,6 +6,8 @@
     {{ addForm.csrf_token }}
     <h2>Add a New Walk</h2>
     <div class="row">
+        <!-- Error message fixed from stackoverflow answer-->
+        <!--https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors-->
         <!-- Error Messages -->
         {% for field, errors in addForm.errors.items() %}
         <div class="alert alert-danger alert-dismissible fade show col-12"
@@ -112,8 +114,6 @@
                 Directions must be between 100-1600 characters.
             </div>
         </div>
-        <!-- Error message fixed from stackoverflow answer-->
-        <!--https://stackoverflow.com/questions/6463035/wtforms-getting-the-errors-->
     </div>
     <button type="submit" class="button submit">Submit</button>
 </form>

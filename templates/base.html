@@ -3,6 +3,11 @@
 
     <head>
         <meta charset="UTF-8">
+        <title>Cornish Walks</title>
+        <meta name="description"
+            content="See Cornwall the way it should be enjoyed, from the people who know and love it best.">
+        <meta name="keywords" content="HTML, CSS, Javascript">
+        <meta name="author" content="Rhys Pollard">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Style Sheets-->
         <link rel="stylesheet"
@@ -18,14 +23,38 @@
         <link rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             type="text/css" />
-        <!-- Favicon Links -->
+        <!-- Favicon Links from https://www.favicon-generator.org/ -->
+        <link rel="apple-touch-icon" sizes="57x57"
+            href="{{ url_for('static', filename='favicon//apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60"
+            href="{{ url_for('static', filename='favicon//apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72"
+            href="{{ url_for('static', filename='favicon//apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="76x76"
+            href="{{ url_for('static', filename='favicon//apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114"
+            href="{{ url_for('static', filename='favicon//apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="120x120"
+            href="{{ url_for('static', filename='favicon//apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="144x144"
+            href="{{ url_for('static', filename='favicon//apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="152x152"
+            href="{{ url_for('static', filename='favicon//apple-icon-152x152.png') }}">
         <link rel="apple-touch-icon" sizes="180x180"
-            href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+            href="{{ url_for('static', filename='favicon//apple-icon-180x180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192"
+            href="{{ url_for('static', filename='favicon//favicon-192x192.png') }}">
         <link rel="icon" type="image/png" sizes="32x32"
-            href="{{ url_for('static', filename='img//favicon-32x32.png') }}">
+            href="{{ url_for('static', filename='favicon//favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96"
+            href="{{ url_for('static', filename='favicon//favicon-96x96.png') }}">
         <link rel="icon" type="image/png" sizes="16x16"
-            href="{{ url_for('static', filename='img//favicon-16x16.png') }}">
-        <link rel="manifest" href="/static/img/site.webmanifest">
+            href="{{ url_for('static', filename='favicon//favicon-16x16.png') }}">
+        <link rel="manifest"
+            href="{{ url_for('static', filename='favicon//site.webmanifest') }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
         <!-- CSS external file-->
         <link rel="stylesheet"
             href="{{ url_for('static', filename='css/style.css') }}"
@@ -37,12 +66,15 @@
         <!-- Navbar-->
         <nav class="navbar navbar-expand-lg custom-nav">
             <a class="navbar-brand" href="{{ url_for('home') }}"><img
-                    src="/static/img/favicon-32x32.png"
-                    alt="CW Cornish Walks">Cornish Walks</a>
+                    src="{{ url_for('static', filename='favicon//favicon-32x32.png') }}"
+                    alt="CW Cornish Walks">Cornish
+                Walks</a>
             <button class="navbar-toggler toggler-icon" type="button"
                 data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
+                <!-- Code for animated icon found at 
+                https://www.w3schools.com/howto/howto_css_menu_icon.asp -->
                 <span class="toggler-icon" id="toggler-icon">
                     <span class="bar1"></span>
                     <span class="bar2"></span>
@@ -178,28 +210,31 @@
                             <li>
                                 <a class="social-bubble"
                                     href="https://www.twitter.com"
-                                    target="_blank"><i class="fab fa-twitter"
+                                    target="_blank" rel="noopener"><i
+                                        class="fab fa-twitter"
                                         aria-hidden="true"></i></a>
                                 <span class="sr-only">Twitter</span>
                             </li>
                             <li>
                                 <a class="social-bubble"
                                     href="https://www.facebook.com"
-                                    target="_blank"><i class="fab fa-facebook-f"
+                                    target="_blank" rel="noopener"><i
+                                        class="fab fa-facebook-f"
                                         aria-hidden="true"></i></a>
                                 <span class="sr-only">Facebook</span>
                             </li>
                             <li>
                                 <a class="social-bubble"
                                     href="https://www.instagram.com"
-                                    target="_blank"><i class="fab fa-instagram"
+                                    target="_blank" rel="noopener"><i
+                                        class="fab fa-instagram"
                                         aria-hidden="true"></i></a>
                                 <span class="sr-only">instagram</span>
                             </li>
                             <li>
                                 <a class="social-bubble"
                                     href="https://www.linkedin.com"
-                                    target="_blank"><i
+                                    target="_blank" rel="noopener"><i
                                         class="fab fa-linkedin-in"
                                         aria-hidden="true"></i></a>
                                 <span class="sr-only">Linked-in</span>

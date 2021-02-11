@@ -115,6 +115,10 @@ https://www.w3schools.com/howto/howto_css_menu_icon.asp */
     margin: 0.5rem 0;
 }
 
+.footer-item{
+    padding: 0.5rem 0;
+}
+
 .footer-link{
     color: aliceblue;
     text-align: center;
@@ -378,7 +382,7 @@ a.button{
 
 /*---------Index--------------*/
 .index-header{
-    background-image: url(/static/img/alt-head.png);
+    background-image: url(/static/img/alt-head.jpg);
     height: 45rem;
     overflow: hidden;
     background-size: cover;
@@ -393,7 +397,6 @@ a.button{
     position: relative;
     left: 2%;
     top: 5%;
-    /*     filter: drop-shadow(1px 2px 4px black);? */
 }
 
 .landing-header{

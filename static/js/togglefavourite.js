@@ -4,7 +4,8 @@ $(document).ready(function () {
 
 /* Checks the state of a pages heart icon and updates user data
  with route name as required. Advice found at:
- https://stackoverflow.com/questions/37631388/how-to-get-data-in-flask-from-ajax-post*/
+ https://stackoverflow.com/questions/37631388/
+ how-to-get-data-in-flask-from-ajax-post */
 
 function bindFavourite() {
   let fav_icon = document.getElementById("favourite");

@@ -12,9 +12,11 @@
                 {{walk.title}}
             </h2>
             <div class="user-fav">
-                <p>By <a
-                        href="{{ url_for('user_profile', username=walk.user )}}">{{walk.user}}
-                    </a></p>
+                <p>By
+                    <a href="{{ url_for('user_profile', username=walk.user )}}">
+                        {{walk.user}}
+                    </a>
+                </p>
                 <!-- Toggle favourite if logged in-->
                 {% if user.username %}
                 {% if user.username != walk.user %}

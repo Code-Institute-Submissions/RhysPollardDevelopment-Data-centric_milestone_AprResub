@@ -199,6 +199,8 @@ def delete_walk(route_id):
     # Assigns walk Id to a walk so username can be extracted.
     walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
 
+    # Searches users for any reference to the route Id in favourites and pulls
+    # Id from array to prevent users who saved walk having empty slots
     mongo.db.users.update(
         {},
         {"$pull":{"favourites": route_id}})
@@ -373,7 +375,7 @@ def user_profile(username):
     page_text = username + "'s Page"
     page_title = page_text.capitalize()
 
-    does_exist = mongo.db.users.find_one_or_404({"username": username})
+    mongo.db.users.find_one_or_404({"username": username})
 
     if session.get("user") is None:
         flash("Must be logged in to see other`s userpages.", "error")
