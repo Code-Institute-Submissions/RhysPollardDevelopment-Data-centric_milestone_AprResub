@@ -95,7 +95,7 @@ this sections, otherwise it cannot scroll.-->
         <li class="page-item {% if current_page==page %}active{% endif %}">
             <a class="page-link"
                 href="{{ url_for('search',filters=filters, page_num=page)}}"
-                aria-link="Go to page {{page}}">{{page}}</a>
+                aria-label="Go to page {{page}}">{{page}}</a>
         </li>
         {% endfor %}
         <li class="page-item {% if next_page==None %}disabled{% endif %}">
