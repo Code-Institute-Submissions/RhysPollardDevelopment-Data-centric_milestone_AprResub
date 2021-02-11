@@ -80,7 +80,7 @@ Generally this scored well with few faults, however one consistent issue was hea
 #### Best Practices:
 Best practices errors were primarily down to trust issues with cross-origin destinations for my social media links and vulnerabilities with bootstrap and javscript libraries. I have made all reasonable changes but am unsure how to combat the issue with libraries without avoiding them currently. 
 #### Performance:
-Performance section had many more issues to discuss, however most regarded concepts such as lazy-loading of images, compression of images and texts beyond normal methods ad minification of javascript and CSS. Unfortunately this are things which fall beyond my understanding to perform and sadly will have to remain as errors, equally due to the possibility of user loaded images not being well optimized this score would always suffer.
+Performance section had many more issues to discuss on the mobile setting, however most regarded concepts such as lazy-loading of images, compression of images and texts beyond normal methods ad minification of javascript and CSS. Unfortunately this are things which fall beyond my understanding to perform and sadly will have to remain as errors, equally due to the possibility of user loaded images not being well optimized this score would always suffer.
 I did alter the png header to a jpeg to improve speeds for first load and interactivity. While this does remove the possibility of changing background around the header and keeping transparency, for the scope of this project this seems appropriate.
 
 ### Responsive design
