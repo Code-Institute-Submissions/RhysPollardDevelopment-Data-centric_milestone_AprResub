@@ -1,3 +1,5 @@
+[Back to main README.](https://github.com/RhysPollardDevelopment/Data-centric_milestone/blob/master/README.md)
+
 ## Testing
 Testing was performed throughout this project when any new feature was implemented or changed. This was mostly done through the use of repeat exercises and changing each attempt by editing one variable. Equally chrome developer Tools was of key importance for any javascript or HTML issues which occured.
 
@@ -69,6 +71,17 @@ The main issues found from integration were:
 2. Internet explorer does not do multipy background or accept certain colour values with altered alpha levels. My headers were all edited in Clip Paint Studio to have a permanent darker overlay to prevent white text being lost without contrast.
 3. Full text on some links to walks was not sitting correctly and overflowed. Found that editing the margins to a padding setting and removing top positioning solved this.
 4. To help loading speeds, any images which were stored in the site itself and not imageUrls were reduced in size to sensible levels.
+
+The use of lighthouse on chrome devtools found a few small issues with SEO, best practices and accessibility. 
+#### SEO
+SEO was mainly concerned with a lack of material in the manifest and page meta, reducing the search and descriptive capability for this website.
+#### Accessibility:
+Generally this scored well with few faults, however one consistent issue was headers not being sequential as walking route links each had a h5 so were considered out of order.
+#### Best Practices:
+Best practices errors were primarily down to trust issues with cross-origin destinations for my social media links and vulnerabilities with bootstrap and javscript libraries. I have made all reasonable changes but am unsure how to combat the issue with libraries without avoiding them currently. 
+#### Performance:
+Performance section had many more issues to discuss, however most regarded concepts such as lazy-loading of images, compression of images and texts beyond normal methods ad minification of javascript and CSS. Unfortunately this are things which fall beyond my understanding to perform and sadly will have to remain as errors.
+I did alter the png header to a jpeg to improve speeds for first load and interactivity. While this does remove the possibility of changing background around the header and keeping transparency, for the scope of this project this seems appropriate.
 
 ### Responsive design
 The use of responsive design is key to developing new websites. This website was build with a mobile first view and a large laptop view following second, once the back end frame work had been decided upon. Key details were then created for intermediate sizes from the smallest mobile to a large laptop. 

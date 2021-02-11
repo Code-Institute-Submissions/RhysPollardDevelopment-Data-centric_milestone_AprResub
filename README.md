@@ -222,6 +222,7 @@ were to become a larger database of walking routes, pagination which is responsi
 21. [Am i responsive](http://ami.responsivedesign.is/): Tool used to see if a webpage is responsive across multiple screens.
 22. [Responsinator](http://www.responsinator.com/): Website which mocks multiple phones and devices of different sizes and orientations.
 23. [Clip Paint Studio](https://www.clipstudio.net/en/): Used to adjust some images and create landing page header.
+24. [Compressjpeg.com](https://compressjpeg.com/): To make larger images smaller and easy to load.
 
 ---
 ## Testing
