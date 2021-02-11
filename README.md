@@ -295,6 +295,7 @@ The only flaw is that due to these services limitations, it was not possible to 
 * W3C validator for CSS does provide warning for webkit-scrollbar and scroll bar width. These are technically non-standard but do not have any problem with regression if not applicable on any website.
 * As mentioned above, could not test some parts correctly in unit testing with Jasmine as it is impossible to test or spy on window.location. Doing so changes the actual window from testing and therefore negates any outcome.
 * The favourites slide show has a small issue when when hovered over, the overlay has a delay in resizing compared to the image box and can be seen not quite overlapping for a moment. This is most likely due to how the overlay calculates its height and width only after the parent element has already met its new proportions.
+* Going back after posting a new walk will reload the page and allow creation of a identical page. Have attempted Post/redirect/get to prevent this but was unsuccessful.
 
 ## Deployment
 The source code for this website was deployed and stored in a GitHub repository while the website application is hosted by Heroku. The two are linked so any new commits or pushes to GitHub's master branch are also updated on the Heroku hosting service.

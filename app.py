@@ -126,7 +126,7 @@ def edit_walk(route_id):
     if session.get("user") is None:
         return redirect(url_for("login"))
     # If user tries to edit a walk which doesn"t belong to them, redirected.
-    elif session.get("user") != walk["user"]:
+    elif session.get("user") != walk["user"] and session.get("user") != "admin":
         return redirect(url_for("home"))
 
     categories = mongo.db.categories.distinct("category_name")
@@ -149,11 +149,12 @@ def edit_walk(route_id):
     difficulties = mongo.db.difficulty.find()
 
     difficulty_choices = []
-    # # cycles through each entry for challenge field to maintain ordering.
+    # cycles through each entry for challenge field to maintain ordering.
     for d in difficulties:
         difficulty_choices.append((d["challenge"], d["challenge"]))
     editForm.difficulty.choices.extend(difficulty_choices)
 
+    # Only call this if form is submitted and flaskforms validates.
     if editForm.validate_on_submit():
 
         dogs_allowed = True if request.form.get("dogs_allowed") else False
@@ -178,13 +179,13 @@ def edit_walk(route_id):
             "free_parking": free_parking,
             "paid_parking": paid_parking,
             "user": mongo.db.users.find_one(
-                {"username": session["user"]})["username"]
+                {"username": walk["user"]})["username"]
         }
 
         mongo.db.routes.update({"_id": ObjectId(route_id)}, updated)
         flash("Walk edited successfully!")
         return redirect(url_for(
-            "user_profile", username=session["user"]))
+            "user_profile", username=walk["user"]))
 
     return render_template(
         "editwalk.html", walk=walk, editForm=editForm, page_title=page_title)
@@ -195,9 +196,10 @@ def delete_walk(route_id):
     """
     Removes the data for a walk from database collection.
     """
+    walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
     mongo.db.routes.remove({"_id": ObjectId(route_id)})
     return redirect(url_for(
-        "user_profile", username=session["user"]))
+        "user_profile", username=walk["user"]))
 
 
 @app.route("/show_route/<route_id>")
