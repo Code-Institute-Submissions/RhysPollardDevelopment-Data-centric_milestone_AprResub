@@ -196,7 +196,12 @@ def delete_walk(route_id):
     """
     Removes the data for a walk from database collection.
     """
+    # Assigns walk Id to a walk so username can be extracted.
     walk = mongo.db.routes.find_one_or_404({"_id": ObjectId(route_id)})
+
+    mongo.db.users.update(
+        {},
+        {"$pull":{"favourites": route_id}})
     mongo.db.routes.remove({"_id": ObjectId(route_id)})
     return redirect(url_for(
         "user_profile", username=walk["user"]))
