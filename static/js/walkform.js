@@ -6,7 +6,7 @@ function bindUrlEvent() {
     let urlInput = document.getElementById("imageUrl");
     if (urlInput)
         urlInput.addEventListener("change", loadImage);
-};
+}
 
 /* idea for url validator found at 
 https://stackoverflow.com/questions/31398473/
@@ -17,4 +17,4 @@ function loadImage(event) {
     imgContainer.src = url;
     let container = document.getElementsByClassName("image-container");
     container[0].classList.add("show-image");
-};
+}

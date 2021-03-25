@@ -122,8 +122,8 @@ def edit_walk(route_id):
     if session.get("user") is None:
         return redirect(url_for("login"))
     # If user tries to edit a walk which doesn"t belong to them, redirected.
-    elif (session.get("user") != walk["user"]
-            and session.get("user") != "admin"):
+    elif (session.get("user") != walk["user"] and
+            session.get("user") != "admin"):
         return redirect(url_for("home"))
 
     categories = mongo.db.categories.distinct("category_name")
