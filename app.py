@@ -7,12 +7,8 @@ from forms import (
 from flask import (
     Flask, flash, render_template, url_for, redirect, request, session)
 from flask_pymongo import PyMongo
-from wtforms.validators import (
-    InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional)
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-if os.path.exists("env.py"):
-    import env
 
 
 app = Flask(__name__)
@@ -126,7 +122,8 @@ def edit_walk(route_id):
     if session.get("user") is None:
         return redirect(url_for("login"))
     # If user tries to edit a walk which doesn"t belong to them, redirected.
-    elif session.get("user") != walk["user"] and session.get("user") != "admin":
+    elif (session.get("user") != walk["user"]
+            and session.get("user") != "admin"):
         return redirect(url_for("home"))
 
     categories = mongo.db.categories.distinct("category_name")
@@ -203,7 +200,7 @@ def delete_walk(route_id):
     # Id from array to prevent users who saved walk having empty slots
     mongo.db.users.update(
         {},
-        {"$pull":{"favourites": route_id}})
+        {"$pull": {"favourites": route_id}})
     mongo.db.routes.remove({"_id": ObjectId(route_id)})
     return redirect(url_for(
         "user_profile", username=walk["user"]))
@@ -251,14 +248,14 @@ def contact():
     page_title = "How To Contact Us/ FAQs"
 
     contactForm = ContactForm()
-    choices=[]
+    choices = []
     faqs = list(mongo.db.FAQs.find())
     for faq in faqs:
         for f in faq:
             if f == "report_problem":
                 choices.append((faq[f], faq[f]))
     contactForm.problem.choices.extend(choices)
-    
+
     if contactForm.validate_on_submit():
         message = {
             "Issue": request.form.get("problem"),
@@ -504,7 +501,8 @@ def search():
         # fast-and-efficient-pagination-in-mongodb-9095flbqr
         routes = list(
             mongo.db.routes.find(
-                filters).sort("title").skip((current_page - 1) * page_size).limit(page_size))
+                filters).sort("title").skip(
+                    (current_page - 1) * page_size).limit(page_size))
 
         prev_page = url_for(
             "search", filters=filters,

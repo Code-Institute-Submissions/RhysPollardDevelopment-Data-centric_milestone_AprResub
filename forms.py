@@ -3,7 +3,7 @@ from wtforms import (
     StringField, PasswordField, BooleanField, SelectField, TextAreaField)
 from wtforms.fields import html5
 from wtforms.validators import (
-    InputRequired, Email, Length, EqualTo, AnyOf, URL, Optional)
+    InputRequired, Email, Length, EqualTo, URL)
 
 
 class RegistrationForm(Form):
@@ -91,13 +91,13 @@ class WalkForm(Form):
         "Difficulty",
         validators=[
             InputRequired()],
-        choices=[("","Select Difficulty")],
+        choices=[("", "Select Difficulty")],
         render_kw={"class": "form-control"})
 
     category_name = SelectField(
         "Walk type",
         validators=[InputRequired()],
-        choices=[("","Select Category")],
+        choices=[("", "Select Category")],
         render_kw={"class": "form-control"})
 
     imageUrl = html5.URLField(
@@ -112,8 +112,8 @@ class WalkForm(Form):
                             "/url for the walk's main image"),
             "minlength": "20", "maxlength": "250",
             # regex simulated at https://www.regextester.com/20
-            "pattern": ("^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)"
-                        "([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$")})
+            "pattern": (r"^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)"
+                        r"([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$")})
 
     description = StringField(
         "Description",
@@ -188,7 +188,7 @@ class ContactForm(Form):
     problem = SelectField(
         "Report a Problem",
         validators=[InputRequired()],
-        choices=[("","Select Issue"),("Other","Other")],
+        choices=[("", "Select Issue"), ("Other", "Other")],
         default="Choose...",
         render_kw={"class": "form-control"})
 
