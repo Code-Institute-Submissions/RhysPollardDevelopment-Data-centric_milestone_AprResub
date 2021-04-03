@@ -51,6 +51,8 @@ All HTML is now parsed by the above validator with no errors or warnings:
 #### JSLint:
 An online tool was used to parse all of my javascript files; no errors were found or warnings, although one or two "unused variables" were found, particularly in the spec files as jasmine code was not suitable for the linter.
 
+One unusued variable is found in the bootstrap.js for the variable 'validation'. As this is bootstraps code taken from their tutorial it should not be up to me to test it's validation. However I have removed the variable and proven the function still works correctly.
+
 #### PEP8 Online:
 All python code is now parsed with the above validator and no warnings or errors are present.
 
