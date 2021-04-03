@@ -47,6 +47,7 @@ My CSS file are now parsed by the above validators with no errors and two warnin
 #### W3C HTML Validator:
 All HTML is now parsed by the above validator with no errors or warnings:
 * The only possible issue is if a user does not upload a valid image-url. If no Url is added this causes an error, but validation front and back end should prevent this case.
+* Versions of pages which had html elements which only were shown for authenticated/logged in users were tested twice to ensure new information was valid.
 
 #### JSLint:
 An online tool was used to parse all of my javascript files; no errors were found or warnings, although one or two "unused variables" were found, particularly in the spec files as jasmine code was not suitable for the linter.
