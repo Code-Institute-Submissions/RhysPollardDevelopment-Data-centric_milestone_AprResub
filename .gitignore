@@ -5,3 +5,7 @@ env.py
 __pycache__/
 *.py[cod]
 *yml
+*.vscode
+node_modules
+package-lock.json
+package.json
